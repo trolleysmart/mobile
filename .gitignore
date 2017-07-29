@@ -56,4 +56,4 @@ fastlane/screenshots
 __generated__/
 package-lock.json
 yarn.lock
-./ios/Frameworks
+/ios/Frameworks/
