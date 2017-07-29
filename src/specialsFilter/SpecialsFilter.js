@@ -1,0 +1,79 @@
+// @flow
+
+import React from 'react';
+import PropTypes from 'prop-types';
+import { View } from 'react-native';
+import { Text, Button, List, ListItem } from 'react-native-elements';
+import SpecialsFilterSorting from './SpecialsFilterSorting';
+import Styles from './Styles';
+import { Color } from '../style/DefaultStyles';
+
+const SpecialsFilter = ({ sortOption, onSortOptionChanged, gotoCategoryFilter, categories, gotoStoreFilter, stores, applyFilters }) =>
+  <View style={Styles.container}>
+    <View style={Styles.filterOptionContainer}>
+      <Text style={Styles.filterTitle}>Sort order</Text>
+      <SpecialsFilterSorting sortOption={sortOption} onSortOptionChanged={onSortOptionChanged} />
+    </View>
+    <View style={Styles.filterOptionContainer}>
+      <Text style={Styles.filterTitle}>Filter</Text>
+      <List>
+        <ListItem
+          key={1}
+          title="Categories"
+          onPress={gotoCategoryFilter}
+          leftIcon={{ name: 'list', type: 'material-icons' }}
+          subtitle={
+            <Text numberOfLines={1}>
+              {categories.map(_ => _.name).toString()}
+            </Text>
+          }
+          badge={{
+            value: categories.length,
+            textStyle: { color: 'white' },
+            containerStyle: { backgroundColor: Color.primaryColorLight },
+          }}
+        />
+        <ListItem
+          key={2}
+          title="Stores"
+          onPress={gotoStoreFilter}
+          leftIcon={{ name: 'store', type: 'material-icons' }}
+          subtitle={
+            <Text numberOfLines={1}>
+              {stores.map(_ => _.name).toString()}
+            </Text>
+          }
+          badge={{
+            value: stores.length,
+            textStyle: { color: 'white' },
+            containerStyle: { backgroundColor: Color.primaryColorLight },
+          }}
+        />
+      </List>
+    </View>
+    <View style={Styles.filterOptionContainer}>
+      <View style={Styles.applyButton}>
+        <Button title="Apply Filters" backgroundColor={Color.secondaryColorAction} onPress={applyFilters} />
+      </View>
+    </View>
+  </View>;
+
+SpecialsFilter.propTypes = {
+  gotoCategoryFilter: PropTypes.func.isRequired,
+  gotoStoreFilter: PropTypes.func.isRequired,
+  applyFilters: PropTypes.func.isRequired,
+  sortOption: PropTypes.string.isRequired,
+  categories: PropTypes.arrayOf(
+    PropTypes.shape({
+      categoryId: PropTypes.string,
+    }),
+  ).isRequired,
+  stores: PropTypes.arrayOf(
+    PropTypes.shape({
+      storeId: PropTypes.string,
+    }),
+  ).isRequired,
+  onSortOptionChanged: PropTypes.func.isRequired,
+};
+
+export default SpecialsFilter;

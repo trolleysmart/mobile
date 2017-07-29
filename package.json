@@ -1,0 +1,96 @@
+{
+  "name": "TrolleySmart",
+  "description": "Trolley Smart",
+  "version": "0.0.1",
+  "author": {
+    "name": "Micro Business Ltd",
+    "email": "micro.business.ltd@gmail.com",
+    "url": "http://www.micro-business.co.nz"
+  },
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest",
+    "lint": "eslint src",
+    "fixlint": "eslint --fix --ext .jsx --ext .js src",
+    "test:watch": "npm test -- --watch",
+    "test-verbose": "jest --verbose",
+    "test-verbose:watch": "npm run test-verbose -- --watch",
+    "flow": "flow",
+    "relay": "relay-compiler --src ./src --schema data/schema.graphql",
+    "relay:watch": "yarn relay -- --watch",
+    "android:apk": "cd android && ./gradlew assembleRelease",
+    "android:install": "adb install android/app/build/outputs/apk/app-release.apk",
+    "clear": "node node_modules/react-native/local-cli/cli.js start --reset-cache",
+    "devtools": "react-devtools",
+    "lint:staged": "lint-staged",
+    "codepush:ios": "code-push release-react trolleysmart-development-ios ios && code-push promote trolleysmart-development-ios Staging Production",
+    "codepush:android": "code-push release-react trolleysmart-development-android android && code-push promote trolleysmart-development-android Staging Production"
+  },
+  "dependencies": {
+    "email-validator": "1.0.7",
+    "immutable": "3.8.1",
+    "lodash.debounce": "^4.0.8",
+    "micro-business-parse-server-common-react-native": "0.1.50",
+    "prop-types": "15.5.10",
+    "react": "16.0.0-alpha.12",
+    "react-immutable-proptypes": "2.1.0",
+    "react-native": "0.46.4",
+    "react-native-action-button": "^2.7.2",
+    "react-native-code-push": "^4.1.0-beta",
+    "react-native-easy-grid": "0.1.15",
+    "react-native-easy-toast": "^1.0.6",
+    "react-native-elements": "0.15.0",
+    "react-native-exception-handler": "^1.1.0",
+    "react-native-fast-image": "^0.0.11",
+    "react-native-fbads": "^4.2.0",
+    "react-native-fbsdk": "^0.6.1",
+    "react-native-popup-menu": "^0.8.0",
+    "react-native-restart": "0.0.2",
+    "react-native-vector-icons": "4.2.0",
+    "react-navigation": "^1.0.0-beta.12",
+    "react-redux": "5.0.5",
+    "react-relay": "1.1.0",
+    "redux": "3.7.2",
+    "redux-saga": "0.15.6",
+    "uuid": "3.1.0"
+  },
+  "devDependencies": {
+    "adm-zip": "^0.4.7",
+    "babel-eslint": "7.2.3",
+    "babel-jest": "20.0.3",
+    "babel-plugin-relay": "1.1.0",
+    "babel-preset-flow": "6.23.0",
+    "babel-preset-react-native": "2.0.0",
+    "babel-preset-react-native-stage-0": "1.0.1",
+    "eslint": "4.3.0",
+    "eslint-plugin-flowtype": "2.35.0",
+    "eslint-plugin-import": "2.7.0",
+    "eslint-plugin-react": "7.1.0",
+    "eslint-plugin-react-native": "3.0.1",
+    "flow-bin": "0.51.1",
+    "jest": "20.0.4",
+    "lint-staged": "4.0.2",
+    "plist": "^2.1.0",
+    "prettier": "1.5.3",
+    "react-devtools": "2.5.0",
+    "react-test-renderer": "16.0.0-alpha.12",
+    "redux-devtools": "3.4.0",
+    "relay-compiler": "1.1.0",
+    "xcode": "^0.9.3"
+  },
+  "jest": {
+    "preset": "react-native"
+  },
+  "pre-commit": "lint:staged",
+  "repository": {
+    "url": "git@bitbucket.org:microbusiness/smart-grocery-mobile-modern.git",
+    "type": "git"
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --write --single-quote true --trailing-comma all --print-width 150",
+      "git add"
+    ]
+  }
+}
