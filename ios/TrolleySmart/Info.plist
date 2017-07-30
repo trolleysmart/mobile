@@ -30,7 +30,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>2-SNAPSHOT</string>
 	<key>CodePushDeploymentKey</key>
 	<string>iLFXafJgMDqWiKZVUrDBBT-tV8Cd678fa9f4-af75-4806-89b9-bad9002337a3</string>
 	<key>FacebookAppID</key>
@@ -58,7 +58,7 @@
 		</dict>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string/>
+	<string></string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Entypo.ttf</string>
