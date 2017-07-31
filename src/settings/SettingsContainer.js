@@ -23,18 +23,18 @@ class SettingsContainer extends Component {
   };
 
   handleClickPrivacyPolicyLink = () => {
-    this.handleClickHyperLink('http://micro-business.co.nz/index.php/privacy');
+    this.handleClickHyperLink('http://www.trolleysmart.co.nz/index.php/privacy');
   };
 
   handleClickOpenSourceLicensesLink = () => {
     this.handleClickHyperLink(
-      'http://micro-business.co.nz/index.php/copyright2',
+      'http://www.trolleysmart.co.nz/index.php/copyright',
     );
   };
 
   handleClickTermsAndConditionLink = () => {
     this.handleClickHyperLink(
-      'http://micro-business.co.nz/index.php/terms-of-use',
+      'http://www.trolleysmart.co.nz/index.php/term-and-conditions',
     );
   };
 
