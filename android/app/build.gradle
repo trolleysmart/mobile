@@ -105,8 +105,8 @@ android {
         applicationId "com.trolleysmart"
         targetSdkVersion 22
         minSdkVersion project.ext.minimumSdkVersion
-        versionCode generateVersionCode()
-        versionName generateVersionName()
+        versionCode 160010002
+        versionName "1.0.2-SNAPSHOT" 
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
