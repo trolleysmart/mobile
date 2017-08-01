@@ -14,7 +14,7 @@ class ShoppingList extends Component {
     tabBarLabel: 'Shopping List',
     tabBarIcon: ({ tintColor, focused }) => <Ionicons name={focused ? 'ios-cart' : 'ios-cart-outline'} size={26} style={{ color: tintColor }} />,
     headerLeft: <HeaderContainer />,
-    title: 'Shopping List',
+    title: 'TrolleySmart',
     headerTitleStyle: {
       marginLeft: Platform.OS === 'ios' ? null : 70,
     },
