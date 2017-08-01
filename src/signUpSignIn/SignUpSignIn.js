@@ -363,7 +363,7 @@ class UserSignInSignUpPresentational extends Component {
         <Grid style={Styles.grid}>
           <Row>
             <Text h2 style={Styles.title}>
-              {' '}Trolley Smart
+              {' '}TrolleySmart
             </Text>
           </Row>
           {this.renderSignUpOrSignInIsInProgressIndicator()}
