@@ -10,6 +10,12 @@ import { TouchableItem } from '../components/touchableIcon';
 import { Color } from '../style/DefaultStyles';
 
 class StapleShoppingListItem extends React.PureComponent {
+  onItemPressed = () => {
+    this.props.onStapleShoppingListItemAdded(this.props.id, this.props.name, this.props.isCustomItem);
+
+    ToastAndroid.showWithGravity(this.props.name + ' has been added', ToastAndroid.SHORT, ToastAndroid.TOP);
+  };
+
   render() {
     return (
       <Grid style={Styles.row}>
@@ -21,33 +27,16 @@ class StapleShoppingListItem extends React.PureComponent {
               testID="header-filter"
               delayPressIn={0}
               pressColor={Color.touchableIconPressColor}
-              onPress={() => {
-                this.props.onStapleShoppingListItemAdded(
-                  this.props.id,
-                  this.props.name,
-                  this.props.isCustomItem,
-                );
-
-                ToastAndroid.showWithGravity(
-                  this.props.name + ' has been added',
-                  ToastAndroid.SHORT,
-                  ToastAndroid.TOP,
-                );
-              }}
+              onPress={this.onItemPressed}
               style={Styles.touchableContainer}
               borderless
             >
-              <Icon
-                size={28}
-                name="md-add-circle"
-                type="ionicon"
-                color={Color.primaryColorNormal}
-              />
+              <Icon size={28} name="md-add-circle" type="ionicon" color={Color.primaryColorNormal} />
             </TouchableItem>
           </View>
         </Col>
         <Col size={90}>
-          <Text style={Styles.itemName}>
+          <Text style={Styles.itemName} onPress={this.onItemPressed}>
             {this.props.name}
           </Text>
         </Col>
