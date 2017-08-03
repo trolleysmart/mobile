@@ -1,7 +1,7 @@
 {
   "name": "TrolleySmart",
   "description": "Trolley Smart",
-  "version": "1.0.7-alpha",
+  "version": "1.0.8-alpha",
   "author": {
     "name": "Micro Business Ltd",
     "email": "micro.business.ltd@gmail.com",
@@ -28,7 +28,7 @@
     "codepush:android": "code-push release-react trolleysmart-v1-alpha-android android && code-push promote trolleysmart-v1-alpha-android Staging Production"
   },
   "dependencies": {
-    "email-validator": "1.0.7",
+    "email-validator": "1.1.1",
     "immutable": "3.8.1",
     "lodash.debounce": "^4.0.8",
     "micro-business-parse-server-common-react-native": "0.1.50",
@@ -47,7 +47,7 @@
     "react-native-fbsdk": "^0.6.1",
     "react-native-popup-menu": "^0.8.0",
     "react-native-restart": "0.0.2",
-    "react-native-vector-icons": "4.2.0",
+    "react-native-vector-icons": "4.3.0",
     "react-navigation": "^1.0.0-beta.12",
     "react-redux": "5.0.5",
     "react-relay": "1.1.0",
@@ -68,7 +68,7 @@
     "eslint-plugin-import": "2.7.0",
     "eslint-plugin-react": "7.1.0",
     "eslint-plugin-react-native": "3.0.1",
-    "flow-bin": "0.51.1",
+    "flow-bin": "0.52.0",
     "jest": "20.0.4",
     "lint-staged": "4.0.2",
     "plist": "^2.1.0",

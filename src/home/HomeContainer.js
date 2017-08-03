@@ -30,6 +30,7 @@ const HomeTabs = TabNavigator(
       },
       activeTintColor: '#FAFBFA',
     },
+    backBehavior: 'none',
   },
 );
 
