@@ -1,10 +1,10 @@
 // @flow
 
 import { StyleSheet } from 'react-native';
+import { Sizes } from '../style/DefaultStyles';
 
 export default StyleSheet.create({
   container: {
-    marginRight: 15,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -12,5 +12,9 @@ export default StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     backgroundColor: 'transparent',
+  },
+  iconContainerStyle: {
+    height: Sizes.searchBarHeaderHeight,
+    width: Sizes.searchBarHeaderHeight,
   },
 });

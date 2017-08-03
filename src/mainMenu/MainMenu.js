@@ -20,7 +20,7 @@ const MainMenu = ({ openDrawer }) =>
       style={Styles.touchableContainer}
       borderless
     >
-      <Icon size={28} name="ios-menu" type="ionicon" />
+      <Icon size={28} name="ios-menu" type="ionicon" containerStyle={Styles.iconContainerStyle} />
     </TouchableItem>
   </View>;
 
