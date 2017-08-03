@@ -20,7 +20,7 @@ const MainMenu = ({ showSpecialsFilter }) =>
       style={Styles.touchableContainer}
       borderless
     >
-      <Icon size={28} color={Color.primaryFontColor} name="sliders" type="font-awesome" />
+      <Icon size={28} color={Color.primaryFontColor} name="sliders" type="font-awesome" containerStyle={Styles.iconContainerStyle} />
     </TouchableItem>
   </View>;
 
