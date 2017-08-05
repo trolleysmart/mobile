@@ -8,6 +8,7 @@ import { bindActionCreators } from 'redux';
 import Immutable, { Map } from 'immutable';
 import SpecialsMenu from './SpecialsMenu';
 import * as specialsFilterActions from '../specialsFilter/Actions';
+
 class SpecialsMenuContainer extends Component {
   showSpecialsFilter = () => {
     // dispatch action to set sort options of specials filter with specials' sort option state
@@ -55,6 +56,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  SpecialsMenuContainer,
-);
+export default connect(mapStateToProps, mapDispatchToProps)(SpecialsMenuContainer);

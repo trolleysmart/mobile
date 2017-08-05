@@ -3,11 +3,13 @@
 import { Map } from 'immutable';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { NavigationActions } from 'react-navigation';
 import { bindActionCreators } from 'redux';
 import { View } from 'react-native';
 import { connect } from 'react-redux';
 import * as StapleShoppingListActions from './Actions';
 import { SearchBarWithDelay } from '../searchBarWithDelay';
+import { UserFeedbackHeader } from '../userFeedback';
 import Styles from './Styles';
 
 class HeaderContainer extends Component {
@@ -19,13 +21,15 @@ class HeaderContainer extends Component {
     );
   };
 
+  userFeedbackClicked = () => {
+    this.props.showUserFeedback();
+  };
+
   render = () => {
     return (
       <View style={Styles.searchHeader}>
-        <SearchBarWithDelay
-          searchKeyword={this.props.searchKeyword}
-          onSearchKeywordChanged={this.onSearchKeywordChanged}
-        />
+        <SearchBarWithDelay searchKeyword={this.props.searchKeyword} onSearchKeywordChanged={this.onSearchKeywordChanged} />
+        <UserFeedbackHeader userFeedbackClicked={this.userFeedbackClicked} />
       </View>
     );
   };
@@ -38,6 +42,7 @@ HeaderContainer.propTypes = {
 
 HeaderContainer.defaultProps = {
   searchKeyword: '',
+  showUserFeedback: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {
@@ -48,10 +53,13 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    stapleShoppingListActions: bindActionCreators(
-      StapleShoppingListActions,
-      dispatch,
-    ),
+    stapleShoppingListActions: bindActionCreators(StapleShoppingListActions, dispatch),
+    showUserFeedback: () =>
+      dispatch(
+        NavigationActions.navigate({
+          routeName: 'StapleShoppingListUserFeedback',
+        }),
+      ),
   };
 }
 
