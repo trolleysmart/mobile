@@ -18,6 +18,9 @@ import com.facebook.FacebookSdk;
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
 import com.facebook.appevents.AppEventsLogger;
 
+import com.parse.Parse;
+import com.parse.ParseInstallation;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -68,5 +71,13 @@ public class MainApplication extends Application implements ReactApplication {
     FacebookSdk.sdkInitialize(getApplicationContext());
     // If you want to use AppEventsLogger to log events.
     AppEventsLogger.activateApp(this);
+
+    Parse.initialize(new Parse.Configuration.Builder(this)
+                     .applicationId("TrolleySmart")
+                     .server("https://trolleysmart-backend.herokuapp.com/parse/")
+                     .build()
+                     );
+
+    ParseInstallation.getCurrentInstallation().saveInBackground();
   }
 }
