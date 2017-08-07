@@ -1,7 +1,7 @@
 {
   "name": "TrolleySmart",
   "description": "Trolley Smart",
-  "version": "1.0.10-SNAPSHOT",
+  "version": "1.0.11-SNAPSHOT",
   "author": {
     "name": "Micro Business Ltd",
     "email": "micro.business.ltd@gmail.com",
@@ -63,7 +63,7 @@
     "babel-preset-flow": "6.23.0",
     "babel-preset-react-native": "2.0.0",
     "babel-preset-react-native-stage-0": "1.0.1",
-    "eslint": "4.3.0",
+    "eslint": "4.4.0",
     "eslint-plugin-flowtype": "2.35.0",
     "eslint-plugin-import": "2.7.0",
     "eslint-plugin-react": "7.1.0",

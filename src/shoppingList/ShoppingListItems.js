@@ -9,14 +9,6 @@ import SpecialItemSeparator from '../specials/SpecialItemSeparator';
 import Styles from './Styles';
 
 class ShoppingListItems extends Component {
-  onRefresh = () => {
-    return;
-  };
-
-  onEndReached = () => {
-    return;
-  };
-
   render = () => {
     return (
       <View style={Styles.container}>
@@ -37,20 +29,15 @@ class ShoppingListItems extends Component {
               multiBuy={info.item.multiBuy}
               savingPercentage={info.item.savingPercentage}
               saving={info.item.saving}
-              onShoppingListItemSelectionChanged={
-                this.props.onShoppingListItemSelectionChanged
-              }
+              onShoppingListItemSelectionChanged={this.props.onShoppingListItemSelectionChanged}
             />}
           keyExtractor={item => item.id}
-          onEndReached={this.onEndReached}
-          onRefresh={this.onRefresh}
-          refreshing={false}
+          onEndReached={this.props.onEndReached}
+          onRefresh={this.props.onRefresh}
+          refreshing={this.props.isFetchingTop}
           ItemSeparatorComponent={() => <SpecialItemSeparator />}
         />
-        <ActionButton
-          buttonColor="rgba(242,135,79,1)"
-          onPress={() => this.props.onShoppingListAddItemClicked()}
-        />
+        <ActionButton buttonColor="rgba(242,135,79,1)" onPress={() => this.props.onShoppingListAddItemClicked()} />
       </View>
     );
   };
@@ -82,6 +69,9 @@ ShoppingListItems.propTypes = {
   ).isRequired,
   onShoppingListItemSelectionChanged: PropTypes.func.isRequired,
   onShoppingListAddItemClicked: PropTypes.func.isRequired,
+  isFetchingTop: PropTypes.bool.isRequired,
+  onRefresh: PropTypes.func.isRequired,
+  onEndReached: PropTypes.func.isRequired,
 };
 
 export default ShoppingListItems;
