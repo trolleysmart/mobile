@@ -173,7 +173,6 @@ private String generateVersionName() {
 dependencies {
     compile project(':react-native-restart')
     compile project(':react-native-fast-image')
-    compile project(':react-native-fbads')
     compile project(':react-native-fbsdk')
     compile project(':react-native-code-push')
     compile project(':react-native-vector-icons')
