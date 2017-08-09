@@ -71,14 +71,14 @@ public class MainApplication extends Application implements ReactApplication {
     AppEventsLogger.activateApp(this);
 
     Parse.initialize(new Parse.Configuration.Builder(this)
-                     .applicationId("TrolleySmart")
-                     .clientKey("a9dafdbe-92b5-46ec-a7d9-663cfe64884a")
-                     .server("https://trolleysmart-backend.herokuapp.com/parse/").build()
+                     .applicationId("TrolleySmart-v1-alpha")
+                     .clientKey("c06ce52d-7d16-4b6a-a0fd-25ab671842b1")
+                     .server("https://trolleysmart-backend-v1-alpha.herokuapp.com/parse/").build()
                      );
 
     ParseInstallation installation = ParseInstallation.getCurrentInstallation();
 
-    installation.put("GCMSenderId", "381197571058");
+    installation.put("GCMSenderId", "479040979190");
     installation.saveInBackground();
   }
 }
