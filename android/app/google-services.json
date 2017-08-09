@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "381197571058",
+    "firebase_url": "https://trolleysmart-development.firebaseio.com",
+    "project_id": "trolleysmart-development",
+    "storage_bucket": "trolleysmart-development.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:381197571058:android:e62cba7eaf4865c2",
+        "android_client_info": {
+          "package_name": "com.trolleysmart"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "381197571058-qngepl8sh73jbmgtb7l6tuvaqrir8b09.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQXz-qlCMbUafe2X69vIL7tTjjSPUPHRQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

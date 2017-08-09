@@ -5,7 +5,6 @@ import android.app.Application;
 import com.facebook.react.ReactApplication;
 import com.avishayil.rnrestart.ReactNativeRestartPackage;
 import com.dylanvann.fastimage.FastImageViewPackage;
-import io.callstack.react.fbads.FBAdsPackage;
 import com.microsoft.codepush.react.CodePush;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.facebook.react.ReactNativeHost;
@@ -17,6 +16,9 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
 import com.facebook.appevents.AppEventsLogger;
+
+import com.parse.Parse;
+import com.parse.ParseInstallation;
 
 import java.util.Arrays;
 import java.util.List;
@@ -47,7 +49,6 @@ public class MainApplication extends Application implements ReactApplication {
           new MainReactPackage(),
           new ReactNativeRestartPackage(),
           new FastImageViewPackage(),
-          new FBAdsPackage(),
           new FBSDKPackage(mCallbackManager),
           new CodePush(getResources().getString(R.string.reactNativeCodePush_androidDeploymentKey), getApplicationContext(), BuildConfig.DEBUG),
           new VectorIconsPackage()
@@ -68,5 +69,16 @@ public class MainApplication extends Application implements ReactApplication {
     FacebookSdk.sdkInitialize(getApplicationContext());
     // If you want to use AppEventsLogger to log events.
     AppEventsLogger.activateApp(this);
+
+    Parse.initialize(new Parse.Configuration.Builder(this)
+                     .applicationId("TrolleySmart")
+                     .clientKey("a9dafdbe-92b5-46ec-a7d9-663cfe64884a")
+                     .server("https://trolleysmart-backend.herokuapp.com/parse/").build()
+                     );
+
+    ParseInstallation installation = ParseInstallation.getCurrentInstallation();
+
+    installation.put("GCMSenderId", "381197571058");
+    installation.saveInBackground();
   }
 }
