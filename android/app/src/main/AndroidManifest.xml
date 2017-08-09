@@ -14,9 +14,6 @@
   <permission android:protectionLevel="signature" android:name="com.trolleysmart.permission.C2D_MESSAGE" />
   <uses-permission android:name="com.trolleysmart.permission.C2D_MESSAGE" />
 
-  <permission android:name="com.trolleysmart.permission.C2D_MESSAGE" android:protectionLevel="signature" />
-  <uses-permission android:name=".permission.C2D_MESSAGE" />
-
   <uses-sdk
       android:minSdkVersion="16"
       android:targetSdkVersion="22" />
