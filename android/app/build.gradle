@@ -92,7 +92,7 @@ def enableProguardInReleaseBuilds = false
 
 ext.versionMajor = 1
 ext.versionMinor = 0
-ext.versionPatch = 12
+ext.versionPatch = 13
 ext.versionClassifier = "alpha" 
 ext.isSnapshot = false
 ext.minimumSdkVersion = 16
@@ -105,8 +105,8 @@ android {
         applicationId "com.trolleysmart"
         targetSdkVersion 22
         minSdkVersion project.ext.minimumSdkVersion
-        versionCode 160010012
-        versionName "1.0.12-alpha" 
+        versionCode 160010013
+        versionName "1.0.13-alpha" 
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
@@ -171,6 +171,7 @@ private String generateVersionName() {
 }
 
 dependencies {
+    compile project(':react-native-maps')
     compile project(':react-native-restart')
     compile project(':react-native-fast-image')
     compile project(':react-native-fbsdk')
@@ -181,8 +182,8 @@ dependencies {
     compile "com.facebook.react:react-native:+"  // From node_modules
     compile 'com.parse.bolts:bolts-android:1.+'
     compile 'com.parse:parse-android:1.+'
-    compile 'com.google.firebase:firebase-core:10.0.1'
-    compile 'com.google.firebase:firebase-messaging:10.0.1'
+    compile 'com.google.firebase:firebase-core:10.+'
+    compile 'com.google.firebase:firebase-messaging:10.+'
 }
 
 // Run this once to be able to run the application with BUCK
