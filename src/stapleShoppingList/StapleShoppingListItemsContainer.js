@@ -1,13 +1,13 @@
 // @flow
 
-import { Map } from 'immutable';
+import { List, Map } from 'immutable';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import uuid from 'uuid/v4';
 import StapleShoppingListItems from './StapleShoppingListItems';
-import { AddNewStapleShoppingListToShoppingList, AddStapleShoppingListItemToUserShoppingList } from '../relay/mutations';
+import { AddNewStapleShoppingListItemsToShoppingList, AddStapleShoppingListItemToUserShoppingList } from '../relay/mutations';
 import * as StapleShoppingListActions from './Actions';
 import { type StapleShoppingListItemsRelayContainer_user } from './__generated__/StapleShoppingListItemsRelayContainer_user.graphql';
 
@@ -36,7 +36,7 @@ class StapleShoppingListItemsContrainer extends Component<any, Props, State> {
     if (isCustomItem) {
       this.clearSearchKeyword();
 
-      AddNewStapleShoppingListToShoppingList.commit(this.props.relay.environment, this.props.user.id, name);
+      AddNewStapleShoppingListItemsToShoppingList.commit(this.props.relay.environment, this.props.user.id, List.of(name));
     } else {
       const shoppingListItem = this.props.user.stapleShoppingList.edges.map(_ => _.node).find(_ => _.id === stapleShoppingListId);
 

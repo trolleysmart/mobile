@@ -1,6 +1,6 @@
 // @flow
 
-export AddNewStapleShoppingListToShoppingList from './AddNewStapleShoppingListToShoppingList';
+export AddNewStapleShoppingListItemsToShoppingList from './AddNewStapleShoppingListItemsToShoppingList';
 export AddStapleShoppingListItemToUserShoppingList from './AddStapleShoppingListItemToUserShoppingList';
 export RemoveStapleShoppingListItemFromUserShoppingList from './RemoveStapleShoppingListItemFromUserShoppingList';
 export RemoveStapleShoppingListItemsFromUserShoppingList from './RemoveStapleShoppingListItemsFromUserShoppingList';
