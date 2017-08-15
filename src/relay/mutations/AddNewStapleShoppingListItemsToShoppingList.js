@@ -48,7 +48,7 @@ function commit(environment, userId, names) {
       if (errorMessage) {
         reduxStore.dispatch(messageBarActions.add(errorMessage, MessageType.ERROR));
       } else {
-        const newItems = payload.getLinkedRecord('items');
+        const newItems = payload.getLinkedRecords('items');
 
         newItems.map(newItem => {
           const id = newItem.getLinkedRecord('node').getValue('id');
