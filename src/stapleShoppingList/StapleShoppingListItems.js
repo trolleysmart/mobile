@@ -23,86 +23,6 @@ import {
 import Styles from './Styles';
 
 class StapleShoppingListItems extends Component {
-  // constructor(props, context) {
-  //   super(props, context);
-  //   this.state = {
-  //     sectionData: [{
-  //       data: [{
-  //           id: 1,
-  //           name: 'apple',
-  //           isCustomItem: false,
-  //         },
-  //         {
-  //           id: 2,
-  //           name: 'beef',
-  //           isCustomItem: false,
-  //         },
-  //         {
-  //           id: 3,
-  //           name: 'broccoli',
-  //           isCustomItem: false,
-  //         },
-  //         {
-  //           id: 4,
-  //           name: 'carrot',
-  //           isCustomItem: false,
-  //         },
-  //         {
-  //           id: 5,
-  //           name: 'chips',
-  //           isCustomItem: false,
-  //         },
-  //         {
-  //           id: 6,
-  //           name: 'dishwash',
-  //           isCustomItem: false,
-  //         },
-  //         {
-  //           id: 7,
-  //           name: 'egg',
-  //           isCustomItem: false,
-  //         },
-  //         {
-  //           id: 8,
-  //           name: 'ham',
-  //           isCustomItem: false,
-  //         },
-  //         {
-  //           id: 9,
-  //           name: 'milk',
-  //           isCustomItem: false,
-  //         },
-  //         {
-  //           id: 10,
-  //           name: 'mushroom',
-  //           isCustomItem: false,
-  //         },
-  //         {
-  //           id: 11,
-  //           name: 'onion',
-  //           isCustomItem: false,
-  //         },
-  //         {
-  //           id: 12,
-  //           name: 'orange',
-  //           isCustomItem: false,
-  //         },
-  //         {
-  //           id: 13,
-  //           name: 'soap',
-  //           isCustomItem: false,
-  //         },
-  //         {
-  //           id: 14,
-  //           name: 'toast',
-  //           isCustomItem: false,
-  //         },
-  //       ],
-  //       title: 'Recent',
-  //     }],
-  //   }
-  // }
-
   onStapleShoppingListItemSelectionChanged = (id, name, isCustomItem, isSelected) => {
     this.props.onStapleShoppingListItemSelectionChanged(id, name, isCustomItem, isSelected);
   };
@@ -129,7 +49,7 @@ class StapleShoppingListItems extends Component {
         <Text style={Styles.sectionTitle}>
             {section.title}
         </Text>
-        <Image source={ImageUltility.getImageSource(section.title)} style={Styles.image} />
+        <Image source={ImageUltility.getImageSource(section.title)} style={Styles.sectionHeaderImage} />
       </View>
 
     );
@@ -154,8 +74,7 @@ class StapleShoppingListItems extends Component {
     return (
       <View style={Styles.container}>
         <View style={Styles.containerHeader}>
-          <Text style={Styles.itemsCount}>{this.props.selectedStapleShoppingListItems.count}items selected</Text>
-          <Text style={Styles.select}>Select All</Text>
+          <Text style={Styles.itemsCount}>{this.props.selectedStapleShoppingListItems.length} items selected</Text>
         </View>
         <SectionList
           contentContainerStyle={Styles.sectionListContainer}

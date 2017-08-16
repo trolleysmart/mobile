@@ -34,64 +34,30 @@ class StapleShoppingListItem extends React.PureComponent {
 
   render() {
     return (
-      <View style={Styles.item}>
-             <TouchableItem
+      // <View style={Styles.item}>
+      <TouchableItem
               accessibilityComponentType="button"
               accessibilityTraits="button"
               delayPressIn={0}
               pressColor={Color.touchableIconPressColor}
               onPress={this.onItemPressed}
-              style={Styles.touchableContainer}
+              // style={Styles.touchableContainer}
               borderless
             >
-              <View>
+              <View style={Styles.touchableContainer}>
                 <Avatar
                   rounded
                   overlayContainerStyle={{ backgroundColor: this.props.isSelected ? 'grey' : 'green' }}
                   source={ImageUltility.getImageSource(this.props.name) }
                   activeOpacity={0.7}
                 />
-                <Text style={Styles.itemName}ss>
+                <Text style={Styles.itemName}>
                      {this.props.name}
                    </Text>
-              {/* </Text> */}
-                {/* <Image source={ImageUltility.getImageSource(this.props.name)} style={Styles.image} /> */}
               </View>
 
             </TouchableItem>
-            {/* <Text style={Styles.itemName} onPress={this.onItemPressed}>
-                 {this.props.name}
-          </Text> */}
-          </View>
-      // <Grid style={Styles.row}>
-      //   <Col size={10}>
-      //     <View>
-      //       <TouchableItem
-      //         accessibilityComponentType="button"
-      //         accessibilityTraits="button"
-      //         testID="header-filter"
-      //         delayPressIn={0}
-      //         pressColor={Color.touchableIconPressColor}
-      //         onPress={this.onItemPressed}
-      //         style={Styles.touchableContainer}
-      //         borderless
-      //       >
-      //         {/* <Icon size={28} name="md-add-circle" type="ionicon" color={Color.primaryColorNormal} /> */}
-      //       </TouchableItem>
-      //     </View>
-      //   </Col>
-      //   <Col size={90}>
-      //     <Text style={Styles.itemName} onPress={this.onItemPressed}>
-      //       {this.props.name}
-      //     </Text>
-      //     <Image source={Images.apple} style={Styles.image} />
-      //   </Col>
-      //   {this.props.isCustomItem
-      //     ? <Col size={8}>
-      //         <Icon name="fiber-new" type="material" />
-      //       </Col>
-      //     : <View />}
-      // </Grid>
+      // </View>
     );
   }
 }

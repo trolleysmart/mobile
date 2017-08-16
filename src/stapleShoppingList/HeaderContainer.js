@@ -19,14 +19,20 @@ import {
 import {
   connect,
 } from 'react-redux';
+import {
+  Icon,
+} from 'react-native-elements';
 import * as StapleShoppingListActions from './Actions';
 import {
   SearchBarWithDelay,
 } from '../searchBarWithDelay';
-import {
-  UserFeedbackHeader,
-} from '../userFeedback';
 import Styles from './Styles';
+import {
+  TouchableItem,
+} from '../components/touchableIcon';
+import {
+  Color,
+} from '../style/DefaultStyles';
 
 class HeaderContainer extends Component {
   onSearchKeywordChanged = searchKeyword => {
@@ -37,7 +43,7 @@ class HeaderContainer extends Component {
     );
   };
 
-  userFeedbackClicked = () => {
+  addItemsClicked = () => {
     this.props.showUserFeedback();
   };
 
@@ -45,8 +51,19 @@ class HeaderContainer extends Component {
     return (
       <View style={Styles.searchHeader}>
         <SearchBarWithDelay searchKeyword={this.props.searchKeyword} onSearchKeywordChanged={this.onSearchKeywordChanged} />
-        
-        {/* <UserFeedbackHeader userFeedbackClicked={this.userFeedbackClicked} /> */}
+        <View style={Styles.addItemsHeaderContainer}>
+          <TouchableItem
+            accessibilityComponentType="button"
+            accessibilityTraits="button"
+            delayPressIn={0}
+            onPress={this.addItemsClicked}
+            pressColor={Color.touchableIconPressColor}
+            borderless
+            style={Styles.addItemsTouchableContainer}
+          >
+            <Icon size={30} color={Color.primaryFontColor} name="md-add" type="ionicon" containerStyle={Styles.addItemsIconContainer} />
+          </TouchableItem>
+        </View>
       </View>
     );
   };
@@ -71,12 +88,12 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     stapleShoppingListActions: bindActionCreators(StapleShoppingListActions, dispatch),
-    showUserFeedback: () =>
-      dispatch(
-        NavigationActions.navigate({
-          routeName: 'StapleShoppingListUserFeedback',
-        }),
-      ),
+    // showUserFeedback: () =>
+    //   dispatch(
+    //     NavigationActions.navigate({
+    //       routeName: 'StapleShoppingListUserFeedback',
+    //     }),
+    //   ),
   };
 }
 

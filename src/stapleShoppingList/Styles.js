@@ -13,7 +13,10 @@ export default StyleSheet.create({
     backgroundColor: 'white',
   },
   touchableContainer: {
-
+    padding: 10,
+    width: 70,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   searchHeader: {
     flexDirection: 'row',
@@ -24,18 +27,14 @@ export default StyleSheet.create({
   row: {
     padding: 10,
   },
-  item: {
-    padding: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
   itemName: {
-    fontSize: 12,
+    fontSize: 10,
+    textAlign: 'center',
   },
-  image: {
-    width: 30,
-    height: 30,
-    borderWidth: 2,
+  sectionHeaderImage: {
+    width: 25,
+    height: 25,
+    // borderWidth: 2,
   },
   sectionHeader: {
     width: Sizes.screenWidth,
@@ -47,7 +46,7 @@ export default StyleSheet.create({
   containerHeader: {
     flexDirection: 'row',
     padding: 10,
-    justifyContent: 'space-between',
+    justifyContent: 'center',
   },
   itemsCount: {
     color: 'blue',
@@ -63,5 +62,18 @@ export default StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     // justifyContent: 'space-between',
+  },
+  addItemsHeaderContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  addItemsTouchableContainer: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    backgroundColor: 'transparent',
+  },
+  addItemsIconContainer: {
+    height: Sizes.searchBarHeaderHeight,
+    width: 30,
   },
 });
