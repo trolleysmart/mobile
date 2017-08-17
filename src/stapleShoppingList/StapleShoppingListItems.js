@@ -1,25 +1,11 @@
 // @flow
 
-import React, {
-  Component,
-} from 'react';
-import {
-  FlatList,
-  ListItem,
-  SectionList,
-  Text,
-  View,
-  Image,
-} from 'react-native';
-import Immutable, {
-  Map,
-} from 'immutable';
+import React, { Component } from 'react';
+import { FlatList, ListItem, SectionList, Text, View, Image } from 'react-native';
+import Immutable from 'immutable';
 import PropTypes from 'prop-types';
 import StapleShoppingListItem from './StapleShoppingListItem';
-import StapleShoppingListSeparator from './StapleShoppingListSeparator';
-import {
-  ImageUltility,
-} from '../components/image';
+import { ImageUltility } from '../components/image';
 import Styles from './Styles';
 
 class StapleShoppingListItems extends Component {
@@ -27,9 +13,7 @@ class StapleShoppingListItems extends Component {
     this.props.onStapleShoppingListItemSelectionChanged(id, name, isCustomItem, isSelected);
   };
 
-  renderRow = ({
-    item,
-  }) => {
+  renderRow = ({ item }) => {
     return (
       <StapleShoppingListItem
         id={item.id}
@@ -41,26 +25,20 @@ class StapleShoppingListItems extends Component {
     );
   };
 
-  renderSectionHeader = ({
-    section,
-  }) => {
+  renderSectionHeader = ({ section }) => {
     return (
       <View style={Styles.sectionHeader}>
         <Text style={Styles.sectionTitle}>
-            {section.title}
+          {section.title}
         </Text>
         <Image source={ImageUltility.getImageSource(section.title)} style={Styles.sectionHeaderImage} />
       </View>
-
     );
   };
 
   render = () => {
     let sectionData = Immutable.fromJS(this.props.stapleShoppingList)
-      .groupBy(item =>
-        item.get('tags')
-        .first()
-        .get('name'))
+      .groupBy(item => (item.has('tags') && item.get('tags') ? item.get('tags').first().get('name') : 'Unknown'))
       .mapEntries(([key, value]) => [
         key,
         {
@@ -74,7 +52,9 @@ class StapleShoppingListItems extends Component {
     return (
       <View style={Styles.container}>
         <View style={Styles.containerHeader}>
-          <Text style={Styles.itemsCount}>{this.props.selectedStapleShoppingListItems.length} items selected</Text>
+          <Text style={Styles.itemsCount}>
+            {this.props.selectedStapleShoppingListItems.length} items selected
+          </Text>
         </View>
         <SectionList
           contentContainerStyle={Styles.sectionListContainer}
@@ -95,21 +75,19 @@ class StapleShoppingListItems extends Component {
 
 StapleShoppingListItems.propTypes = {
   stapleShoppingList: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        isCustomItem: PropTypes.bool,
-      }),
-    )
-    .isRequired,
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      isCustomItem: PropTypes.bool,
+    }),
+  ).isRequired,
   selectedStapleShoppingListItems: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        isCustomItem: PropTypes.bool,
-      }),
-    )
-    .isRequired,
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      isCustomItem: PropTypes.bool,
+    }),
+  ).isRequired,
   onStapleShoppingListItemAdded: PropTypes.func.isRequired,
   onStapleShoppingListItemSelectionChanged: PropTypes.func.isRequired,
   isFetchingTop: PropTypes.bool.isRequired,

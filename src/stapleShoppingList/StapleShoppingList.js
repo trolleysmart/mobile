@@ -1,22 +1,11 @@
 // @flow
 
-import React, {
-  Component,
-} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {
-  Text,
-} from 'react-native-elements';
-import {
-  connect,
-} from 'react-redux';
-import {
-  environment,
-} from '../relay';
-import {
-  graphql,
-  QueryRenderer,
-} from 'react-relay';
+import { Text } from 'react-native-elements';
+import { connect } from 'react-redux';
+import { environment } from '../relay';
+import { graphql, QueryRenderer } from 'react-relay';
 import StapleShoppingListItemsRelayContainer from './StapleShoppingListItemsRelayContainer';
 import HeaderContainer from './HeaderContainer';
 
@@ -38,7 +27,7 @@ class StapleShoppingList extends Component {
         `}
         variables={{
           cursor: null,
-          count: 300,
+          count: 1000,
           searchKeyword: this.props.searchKeyword,
         }}
         render={({ error, props }) => {
@@ -52,15 +41,13 @@ class StapleShoppingList extends Component {
 
           if (props) {
             return <StapleShoppingListItemsRelayContainer user={props.user} />;
-    }
-    else {
-      return <Text>Loading</Text>;
-    }
+          } else {
+            return <Text>Loading</Text>;
+          }
+        }}
+      />
+    );
   }
-}
-/>
-);
-}
 }
 
 StapleShoppingList.propTypes = {

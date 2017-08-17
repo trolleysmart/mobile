@@ -1,12 +1,7 @@
 // @flow
 
-import {
-  StyleSheet,
-  Platform,
-} from 'react-native';
-import {
-  Sizes,
-} from '../style/DefaultStyles';
+import { StyleSheet, Platform } from 'react-native';
+import { Sizes } from '../style/DefaultStyles';
 
 export default StyleSheet.create({
   container: {
@@ -58,7 +53,7 @@ export default StyleSheet.create({
     fontWeight: '700',
   },
   sectionListContainer: {
-    flex: 1,
+    // flex: 1,
     flexDirection: 'row',
     flexWrap: 'wrap',
     // justifyContent: 'space-between',

@@ -1,25 +1,14 @@
 // @flow
 
-import Immutable, {
-  Map,
-  List,
-} from 'immutable';
-import React, {
-  Component,
-} from 'react';
+import Immutable, { Map, List } from 'immutable';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {
-  bindActionCreators,
-} from 'redux';
-import {
-  connect,
-} from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import uuid from 'uuid/v4';
 import StapleShoppingListItems from './StapleShoppingListItems';
 import * as StapleShoppingListActions from './Actions';
-import {
-  type StapleShoppingListItemsRelayContainer_user,
-} from './__generated__/StapleShoppingListItemsRelayContainer_user.graphql';
+import { type StapleShoppingListItemsRelayContainer_user } from './__generated__/StapleShoppingListItemsRelayContainer_user.graphql';
 
 type Props = {
   user: StapleShoppingListItemsRelayContainer_user,
@@ -29,7 +18,7 @@ type State = {
   isFetchingTop: boolean,
 };
 
-class StapleShoppingListItemsContrainer extends Component < any, Props, State > {
+class StapleShoppingListItemsContrainer extends Component<any, Props, State> {
   state = {
     isFetchingTop: false,
   };
@@ -53,11 +42,15 @@ class StapleShoppingListItemsContrainer extends Component < any, Props, State > 
         }),
       );
     } else {
+      if (!stapleShoppingListId) {
+        this.clearSearchKeyword();
+      }
+
       this.props.stapleShoppingListActions.stapleShoppingListItemSelectionChanged(
         Map({
           selectedStapleShoppingListItems: selectedItems.push(
             Map({
-              id: stapleShoppingListId,
+              id: stapleShoppingListId || uuid(),
               name: name,
               isCustomItem: isCustomItem,
             }),
@@ -68,9 +61,7 @@ class StapleShoppingListItemsContrainer extends Component < any, Props, State > 
   };
 
   onRefresh = () => {
-    const {
-      stapleShoppingList,
-    } = this.props.user;
+    const { stapleShoppingList } = this.props.user;
 
     if (this.props.relay.isLoading()) {
       return;
@@ -102,7 +93,7 @@ class StapleShoppingListItemsContrainer extends Component < any, Props, State > 
     return (
       <StapleShoppingListItems
         stapleShoppingList={getStapleShoppingListItemsWithCustomItem(
-          this.props.user.stapleShoppingList.edges.map(_ => _.node),
+          this.props.temporaryCustomItems.concat(this.props.user.stapleShoppingList.edges.map(_ => _.node)),
           this.props.customStapleShoppingListItem,
         )}
         onStapleShoppingListItemSelectionChanged={this.onStapleShoppingListItemSelectionChanged}
@@ -124,7 +115,6 @@ function getStapleShoppingListItemsWithCustomItem(stapleList, customStapleShoppi
       const customStapleItems = [];
 
       customStapleItems.push({
-        id: uuid(),
         name: customItemName,
         isCustomItem: true,
       });
@@ -146,8 +136,8 @@ StapleShoppingListItemsContrainer.propTypes = {
 function mapStateToProps(state) {
   return {
     customStapleShoppingListItem: state.stapleShoppingList.get('searchKeyword'),
-    selectedStapleShoppingListItems: state.stapleShoppingList.get('selectedStapleShoppingListItems')
-      .toJS(),
+    selectedStapleShoppingListItems: state.stapleShoppingList.get('selectedStapleShoppingListItems').toJS(),
+    temporaryCustomItems: state.stapleShoppingList.get('temporaryCustomItems').toJS(),
   };
 }
 
