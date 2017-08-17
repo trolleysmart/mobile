@@ -24,6 +24,10 @@ import {
 } from 'react-native-elements';
 import * as StapleShoppingListActions from './Actions';
 import {
+  AddNewStapleShoppingListItemsToShoppingList,
+  AddStapleShoppingListItemToUserShoppingList,
+} from '../relay/mutations';
+import {
   SearchBarWithDelay,
 } from '../searchBarWithDelay';
 import Styles from './Styles';
@@ -44,7 +48,19 @@ class HeaderContainer extends Component {
   };
 
   addItemsClicked = () => {
-    this.props.showUserFeedback();
+    // First select custom ones and add
+    // Then add non custom ones
+    if (isCustomItem) {
+      //this.clearSearchKeyword();
+      AddNewStapleShoppingListItemsToShoppingList.commit(this.props.relay.environment, this.props.user.id, List.of(name));
+
+    } else {
+      const shoppingListItem = this.props.user.stapleShoppingList.edges.map(_ => _.node)
+        .find(_ => _.id === stapleShoppingListId);
+      AddStapleShoppingListItemToUserShoppingList.commit(this.props.relay.environment, this.props.user.id, shoppingListItem);
+    }
+
+    this.props.stapleShoppingListActions.stapleShoppingListItemsAdded();
   };
 
   render = () => {
@@ -82,6 +98,8 @@ HeaderContainer.defaultProps = {
 function mapStateToProps(state) {
   return {
     searchKeyword: state.stapleShoppingList.get('searchKeyword'),
+    selectedStapleShoppingListItems: state.stapleShoppingList.get('selectedStapleShoppingListItems')
+      .toJS(),
   };
 }
 

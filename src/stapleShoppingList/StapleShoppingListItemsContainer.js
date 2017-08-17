@@ -16,10 +16,6 @@ import {
 } from 'react-redux';
 import uuid from 'uuid/v4';
 import StapleShoppingListItems from './StapleShoppingListItems';
-import {
-  AddNewStapleShoppingListItemsToShoppingList,
-  AddStapleShoppingListItemToUserShoppingList,
-} from '../relay/mutations';
 import * as StapleShoppingListActions from './Actions';
 import {
   type StapleShoppingListItemsRelayContainer_user,
@@ -44,24 +40,6 @@ class StapleShoppingListItemsContrainer extends Component < any, Props, State > 
         searchKeyword: '',
       }),
     );
-  };
-
-  // onStapleShoppingListItemAdded = (stapleShoppingListId, name, isCustomItem) => {
-  //   if (isCustomItem) {
-  //     this.clearSearchKeyword();
-  //
-
-  //AddNewStapleShoppingListItemsToShoppingList.commit(this.props.relay.environment, this.props.user.id, List.of(name));
-
-  //   } else {
-  //     const shoppingListItem = this.props.user.stapleShoppingList.edges.map(_ => _.node).find(_ => _.id === stapleShoppingListId);
-  //
-  //     AddStapleShoppingListItemToUserShoppingList.commit(this.props.relay.environment, this.props.user.id, shoppingListItem);
-  //   }
-  // };
-  onStapleShoppingListItemsAdded = (stapleShoppingListId, name, isCustomItem) => {
-
-    //this.props.stapleShoppingListActions.stapleShoppingListItemsAdded(stapleShoppingListId, name, isCustomItem);
   };
 
   onStapleShoppingListItemSelectionChanged = (stapleShoppingListId, name, isCustomItem, isSelected) => {
@@ -127,7 +105,6 @@ class StapleShoppingListItemsContrainer extends Component < any, Props, State > 
           this.props.user.stapleShoppingList.edges.map(_ => _.node),
           this.props.customStapleShoppingListItem,
         )}
-        onStapleShoppingListItemsAdded={this.onStapleShoppingListItemsAdded}
         onStapleShoppingListItemSelectionChanged={this.onStapleShoppingListItemSelectionChanged}
         selectedStapleShoppingListItems={this.props.selectedStapleShoppingListItems}
         isFetchingTop={this.state.isFetchingTop}
