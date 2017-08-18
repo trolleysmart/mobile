@@ -31,7 +31,7 @@ class SpecialItemsContainer extends Component<any, Props, State> {
     } else {
       const shoppingListItem = this.props.user.specials.edges.map(_ => _.node).find(_ => _.id === specialItemId);
 
-      AddItemsToShoppingList.commit(this.props.relay.environment, this.props.user.id, { products: List.of(Immutable.fromJS(shoppingListItem)) });
+      AddItemsToShoppingList.commit(this.props.relay.environment, this.props.user.id, { productPrices: List.of(Immutable.fromJS(shoppingListItem)) });
     }
   };
 
