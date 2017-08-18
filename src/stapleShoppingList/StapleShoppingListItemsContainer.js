@@ -1,6 +1,6 @@
 // @flow
 
-import Immutable, { Map, List } from 'immutable';
+import Immutable, { Map } from 'immutable';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';

@@ -28,7 +28,7 @@ class StapleShoppingListItem extends React.PureComponent {
         <View style={Styles.touchableContainer}>
           <Avatar
             rounded
-            overlayContainerStyle={{ backgroundColor: this.props.isSelected ? 'grey' : 'green' }}
+            overlayContainerStyle={{ backgroundColor: this.props.isSelected ? '#F4CC62' : '#EFF0F1' }}
             source={ImageUltility.getImageSource(this.props.name)}
             activeOpacity={0.7}
           />
