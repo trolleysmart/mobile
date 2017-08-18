@@ -1,15 +1,13 @@
 // @flow
 
+import Immutable, { List } from 'immutable';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as specialsActions from './Actions';
 import SpecialItems from './SpecialItems';
-import {
-  AddSpecialItemToUserShoppingList,
-  RemoveSpecialItemsFromUserShoppingList,
-} from '../relay/mutations';
+import { AddItemsToShoppingList, RemoveSpecialItemsFromUserShoppingList } from '../relay/mutations';
 import { type SpecialItemsRelayContainer_user } from './__generated__/SpecialItemsRelayContainer_user.graphql';
 
 type Props = {
@@ -27,26 +25,13 @@ class SpecialItemsContainer extends Component<any, Props, State> {
 
   onSpecialItemSelectionChanged = (specialItemId, isInShoppingList) => {
     if (isInShoppingList) {
-      const shoppingListItem = this.props.shoppingList.find(
-        _ => _.specialId === specialItemId,
-      );
+      const shoppingListItem = this.props.shoppingList.find(_ => _.specialId === specialItemId);
 
-      RemoveSpecialItemsFromUserShoppingList.commit(
-        this.props.relay.environment,
-        this.props.user.id,
-        shoppingListItem.id,
-        specialItemId,
-      );
+      RemoveSpecialItemsFromUserShoppingList.commit(this.props.relay.environment, this.props.user.id, shoppingListItem.id, specialItemId);
     } else {
-      const shoppingListItem = this.props.user.specials.edges
-        .map(_ => _.node)
-        .find(_ => _.id === specialItemId);
+      const shoppingListItem = this.props.user.specials.edges.map(_ => _.node).find(_ => _.id === specialItemId);
 
-      AddSpecialItemToUserShoppingList.commit(
-        this.props.relay.environment,
-        this.props.user.id,
-        shoppingListItem,
-      );
+      AddItemsToShoppingList.commit(this.props.relay.environment, this.props.user.id, { products: List.of(Immutable.fromJS(shoppingListItem)) });
     }
   };
 
@@ -115,6 +100,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  SpecialItemsContainer,
-);
+export default connect(mapStateToProps, mapDispatchToProps)(SpecialItemsContainer);
