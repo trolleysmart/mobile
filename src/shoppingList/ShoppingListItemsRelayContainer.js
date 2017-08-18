@@ -10,6 +10,10 @@ export default createPaginationContainer(
       fragment ShoppingListItemsRelayContainer_user on User {
         id
         shoppingList(first: $count, after: $cursor) @connection(key: "ShoppingList_shoppingList") {
+          pageInfo {
+            hasNextPage
+            endCursor
+          }
           edges {
             node {
               id
