@@ -19,7 +19,9 @@ const fetchQuery = async (operation, variables) => {
     }),
   });
 
-  return response.json();
+  const result = await response.json();
+
+  return result;
 };
 
 // Create a network layer from the fetch function
