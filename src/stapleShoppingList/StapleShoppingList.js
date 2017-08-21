@@ -11,7 +11,7 @@ import HeaderContainer from './HeaderContainer';
 
 class StapleShoppingList extends Component {
   static navigationOptions = {
-    headerTitle: <HeaderContainer />,
+    headerTitle: <HeaderContainer environment={environment} />,
   };
 
   render() {

@@ -20,7 +20,8 @@ export default (state = initialState, action) => {
               .filterNot(_ => items.find(item => item.get('id') === _.get('id'))),
           ),
         );
-
+    case ActionTypes.STAPLE_SHOPPING_LIST_USER_ID_CHANGED:
+      return state.set('userId', action.payload.get('userId'));
     default:
       return state;
   }

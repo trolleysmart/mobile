@@ -22,3 +22,10 @@ export function stapleShoppingListItemSelectionChanged(payload) {
     payload,
   };
 }
+
+export function userIdChanged(payload) {
+  return {
+    type: ActionTypes.STAPLE_SHOPPING_LIST_USER_ID_CHANGED,
+    payload,
+  };
+}

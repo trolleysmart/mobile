@@ -1,42 +1,19 @@
 // @flow
 
-import {
-  Map,
-} from 'immutable';
-import React, {
-  Component,
-} from 'react';
+import { Map, List } from 'immutable';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {
-  NavigationActions,
-} from 'react-navigation';
-import {
-  bindActionCreators,
-} from 'redux';
-import {
-  View,
-} from 'react-native';
-import {
-  connect,
-} from 'react-redux';
-import {
-  Icon,
-} from 'react-native-elements';
+import { NavigationActions } from 'react-navigation';
+import { bindActionCreators } from 'redux';
+import { View } from 'react-native';
+import { connect } from 'react-redux';
+import { Icon } from 'react-native-elements';
 import * as StapleShoppingListActions from './Actions';
-import {
-  AddNewStapleShoppingListItemsToShoppingList,
-  AddStapleShoppingListItemToUserShoppingList,
-} from '../relay/mutations';
-import {
-  SearchBarWithDelay,
-} from '../searchBarWithDelay';
+import { AddItemsToShoppingList } from '../relay/mutations';
+import { SearchBarWithDelay } from '../searchBarWithDelay';
 import Styles from './Styles';
-import {
-  TouchableItem,
-} from '../components/touchableIcon';
-import {
-  Color,
-} from '../style/DefaultStyles';
+import { TouchableItem } from '../components/touchableIcon';
+import { Color } from '../style/DefaultStyles';
 
 class HeaderContainer extends Component {
   onSearchKeywordChanged = searchKeyword => {
@@ -48,19 +25,20 @@ class HeaderContainer extends Component {
   };
 
   addItemsClicked = () => {
-    // First select custom ones and add
-    // Then add non custom ones
-    if (isCustomItem) {
-      //this.clearSearchKeyword();
-      AddNewStapleShoppingListItemsToShoppingList.commit(this.props.relay.environment, this.props.user.id, List.of(name));
+    if (this.props.selectedStapleShoppingListItems.size !== 0) {
+      AddItemsToShoppingList.commit(this.props.environment, this.props.userId, {
+        newStapleShoppingListNames: this.props.selectedStapleShoppingListItems.filter(_ => _.get('isCustomItem')).map(_ => _.get('name')),
+        stapleShoppingListItems: this.props.selectedStapleShoppingListItems.filterNot(_ => _.get('isCustomItem')),
+      });
 
-    } else {
-      const shoppingListItem = this.props.user.stapleShoppingList.edges.map(_ => _.node)
-        .find(_ => _.id === stapleShoppingListId);
-      AddStapleShoppingListItemToUserShoppingList.commit(this.props.relay.environment, this.props.user.id, shoppingListItem);
+      // Clear the selected staple list
+      this.props.stapleShoppingListActions.stapleShoppingListItemSelectionChanged(
+        Map({
+          selectedStapleShoppingListItems: List(),
+        }),
+      );
+      this.props.gotoShoppingList();
     }
-
-    this.props.stapleShoppingListActions.stapleShoppingListItemsAdded();
   };
 
   render = () => {
@@ -98,20 +76,20 @@ HeaderContainer.defaultProps = {
 function mapStateToProps(state) {
   return {
     searchKeyword: state.stapleShoppingList.get('searchKeyword'),
-    selectedStapleShoppingListItems: state.stapleShoppingList.get('selectedStapleShoppingListItems')
-      .toJS(),
+    userId: state.stapleShoppingList.get('userId'),
+    selectedStapleShoppingListItems: state.stapleShoppingList.get('selectedStapleShoppingListItems'),
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     stapleShoppingListActions: bindActionCreators(StapleShoppingListActions, dispatch),
-    // showUserFeedback: () =>
-    //   dispatch(
-    //     NavigationActions.navigate({
-    //       routeName: 'StapleShoppingListUserFeedback',
-    //     }),
-    //   ),
+    gotoShoppingList: () =>
+      dispatch(
+        NavigationActions.navigate({
+          routeName: 'ShoppingList',
+        }),
+      ),
   };
 }
 

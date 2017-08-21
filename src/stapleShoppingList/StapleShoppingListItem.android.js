@@ -22,7 +22,7 @@ class StapleShoppingListItem extends React.PureComponent {
         delayPressIn={0}
         pressColor={Color.touchableIconPressColor}
         onPress={this.onItemPressed}
-        // style={Styles.touchableContainer}
+        style={Styles.touchableContainer}
         borderless
       >
         <View style={Styles.touchableContainer}>

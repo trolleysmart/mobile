@@ -23,6 +23,14 @@ class StapleShoppingListItemsContrainer extends Component<any, Props, State> {
     isFetchingTop: false,
   };
 
+  componentWillReceiveProps = nextProps => {
+    this.props.stapleShoppingListActions.userIdChanged(
+      Map({
+        userId: nextProps.user.id,
+      }),
+    );
+  };
+
   clearSearchKeyword = () => {
     this.props.stapleShoppingListActions.searchKeywordChanged(
       Map({

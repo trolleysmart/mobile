@@ -54,8 +54,8 @@ export default StyleSheet.create({
   },
   sectionListContainer: {
     // flex: 1,
-    // flexDirection: 'row',
-    // flexWrap: 'wrap',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
     // justifyContent: 'space-between',
   },
   addItemsHeaderContainer: {

@@ -6,4 +6,5 @@ export default Map({
   searchKeyword: '',
   selectedStapleShoppingListItems: List(),
   temporaryCustomItems: List(),
+  userId: '',
 });

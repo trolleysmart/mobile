@@ -1,10 +1,9 @@
 // @flow
 
 import React, { Component } from 'react';
-import { FlatList, SectionList, Text, View, Image } from 'react-native';
+import { SectionList, Text, View, Image } from 'react-native';
 import Immutable from 'immutable';
 import PropTypes from 'prop-types';
-import uuid from 'uuid/v4';
 import StapleShoppingListItem from './StapleShoppingListItem';
 import { ImageUltility } from '../components/image';
 import Styles from './Styles';
@@ -16,7 +15,6 @@ class StapleShoppingListItems extends Component {
 
   renderItem = ({ item }) => {
     return (
-      // <Text>{item.name}</Text>
       <StapleShoppingListItem
         id={item.id}
         name={item.name}
@@ -26,11 +24,6 @@ class StapleShoppingListItems extends Component {
       />
     );
   };
-
-  renderList = ({ item }) =>
-    <View>
-      <FlatList numColumns={5} data={item.data} renderItem={this.renderItem} keyExtractor={item => item.id} />
-    </View>;
 
   renderSectionHeader = ({ section }) => {
     return (
@@ -49,12 +42,7 @@ class StapleShoppingListItems extends Component {
       .mapEntries(([key, value]) => [
         key,
         {
-          data: [
-            {
-              data: value.toJS(),
-              key: uuid(),
-            },
-          ],
+          data: value.toJS(),
           title: key,
         },
       ])
@@ -70,13 +58,10 @@ class StapleShoppingListItems extends Component {
         </View>
         <SectionList
           contentContainerStyle={Styles.sectionListContainer}
-          renderItem={this.renderList}
+          renderItem={this.renderItem}
           renderSectionHeader={this.renderSectionHeader}
           sections={sectionData}
-          keyExtractor={item => {
-            //console.log(item);
-            return item.key;
-          }}
+          keyExtractor={item => item.id}
           onEndReached={this.props.onEndReached}
           onRefresh={this.props.onRefresh}
           refreshing={this.props.isFetchingTop}
