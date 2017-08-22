@@ -1,13 +1,25 @@
 // @flow
 
 import React from 'react';
-import { View } from 'react-native';
-import { Col, Grid } from 'react-native-easy-grid';
-import { Text, Icon } from 'react-native-elements';
+import {
+  View,
+} from 'react-native';
+import {
+  Col,
+  Grid,
+} from 'react-native-easy-grid';
+import {
+  Text,
+  Icon,
+} from 'react-native-elements';
 import PropTypes from 'prop-types';
 import Styles from './Styles';
-import { TouchableItem } from '../components/touchableIcon';
-import { Color } from '../style/DefaultStyles';
+import {
+  TouchableItem,
+} from '../components/touchableIcon';
+import {
+  Color,
+} from '../style/DefaultStyles';
 
 class StapleShoppingListItem extends React.PureComponent {
   onItemPressed = () => {
