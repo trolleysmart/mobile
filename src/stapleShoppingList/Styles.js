@@ -7,6 +7,12 @@ export default StyleSheet.create({
   container: {
     backgroundColor: 'white',
   },
+  touchableContainer: {
+    padding: 10,
+    width: 70,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   searchHeader: {
     flexDirection: 'row',
     height: Sizes.searchBarHeaderHeight,
@@ -17,8 +23,52 @@ export default StyleSheet.create({
     padding: 10,
   },
   itemName: {
-    fontSize: 20,
+    fontSize: 10,
+    textAlign: 'center',
+  },
+  sectionHeaderImage: {
+    width: 25,
+    height: 25,
+    // borderWidth: 2,
+  },
+  sectionHeader: {
+    width: Sizes.screenWidth,
+    backgroundColor: '#E9E9EF',
+    padding: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  containerHeader: {
+    flexDirection: 'row',
+    padding: 10,
+    justifyContent: 'center',
+  },
+  itemsCount: {
+    color: 'blue',
+  },
+  select: {
+    color: 'blue',
+  },
+  sectionTitle: {
+    fontWeight: '700',
+  },
+  sectionListContainer: {
+    // flex: 1,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    // justifyContent: 'space-between',
+  },
+  addItemsHeaderContainer: {
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  addItemsTouchableContainer: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    backgroundColor: 'transparent',
+  },
+  addItemsIconContainer: {
+    height: Sizes.searchBarHeaderHeight,
+    width: 30,
   },
 });

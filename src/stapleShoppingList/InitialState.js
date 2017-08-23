@@ -1,7 +1,10 @@
 // @flow
 
-import { Map } from 'immutable';
+import { Map, List } from 'immutable';
 
 export default Map({
   searchKeyword: '',
+  selectedStapleShoppingListItems: List(),
+  temporaryCustomItems: List(),
+  userId: '',
 });
