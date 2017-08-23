@@ -1,6 +1,6 @@
 // @flow
 
-import Immutable, { Map } from 'immutable';
+import Immutable, { Map, List } from 'immutable';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { NavigationActions } from 'react-navigation';
@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 import ShoppingListItems from './ShoppingListItems';
 import { RemoveStapleShoppingListItemsFromUserShoppingList, RemoveSpecialItemsFromUserShoppingList } from '../relay/mutations';
 import * as ShoppingListActions from './Actions';
+import * as StapleShoppingListActions from '../stapleShoppingList/Actions';
 import { type ShoppingListItemsRelayContainer_user } from './__generated__/ShoppingListItemsRelayContainer_user.graphql';
 
 type Props = {
@@ -51,6 +52,12 @@ class ShoppingListItemsContainer extends Component<any, Props, State> {
   };
 
   onShoppingListAddItemClicked = () => {
+    // Clear the selected staple list
+    this.props.stapleShoppingListActions.stapleShoppingListItemSelectionChanged(
+      Map({
+        selectedStapleShoppingListItems: List(),
+      }),
+    );
     this.props.gotoAddStapleShoppingListItems();
   };
 
@@ -107,6 +114,7 @@ function mapStateToProps() {
 function mapDispatchToProps(dispatch) {
   return {
     shoppingListActions: bindActionCreators(ShoppingListActions, dispatch),
+    stapleShoppingListActions: bindActionCreators(StapleShoppingListActions, dispatch),
     gotoAddStapleShoppingListItems: () =>
       dispatch(
         NavigationActions.navigate({

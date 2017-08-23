@@ -1,6 +1,7 @@
 // @flow
 
 import { StyleSheet } from 'react-native';
+import { Sizes } from '../style/DefaultStyles';
 
 export default StyleSheet.create({
   container: {
@@ -64,5 +65,19 @@ export default StyleSheet.create({
     fontSize: 20,
     height: 22,
     color: 'white',
+  },
+  sectionHeader: {
+    width: Sizes.screenWidth,
+    backgroundColor: '#E9E9EF',
+    padding: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  sectionTitle: {
+    fontWeight: '700',
+  },
+  sectionHeaderImage: {
+    width: 25,
+    height: 25,
   },
 });

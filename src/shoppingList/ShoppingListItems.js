@@ -1,36 +1,67 @@
 // @flow
 
 import React, { Component } from 'react';
-import { FlatList, View } from 'react-native';
+import { SectionList, Text, View, Image } from 'react-native';
+import Immutable from 'immutable';
 import PropTypes from 'prop-types';
 import ActionButton from 'react-native-action-button';
 import ShoppingListItem from './ShoppingListItem';
 import SpecialItemSeparator from '../specials/SpecialItemSeparator';
+import { ImageUltility } from '../components/image';
 import Styles from './Styles';
 
 class ShoppingListItems extends Component {
+  renderItem = ({ item }) => {
+    return (
+      <ShoppingListItem
+        id={item.id}
+        name={item.name}
+        imageUrl={item.imageUrl}
+        priceToDisplay={item.priceToDisplay}
+        storeImageUrl={item.storeImageUrl}
+        storeName={item.storeName}
+        comments={item.comments}
+        unitPrice={item.unitPrice}
+        offerEndDate={item.offerEndDate}
+        size={item.size}
+        multiBuy={item.multiBuy}
+        savingPercentage={item.savingPercentage}
+        saving={item.saving}
+        onShoppingListItemSelectionChanged={this.props.onShoppingListItemSelectionChanged}
+      />
+    );
+  };
+
+  renderSectionHeader = ({ section }) => {
+    return (
+      <View style={Styles.sectionHeader}>
+        <Text style={Styles.sectionTitle}>
+          {section.title}
+        </Text>
+        <Image source={ImageUltility.getImageSource(section.title)} style={Styles.sectionHeaderImage} />
+      </View>
+    );
+  };
+
   render = () => {
+    let sectionData = Immutable.fromJS(this.props.shoppingList)
+      .groupBy(item => (item.has('tags') && item.get('tags') ? item.get('tags').first().get('name') : 'Unknown'))
+      .mapEntries(([key, value]) => [
+        key,
+        {
+          data: value.toJS(),
+          title: key,
+        },
+      ])
+      .valueSeq()
+      .toJS();
     return (
       <View style={Styles.container}>
-        <FlatList
-          data={this.props.shoppingList}
-          renderItem={info =>
-            <ShoppingListItem
-              id={info.item.id}
-              name={info.item.name}
-              imageUrl={info.item.imageUrl}
-              priceToDisplay={info.item.priceToDisplay}
-              storeImageUrl={info.item.storeImageUrl}
-              storeName={info.item.storeName}
-              comments={info.item.comments}
-              unitPrice={info.item.unitPrice}
-              offerEndDate={info.item.offerEndDate}
-              size={info.item.size}
-              multiBuy={info.item.multiBuy}
-              savingPercentage={info.item.savingPercentage}
-              saving={info.item.saving}
-              onShoppingListItemSelectionChanged={this.props.onShoppingListItemSelectionChanged}
-            />}
+        <SectionList
+          contentContainerStyle={Styles.sectionListContainer}
+          renderItem={this.renderItem}
+          renderSectionHeader={this.renderSectionHeader}
+          sections={sectionData}
           keyExtractor={item => item.id}
           onEndReached={this.props.onEndReached}
           onRefresh={this.props.onRefresh}
