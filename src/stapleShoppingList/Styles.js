@@ -29,7 +29,6 @@ export default StyleSheet.create({
   sectionHeaderImage: {
     width: 25,
     height: 25,
-    // borderWidth: 2,
   },
   sectionHeader: {
     width: Sizes.screenWidth,
