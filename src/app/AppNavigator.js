@@ -3,6 +3,7 @@
 import { StackNavigator } from 'react-navigation';
 import { HomeContainer } from '../home';
 import { StapleShoppingList } from '../stapleShoppingList';
+import { UserFeedbackContainer as StapleShoppingListUserFeedback } from '../stapleShoppingList/userFeedback';
 import { SpecialsFilterContainer } from '../specialsFilter';
 import { CategoriesFilter } from '../categoriesFilter';
 import { StoresFilter } from '../storesFilter';
@@ -13,6 +14,9 @@ export default StackNavigator({
   },
   StapleShoppingList: {
     screen: StapleShoppingList,
+  },
+  StapleShoppingListUserFeedback: {
+    screen: StapleShoppingListUserFeedback,
   },
   SpecialsFilter: {
     screen: SpecialsFilterContainer,

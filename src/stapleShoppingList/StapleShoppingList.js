@@ -11,7 +11,7 @@ import HeaderContainer from './HeaderContainer';
 
 class StapleShoppingList extends Component {
   static navigationOptions = {
-    headerTitle: <HeaderContainer />,
+    headerTitle: <HeaderContainer environment={environment} />,
   };
 
   render() {
@@ -27,7 +27,7 @@ class StapleShoppingList extends Component {
         `}
         variables={{
           cursor: null,
-          count: 30,
+          count: 1000,
           searchKeyword: this.props.searchKeyword,
         }}
         render={({ error, props }) => {

@@ -1,7 +1,12 @@
 // @flow
 
-import { StyleSheet, Platform } from 'react-native';
-import { Dimensions } from 'react-native';
+import {
+  StyleSheet,
+  Platform,
+} from 'react-native';
+import {
+  Dimensions,
+} from 'react-native';
 
 const APPBAR_HEIGHT = Platform.OS === 'ios' ? 44 : 56;
 const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : 0;
@@ -26,6 +31,7 @@ export const Color = {
 export const Sizes = {
   searchBarHeaderWidth: screen.width - 10,
   searchBarHeaderHeight: HEIGHT,
+  screenWidth: screen.width,
 };
 
 export default StyleSheet.create({

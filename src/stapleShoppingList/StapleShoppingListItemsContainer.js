@@ -1,13 +1,12 @@
 // @flow
 
-import { Map } from 'immutable';
+import Immutable, { Map } from 'immutable';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import uuid from 'uuid/v4';
 import StapleShoppingListItems from './StapleShoppingListItems';
-import { AddNewStapleShoppingListToShoppingList, AddStapleShoppingListItemToUserShoppingList } from '../relay/mutations';
 import * as StapleShoppingListActions from './Actions';
 import { type StapleShoppingListItemsRelayContainer_user } from './__generated__/StapleShoppingListItemsRelayContainer_user.graphql';
 
@@ -24,6 +23,14 @@ class StapleShoppingListItemsContrainer extends Component<any, Props, State> {
     isFetchingTop: false,
   };
 
+  componentWillReceiveProps = nextProps => {
+    this.props.stapleShoppingListActions.userIdChanged(
+      Map({
+        userId: nextProps.user.id,
+      }),
+    );
+  };
+
   clearSearchKeyword = () => {
     this.props.stapleShoppingListActions.searchKeywordChanged(
       Map({
@@ -32,15 +39,32 @@ class StapleShoppingListItemsContrainer extends Component<any, Props, State> {
     );
   };
 
-  onStapleShoppingListItemAdded = (stapleShoppingListId, name, isCustomItem) => {
-    if (isCustomItem) {
-      this.clearSearchKeyword();
+  onStapleShoppingListItemSelectionChanged = (stapleShoppingListId, name, isCustomItem, isSelected) => {
+    const selectedItems = Immutable.fromJS(this.props.selectedStapleShoppingListItems);
 
-      AddNewStapleShoppingListToShoppingList.commit(this.props.relay.environment, this.props.user.id, name);
+    // original state is selected, so remove from selected list
+    if (isSelected) {
+      this.props.stapleShoppingListActions.stapleShoppingListItemSelectionChanged(
+        Map({
+          selectedStapleShoppingListItems: selectedItems.filterNot(_ => _.get('id') === stapleShoppingListId),
+        }),
+      );
     } else {
-      const shoppingListItem = this.props.user.stapleShoppingList.edges.map(_ => _.node).find(_ => _.id === stapleShoppingListId);
+      if (!stapleShoppingListId) {
+        this.clearSearchKeyword();
+      }
 
-      AddStapleShoppingListItemToUserShoppingList.commit(this.props.relay.environment, this.props.user.id, shoppingListItem);
+      this.props.stapleShoppingListActions.stapleShoppingListItemSelectionChanged(
+        Map({
+          selectedStapleShoppingListItems: selectedItems.push(
+            Map({
+              id: stapleShoppingListId || uuid(),
+              name: name,
+              isCustomItem: isCustomItem,
+            }),
+          ),
+        }),
+      );
     }
   };
 
@@ -77,10 +101,11 @@ class StapleShoppingListItemsContrainer extends Component<any, Props, State> {
     return (
       <StapleShoppingListItems
         stapleShoppingList={getStapleShoppingListItemsWithCustomItem(
-          this.props.user.stapleShoppingList.edges.map(_ => _.node),
+          this.props.temporaryCustomItems.concat(this.props.user.stapleShoppingList.edges.map(_ => _.node)),
           this.props.customStapleShoppingListItem,
         )}
-        onStapleShoppingListItemAdded={this.onStapleShoppingListItemAdded}
+        onStapleShoppingListItemSelectionChanged={this.onStapleShoppingListItemSelectionChanged}
+        selectedStapleShoppingListItems={this.props.selectedStapleShoppingListItems}
         isFetchingTop={this.state.isFetchingTop}
         onRefresh={this.onRefresh}
         onEndReached={this.onEndReached}
@@ -98,7 +123,6 @@ function getStapleShoppingListItemsWithCustomItem(stapleList, customStapleShoppi
       const customStapleItems = [];
 
       customStapleItems.push({
-        id: uuid(),
         name: customItemName,
         isCustomItem: true,
       });
@@ -120,6 +144,8 @@ StapleShoppingListItemsContrainer.propTypes = {
 function mapStateToProps(state) {
   return {
     customStapleShoppingListItem: state.stapleShoppingList.get('searchKeyword'),
+    selectedStapleShoppingListItems: state.stapleShoppingList.get('selectedStapleShoppingListItems').toJS(),
+    temporaryCustomItems: state.stapleShoppingList.get('temporaryCustomItems').toJS(),
   };
 }
 

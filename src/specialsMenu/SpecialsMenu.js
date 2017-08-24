@@ -8,24 +8,24 @@ import Styles from './Styles';
 import { Color } from '../style/DefaultStyles';
 import { TouchableItem } from '../components/touchableIcon';
 
-const MainMenu = ({ showSpecialsFilter }) =>
+const SpecialsMenu = ({ showSpecialsFilter }) =>
   <View style={Styles.container}>
     <TouchableItem
       accessibilityComponentType="button"
       accessibilityTraits="button"
       testID="header-filter"
       delayPressIn={0}
-      onPress={() => showSpecialsFilter()}
+      onPress={showSpecialsFilter}
       pressColor={Color.touchableIconPressColor}
       style={Styles.touchableContainer}
       borderless
     >
-      <Icon size={28} color={Color.primaryFontColor} name="sliders" type="font-awesome" />
+      <Icon size={28} color={Color.primaryFontColor} name="sliders" type="font-awesome" containerStyle={Styles.iconContainerStyle} />
     </TouchableItem>
   </View>;
 
-MainMenu.propTypes = {
+SpecialsMenu.propTypes = {
   showSpecialsFilter: PropTypes.func.isRequired,
 };
 
-export default MainMenu;
+export default SpecialsMenu;

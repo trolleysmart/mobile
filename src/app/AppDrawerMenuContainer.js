@@ -16,33 +16,18 @@ class AppDrawerMenuContainer extends Component {
       <View style={Styles.container}>
         <View style={Styles.profile}>
           {this.props.avatarUrl
-            ? <Avatar
-                containerStyle={Styles.profileAvatar}
-                medium
-                rounded
-                source={{ uri: this.props.avatarUrl }}
-                activeOpacity={0.7}
-              />
-            : <Avatar
-                containerStyle={Styles.profileAvatar}
-                medium
-                rounded
-                icon={{ name: 'person', type: 'material-icons' }}
-                activeOpacity={0.7}
-              />}
+            ? <Avatar containerStyle={Styles.profileAvatar} medium rounded source={{ uri: this.props.avatarUrl }} activeOpacity={0.7} />
+            : <Avatar containerStyle={Styles.profileAvatar} medium rounded icon={{ name: 'person', type: 'material-icons' }} activeOpacity={0.7} />}
           <View style={Styles.profileDetail}>
-            <Text>{this.props.name}</Text>
+            <Text>
+              {this.props.name}
+            </Text>
             <Text>View Profile</Text>
           </View>
         </View>
         <View style={Styles.menu}>
           <ScrollView>
-            <DrawerItems
-              {...this.props}
-              onItemPress={({ route }) => {
-                this.props.gotoScreen(route.key);
-              }}
-            />
+            <DrawerItems {...this.props} />
           </ScrollView>
         </View>
       </View>
@@ -59,9 +44,7 @@ function mapStateToProps(state) {
     name: state.userAccess.get('userInfo').get('name')
       ? state.userAccess.get('userInfo').get('name')
       : state.userAccess.get('userInfo').get('emailAddress'),
-    avatarUrl: state.userAccess.getIn(['userInfo', 'avatar'])
-      ? state.userAccess.getIn(['userInfo', 'avatar']).data.url
-      : null,
+    avatarUrl: state.userAccess.getIn(['userInfo', 'avatar']) ? state.userAccess.getIn(['userInfo', 'avatar']).data.url : null,
   };
 }
 
@@ -77,6 +60,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  AppDrawerMenuContainer,
-);
+export default connect(mapStateToProps, mapDispatchToProps)(AppDrawerMenuContainer);
