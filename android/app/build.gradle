@@ -92,8 +92,8 @@ def enableProguardInReleaseBuilds = false
 
 ext.versionMajor = 1
 ext.versionMinor = 0
-ext.versionPatch = 18
-ext.versionClassifier = null 
+ext.versionPatch = 20
+ext.versionClassifier = null
 ext.isSnapshot = true
 ext.minimumSdkVersion = 16
 
@@ -105,8 +105,8 @@ android {
         applicationId "com.trolleysmart"
         targetSdkVersion 22
         minSdkVersion project.ext.minimumSdkVersion
-        versionCode 160010018
-        versionName "1.0.18-SNAPSHOT" 
+        versionCode 160010020
+        versionName "1.0.20-SNAPSHOT"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
