@@ -9,6 +9,9 @@ import {
 import {
   Specials,
 } from '../specials';
+import {
+  FlyersContainer,
+} from '../flyers';
 
 const HomeTabs = TabNavigator({
   ShoppingList: {
@@ -18,6 +21,10 @@ const HomeTabs = TabNavigator({
   Specials: {
     screen: Specials,
     path: '/specials',
+  },
+  Flyers: {
+    screen: FlyersContainer,
+    path: '/flyers',
   },
 }, {
   tabBarPosition: 'bottom',

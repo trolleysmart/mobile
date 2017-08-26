@@ -1,12 +1,29 @@
 // @flow
 
-import { StackNavigator } from 'react-navigation';
-import { HomeContainer } from '../home';
-import { StapleShoppingList } from '../stapleShoppingList';
-import { UserFeedbackContainer as StapleShoppingListUserFeedback } from '../stapleShoppingList/userFeedback';
-import { SpecialsFilterContainer } from '../specialsFilter';
-import { CategoriesFilter } from '../categoriesFilter';
-import { StoresFilter } from '../storesFilter';
+import {
+  StackNavigator,
+} from 'react-navigation';
+import {
+  HomeContainer,
+} from '../home';
+import {
+  StapleShoppingList,
+} from '../stapleShoppingList';
+import {
+  UserFeedbackContainer as StapleShoppingListUserFeedback,
+} from '../stapleShoppingList/userFeedback';
+import {
+  SpecialsFilterContainer,
+} from '../specialsFilter';
+import {
+  CategoriesFilter,
+} from '../categoriesFilter';
+import {
+  StoresFilter,
+} from '../storesFilter';
+import {
+  FlyerContainer,
+} from '../flyer';
 
 export default StackNavigator({
   Home: {
@@ -26,5 +43,8 @@ export default StackNavigator({
   },
   StoresFilter: {
     screen: StoresFilter,
+  },
+  Flyer: {
+    screen: FlyerContainer,
   },
 });
