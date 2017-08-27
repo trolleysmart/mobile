@@ -6,28 +6,21 @@ import { Col, Grid } from 'react-native-easy-grid';
 import { CheckBox } from 'react-native-elements';
 import PropTypes from 'prop-types';
 import Styles from './Styles';
-import SpecialItem from './SpecialItem';
+import ProductListRowItem from './ProductListRowItem';
 
-class SpecialItemRow extends React.PureComponent {
+class ProductListRow extends React.PureComponent {
   render() {
     return (
-      <TouchableHighlight
-        underlayColor="whitesmoke"
-        style={Styles.specialItemRow}
-      >
+      <TouchableHighlight underlayColor="whitesmoke" style={Styles.productListItemRow}>
         <Grid>
           <CheckBox
             style={Styles.checkbox}
             checked={this.props.isInShoppingList}
             right
-            onPress={() =>
-              this.props.onSpecialItemSelectionChanged(
-                this.props.id,
-                this.props.isInShoppingList,
-              )}
+            onPress={() => this.props.onItemSelectionChanged(this.props.id, this.props.isInShoppingList)}
           />
           <Col size={80}>
-            <SpecialItem
+            <ProductListRowItem
               id={this.props.id}
               name={this.props.name}
               imageUrl={this.props.imageUrl}
@@ -49,7 +42,7 @@ class SpecialItemRow extends React.PureComponent {
   }
 }
 
-SpecialItemRow.propTypes = {
+ProductListRow.propTypes = {
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   imageUrl: PropTypes.string,
@@ -70,7 +63,7 @@ SpecialItemRow.propTypes = {
   offerEndDate: PropTypes.string,
   size: PropTypes.string,
   isInShoppingList: PropTypes.bool.isRequired,
-  onSpecialItemSelectionChanged: PropTypes.func.isRequired,
+  onItemSelectionChanged: PropTypes.func.isRequired,
 };
 
-export default SpecialItemRow;
+export default ProductListRow;

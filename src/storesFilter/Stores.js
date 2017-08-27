@@ -4,17 +4,10 @@ import React from 'react';
 import { FlatList, View } from 'react-native';
 import PropTypes from 'prop-types';
 import Store from './Store';
-import SpecialItemSeparator from '../specials/SpecialItemSeparator';
+import { ListItemSeparator } from '../components/list';
 import Styles from './Styles';
 
-const Stores = ({
-  stores,
-  selectedStores,
-  onStoreSelectionChanged,
-  isFetchingTop,
-  onRefresh,
-  onEndReached,
-}) =>
+const Stores = ({ stores, selectedStores, onStoreSelectionChanged, isFetchingTop, onRefresh, onEndReached }) =>
   <View style={Styles.container}>
     <FlatList
       data={stores}
@@ -29,7 +22,7 @@ const Stores = ({
       onEndReached={onEndReached}
       onRefresh={onRefresh}
       refreshing={isFetchingTop}
-      ItemSeparatorComponent={() => <SpecialItemSeparator />}
+      ItemSeparatorComponent={() => <ListItemSeparator />}
     />
   </View>;
 

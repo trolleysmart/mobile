@@ -3,54 +3,38 @@
 import React from 'react';
 import { TouchableHighlight } from 'react-native';
 import { Col, Grid } from 'react-native-easy-grid';
-import { CheckBox, Text } from 'react-native-elements';
+import { CheckBox, ListItem } from 'react-native-elements';
 import PropTypes from 'prop-types';
 import Styles from './Styles';
-import { SpecialItem } from '../specials';
+import { ProductListRowItem } from '../products';
 
 class ShoppingListItem extends React.PureComponent {
   render() {
     if (!this.props.priceToDisplay && !this.props.imageUrl) {
       // Staple item
       return (
-        <TouchableHighlight
-          underlayColor="whitesmoke"
-          style={Styles.stapleItemRow}
-        >
-          <Grid>
-            <Col size={10}>
-              <CheckBox
-                style={Styles.stapleItemCheckbox}
-                checked={false}
-                center
-                onPress={() =>
-                  this.props.onShoppingListItemSelectionChanged(this.props.id)}
-              />
-            </Col>
-            <Col size={90} style={Styles.stapleItemName}>
-              <Text style={Styles.name} numberOfLines={1}>
-                {this.props.name}
-              </Text>
-            </Col>
-          </Grid>
-        </TouchableHighlight>
+        <ListItem
+          containerStyle={Styles.stapleItemRow}
+          avatar={
+            <CheckBox
+              style={Styles.stapleItemCheckbox}
+              checked={false}
+              center
+              onPress={() => this.props.onShoppingListItemSelectionChanged(this.props.id)}
+            />
+          }
+          key={this.props.name}
+          title={this.props.name}
+          onPressRightIcon={() => this.props.onViewProductsPressed(this.props.name)}
+        />
       );
     } else {
       return (
-        <TouchableHighlight
-          underlayColor="whitesmoke"
-          style={Styles.specialItemRow}
-        >
+        <TouchableHighlight underlayColor="whitesmoke" style={Styles.specialItemRow}>
           <Grid>
-            <CheckBox
-              style={Styles.checkbox}
-              checked={false}
-              center
-              onPress={() =>
-                this.props.onShoppingListItemSelectionChanged(this.props.id)}
-            />
+            <CheckBox style={Styles.checkbox} checked={false} center onPress={() => this.props.onShoppingListItemSelectionChanged(this.props.id)} />
             <Col size={80}>
-              <SpecialItem
+              <ProductListRowItem
                 id={this.props.id}
                 name={this.props.name}
                 imageUrl={this.props.imageUrl}
@@ -94,6 +78,7 @@ ShoppingListItem.propTypes = {
   saving: PropTypes.number,
   comments: PropTypes.string,
   onShoppingListItemSelectionChanged: PropTypes.func.isRequired,
+  onViewProductsPressed: PropTypes.func.isRequired,
 };
 
 export default ShoppingListItem;

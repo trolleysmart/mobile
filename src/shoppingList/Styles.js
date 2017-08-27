@@ -7,35 +7,6 @@ export default StyleSheet.create({
   container: {
     flex: 1,
   },
-  specialItemImage: {
-    width: 60,
-    height: 60,
-    backgroundColor: 'transparent',
-  },
-  storeImage: {
-    width: 20,
-    height: 20,
-    backgroundColor: 'transparent',
-  },
-  specialItemSeparator: {
-    height: 1,
-    backgroundColor: '#cccccc',
-  },
-  name: {
-    fontSize: 14,
-  },
-  offerEndDate: {
-    color: 'red',
-  },
-  comments: {},
-  unitSize: {},
-  storeName: {
-    fontWeight: 'bold',
-  },
-  priceToDisplay: {
-    fontWeight: 'bold',
-    color: 'red',
-  },
   checkbox: {
     justifyContent: 'center',
     alignItems: 'center',
@@ -45,6 +16,7 @@ export default StyleSheet.create({
   stapleItemCheckbox: {
     justifyContent: 'center',
     alignItems: 'center',
+    marginTop: 5,
     marginLeft: 7,
     marginRight: -15,
   },
@@ -56,7 +28,6 @@ export default StyleSheet.create({
     padding: 10,
   },
   stapleItemRow: {
-    padding: 10,
     alignItems: 'center',
     backgroundColor: 'white',
     justifyContent: 'center',

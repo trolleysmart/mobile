@@ -10,6 +10,7 @@ import ShoppingListItems from './ShoppingListItems';
 import { RemoveStapleShoppingListItemsFromUserShoppingList, RemoveSpecialItemsFromUserShoppingList } from '../relay/mutations';
 import * as ShoppingListActions from './Actions';
 import * as StapleShoppingListActions from '../stapleShoppingList/Actions';
+import * as ProductsActions from '../products/Actions';
 import { type ShoppingListItemsRelayContainer_user } from './__generated__/ShoppingListItemsRelayContainer_user.graphql';
 
 type Props = {
@@ -61,6 +62,15 @@ class ShoppingListItemsContainer extends Component<any, Props, State> {
     this.props.gotoAddStapleShoppingListItems();
   };
 
+  onViewProductsPressed = stapleItemName => {
+    this.props.productsActions.searchKeywordChanged(
+      Map({
+        searchKeyword: stapleItemName,
+      }),
+    );
+    this.props.gotoProducts();
+  };
+
   onRefresh = () => {
     const { shoppingList } = this.props.user;
 
@@ -95,6 +105,7 @@ class ShoppingListItemsContainer extends Component<any, Props, State> {
       <ShoppingListItems
         shoppingList={this.props.user.shoppingList.edges.map(_ => _.node)}
         onShoppingListItemSelectionChanged={this.onShoppingListItemSelectionChanged}
+        onViewProductsPressed={this.onViewProductsPressed}
         onShoppingListAddItemClicked={this.onShoppingListAddItemClicked}
         isFetchingTop={this.state.isFetchingTop}
         onRefresh={this.onRefresh}
@@ -115,10 +126,17 @@ function mapDispatchToProps(dispatch) {
   return {
     shoppingListActions: bindActionCreators(ShoppingListActions, dispatch),
     stapleShoppingListActions: bindActionCreators(StapleShoppingListActions, dispatch),
+    productsActions: bindActionCreators(ProductsActions, dispatch),
     gotoAddStapleShoppingListItems: () =>
       dispatch(
         NavigationActions.navigate({
           routeName: 'StapleShoppingList',
+        }),
+      ),
+    gotoProducts: () =>
+      dispatch(
+        NavigationActions.navigate({
+          routeName: 'Products',
         }),
       ),
   };

@@ -3,23 +3,16 @@
 import React from 'react';
 import { FlatList, View } from 'react-native';
 import PropTypes from 'prop-types';
-import SpecialItemRow from './SpecialItemRow';
-import SpecialItemSeparator from './SpecialItemSeparator';
+import ProductListRow from './ProductListRow';
+import { ListItemSeparator } from '../components/list';
 import Styles from './Styles';
 
-const SpecialItems = ({
-  specials,
-  shoppingList,
-  onSpecialItemSelectionChanged,
-  isFetchingTop,
-  onRefresh,
-  onEndReached,
-}) =>
+const ProductList = ({ products, shoppingList, onItemSelectionChanged, isFetchingTop, onRefresh, onEndReached }) =>
   <View style={Styles.container}>
     <FlatList
-      data={specials}
+      data={products}
       renderItem={info =>
-        <SpecialItemRow
+        <ProductListRow
           id={info.item.id}
           name={info.item.name}
           imageUrl={info.item.imageUrl}
@@ -33,21 +26,19 @@ const SpecialItems = ({
           multiBuy={info.item.multiBuy}
           savingPercentage={info.item.savingPercentage}
           saving={info.item.saving}
-          isInShoppingList={
-            shoppingList.find(_ => _.specialId === info.item.id) != null
-          }
-          onSpecialItemSelectionChanged={onSpecialItemSelectionChanged}
+          isInShoppingList={shoppingList ? shoppingList.find(_ => _.specialId === info.item.id) != null : false}
+          onItemSelectionChanged={onItemSelectionChanged}
         />}
       keyExtractor={item => item.id}
       onEndReached={onEndReached}
       onRefresh={onRefresh}
       refreshing={isFetchingTop}
-      ItemSeparatorComponent={() => <SpecialItemSeparator />}
+      ItemSeparatorComponent={() => <ListItemSeparator />}
     />
   </View>;
 
-SpecialItems.propTypes = {
-  specials: PropTypes.arrayOf(
+ProductList.propTypes = {
+  products: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
@@ -76,10 +67,10 @@ SpecialItems.propTypes = {
       specialId: PropTypes.string,
     }),
   ).isRequired,
-  onSpecialItemSelectionChanged: PropTypes.func.isRequired,
+  onItemSelectionChanged: PropTypes.func.isRequired,
   isFetchingTop: PropTypes.bool.isRequired,
   onRefresh: PropTypes.func.isRequired,
   onEndReached: PropTypes.func.isRequired,
 };
 
-export default SpecialItems;
+export default ProductList;
