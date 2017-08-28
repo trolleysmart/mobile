@@ -1,34 +1,18 @@
 // @flow
 
-import React, {
-  Component,
-} from 'react';
-import {
-  View,
-  Platform,
-} from 'react-native';
-import {
-  Icon,
-} from 'react-native-elements';
+import React, { Component } from 'react';
+import { View, Platform } from 'react-native';
+import { Icon } from 'react-native-elements';
 import PropTypes from 'prop-types';
-import {
-  connect,
-} from 'react-redux';
-import {
-  NavigationActions,
-} from 'react-navigation';
-import {
-  bindActionCreators,
-} from 'redux';
+import { connect } from 'react-redux';
+import { NavigationActions } from 'react-navigation';
+import { bindActionCreators } from 'redux';
 import Flyers from './Flyers';
 
 class FlyersContainer extends Component {
   static navigationOptions = {
     tabBarLabel: 'Flyers',
-    tabBarIcon: ({
-      tintColor,
-      focused,
-    }) => <Icon name={focused ? 'ios-images' : 'ios-images-outline'} type='ionicon' size={26} color={tintColor} />,
+    tabBarIcon: ({ tintColor, focused }) => <Icon name={focused ? 'ios-images' : 'ios-images-outline'} type="ionicon" size={26} color={tintColor} />,
     // headerLeft: <HeaderContainer />,
     title: 'Flyers',
     headerTitleStyle: {
@@ -36,7 +20,7 @@ class FlyersContainer extends Component {
     },
     headerBackTitle: null,
   };
-  onFlyerListItemPress = (id) => {
+  onFlyerListItemPress = id => {
     this.props.gotoFlyer();
   };
 
@@ -48,23 +32,23 @@ class FlyersContainer extends Component {
 FlyersContainer.propTypes = {
   gotoFlyer: PropTypes.func.isRequired,
   flyers: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        thumbnailImageUrl: PropTypes.string,
-        imageUrl: PropTypes.string,
-        expiryDate: PropTypes.string,
-      })
-    )
-    .isRequired,
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      thumbnailImageUrl: PropTypes.string,
+      imageUrl: PropTypes.string,
+      expiryDate: PropTypes.string,
+    }),
+  ).isRequired,
 };
 
 function mapStateToProps(state) {
   return {
-    flyers: [{
+    flyers: [
+      {
         id: 1,
         name: 'Briscoe',
-        thumbnailImageUrl: '',
+        thumbnailImageUrl: 'briscoes_thumb',
         imageUrl: '',
         expiryDate: '15/9/2017',
       },
@@ -90,6 +74,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  FlyersContainer,
-);
+export default connect(mapStateToProps, mapDispatchToProps)(FlyersContainer);

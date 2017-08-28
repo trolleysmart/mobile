@@ -2,24 +2,24 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  View,
-  Text,
-} from 'react-native';
-import {
-  Tile,
-} from 'react-native-elements';
+import { View, Text } from 'react-native';
+import { Tile } from 'react-native-elements';
+import { ImageUltility } from '../components/image';
 
 class FlyerListItem extends React.PureComponent {
   render() {
-    return <Tile
-        onPress={this.props.onFlyerListItemPress}
-        title={this.props.name}>
+    return (
+      <Tile imageSrc={ImageUltility.getImageSource(this.props.thumbnailImageUrl)} onPress={this.props.onFlyerListItemPress} title={this.props.name}>
         <View>
-          <Text >{this.props.name}</Text>
-          <Text>{this.props.expiryDate}</Text>
+          <Text>
+            {this.props.name}
+          </Text>
+          <Text>
+            {this.props.expiryDate}
+          </Text>
         </View>
-      </Tile>;
+      </Tile>
+    );
   }
 }
 

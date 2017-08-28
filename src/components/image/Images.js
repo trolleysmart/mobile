@@ -91,6 +91,7 @@ const Images = {
   vinegar: require('../../../assets/img/vinegar.png'),
   wine: require('../../../assets/img/wine.png'),
   yogurt: require('../../../assets/img/yogurt.png'),
+  briscoes_thumb: require('../../../assets/img/Briscoes_thumb.png'),
 };
 
 export default Images;
