@@ -5,7 +5,11 @@ import React, {
 } from 'react';
 import {
   View,
+  Platform,
 } from 'react-native';
+import {
+  Icon,
+} from 'react-native-elements';
 import PropTypes from 'prop-types';
 import {
   connect,
@@ -19,7 +23,19 @@ import {
 import Flyers from './Flyers';
 
 class FlyersContainer extends Component {
-
+  static navigationOptions = {
+    tabBarLabel: 'Flyers',
+    tabBarIcon: ({
+      tintColor,
+      focused,
+    }) => <Icon name={focused ? 'ios-images' : 'ios-images-outline'} type='ionicon' size={26} color={tintColor} />,
+    // headerLeft: <HeaderContainer />,
+    title: 'Flyers',
+    headerTitleStyle: {
+      marginLeft: Platform.OS === 'ios' ? null : 70,
+    },
+    headerBackTitle: null,
+  };
   onFlyerListItemPress = (id) => {
     this.props.gotoFlyer();
   };

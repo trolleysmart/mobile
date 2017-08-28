@@ -6,13 +6,20 @@ import {
   View,
   Text,
 } from 'react-native';
+import {
+  Tile,
+} from 'react-native-elements';
 
 class FlyerListItem extends React.PureComponent {
   render() {
-    return <View >
-      <Text onPress={this.props.onFlyerListItemPress}>{this.props.name}</Text>
-      <Text>{this.props.expiryDate}</Text>
-    </View>;
+    return <Tile
+        onPress={this.props.onFlyerListItemPress}
+        title={this.props.name}>
+        <View>
+          <Text >{this.props.name}</Text>
+          <Text>{this.props.expiryDate}</Text>
+        </View>
+      </Tile>;
   }
 }
 
