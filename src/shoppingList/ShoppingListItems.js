@@ -54,6 +54,7 @@ class ShoppingListItems extends Component {
           title: key,
         },
       ])
+      .sortBy(_ => _.title)
       .valueSeq()
       .toJS();
     return (

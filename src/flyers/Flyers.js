@@ -2,25 +2,16 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  Text,
-  View,
-  FlatList,
-} from 'react-native';
-import {
-  Button,
-} from 'react-native-elements';
+import { FlatList } from 'react-native';
 import FlyerListItem from './FlyerListItem';
-import Styles from './Styles';
 
 class Flyers extends React.PureComponent {
-  renderItem = ({
-    item,
-  }) => {
+  renderItem = ({ item }) => {
     return (
       <FlyerListItem
         id={item.id}
         name={item.name}
+        displayName={item.displayName}
         expiryDate={item.expiryDate}
         thumbnailImageUrl={item.thumbnailImageUrl}
         onFlyerListItemPress={this.props.onFlyerListItemPress}
@@ -36,14 +27,13 @@ class Flyers extends React.PureComponent {
 Flyers.PropTypes = {
   onFlyerListItemPress: PropTypes.func.isRequired,
   flyers: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        thumbnailImageUrl: PropTypes.string,
-        expiryDate: PropTypes.string,
-      }),
-    )
-    .isRequired,
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      thumbnailImageUrl: PropTypes.string,
+      expiryDate: PropTypes.string,
+    }),
+  ).isRequired,
 };
 
 export default Flyers;

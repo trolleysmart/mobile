@@ -1,43 +1,26 @@
 // @flow
 
-import React, {
-  Component,
-} from 'react';
-import {
-  View,
-  Platform,
-} from 'react-native';
-import {
-  Icon,
-} from 'react-native-elements';
+import React, { Component } from 'react';
+import { Icon } from 'react-native-elements';
 import PropTypes from 'prop-types';
-import {
-  connect,
-} from 'react-redux';
-import {
-  NavigationActions,
-} from 'react-navigation';
-import {
-  bindActionCreators,
-} from 'redux';
+import { connect } from 'react-redux';
+import { NavigationActions } from 'react-navigation';
 import Flyers from './Flyers';
+import { GetFlyers } from './FlyersData';
 
 class FlyersContainer extends Component {
   static navigationOptions = {
     tabBarLabel: 'Flyers',
-    tabBarIcon: ({
-      tintColor,
-      focused,
-    }) => <Icon name={focused ? 'ios-images' : 'ios-images-outline'} type="ionicon" size={26} color={tintColor} />,
+    tabBarIcon: ({ tintColor, focused }) => <Icon name={focused ? 'ios-images' : 'ios-images-outline'} type="ionicon" size={26} color={tintColor} />,
     // headerLeft: <HeaderContainer />,
     title: 'Flyers',
-    headerTitleStyle: {
-      marginLeft: Platform.OS === 'ios' ? null : 70,
-    },
+    // headerTitleStyle: {
+    //   marginLeft: Platform.OS === 'ios' ? null : 70,
+    // },
     headerBackTitle: null,
   };
-  onFlyerListItemPress = id => {
-    this.props.gotoFlyer();
+  onFlyerListItemPress = (id, name) => {
+    this.props.gotoFlyer(id, name);
   };
 
   render = () => {
@@ -48,42 +31,31 @@ class FlyersContainer extends Component {
 FlyersContainer.propTypes = {
   gotoFlyer: PropTypes.func.isRequired,
   flyers: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        thumbnailImageUrl: PropTypes.string,
-        expiryDate: PropTypes.string,
-      }),
-    )
-    .isRequired,
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      thumbnailImageUrl: PropTypes.string,
+      expiryDate: PropTypes.string,
+    }),
+  ).isRequired,
 };
 
 function mapStateToProps(state) {
   return {
-    flyers: [{
-        id: 1,
-        name: 'Briscoe',
-        thumbnailImageUrl: 'briscoes_thumb',
-        imageUrl: '',
-        expiryDate: '15/9/2017',
-      },
-      {
-        id: 2,
-        name: 'Noeleeming',
-        thumbnailImageUrl: '',
-        imageUrl: '',
-        expiryDate: '22/9/2017',
-      },
-    ],
+    flyers: GetFlyers(),
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    gotoFlyer: () =>
+    gotoFlyer: (id, name) =>
       dispatch(
         NavigationActions.navigate({
           routeName: 'Flyer',
+          params: {
+            id,
+            title: name,
+          },
         }),
       ),
   };

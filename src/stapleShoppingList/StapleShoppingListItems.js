@@ -46,6 +46,7 @@ class StapleShoppingListItems extends Component {
           title: key,
         },
       ])
+      .sortBy(_ => _.title)
       .valueSeq()
       .toJS();
 
