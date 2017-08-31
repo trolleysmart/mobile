@@ -14,12 +14,6 @@ class FlyerContainer extends Component {
     title: navigation.state.params ? navigation.state.params.title : '',
   });
 
-  // componentDidMount = () => {
-  //   this.props.navigation.setParams({
-  //     title: this.props.name,
-  //   });
-  // };
-
   render = () => {
     return <FlyerDetail slides={this.props.slides} name={this.props.name} expiryDate={this.props.expiryDate} />;
   };
@@ -35,20 +29,11 @@ FlyerContainer.propTypes = {
   ).isRequired,
 };
 
-function mapStateToProps(state) {
-  let a = GetFlyers();
-  return {
-    storeName: 'Briscoe',
-    expiryDate: '25/9/2017',
-    slides: [
-      {
-        uri: '1',
-      },
-      {
-        uri: '2',
-      },
-    ],
-  };
+function mapStateToProps(state, props) {
+  const storeId = props.navigation.state.params.id;
+
+  let allFlyers = GetFlyers();
+  return allFlyers.find(_ => _.id === storeId);
 }
 
 function mapDispatchToProps(dispatch) {

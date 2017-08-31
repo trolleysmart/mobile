@@ -8,7 +8,7 @@ import StapleShoppingListItem from './StapleShoppingListItem';
 import { ImageUltility } from '../components/image';
 import Styles from './Styles';
 
-class StapleShoppingListItems extends Component {
+class StapleShoppingListItems extends React.PureComponent {
   onStapleShoppingListItemSelectionChanged = (id, name, isCustomItem, isSelected) => {
     this.props.onStapleShoppingListItemSelectionChanged(id, name, isCustomItem, isSelected);
   };

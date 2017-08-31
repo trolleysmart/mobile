@@ -33,7 +33,8 @@ FlyersContainer.propTypes = {
   flyers: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
+      storeName: PropTypes.string.isRequired,
+      storeDisplayName: PropTypes.string.isRequired,
       thumbnailImageUrl: PropTypes.string,
       expiryDate: PropTypes.string,
     }),

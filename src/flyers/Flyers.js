@@ -10,8 +10,7 @@ class Flyers extends React.PureComponent {
     return (
       <FlyerListItem
         id={item.id}
-        name={item.name}
-        displayName={item.displayName}
+        name={item.storeDisplayName}
         expiryDate={item.expiryDate}
         thumbnailImageUrl={item.thumbnailImageUrl}
         onFlyerListItemPress={this.props.onFlyerListItemPress}
@@ -30,6 +29,7 @@ Flyers.PropTypes = {
     PropTypes.shape({
       id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
+      displayName: PropTypes.string.isRequired,
       thumbnailImageUrl: PropTypes.string,
       expiryDate: PropTypes.string,
     }),
