@@ -25,7 +25,7 @@ class ShoppingListItem extends React.PureComponent {
           }
           key={this.props.name}
           title={this.props.name}
-          onPressRightIcon={() => this.props.onViewProductsPressed(this.props.name)}
+          onPressRightIcon={() => this.props.onViewProductsPressed(this.props.id)}
         />
       );
     } else {

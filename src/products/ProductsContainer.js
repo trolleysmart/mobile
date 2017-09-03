@@ -1,9 +1,15 @@
 // @flow
 
+import Immutable, { List } from 'immutable';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import {
+  AddItemsToShoppingList,
+  RemoveSpecialItemsFromUserShoppingList,
+  RemoveStapleShoppingListItemsFromUserShoppingList,
+} from '../relay/mutations';
 import ProductList from './ProductList';
 import { type ProductsRelayContainer_user } from './__generated__/ProductsRelayContainer_user.graphql';
 
@@ -21,15 +27,27 @@ class ProductsContainer extends Component<any, Props, State> {
   };
 
   onProductItemSelectionChanged = (productId, isInShoppingList) => {
-    //   if (isInShoppingList) {
-    //     const shoppingListItem = this.props.shoppingList.find(_ => _.specialId === specialItemId);
-    //
-    //     RemoveSpecialItemsFromUserShoppingList.commit(this.props.relay.environment, this.props.user.id, shoppingListItem.id, specialItemId);
-    //   } else {
-    //     const shoppingListItem = this.props.user.specials.edges.map(_ => _.node).find(_ => _.id === specialItemId);
-    //
-    //     AddItemsToShoppingList.commit(this.props.relay.environment, this.props.user.id, { productPrices: List.of(Immutable.fromJS(shoppingListItem)) });
-    //   }
+    if (isInShoppingList) {
+      const shoppingListItem = this.props.shoppingList.find(_ => _.specialId === productId);
+
+      RemoveSpecialItemsFromUserShoppingList.commit(this.props.relay.environment, this.props.user.id, shoppingListItem.id, productId);
+    } else {
+      const shoppingListItem = this.props.user.specials.edges.map(_ => _.node).find(_ => _.id === productId);
+
+      AddItemsToShoppingList.commit(this.props.relay.environment, this.props.user.id, {
+        productPrices: List.of(Immutable.fromJS(shoppingListItem)),
+      });
+
+      // Remove existing staple item after added products.
+      if (this.props.shoppingListId) {
+        RemoveStapleShoppingListItemsFromUserShoppingList.commit(
+          this.props.relay.environment,
+          this.props.user.id,
+          this.props.shoppingListId,
+          this.props.stapleShoppingListItemId,
+        );
+      }
+    }
   };
 
   onRefresh = () => {
@@ -75,12 +93,12 @@ class ProductsContainer extends Component<any, Props, State> {
   };
 }
 
-ProductsContainer.propTypes = {
-  // productsActions: PropTypes.object.isRequired,
-};
+ProductsContainer.propTypes = {};
 
 function mapStateToProps(state) {
-  return {};
+  return {
+    shoppingList: state.shoppingList.get('shoppingList').toJS(),
+  };
 }
 
 function mapDispatchToProps(dispatch) {

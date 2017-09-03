@@ -62,13 +62,15 @@ class ShoppingListItemsContainer extends Component<any, Props, State> {
     this.props.gotoAddStapleShoppingListItems();
   };
 
-  onViewProductsPressed = stapleItemName => {
+  onViewProductsPressed = id => {
+    const foundItem = this.props.user.shoppingList.edges.map(_ => _.node).find(item => item.id.localeCompare(id) === 0);
+
     this.props.productsActions.searchKeywordChanged(
       Map({
-        searchKeyword: stapleItemName,
+        searchKeyword: foundItem.name,
       }),
     );
-    this.props.gotoProducts();
+    this.props.gotoProducts(id, foundItem.stapleShoppingListId);
   };
 
   onRefresh = () => {
@@ -133,10 +135,14 @@ function mapDispatchToProps(dispatch) {
           routeName: 'StapleShoppingList',
         }),
       ),
-    gotoProducts: () =>
+    gotoProducts: (shoppingListId, stapleShoppingListItemId) =>
       dispatch(
         NavigationActions.navigate({
           routeName: 'Products',
+          params: {
+            shoppingListId,
+            stapleShoppingListItemId,
+          },
         }),
       ),
   };

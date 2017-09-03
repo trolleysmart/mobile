@@ -11,8 +11,16 @@ export function GetFlyers() {
     },
     {
       id: 2,
-      storeName: 'harveynorman',
-      storeDisplayName: 'Harvey Norman',
+      storeName: 'farmers',
+      storeDisplayName: 'Farmers',
+      expiryDate: '25/9/2017',
+      thumbnailImageUrl: '',
+      slides: [],
+    },
+    {
+      id: 3,
+      storeName: 'rebel',
+      storeDisplayName: 'Rebel',
       expiryDate: '25/9/2017',
       thumbnailImageUrl: '',
       slides: [],
@@ -21,10 +29,12 @@ export function GetFlyers() {
 
   stores.forEach(_ => {
     const slideUrl = baseImageUrl + _.storeName + '%2F' + _.storeName + '_';
-    _.thumbnailImageUrl = slideUrl + 'thumb.jpg';
+    _.thumbnailImageUrl = slideUrl + 'thumb.jpg?alt=media';
 
     for (let i = 1; i <= 10; i++) {
-      _.slides.push(slideUrl + i + '.jpg');
+      _.slides.push({
+        uri: slideUrl + i + '.jpg?alt=media',
+      });
     }
   });
 

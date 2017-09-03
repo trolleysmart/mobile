@@ -54,7 +54,13 @@ class Products extends Component {
           }
 
           if (props) {
-            return <ProductsRelayContainer user={props.user} />;
+            return (
+              <ProductsRelayContainer
+                user={props.user}
+                shoppingListId={this.props.shoppingListId}
+                stapleShoppingListItemId={this.props.stapleShoppingListItemId}
+              />
+            );
           } else {
             return <Text>Loading...</Text>;
           }
@@ -71,8 +77,10 @@ Products.propTypes = {
   stores: PropTypes.arrayOf(PropTypes.string),
 };
 
-function mapStateToProps(state) {
+function mapStateToProps(state, props) {
   return {
+    shoppingListId: props.navigation.state.params.shoppingListId,
+    stapleShoppingListItemId: props.navigation.state.params.stapleShoppingListItemId,
     searchKeyword: state.products.get('searchKeyword'),
     sortOption: state.products.get('filterOptions').get('sortOption'),
     categories: state.products.get('filterOptions').get('categories').isEmpty()

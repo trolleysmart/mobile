@@ -4,7 +4,6 @@ import React, { Component } from 'react';
 import { View, Image, Dimensions } from 'react-native';
 import Swiper from 'react-native-swiper';
 import ImageZoom from 'react-native-image-pan-zoom';
-import { ImageUltility } from '../components/image';
 import Styles from './Styles';
 
 class FlyerDetail extends Component {
@@ -19,11 +18,9 @@ class FlyerDetail extends Component {
         >
           <Image
             style={{ width: Dimensions.get('window').width + 150, height: Dimensions.get('window').height }}
-            source={ImageUltility.getImageSource('briscoes_1')
-            //      {
-            //      uri: 'https://db1736767dbd5e7094bb-d61bbc5d0b342a54145a236e2d5d1ebf.ssl.cf4.rackcdn.com/Product-1600x1600/eb11945f-158a-42d3-9b31-4c58f0f709c0.jpg'
-            //  }
-            }
+            source={{
+              uri: slide.uri,
+            }}
           />
         </ImageZoom>
       </View>
