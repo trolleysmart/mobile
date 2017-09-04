@@ -1,25 +1,40 @@
 // @flow
-
+import React from 'react';
 import { TabNavigator } from 'react-navigation';
-import Specials from './Specials';
-import { FlyersContainer } from '../flyers';
+import Specials from './SpecialsStatelessContainer';
 
 const SpecialsNavigationTabs = TabNavigator(
   {
     Specials: {
-      screen: Specials,
+      screen: props => <Specials {...props} />,
+      navigationOptions: {
+        tabBarLabel: 'All',
+        headerTitle: 'All products header',
+      },
       path: '/specials',
     },
     BigSave: {
-      screen: Specials,
+      screen: props => <Specials {...props} />,
+      navigationOptions: {
+        tabBarLabel: 'Big Save',
+        headerTitle: 'Big Save Header',
+      },
       path: '/specialsbig',
     },
     FruitsAndVeg: {
-      screen: Specials,
+      screen: props => <Specials {...props} />,
+      navigationOptions: {
+        tabBarLabel: 'Fruits & Vegs',
+        headerTitle: 'Fruits and Vegs',
+      },
       path: '/specialsfruits',
     },
     Meat: {
-      screen: Specials,
+      screen: props => <Specials {...props} />,
+      navigationOptions: {
+        tabBarLabel: 'Meat',
+        headerTitle: 'Meat header',
+      },
       path: '/specialsfruits',
     },
   },
