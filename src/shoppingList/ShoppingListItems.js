@@ -1,17 +1,30 @@
 // @flow
 
-import React, { Component } from 'react';
-import { SectionList, Text, View, Image } from 'react-native';
+import React, {
+  Component,
+} from 'react';
+import {
+  SectionList,
+  Text,
+  View,
+  Image,
+} from 'react-native';
 import Immutable from 'immutable';
 import PropTypes from 'prop-types';
 import ActionButton from 'react-native-action-button';
 import ShoppingListItem from './ShoppingListItem';
-import SpecialItemSeparator from '../specials/SpecialItemSeparator';
-import { ImageUltility } from '../components/image';
+import {
+  ListItemSeparator,
+} from '../components/list';
+import {
+  ImageUltility,
+} from '../components/image';
 import Styles from './Styles';
 
 class ShoppingListItems extends Component {
-  renderItem = ({ item }) => {
+  renderItem = ({
+    item,
+  }) => {
     return (
       <ShoppingListItem
         id={item.id}
@@ -28,11 +41,14 @@ class ShoppingListItems extends Component {
         savingPercentage={item.savingPercentage}
         saving={item.saving}
         onShoppingListItemSelectionChanged={this.props.onShoppingListItemSelectionChanged}
+        onViewProductsPressed={this.props.onViewProductsPressed}
       />
     );
   };
 
-  renderSectionHeader = ({ section }) => {
+  renderSectionHeader = ({
+    section,
+  }) => {
     return (
       <View style={Styles.sectionHeader}>
         <Text style={Styles.sectionTitle}>
@@ -45,7 +61,9 @@ class ShoppingListItems extends Component {
 
   render = () => {
     let sectionData = Immutable.fromJS(this.props.shoppingList)
-      .groupBy(item => (item.has('tags') && item.get('tags') ? item.get('tags').first().get('name') : 'Unknown'))
+      .groupBy(item => (item.has('tags') && item.get('tags') ? item.get('tags')
+        .first()
+        .get('name') : 'Other'))
       .mapEntries(([key, value]) => [
         key,
         {
@@ -53,12 +71,12 @@ class ShoppingListItems extends Component {
           title: key,
         },
       ])
+      .sortBy(_ => _.title)
       .valueSeq()
       .toJS();
     return (
       <View style={Styles.container}>
         <SectionList
-          contentContainerStyle={Styles.sectionListContainer}
           renderItem={this.renderItem}
           renderSectionHeader={this.renderSectionHeader}
           sections={sectionData}
@@ -66,7 +84,7 @@ class ShoppingListItems extends Component {
           onEndReached={this.props.onEndReached}
           onRefresh={this.props.onRefresh}
           refreshing={this.props.isFetchingTop}
-          ItemSeparatorComponent={() => <SpecialItemSeparator />}
+          ItemSeparatorComponent={() => <ListItemSeparator />}
         />
         <ActionButton buttonColor="rgba(242,135,79,1)" onPress={() => this.props.onShoppingListAddItemClicked()} />
       </View>
@@ -76,29 +94,31 @@ class ShoppingListItems extends Component {
 
 ShoppingListItems.propTypes = {
   shoppingList: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      imageUrl: PropTypes.string,
-      priceToDisplay: PropTypes.number,
-      savingPercentage: PropTypes.number,
-      saving: PropTypes.number,
-      storeImageUrl: PropTypes.string,
-      storeName: PropTypes.string,
-      comments: PropTypes.string,
-      unitPrice: PropTypes.shape({
-        price: PropTypes.number.isRequired,
-        size: PropTypes.string.isRequired,
+      PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        imageUrl: PropTypes.string,
+        priceToDisplay: PropTypes.number,
+        savingPercentage: PropTypes.number,
+        saving: PropTypes.number,
+        storeImageUrl: PropTypes.string,
+        storeName: PropTypes.string,
+        comments: PropTypes.string,
+        unitPrice: PropTypes.shape({
+          price: PropTypes.number.isRequired,
+          size: PropTypes.string.isRequired,
+        }),
+        multiBuy: PropTypes.shape({
+          awardQuantity: PropTypes.number.isRequired,
+          awardValue: PropTypes.number.isRequired,
+        }),
+        offerEndDate: PropTypes.string,
+        size: PropTypes.string,
       }),
-      multiBuy: PropTypes.shape({
-        awardQuantity: PropTypes.number.isRequired,
-        awardValue: PropTypes.number.isRequired,
-      }),
-      offerEndDate: PropTypes.string,
-      size: PropTypes.string,
-    }),
-  ).isRequired,
+    )
+    .isRequired,
   onShoppingListItemSelectionChanged: PropTypes.func.isRequired,
+  onViewProductsPressed: PropTypes.func.isRequired,
   onShoppingListAddItemClicked: PropTypes.func.isRequired,
   isFetchingTop: PropTypes.bool.isRequired,
   onRefresh: PropTypes.func.isRequired,

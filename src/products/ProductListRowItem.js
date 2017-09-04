@@ -52,13 +52,13 @@ function getItemSubTitle(offerEndDate, multiBuy, unitPrice) {
   return subTitleItems.join('|');
 }
 
-class SpecialItem extends React.PureComponent {
+class ProductListRowItem extends React.PureComponent {
   render() {
     return (
       <Grid>
         <Col size={20}>
           {this.props.imageUrl
-            ? <FastImage style={Styles.specialItemImage} resizeMode={FastImage.resizeMode.stretch} source={{ uri: this.props.imageUrl }} />
+            ? <FastImage style={Styles.productImage} resizeMode={FastImage.resizeMode.stretch} source={{ uri: this.props.imageUrl }} />
             : <View />}
         </Col>
         <Col size={80}>
@@ -69,7 +69,7 @@ class SpecialItem extends React.PureComponent {
               </Text>
             </Col>
             <Col size={30}>
-              <Text style={Styles.size}>
+              <Text style={Styles.productSize}>
                 {this.props.size}
               </Text>
             </Col>
@@ -118,7 +118,7 @@ class SpecialItem extends React.PureComponent {
   }
 }
 
-SpecialItem.propTypes = {
+ProductListRowItem.propTypes = {
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   imageUrl: PropTypes.string,
@@ -140,4 +140,4 @@ SpecialItem.propTypes = {
   size: PropTypes.string,
 };
 
-export default SpecialItem;
+export default ProductListRowItem;

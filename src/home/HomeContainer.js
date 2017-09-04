@@ -1,43 +1,46 @@
 // @flow
 
-import {
-  TabNavigator,
-} from 'react-navigation';
-import {
-  ShoppingList,
-} from '../shoppingList';
-import {
-  Specials,
-} from '../specials';
-
-const HomeTabs = TabNavigator({
-  ShoppingList: {
-    screen: ShoppingList,
-    path: '/',
+import { TabNavigator } from 'react-navigation';
+import { ShoppingList } from '../shoppingList';
+import { SpecialsNavigationTabs } from '../specials';
+import { FlyersContainer } from '../flyers';
+import { Color } from '../style/DefaultStyles';
+const HomeTabs = TabNavigator(
+  {
+    ShoppingList: {
+      screen: ShoppingList,
+      path: '/',
+    },
+    Browse: {
+      screen: SpecialsNavigationTabs,
+      path: '/specialsnav',
+    },
+    Flyers: {
+      screen: FlyersContainer,
+      path: '/flyers',
+    },
   },
-  Specials: {
-    screen: Specials,
-    path: '/specials',
+  {
+    tabBarPosition: 'bottom',
+    animationEnabled: false,
+    tabBarOptions: {
+      showIcon: true,
+      tabStyle: {
+        height: 49,
+      },
+      labelStyle: {
+        fontSize: 9,
+      },
+      iconStyle: {
+        marginBottom: 0,
+      },
+      style: {
+        backgroundColor: 'white', //Color.primaryColorLight, //'#3DC62A',
+      },
+      activeTintColor: Color.primaryColorNormal, //'#FAFBFA',
+    },
+    backBehavior: 'none',
   },
-}, {
-  tabBarPosition: 'bottom',
-  tabBarOptions: {
-    showIcon: true,
-    tabStyle: {
-      height: 49,
-    },
-    labelStyle: {
-      fontSize: 9,
-    },
-    iconStyle: {
-      marginBottom: 0,
-    },
-    style: {
-      backgroundColor: '#3DC62A',
-    },
-    activeTintColor: '#FAFBFA',
-  },
-  backBehavior: 'none',
-}, );
+);
 
 export default HomeTabs;

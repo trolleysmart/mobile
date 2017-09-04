@@ -5,35 +5,48 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as specialsActions from './Actions';
-import { ProductList } from '../products';
-import { AddItemsToShoppingList, RemoveSpecialItemsFromUserShoppingList } from '../relay/mutations';
-import { type SpecialItemsRelayContainer_user } from './__generated__/SpecialItemsRelayContainer_user.graphql';
+import {
+  AddItemsToShoppingList,
+  RemoveSpecialItemsFromUserShoppingList,
+  RemoveStapleShoppingListItemsFromUserShoppingList,
+} from '../relay/mutations';
+import ProductList from './ProductList';
+import { type ProductsRelayContainer_user } from './__generated__/ProductsRelayContainer_user.graphql';
 
 type Props = {
-  user: SpecialItemsRelayContainer_user,
+  user: ProductsRelayContainer_user,
 };
 
 type State = {
   isFetchingTop: boolean,
 };
 
-class SpecialItemsContainer extends Component<any, Props, State> {
+class ProductsContainer extends Component<any, Props, State> {
   state = {
     isFetchingTop: false,
   };
 
-  onSpecialItemSelectionChanged = (specialItemId, isInShoppingList) => {
+  onProductItemSelectionChanged = (productId, isInShoppingList) => {
     if (isInShoppingList) {
-      const shoppingListItem = this.props.shoppingList.find(_ => _.specialId === specialItemId);
+      const shoppingListItem = this.props.shoppingList.find(_ => _.specialId === productId);
 
-      RemoveSpecialItemsFromUserShoppingList.commit(this.props.relay.environment, this.props.user.id, shoppingListItem.id, specialItemId);
+      RemoveSpecialItemsFromUserShoppingList.commit(this.props.relay.environment, this.props.user.id, shoppingListItem.id, productId);
     } else {
-      const shoppingListItem = this.props.user.specials.edges.map(_ => _.node).find(_ => _.id === specialItemId);
+      const shoppingListItem = this.props.user.specials.edges.map(_ => _.node).find(_ => _.id === productId);
 
       AddItemsToShoppingList.commit(this.props.relay.environment, this.props.user.id, {
         productPrices: List.of(Immutable.fromJS(shoppingListItem)),
       });
+
+      // Remove existing staple item after added products.
+      if (this.props.shoppingListId) {
+        RemoveStapleShoppingListItemsFromUserShoppingList.commit(
+          this.props.relay.environment,
+          this.props.user.id,
+          this.props.shoppingListId,
+          this.props.stapleShoppingListItemId,
+        );
+      }
     }
   };
 
@@ -71,7 +84,7 @@ class SpecialItemsContainer extends Component<any, Props, State> {
       <ProductList
         products={this.props.user.specials.edges.map(_ => _.node)}
         shoppingList={this.props.shoppingList}
-        onItemSelectionChanged={this.onSpecialItemSelectionChanged}
+        onItemSelectionChanged={this.onProductItemSelectionChanged}
         isFetchingTop={this.state.isFetchingTop}
         onRefresh={this.onRefresh}
         onEndReached={this.onEndReached}
@@ -80,15 +93,7 @@ class SpecialItemsContainer extends Component<any, Props, State> {
   };
 }
 
-SpecialItemsContainer.propTypes = {
-  shoppingList: PropTypes.arrayOf(
-    PropTypes.shape({
-      stapleShoppingListId: PropTypes.string,
-      specialId: PropTypes.string,
-    }),
-  ).isRequired,
-  specialsActions: PropTypes.object.isRequired,
-};
+ProductsContainer.propTypes = {};
 
 function mapStateToProps(state) {
   return {
@@ -98,8 +103,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    specialsActions: bindActionCreators(specialsActions, dispatch),
+    // productsActions: bindActionCreators(specialsActions, dispatch),
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SpecialItemsContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductsContainer);
