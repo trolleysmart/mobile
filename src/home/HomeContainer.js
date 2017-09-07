@@ -14,6 +14,9 @@ const HomeTabs = TabNavigator(
     Browse: {
       screen: SpecialsNavigationTabs,
       path: '/specialsnav',
+      navigationOptions: {
+        tabBarLabel: 'Browse',
+      },
     },
     Flyers: {
       screen: FlyersContainer,

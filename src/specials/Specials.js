@@ -64,16 +64,22 @@ Specials.propTypes = {
   stores: PropTypes.arrayOf(PropTypes.string),
 };
 
-function mapStateToProps(state) {
+function mapStateToProps(state, props) {
   return {
-    searchKeyword: state.specials.get('searchKeyword'),
-    sortOption: state.specials.get('filterOptions').get('sortOption'),
-    categories: state.specials.get('filterOptions').get('categories').isEmpty()
-      ? null
-      : state.specials.get('filterOptions').get('categories').map(_ => _.get('id')),
-    stores: state.specials.get('filterOptions').get('stores').isEmpty()
-      ? null
-      : state.specials.get('filterOptions').get('stores').map(_ => _.get('id')),
+    searchKeyword: state.specials.has(props.navigation.state.key) ? state.specials.get(props.navigation.state.key).get('searchKeyword') : '',
+    sortOption: state.specials.has(props.navigation.state.key)
+      ? state.specials.get(props.navigation.state.key).get('filterOptions').get('sortOption')
+      : 'NameAscending',
+    categories: state.specials.has(props.navigation.state.key)
+      ? state.specials.get(props.navigation.state.key).get('filterOptions').get('categories').isEmpty()
+        ? null
+        : state.specials.get('filterOptions').get('categories').map(_ => _.get('id'))
+      : null,
+    stores: state.specials.has(props.navigation.state.key)
+      ? state.specials.get(props.navigation.state.key).get('filterOptions').get('stores').isEmpty()
+        ? null
+        : state.specials.get('filterOptions').get('stores').map(_ => _.get('id'))
+      : null,
   };
 }
 

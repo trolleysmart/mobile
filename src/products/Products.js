@@ -7,7 +7,6 @@ import { Text } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { environment } from '../relay';
 import { graphql, QueryRenderer } from 'react-relay';
-// import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import ProductsRelayContainer from './ProductsRelayContainer';
 // import HeaderContainer from './HeaderContainer';
 
@@ -54,13 +53,7 @@ class Products extends Component {
           }
 
           if (props) {
-            return (
-              <ProductsRelayContainer
-                user={props.user}
-                shoppingListId={this.props.shoppingListId}
-                stapleShoppingListItemId={this.props.stapleShoppingListItemId}
-              />
-            );
+            return <ProductsRelayContainer user={props.user} />;
           } else {
             return <Text>Loading...</Text>;
           }
@@ -79,8 +72,6 @@ Products.propTypes = {
 
 function mapStateToProps(state, props) {
   return {
-    shoppingListId: props.navigation.state.params.shoppingListId,
-    stapleShoppingListItemId: props.navigation.state.params.stapleShoppingListItemId,
     searchKeyword: state.products.get('searchKeyword'),
     sortOption: state.products.get('filterOptions').get('sortOption'),
     categories: state.products.get('filterOptions').get('categories').isEmpty()

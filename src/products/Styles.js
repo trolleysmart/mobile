@@ -16,6 +16,10 @@ export default StyleSheet.create({
     backgroundColor: 'white',
     padding: 10,
   },
+  productListItemRowSelected: {
+    backgroundColor: Color.primaryColorLight,
+    padding: 10,
+  },
   productImage: {
     width: 60,
     height: 60,

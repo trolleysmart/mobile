@@ -15,3 +15,17 @@ export function filterOptionChanged(payload) {
     payload,
   };
 }
+
+export function productSelected(payload) {
+  return {
+    type: ActionTypes.PRODUCTS_PRODUCT_SELECTED,
+    payload,
+  };
+}
+
+export function productDeselected(payload) {
+  return {
+    type: ActionTypes.PRODUCTS_PRODUCT_DESELECTED,
+    payload,
+  };
+}

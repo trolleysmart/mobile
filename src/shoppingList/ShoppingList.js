@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import { Text } from 'react-native-elements';
 import { environment } from '../relay';
 import { graphql, QueryRenderer } from 'react-relay';
+import { connect } from 'react-redux';
 import { Platform } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import ShoppingListItemsRelayContainer from './ShoppingListItemsRelayContainer';
@@ -58,4 +59,12 @@ class ShoppingList extends Component {
 
 ShoppingList.propTypes = {};
 
-export default ShoppingList;
+function mapStateToProps(state, props) {
+  return {};
+}
+
+function mapDispatchToProps(dispatch) {
+  return {};
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ShoppingList);

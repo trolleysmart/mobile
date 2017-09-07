@@ -1,11 +1,11 @@
 // @flow
 import React from 'react';
 import { TabNavigator } from 'react-navigation';
-import Specials from './SpecialsStatelessContainer';
+import Specials from './Specials';
 
 const SpecialsNavigationTabs = TabNavigator(
   {
-    Specials: {
+    All: {
       screen: props => <Specials {...props} />,
       navigationOptions: {
         tabBarLabel: 'All',

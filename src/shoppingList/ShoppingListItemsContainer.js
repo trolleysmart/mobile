@@ -35,11 +35,30 @@ class ShoppingListItemsContainer extends Component<any, Props, State> {
   }
 
   componentWillReceiveProps = nextProps => {
+    const shoppingList = Immutable.fromJS(nextProps.user.shoppingList.edges.map(_ => _.node));
     this.props.shoppingListActions.shoppingListChanged(
       Map({
-        shoppingList: Immutable.fromJS(nextProps.user.shoppingList.edges.map(_ => _.node)),
+        shoppingList: shoppingList,
       }),
     );
+
+    // Remove existing staple item after added relevant products.
+    if (
+      nextProps.removeCurrentViewingStapleItem &&
+      this.props.viewingStapleItem.has('shoppingListId') &&
+      this.props.viewingStapleItem.get('shoppingListId') &&
+      shoppingList.find(_ => _.get('id') === this.props.viewingStapleItem.get('shoppingListId'))
+    ) {
+      RemoveStapleShoppingListItemsFromUserShoppingList.commit(
+        this.props.relay.environment,
+        this.props.user.id,
+        this.props.viewingStapleItem.get('shoppingListId'),
+        this.props.viewingStapleItem.get('stapleShoppingListId'),
+      );
+
+      // Clear the current viewing staple item
+      this.props.shoppingListActions.currentViewingStapleItemChanged(Map());
+    }
   };
 
   onShoppingListItemSelectionChanged = id => {
@@ -70,7 +89,22 @@ class ShoppingListItemsContainer extends Component<any, Props, State> {
         searchKeyword: foundItem.name,
       }),
     );
-    this.props.gotoProducts(id, foundItem.stapleShoppingListId);
+
+    // Set the current viewing staple item
+    this.props.shoppingListActions.currentViewingStapleItemChanged(
+      Map({
+        shoppingListId: id,
+        stapleShoppingListId: foundItem.stapleShoppingListId,
+      }),
+    );
+
+    // Set removeCurrentViewingStapleItem to false
+    this.props.shoppingListActions.removeCurrentViewingStapleItemFlagChanged(
+      Map({
+        removeCurrentViewingStapleItem: false,
+      }),
+    );
+    this.props.gotoProducts();
   };
 
   onRefresh = () => {
@@ -118,10 +152,14 @@ class ShoppingListItemsContainer extends Component<any, Props, State> {
 }
 ShoppingListItemsContainer.propTypes = {
   gotoAddStapleShoppingListItems: PropTypes.func.isRequired,
+  removeCurrentViewingStapleItem: PropTypes.bool,
 };
 
-function mapStateToProps() {
-  return {};
+function mapStateToProps(state) {
+  return {
+    removeCurrentViewingStapleItem: state.shoppingList.get('removeCurrentViewingStapleItem'),
+    viewingStapleItem: state.shoppingList.get('currentlyViewingStapleItem'),
+  };
 }
 
 function mapDispatchToProps(dispatch) {

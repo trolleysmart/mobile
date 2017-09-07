@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import * as productsActions from './Actions';
 import {
   AddItemsToShoppingList,
   RemoveSpecialItemsFromUserShoppingList,
@@ -31,22 +32,14 @@ class ProductsContainer extends Component<any, Props, State> {
       const shoppingListItem = this.props.shoppingList.find(_ => _.specialId === productId);
 
       RemoveSpecialItemsFromUserShoppingList.commit(this.props.relay.environment, this.props.user.id, shoppingListItem.id, productId);
+      this.props.productsActions.productDeselected(productId);
     } else {
       const shoppingListItem = this.props.user.specials.edges.map(_ => _.node).find(_ => _.id === productId);
 
       AddItemsToShoppingList.commit(this.props.relay.environment, this.props.user.id, {
         productPrices: List.of(Immutable.fromJS(shoppingListItem)),
       });
-
-      // Remove existing staple item after added products.
-      if (this.props.shoppingListId) {
-        RemoveStapleShoppingListItemsFromUserShoppingList.commit(
-          this.props.relay.environment,
-          this.props.user.id,
-          this.props.shoppingListId,
-          this.props.stapleShoppingListItemId,
-        );
-      }
+      this.props.productsActions.productSelected(productId);
     }
   };
 
@@ -103,7 +96,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    // productsActions: bindActionCreators(specialsActions, dispatch),
+    productsActions: bindActionCreators(productsActions, dispatch),
   };
 }
 

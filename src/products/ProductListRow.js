@@ -1,9 +1,7 @@
 // @flow
 
 import React from 'react';
-import { TouchableHighlight } from 'react-native';
-import { Col, Grid } from 'react-native-easy-grid';
-import { CheckBox } from 'react-native-elements';
+import { View, TouchableHighlight } from 'react-native';
 import PropTypes from 'prop-types';
 import Styles from './Styles';
 import ProductListRowItem from './ProductListRowItem';
@@ -11,32 +9,28 @@ import ProductListRowItem from './ProductListRowItem';
 class ProductListRow extends React.PureComponent {
   render() {
     return (
-      <TouchableHighlight underlayColor="whitesmoke" style={Styles.productListItemRow}>
-        <Grid>
-          <CheckBox
-            style={Styles.checkbox}
-            checked={this.props.isInShoppingList}
-            right
-            onPress={() => this.props.onItemSelectionChanged(this.props.id, this.props.isInShoppingList)}
+      <TouchableHighlight
+        underlayColor="whitesmoke"
+        onPress={() => this.props.onItemSelectionChanged(this.props.id, this.props.isInShoppingList)}
+        style={this.props.isInShoppingList ? Styles.productListItemRowSelected : Styles.productListItemRow}
+      >
+        <View>
+          <ProductListRowItem
+            id={this.props.id}
+            name={this.props.name}
+            imageUrl={this.props.imageUrl}
+            priceToDisplay={this.props.priceToDisplay}
+            storeImageUrl={this.props.storeImageUrl}
+            storeName={this.props.storeName}
+            comments={this.props.comments}
+            unitPrice={this.props.unitPrice}
+            offerEndDate={this.props.offerEndDate}
+            size={this.props.size}
+            multiBuy={this.props.multiBuy}
+            savingPercentage={this.props.savingPercentage}
+            saving={this.props.saving}
           />
-          <Col size={80}>
-            <ProductListRowItem
-              id={this.props.id}
-              name={this.props.name}
-              imageUrl={this.props.imageUrl}
-              priceToDisplay={this.props.priceToDisplay}
-              storeImageUrl={this.props.storeImageUrl}
-              storeName={this.props.storeName}
-              comments={this.props.comments}
-              unitPrice={this.props.unitPrice}
-              offerEndDate={this.props.offerEndDate}
-              size={this.props.size}
-              multiBuy={this.props.multiBuy}
-              savingPercentage={this.props.savingPercentage}
-              saving={this.props.saving}
-            />
-          </Col>
-        </Grid>
+        </View>
       </TouchableHighlight>
     );
   }
