@@ -84,12 +84,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     stapleShoppingListActions: bindActionCreators(StapleShoppingListActions, dispatch),
-    gotoShoppingList: () =>
-      dispatch(
-        NavigationActions.navigate({
-          routeName: 'ShoppingList',
-        }),
-      ),
+    gotoShoppingList: () => dispatch(NavigationActions.back()),
   };
 }
 

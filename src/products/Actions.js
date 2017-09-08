@@ -29,3 +29,10 @@ export function productDeselected(payload) {
     payload,
   };
 }
+
+export function productsSearchingModeChanged(payload) {
+  return {
+    type: ActionTypes.PRODUCTS_SEARCHING_MODE_CHANGED,
+    payload,
+  };
+}

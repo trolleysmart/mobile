@@ -3,9 +3,10 @@
 import { List, Map } from 'immutable';
 
 export default Map({
+  isSearchingMode: false,
   searchKeyword: '',
   filterOptions: Map({
-    sortOption: 'SavingDescending',
+    sortOption: 'NameAscending',
     categories: List(),
     stores: List(),
   }),

@@ -11,6 +11,9 @@ export default (state = initialState, action) => {
     case ActionTypes.PRODUCTS_FILTER_OPTION_CHANGED:
       return state.set('filterOptions', action.payload.get('filterOptions'));
 
+    case ActionTypes.PRODUCTS_SEARCHING_MODE_CHANGED:
+      return state.set('isSearchingMode', action.payload.get('isSearchingMode'));
+
     default:
       return state;
   }

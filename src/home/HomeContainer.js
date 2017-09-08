@@ -1,10 +1,12 @@
 // @flow
-
+import React from 'react';
 import { TabNavigator } from 'react-navigation';
 import { ShoppingList } from '../shoppingList';
-import { SpecialsNavigationTabs } from '../specials';
+import { BrowseProductsNavigationTab } from '../browseProducts';
 import { FlyersContainer } from '../flyers';
 import { Color } from '../style/DefaultStyles';
+import { ProductsHeaderContainer } from '../products';
+
 const HomeTabs = TabNavigator(
   {
     ShoppingList: {
@@ -12,10 +14,11 @@ const HomeTabs = TabNavigator(
       path: '/',
     },
     Browse: {
-      screen: SpecialsNavigationTabs,
-      path: '/specialsnav',
+      screen: BrowseProductsNavigationTab,
+      path: '/browse',
       navigationOptions: {
         tabBarLabel: 'Browse',
+        headerTitle: <ProductsHeaderContainer />,
       },
     },
     Flyers: {

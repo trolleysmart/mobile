@@ -9,6 +9,7 @@ export default StyleSheet.create({
   },
   header: {
     flexDirection: 'row',
+    justifyContent: 'space-between',
     height: Sizes.searchBarHeaderHeight,
     width: Platform.OS === 'ios' ? Sizes.searchBarHeaderWidth : null,
   },

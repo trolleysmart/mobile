@@ -6,11 +6,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as productsActions from './Actions';
-import {
-  AddItemsToShoppingList,
-  RemoveSpecialItemsFromUserShoppingList,
-  RemoveStapleShoppingListItemsFromUserShoppingList,
-} from '../relay/mutations';
+import { AddItemsToShoppingList, RemoveSpecialItemsFromUserShoppingList } from '../relay/mutations';
 import ProductList from './ProductList';
 import { type ProductsRelayContainer_user } from './__generated__/ProductsRelayContainer_user.graphql';
 

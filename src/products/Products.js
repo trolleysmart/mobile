@@ -1,7 +1,6 @@
 // @flow
 
 import React, { Component } from 'react';
-import { Platform } from 'react-native';
 import PropTypes from 'prop-types';
 import { Text } from 'react-native-elements';
 import { connect } from 'react-redux';
@@ -13,9 +12,6 @@ import ProductsRelayContainer from './ProductsRelayContainer';
 class Products extends Component {
   static navigationOptions = ({ navigation }) => ({
     title: navigation.state.params ? 'Products for ' + navigation.state.params.title : '',
-    // headerTitleStyle: {
-    //   marginLeft: Platform.OS === 'ios' ? null : 100,
-    // },
   });
 
   componentDidMount = () => {
@@ -39,8 +35,8 @@ class Products extends Component {
           cursor: null,
           count: 30,
           searchKeyword: this.props.searchKeyword,
-          sortOption: this.props.sortOption,
-          categories: this.props.categories,
+          sortOption: this.props.defaultSortOption ? this.props.defaultSortOption : this.props.sortOption,
+          categories: this.props.defaultCategories ? this.props.defaultCategories : this.props.categories, // Use default categories if supplied
           stores: this.props.stores,
         }}
         render={({ error, props }) => {
@@ -67,11 +63,14 @@ Products.propTypes = {
   searchKeyword: PropTypes.string,
   sortOption: PropTypes.string,
   categories: PropTypes.arrayOf(PropTypes.string),
+  defaultCategories: PropTypes.arrayOf(PropTypes.string),
   stores: PropTypes.arrayOf(PropTypes.string),
 };
 
 function mapStateToProps(state, props) {
   return {
+    defaultCategories: props.defaultCategories,
+    defaultSortOption: props.defaultSortOption,
     searchKeyword: state.products.get('searchKeyword'),
     sortOption: state.products.get('filterOptions').get('sortOption'),
     categories: state.products.get('filterOptions').get('categories').isEmpty()
