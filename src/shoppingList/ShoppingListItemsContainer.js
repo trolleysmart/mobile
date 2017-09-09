@@ -84,12 +84,6 @@ class ShoppingListItemsContainer extends Component<any, Props, State> {
   onViewProductsPressed = id => {
     const foundItem = this.props.user.shoppingList.edges.map(_ => _.node).find(item => item.id.localeCompare(id) === 0);
 
-    this.props.productsActions.searchKeywordChanged(
-      Map({
-        searchKeyword: foundItem.name,
-      }),
-    );
-
     // Set the current viewing staple item
     this.props.shoppingListActions.currentViewingStapleItemChanged(
       Map({
@@ -104,7 +98,7 @@ class ShoppingListItemsContainer extends Component<any, Props, State> {
         removeCurrentViewingStapleItem: false,
       }),
     );
-    this.props.gotoProducts();
+    this.props.gotoProducts(foundItem.name);
   };
 
   onRefresh = () => {
@@ -173,13 +167,12 @@ function mapDispatchToProps(dispatch) {
           routeName: 'StapleShoppingList',
         }),
       ),
-    gotoProducts: (shoppingListId, stapleShoppingListItemId) =>
+    gotoProducts: defaultSearchKeyword =>
       dispatch(
         NavigationActions.navigate({
           routeName: 'Products',
           params: {
-            shoppingListId,
-            stapleShoppingListItemId,
+            defaultSearchKeyword,
           },
         }),
       ),

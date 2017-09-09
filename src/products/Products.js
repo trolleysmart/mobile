@@ -11,7 +11,9 @@ import ProductsRelayContainer from './ProductsRelayContainer';
 
 class Products extends Component {
   static navigationOptions = ({ navigation }) => ({
-    title: navigation.state.params ? 'Products for ' + navigation.state.params.title : '',
+    title: navigation.state.params
+      ? navigation.state.params.defaultSearchKeyword ? 'Products for ' + navigation.state.params.defaultSearchKeyword : ''
+      : '',
   });
 
   componentDidMount = () => {
@@ -34,7 +36,7 @@ class Products extends Component {
         variables={{
           cursor: null,
           count: 30,
-          searchKeyword: this.props.searchKeyword,
+          searchKeyword: this.props.defaultSearchKeyword ? this.props.defaultSearchKeyword : this.props.searchKeyword,
           sortOption: this.props.defaultSortOption ? this.props.defaultSortOption : this.props.sortOption,
           categories: this.props.defaultCategories ? this.props.defaultCategories : this.props.categories, // Use default categories if supplied
           stores: this.props.stores,
@@ -64,6 +66,8 @@ Products.propTypes = {
   sortOption: PropTypes.string,
   categories: PropTypes.arrayOf(PropTypes.string),
   defaultCategories: PropTypes.arrayOf(PropTypes.string),
+  defaultSortOption: PropTypes.string,
+  defaultSearchKeyword: PropTypes.string,
   stores: PropTypes.arrayOf(PropTypes.string),
 };
 
@@ -71,6 +75,7 @@ function mapStateToProps(state, props) {
   return {
     defaultCategories: props.defaultCategories,
     defaultSortOption: props.defaultSortOption,
+    defaultSearchKeyword: props.navigation.state.params ? props.navigation.state.params.defaultSearchKeyword : props.defaultSearchKeyword,
     searchKeyword: state.products.get('searchKeyword'),
     sortOption: state.products.get('filterOptions').get('sortOption'),
     categories: state.products.get('filterOptions').get('categories').isEmpty()
