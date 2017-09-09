@@ -29,6 +29,8 @@ const HomeTabs = TabNavigator(
   {
     tabBarPosition: 'bottom',
     animationEnabled: false,
+    swipeEnabled: false,
+    lazyLoad: true,
     tabBarOptions: {
       showIcon: true,
       tabStyle: {
@@ -41,7 +43,7 @@ const HomeTabs = TabNavigator(
         marginBottom: 0,
       },
       style: {
-        backgroundColor: 'white', //Color.primaryColorLight, //'#3DC62A',
+        backgroundColor: 'lightblue', //Color.primaryColorLight, //'#3DC62A',
       },
       activeTintColor: Color.primaryColorNormal, //'#FAFBFA',
     },

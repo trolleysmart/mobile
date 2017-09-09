@@ -1,6 +1,5 @@
 // @flow
 import React from 'react';
-import { Text } from 'react-native';
 import { TabNavigator } from 'react-navigation';
 import { Products } from '../products';
 
