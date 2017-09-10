@@ -3,25 +3,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { View } from 'react-native';
-import { Icon } from 'react-native-elements';
-import { TouchableItem } from '../components/touchableIcon';
+import { TouchableIcon } from '../components/touchableIcon';
 import Styles from './Styles';
-import { Color } from '../style/DefaultStyles';
 
 const MainMenu = ({ openDrawer }) =>
   <View style={Styles.container}>
-    <TouchableItem
-      accessibilityComponentType="button"
-      accessibilityTraits="button"
-      testID="header-filter"
-      delayPressIn={0}
-      onPress={() => openDrawer()}
-      pressColor={Color.touchableIconPressColor}
-      style={Styles.touchableContainer}
-      borderless
-    >
-      <Icon size={28} name="ios-menu" type="ionicon" containerStyle={Styles.iconContainerStyle} />
-    </TouchableItem>
+    <TouchableIcon onPress={openDrawer} iconName="ios-menu" iconType="ionicon" />
   </View>;
 
 MainMenu.propTypes = {

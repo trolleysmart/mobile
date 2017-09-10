@@ -7,13 +7,18 @@ import { connect } from 'react-redux';
 import { NavigationActions } from 'react-navigation';
 import Flyers from './Flyers';
 import { GetFlyers } from './FlyersData';
+import { Color } from '../style/DefaultStyles';
+import HeaderContainer from '../shoppingList/HeaderContainer';
 
 class FlyersContainer extends Component {
   static navigationOptions = {
     tabBarLabel: 'Flyers',
     tabBarIcon: ({ tintColor, focused }) => <Icon name={focused ? 'ios-images' : 'ios-images-outline'} type="ionicon" size={26} color={tintColor} />,
-    // headerLeft: <HeaderContainer />,
+    headerLeft: <HeaderContainer />,
     title: 'Flyers',
+    headerStyle: {
+      backgroundColor: Color.primaryColorNormal,
+    },
     // headerTitleStyle: {
     //   marginLeft: Platform.OS === 'ios' ? null : 70,
     // },

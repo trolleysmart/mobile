@@ -10,8 +10,10 @@ export default StyleSheet.create({
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
+    // justifyContent: 'center',
     height: Sizes.searchBarHeaderHeight,
-    width: Platform.OS === 'ios' ? Sizes.searchBarHeaderWidth : null,
+    width: Sizes.searchBarHeaderWidth,
   },
   productListItemRow: {
     backgroundColor: 'white',

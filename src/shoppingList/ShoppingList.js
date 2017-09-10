@@ -9,13 +9,18 @@ import { Platform } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import ShoppingListItemsRelayContainer from './ShoppingListItemsRelayContainer';
 import HeaderContainer from './HeaderContainer';
+import { Color } from '../style/DefaultStyles';
 
 class ShoppingList extends Component {
   static navigationOptions = {
     tabBarLabel: 'Shopping List',
-    tabBarIcon: ({ tintColor, focused }) => <Ionicons name={focused ? 'ios-cart' : 'ios-cart-outline'} size={26} style={{ color: tintColor }} />,
+    tabBarIcon: ({ tintColor, focused }) =>
+      <Ionicons name={focused ? 'ios-list-box' : 'ios-list-box-outline'} size={26} style={{ color: tintColor }} />,
     headerLeft: <HeaderContainer />,
-    title: 'TrolleySmart',
+    headerStyle: {
+      backgroundColor: Color.primaryColorNormal,
+    },
+    title: 'Trolley Smart',
     headerTitleStyle: {
       marginLeft: Platform.OS === 'ios' ? null : 70,
     },

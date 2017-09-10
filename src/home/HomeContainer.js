@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
 import { TabNavigator } from 'react-navigation';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import { ShoppingList } from '../shoppingList';
 import { BrowseProductsNavigationTab } from '../browseProducts';
 import { FlyersContainer } from '../flyers';
@@ -18,7 +19,11 @@ const HomeTabs = TabNavigator(
       path: '/browse',
       navigationOptions: {
         tabBarLabel: 'Browse',
+        tabBarIcon: ({ tintColor, focused }) => <Ionicons name={focused ? 'ios-cart' : 'ios-cart-outline'} size={26} style={{ color: tintColor }} />,
         headerTitle: <ProductsHeaderContainer />,
+        headerStyle: {
+          backgroundColor: Color.primaryColorNormal,
+        },
       },
     },
     Flyers: {
@@ -43,8 +48,9 @@ const HomeTabs = TabNavigator(
         marginBottom: 0,
       },
       style: {
-        backgroundColor: 'lightblue', //Color.primaryColorLight, //'#3DC62A',
+        backgroundColor: 'white', //Color.primaryColorLight, //'#3DC62A',
       },
+      inactiveTintColor: Color.primaryColorDark,
       activeTintColor: Color.primaryColorNormal, //'#FAFBFA',
     },
     backBehavior: 'none',

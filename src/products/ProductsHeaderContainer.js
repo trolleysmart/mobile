@@ -6,7 +6,6 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { View } from 'react-native';
 import { connect } from 'react-redux';
-import { Icon } from 'react-native-elements';
 import { MainMenuContainer } from '../mainMenu';
 import { SearchBarWithDelay } from '../searchBarWithDelay';
 import { TouchableIcon } from '../components/touchableIcon';
@@ -48,13 +47,13 @@ class ProductsHeaderContainer extends Component {
       <View>
         {this.props.isSearchingMode
           ? <View style={Styles.header}>
-              <TouchableIcon onPress={this.onExitsSearchModeIconPress} iconName="chevron-left" iconType="font-awesome" />
+              <TouchableIcon onPress={this.onExitsSearchModeIconPress} iconName="ios-arrow-back" iconType="ionicon" />
               <SearchBarWithDelay searchKeyword={this.props.searchKeyword} onSearchKeywordChanged={this.onSearchKeywordChanged} />
             </View>
           : <View style={Styles.header}>
               <MainMenuContainer />
               <View>
-                <TouchableIcon onPress={this.onSearchIconPress} iconName="search" iconType="font-awesome" />
+                <TouchableIcon onPress={this.onSearchIconPress} iconName="ios-search" iconType="ionicon" />
               </View>
             </View>}
       </View>

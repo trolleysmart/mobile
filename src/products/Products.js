@@ -7,7 +7,6 @@ import { connect } from 'react-redux';
 import { environment } from '../relay';
 import { graphql, QueryRenderer } from 'react-relay';
 import ProductsRelayContainer from './ProductsRelayContainer';
-// import HeaderContainer from './HeaderContainer';
 
 class Products extends Component {
   static navigationOptions = ({ navigation }) => ({
