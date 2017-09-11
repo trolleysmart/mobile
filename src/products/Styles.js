@@ -1,7 +1,13 @@
 // @flow
 
-import { StyleSheet, Platform } from 'react-native';
-import { Color, Sizes } from '../style/DefaultStyles';
+import {
+  StyleSheet,
+  Platform,
+} from 'react-native';
+import {
+  Color,
+  Sizes,
+} from '../style/DefaultStyles';
 
 export default StyleSheet.create({
   container: {
@@ -15,12 +21,18 @@ export default StyleSheet.create({
     height: Sizes.searchBarHeaderHeight,
     width: Sizes.searchBarHeaderWidth,
   },
+  headerOptions: {
+    flexDirection: 'row',
+  },
+  menuOption: {
+    flexDirection: 'row',
+  },
   productListItemRow: {
     backgroundColor: 'white',
     padding: 10,
   },
   productListItemRowSelected: {
-    backgroundColor: Color.primaryColorLight,
+    backgroundColor: 'white',
     padding: 10,
   },
   productImage: {
@@ -60,10 +72,7 @@ export default StyleSheet.create({
     color: '#3DC62A',
     textAlign: 'right',
   },
-  checkbox: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginLeft: 7,
-    marginRight: -15,
+  boldText: {
+    fontWeight: 'bold',
   },
 });

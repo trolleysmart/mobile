@@ -1,7 +1,10 @@
 // @flow
 
 import React from 'react';
-import { View, TouchableHighlight } from 'react-native';
+import {
+  View,
+  TouchableHighlight,
+} from 'react-native';
 import PropTypes from 'prop-types';
 import Styles from './Styles';
 import ProductListRowItem from './ProductListRowItem';
@@ -29,6 +32,7 @@ class ProductListRow extends React.PureComponent {
             multiBuy={this.props.multiBuy}
             savingPercentage={this.props.savingPercentage}
             saving={this.props.saving}
+            isInShoppingList={this.props.isInShoppingList}
           />
         </View>
       </TouchableHighlight>

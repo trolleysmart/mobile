@@ -1,10 +1,18 @@
 // @flow
 
 import React from 'react';
-import { View } from 'react-native';
-import { Col, Grid, Row } from 'react-native-easy-grid';
+import {
+  View,
+} from 'react-native';
+import {
+  Col,
+  Grid,
+  Row,
+} from 'react-native-easy-grid';
 import FastImage from 'react-native-fast-image';
-import { Text } from 'react-native-elements';
+import {
+  Text,
+} from 'react-native-elements';
 import PropTypes from 'prop-types';
 import Styles from './Styles';
 import MainStyles from '../style/DefaultStyles';
@@ -64,7 +72,7 @@ class ProductListRowItem extends React.PureComponent {
         <Col size={80}>
           <Row>
             <Col size={70}>
-              <Text style={MainStyles.primaryFont} numberOfLines={2}>
+              <Text style={this.props.isInShoppingList ? [MainStyles.primaryFont, Styles.boldText] : MainStyles.primaryFont} numberOfLines={2}>
                 {this.props.name}
               </Text>
             </Col>
@@ -138,6 +146,7 @@ ProductListRowItem.propTypes = {
   }),
   offerEndDate: PropTypes.string,
   size: PropTypes.string,
+  isInShoppingList: PropTypes.bool.isRequired,
 };
 
 export default ProductListRowItem;
