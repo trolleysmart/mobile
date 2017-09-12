@@ -9,7 +9,7 @@ export default createPaginationContainer(
     user: graphql`
       fragment ShoppingListItemsRelayContainer_user on User {
         id
-        shoppingList(first: $count, after: $cursor) @connection(key: "ShoppingList_shoppingList") {
+        shoppingListItems(first: $count, after: $cursor) @connection(key: "ShoppingListItems_shoppingListItems") {
           pageInfo {
             hasNextPage
             endCursor
@@ -17,13 +17,13 @@ export default createPaginationContainer(
           edges {
             node {
               id
-              stapleShoppingListId
-              specialId
               name
               imageUrl
               priceToDisplay
-              storeImageUrl
-              storeName
+              store {
+                name
+                imageUrl
+              }
               comments
               unitPrice {
                 price

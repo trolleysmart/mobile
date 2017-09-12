@@ -26,7 +26,7 @@ class Products extends Component {
       <QueryRenderer
         environment={environment}
         query={graphql`
-          query ProductsQuery($count: Int!, $cursor: String, $searchKeyword: String, $sortOption: String, $categories: [ID], $stores: [ID]) {
+          query ProductsQuery($count: Int!, $cursor: String, $searchKeyword: String, $sortOption: String, $categories: [String], $stores: [String]) {
             user {
               ...ProductsRelayContainer_user
             }

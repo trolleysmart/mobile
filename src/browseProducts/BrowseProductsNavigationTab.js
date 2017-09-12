@@ -20,14 +20,14 @@ const BrowseProductsNavigationTab = TabNavigator(
       path: '/specialsbig',
     },
     FruitsAndVeg: {
-      screen: props => <Products {...props} defaultCategories={['LcqN2sponb']} />,
+      screen: props => <Products {...props} defaultCategories={['fruit-vegetables']} />,
       navigationOptions: {
         tabBarLabel: 'Fruits & Vegs',
       },
       path: '/fruits',
     },
     Meat: {
-      screen: props => <Products {...props} defaultCategories={['jeRdBSKvSx']} />,
+      screen: props => <Products {...props} defaultCategories={['meat-seafood']} />,
       navigationOptions: {
         tabBarLabel: 'Meat',
       },

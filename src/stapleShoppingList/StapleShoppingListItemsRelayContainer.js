@@ -1,17 +1,15 @@
 // @flow
 
-import {
-  createPaginationContainer,
-  graphql,
-} from 'react-relay';
+import { createPaginationContainer, graphql } from 'react-relay';
 import StapleShoppingListItemsContainer from './StapleShoppingListItemsContainer';
 
 export default createPaginationContainer(
-  StapleShoppingListItemsContainer, {
-    user: graphql `
+  StapleShoppingListItemsContainer,
+  {
+    user: graphql`
       fragment StapleShoppingListItemsRelayContainer_user on User {
         id
-        stapleShoppingList(first: $count, after: $cursor, name: $searchKeyword) @connection(key: "User_stapleShoppingList") {
+        stapleItems(first: $count, after: $cursor, name: $searchKeyword) @connection(key: "User_stapleItems") {
           pageInfo {
             hasNextPage
             endCursor
@@ -22,18 +20,19 @@ export default createPaginationContainer(
               name
               tags {
                 id
-                name
                 key
+                name
               }
             }
           }
         }
       }
     `,
-  }, {
+  },
+  {
     direction: 'forward',
     getConnectionFromProps(props) {
-      return props.user && props.user.stapleShoppingList;
+      return props.user && props.user.stapleItems;
     },
     getFragmentVariables(prevVars, totalCount) {
       return {
@@ -41,10 +40,7 @@ export default createPaginationContainer(
         count: totalCount,
       };
     },
-    getVariables(props, {
-      count,
-      cursor,
-    }, fragmentVariables) {
+    getVariables(props, { count, cursor }, fragmentVariables) {
       return {
         count,
         cursor,
@@ -54,7 +50,7 @@ export default createPaginationContainer(
     variables: {
       cursor: null,
     },
-    query: graphql `
+    query: graphql`
       query StapleShoppingListItemsRelayContainer_PaginationQuery($count: Int!, $cursor: String, $searchKeyword: String) {
         user {
           ...StapleShoppingListItemsRelayContainer_user

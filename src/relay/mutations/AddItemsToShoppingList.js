@@ -11,45 +11,6 @@ const mutation = graphql`
   mutation AddItemsToShoppingListMutation($input: AddItemsToShoppingListInput!) {
     addItemsToShoppingList(input: $input) {
       errorMessage
-      productPrices {
-        __typename
-        cursor
-        node {
-          id
-          specialId
-          name
-          imageUrl
-          barcode
-          specialType
-          priceToDisplay
-          wasPrice
-          multiBuy {
-            awardValue
-            awardQuantity
-          }
-          storeName
-          storeImageUrl
-          comments
-          offerEndDate
-          unitPrice {
-            price
-            size
-          }
-          offerEndDate
-          size
-          saving
-          savingPercentage
-        }
-      }
-      stapleShoppingListItems {
-        __typename
-        cursor
-        node {
-          id
-          stapleShoppingListId
-          name
-        }
-      }
     }
   }
 `;

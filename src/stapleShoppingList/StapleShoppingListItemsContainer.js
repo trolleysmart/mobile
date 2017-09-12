@@ -69,7 +69,7 @@ class StapleShoppingListItemsContrainer extends Component<any, Props, State> {
   };
 
   onRefresh = () => {
-    const { stapleShoppingList } = this.props.user;
+    const { stapleItems } = this.props.user;
 
     if (this.props.relay.isLoading()) {
       return;
@@ -79,7 +79,7 @@ class StapleShoppingListItemsContrainer extends Component<any, Props, State> {
       isFetchingTop: true,
     });
 
-    this.props.relay.refetchConnection(stapleShoppingList.edges.length, error => {
+    this.props.relay.refetchConnection(stapleItems.edges.length, error => {
       //TODO: 20170610 - Morteza - Should handle the error here
       this.setState({
         isFetchingTop: false,
@@ -101,7 +101,7 @@ class StapleShoppingListItemsContrainer extends Component<any, Props, State> {
     return (
       <StapleShoppingListItems
         stapleShoppingList={getStapleShoppingListItemsWithCustomItem(
-          this.props.temporaryCustomItems.concat(this.props.user.stapleShoppingList.edges.map(_ => _.node)),
+          this.props.temporaryCustomItems.concat(this.props.user.stapleItems.edges.map(_ => _.node)),
           this.props.customStapleShoppingListItem,
         )}
         onStapleShoppingListItemSelectionChanged={this.onStapleShoppingListItemSelectionChanged}

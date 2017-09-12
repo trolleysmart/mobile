@@ -23,7 +23,7 @@ class Specials extends Component {
       <QueryRenderer
         environment={environment}
         query={graphql`
-          query SpecialsQuery($count: Int!, $cursor: String, $searchKeyword: String, $sortOption: String, $categories: [ID], $stores: [ID]) {
+          query SpecialsQuery($count: Int!, $cursor: String, $searchKeyword: String, $sortOption: String, $categories: [String], $stores: [String]) {
             user {
               ...SpecialItemsRelayContainer_user
             }

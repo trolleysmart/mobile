@@ -29,13 +29,13 @@ class ShoppingListItemsContainer extends Component<any, Props, State> {
 
     this.props.shoppingListActions.shoppingListChanged(
       Map({
-        shoppingList: Immutable.fromJS(this.props.user.shoppingList.edges.map(_ => _.node)),
+        shoppingList: Immutable.fromJS(this.props.user.shoppingListItems.edges.map(_ => _.node)),
       }),
     );
   }
 
   componentWillReceiveProps = nextProps => {
-    const shoppingList = Immutable.fromJS(nextProps.user.shoppingList.edges.map(_ => _.node));
+    const shoppingList = Immutable.fromJS(nextProps.user.shoppingListItems.edges.map(_ => _.node));
     this.props.shoppingListActions.shoppingListChanged(
       Map({
         shoppingList: shoppingList,
@@ -62,7 +62,7 @@ class ShoppingListItemsContainer extends Component<any, Props, State> {
   };
 
   onShoppingListItemSelectionChanged = id => {
-    const foundItem = this.props.user.shoppingList.edges.map(_ => _.node).find(item => item.id.localeCompare(id) === 0);
+    const foundItem = this.props.user.shoppingListItems.edges.map(_ => _.node).find(item => item.id.localeCompare(id) === 0);
 
     if (foundItem.stapleShoppingListId) {
       RemoveStapleShoppingListItemsFromUserShoppingList.commit(this.props.relay.environment, this.props.user.id, id, foundItem.stapleShoppingListId);
@@ -82,7 +82,7 @@ class ShoppingListItemsContainer extends Component<any, Props, State> {
   };
 
   onViewProductsPressed = id => {
-    const foundItem = this.props.user.shoppingList.edges.map(_ => _.node).find(item => item.id.localeCompare(id) === 0);
+    const foundItem = this.props.user.shoppingListItems.edges.map(_ => _.node).find(item => item.id.localeCompare(id) === 0);
 
     // Set the current viewing staple item
     this.props.shoppingListActions.currentViewingStapleItemChanged(
@@ -102,7 +102,7 @@ class ShoppingListItemsContainer extends Component<any, Props, State> {
   };
 
   onRefresh = () => {
-    const { shoppingList } = this.props.user;
+    const { shoppingListItems } = this.props.user;
 
     if (this.props.relay.isLoading()) {
       return;
@@ -112,7 +112,7 @@ class ShoppingListItemsContainer extends Component<any, Props, State> {
       isFetchingTop: true,
     });
 
-    this.props.relay.refetchConnection(shoppingList.edges.length, error => {
+    this.props.relay.refetchConnection(shoppingListItems.edges.length, error => {
       //TODO: 20170610 - Morteza - Should handle the error here
       this.setState({
         isFetchingTop: false,
@@ -133,7 +133,7 @@ class ShoppingListItemsContainer extends Component<any, Props, State> {
   render = () => {
     return (
       <ShoppingListItems
-        shoppingList={this.props.user.shoppingList.edges.map(_ => _.node)}
+        shoppingList={this.props.user.shoppingListItems.edges.map(_ => _.node)}
         onShoppingListItemSelectionChanged={this.onShoppingListItemSelectionChanged}
         onViewProductsPressed={this.onViewProductsPressed}
         onShoppingListAddItemClicked={this.onShoppingListAddItemClicked}

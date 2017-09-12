@@ -29,7 +29,7 @@ class SpecialItemsContainer extends Component<any, Props, State> {
 
       RemoveSpecialItemsFromUserShoppingList.commit(this.props.relay.environment, this.props.user.id, shoppingListItem.id, specialItemId);
     } else {
-      const shoppingListItem = this.props.user.specials.edges.map(_ => _.node).find(_ => _.id === specialItemId);
+      const shoppingListItem = this.props.user.products.edges.map(_ => _.node).find(_ => _.id === specialItemId);
 
       AddItemsToShoppingList.commit(this.props.relay.environment, this.props.user.id, {
         productPrices: List.of(Immutable.fromJS(shoppingListItem)),
@@ -38,7 +38,7 @@ class SpecialItemsContainer extends Component<any, Props, State> {
   };
 
   onRefresh = () => {
-    const { specials } = this.props.user;
+    const { products } = this.props.user;
 
     if (this.props.relay.isLoading()) {
       return;
@@ -48,7 +48,7 @@ class SpecialItemsContainer extends Component<any, Props, State> {
       isFetchingTop: true,
     });
 
-    this.props.relay.refetchConnection(specials.edges.length, error => {
+    this.props.relay.refetchConnection(products.edges.length, error => {
       //TODO: 20170610 - Morteza - Should handle the error here
       this.setState({
         isFetchingTop: false,
@@ -69,7 +69,7 @@ class SpecialItemsContainer extends Component<any, Props, State> {
   render = () => {
     return (
       <ProductList
-        products={this.props.user.specials.edges.map(_ => _.node)}
+        products={this.props.user.products.edges.map(_ => _.node)}
         shoppingList={this.props.shoppingList}
         onItemSelectionChanged={this.onSpecialItemSelectionChanged}
         isFetchingTop={this.state.isFetchingTop}
