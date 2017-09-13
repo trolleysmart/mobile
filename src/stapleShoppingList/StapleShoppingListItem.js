@@ -29,7 +29,7 @@ class StapleShoppingListItem extends React.PureComponent {
           <Avatar
             rounded
             overlayContainerStyle={{ backgroundColor: this.props.isSelected ? '#F4CC62' : '#EFF0F1' }}
-            source={ImageUltility.getImageSource(this.props.name)}
+            source={ImageUltility.getImageSource(this.props.name.toLowerCase().replace(/\s+/g, ''))}
             activeOpacity={0.7}
           />
           <Text style={Styles.itemName}>
