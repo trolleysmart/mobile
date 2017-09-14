@@ -7,10 +7,11 @@ import { BrowseProductsNavigationTab } from '../browseProducts';
 import { FlyersContainer } from '../flyers';
 import { Color } from '../style/DefaultStyles';
 import { ProductsHeaderContainer } from '../products';
+import { ShoppingListsNavigationStack } from '../shoppingLists';
 
 const HomeTabs = TabNavigator(
   {
-    ShoppingList: {
+    ShoppingLists: {
       screen: ShoppingList,
       path: '/',
     },
