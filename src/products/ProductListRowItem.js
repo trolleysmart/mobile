@@ -1,10 +1,18 @@
 // @flow
 
 import React from 'react';
-import { View } from 'react-native';
-import { Col, Grid, Row } from 'react-native-easy-grid';
+import {
+  View,
+} from 'react-native';
+import {
+  Col,
+  Grid,
+  Row,
+} from 'react-native-easy-grid';
 import FastImage from 'react-native-fast-image';
-import { Text } from 'react-native-elements';
+import {
+  Text,
+} from 'react-native-elements';
 import PropTypes from 'prop-types';
 import Styles from './Styles';
 import MainStyles from '../style/DefaultStyles';
@@ -97,7 +105,7 @@ class ProductListRowItem extends React.PureComponent {
                 </Col>
                 <Col size={85}>
                   <Text style={Styles.storeName} numberOfLines={1}>
-                    {this.props.store.name}
+                    {this.props.store ? this.props.store.name : ''}
                   </Text>
                 </Col>
               </Row>
