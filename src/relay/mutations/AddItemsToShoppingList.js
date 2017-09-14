@@ -74,7 +74,7 @@ function commit(environment, userId, { productPrices, stapleItems, newStapleItem
       } else {
         const shoppingListItemsEdges = payload.getLinkedRecords('shoppingListItems');
 
-        shoppingListItemsEdges.map(shoppingListItemsEdge => {
+        shoppingListItemsEdges.forEach(shoppingListItemsEdge => {
           const id = shoppingListItemsEdge.getLinkedRecord('node').getValue('id');
 
           sharedUpdater(store, userId, shoppingListItemsEdge, id);
@@ -83,7 +83,7 @@ function commit(environment, userId, { productPrices, stapleItems, newStapleItem
     },
     optimisticUpdater: store => {
       if (productPrices) {
-        productPrices.map(productPrice => {
+        productPrices.forEach(productPrice => {
           const id = uuid();
           const node = store.create(id, 'item');
 
@@ -106,7 +106,7 @@ function commit(environment, userId, { productPrices, stapleItems, newStapleItem
       }
 
       if (stapleItems) {
-        stapleItems.map(stapleItem => {
+        stapleItems.forEach(stapleItem => {
           const id = uuid();
           const node = store.create(id, 'item');
 
@@ -122,7 +122,7 @@ function commit(environment, userId, { productPrices, stapleItems, newStapleItem
       }
 
       if (newStapleItemNames) {
-        newStapleItemNames.map(newStapleItemName => {
+        newStapleItemNames.forEach(newStapleItemName => {
           const id = uuid();
           const node = store.create(id, 'item');
 

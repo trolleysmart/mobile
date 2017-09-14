@@ -1,13 +1,13 @@
 // @flow
 
-import Immutable, { Map, List } from 'immutable';
+import Immutable, { List, Map } from 'immutable';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { NavigationActions } from 'react-navigation';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import ShoppingListItems from './ShoppingListItems';
-import { RemoveStapleShoppingListItemsFromUserShoppingList, RemoveSpecialItemsFromUserShoppingList } from '../relay/mutations';
+import { RemoveItemsFromShoppingList } from '../relay/mutations';
 import * as ShoppingListActions from './Actions';
 import * as StapleShoppingListActions from '../stapleShoppingList/Actions';
 import * as ProductsActions from '../products/Actions';
@@ -35,10 +35,11 @@ class ShoppingListItemsContainer extends Component<any, Props, State> {
   }
 
   componentWillReceiveProps = nextProps => {
-    const shoppingList = Immutable.fromJS(nextProps.user.shoppingListItems.edges.map(_ => _.node));
+    const shoppingListItems = Immutable.fromJS(nextProps.user.shoppingListItems.edges.map(_ => _.node));
+
     this.props.shoppingListActions.shoppingListChanged(
       Map({
-        shoppingList: shoppingList,
+        shoppingList: shoppingListItems,
       }),
     );
 
@@ -47,13 +48,12 @@ class ShoppingListItemsContainer extends Component<any, Props, State> {
       nextProps.removeCurrentViewingStapleItem &&
       this.props.viewingStapleItem.has('shoppingListId') &&
       this.props.viewingStapleItem.get('shoppingListId') &&
-      shoppingList.find(_ => _.get('id') === this.props.viewingStapleItem.get('shoppingListId'))
+      shoppingListItems.find(_ => _.get('id') === this.props.viewingStapleItem.get('shoppingListId'))
     ) {
-      RemoveStapleShoppingListItemsFromUserShoppingList.commit(
+      RemoveItemsFromShoppingList.commit(
         this.props.relay.environment,
         this.props.user.id,
-        this.props.viewingStapleItem.get('shoppingListId'),
-        this.props.viewingStapleItem.get('stapleShoppingListId'),
+        List.of(this.props.viewingStapleItem.get('shoppingListId')),
       );
 
       // Clear the current viewing staple item
@@ -62,13 +62,9 @@ class ShoppingListItemsContainer extends Component<any, Props, State> {
   };
 
   onShoppingListItemSelectionChanged = id => {
-    const foundItem = this.props.user.shoppingListItems.edges.map(_ => _.node).find(item => item.id.localeCompare(id) === 0);
+    const shoppingListItem = this.props.user.shoppingListItems.edges.map(_ => _.node).find(item => item.id.localeCompare(id) === 0);
 
-    if (foundItem.stapleShoppingListId) {
-      RemoveStapleShoppingListItemsFromUserShoppingList.commit(this.props.relay.environment, this.props.user.id, id, foundItem.stapleShoppingListId);
-    } else {
-      RemoveSpecialItemsFromUserShoppingList.commit(this.props.relay.environment, this.props.user.id, id, foundItem.specialId);
-    }
+    RemoveItemsFromShoppingList.commit(this.props.relay.environment, this.props.user.id, id, List.of(shoppingListItem.get('id')));
   };
 
   onShoppingListAddItemClicked = () => {

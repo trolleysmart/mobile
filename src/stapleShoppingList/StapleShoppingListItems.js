@@ -1,7 +1,7 @@
 // @flow
 
-import React, { Component } from 'react';
-import { SectionList, FlatList, Text, View, Image } from 'react-native';
+import React from 'react';
+import { SectionList, Text, View, Image } from 'react-native';
 import Immutable from 'immutable';
 import PropTypes from 'prop-types';
 import StapleShoppingListItem from './StapleShoppingListItem';
