@@ -1,18 +1,10 @@
 // @flow
 
 import React from 'react';
-import {
-  View,
-} from 'react-native';
-import {
-  Col,
-  Grid,
-  Row,
-} from 'react-native-easy-grid';
+import { View } from 'react-native';
+import { Col, Grid, Row } from 'react-native-easy-grid';
 import FastImage from 'react-native-fast-image';
-import {
-  Text,
-} from 'react-native-elements';
+import { Text } from 'react-native-elements';
 import PropTypes from 'prop-types';
 import Styles from './Styles';
 import MainStyles from '../style/DefaultStyles';
@@ -99,13 +91,13 @@ class ProductListRowItem extends React.PureComponent {
             <Col size={60}>
               <Row>
                 <Col size={15}>
-                  {this.props.storeImageUrl
-                    ? <FastImage style={Styles.storeImage} resizeMode={FastImage.resizeMode.stretch} source={{ uri: this.props.storeImageUrl }} />
+                  {this.props.store && this.props.store.imageUrl
+                    ? <FastImage style={Styles.storeImage} resizeMode={FastImage.resizeMode.stretch} source={{ uri: this.props.store.imageUrl }} />
                     : <View />}
                 </Col>
                 <Col size={85}>
                   <Text style={Styles.storeName} numberOfLines={1}>
-                    {this.props.storeName}
+                    {this.props.store.name}
                   </Text>
                 </Col>
               </Row>
@@ -133,9 +125,11 @@ ProductListRowItem.propTypes = {
   priceToDisplay: PropTypes.number,
   savingPercentage: PropTypes.number,
   saving: PropTypes.number,
-  storeImageUrl: PropTypes.string,
-  storeName: PropTypes.string,
   comments: PropTypes.string,
+  store: PropTypes.shape({
+    name: PropTypes.number.isRequired,
+    imageUrl: PropTypes.string.isRequired,
+  }),
   unitPrice: PropTypes.shape({
     price: PropTypes.number.isRequired,
     size: PropTypes.string.isRequired,

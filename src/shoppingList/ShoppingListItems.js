@@ -20,8 +20,7 @@ class ShoppingListItems extends Component {
         name={item.name}
         imageUrl={item.imageUrl}
         priceToDisplay={item.priceToDisplay}
-        storeImageUrl={item.storeImageUrl}
-        storeName={item.storeName}
+        store={item.store}
         comments={item.comments}
         unitPrice={item.unitPrice}
         offerEndDate={item.offerEndDate}
@@ -91,8 +90,10 @@ ShoppingListItems.propTypes = {
       priceToDisplay: PropTypes.number,
       savingPercentage: PropTypes.number,
       saving: PropTypes.number,
-      storeImageUrl: PropTypes.string,
-      storeName: PropTypes.string,
+      store: PropTypes.shape({
+        name: PropTypes.number,
+        imageUrl: PropTypes.string,
+      }),
       comments: PropTypes.string,
       unitPrice: PropTypes.shape({
         price: PropTypes.number.isRequired,

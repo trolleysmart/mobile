@@ -39,8 +39,7 @@ class ShoppingListItem extends React.PureComponent {
                 name={this.props.name}
                 imageUrl={this.props.imageUrl}
                 priceToDisplay={this.props.priceToDisplay}
-                storeImageUrl={this.props.storeImageUrl}
-                storeName={this.props.storeName}
+                store={this.props.store}
                 comments={this.props.comments}
                 unitPrice={this.props.unitPrice}
                 offerEndDate={this.props.offerEndDate}
@@ -65,8 +64,10 @@ ShoppingListItem.propTypes = {
   name: PropTypes.string.isRequired,
   imageUrl: PropTypes.string,
   priceToDisplay: PropTypes.number,
-  storeImageUrl: PropTypes.string,
-  storeName: PropTypes.string,
+  store: PropTypes.shape({
+    name: PropTypes.number,
+    imageUrl: PropTypes.string,
+  }),
   unitPrice: PropTypes.shape({
     price: PropTypes.number.isRequired,
     size: PropTypes.string.isRequired,

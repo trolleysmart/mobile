@@ -1,10 +1,7 @@
 // @flow
 
 import React from 'react';
-import {
-  View,
-  TouchableHighlight,
-} from 'react-native';
+import { View, TouchableHighlight } from 'react-native';
 import PropTypes from 'prop-types';
 import Styles from './Styles';
 import ProductListRowItem from './ProductListRowItem';
@@ -23,10 +20,9 @@ class ProductListRow extends React.PureComponent {
             name={this.props.name}
             imageUrl={this.props.imageUrl}
             priceToDisplay={this.props.priceToDisplay}
-            storeImageUrl={this.props.storeImageUrl}
-            storeName={this.props.storeName}
+            store={this.props.store}
             comments={this.props.comments}
-            unitPrice={this.props.unitPrice}
+            enitPrice={this.props.unitPrice}
             offerEndDate={this.props.offerEndDate}
             size={this.props.size}
             multiBuy={this.props.multiBuy}
@@ -47,8 +43,10 @@ ProductListRow.propTypes = {
   priceToDisplay: PropTypes.number,
   savingPercentage: PropTypes.number,
   saving: PropTypes.number,
-  storeImageUrl: PropTypes.string,
-  storeName: PropTypes.string,
+  store: PropTypes.shape({
+    name: PropTypes.number.isRequired,
+    imageUrl: PropTypes.string.isRequired,
+  }),
   comments: PropTypes.string,
   unitPrice: PropTypes.shape({
     price: PropTypes.number.isRequired,
