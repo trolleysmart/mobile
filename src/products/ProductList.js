@@ -26,7 +26,7 @@ const ProductList = ({ products, shoppingList, onItemSelectionChanged, isFetchin
           multiBuy={info.item.multiBuy}
           savingPercentage={info.item.savingPercentage}
           saving={info.item.saving}
-          isInShoppingList={shoppingList ? shoppingList.find(_ => _.specialId === info.item.id) != null : false}
+          isInShoppingList={shoppingList ? shoppingList.find(_ => _.productPriceId === info.item.id) != null : false}
           onItemSelectionChanged={onItemSelectionChanged}
         />}
       keyExtractor={item => item.id}
@@ -64,7 +64,7 @@ ProductList.propTypes = {
   shoppingList: PropTypes.arrayOf(
     PropTypes.shape({
       stapleShoppingListId: PropTypes.string,
-      specialId: PropTypes.string,
+      productPriceId: PropTypes.string,
     }),
   ).isRequired,
   onItemSelectionChanged: PropTypes.func.isRequired,

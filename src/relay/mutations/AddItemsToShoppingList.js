@@ -55,16 +55,14 @@ function sharedUpdater(store, userId, shoppingListItemsEdge, id) {
   ConnectionHandler.insertEdgeAfter(connection, shoppingListItemsEdge);
 }
 
-function commit(environment, userId, { productPrices, stapleShoppingListItems, newStapleShoppingListNames }) {
+function commit(environment, userId, { productPrices, stapleItems, newStapleItemNames }) {
   return commitMutation(environment, {
     mutation,
     variables: {
       input: {
         productPriceIds: productPrices ? productPrices.map(productPrice => productPrice.get('id')).toJS() : [],
-        stapleShoppingListIds: stapleShoppingListItems
-          ? stapleShoppingListItems.map(stapleShoppingListItem => stapleShoppingListItem.get('id')).toJS()
-          : [],
-        newStapleShoppingListNames: newStapleShoppingListNames ? newStapleShoppingListNames.toJS() : [],
+        stapleItemIds: stapleItems ? stapleItems.map(stapleItem => stapleItem.get('id')).toJS() : [],
+        newStapleItemNames: newStapleItemNames ? newStapleItemNames.toJS() : [],
       },
     },
     updater: store => {
@@ -107,14 +105,14 @@ function commit(environment, userId, { productPrices, stapleShoppingListItems, n
         });
       }
 
-      if (stapleShoppingListItems) {
-        stapleShoppingListItems.map(stapleShoppingListItem => {
+      if (stapleItems) {
+        stapleItems.map(stapleItem => {
           const id = uuid();
           const node = store.create(id, 'item');
 
           node.setValue(id, 'id');
-          node.setValue(stapleShoppingListItem.get('id'), 'stapleItemId');
-          node.setValue(stapleShoppingListItem.get('name'), 'name');
+          node.setValue(stapleItem.get('id'), 'stapleItemId');
+          node.setValue(stapleItem.get('name'), 'name');
 
           const shoppingListItemEdge = store.create(uuid(), 'ShoppingListItemEdge');
 
@@ -123,14 +121,14 @@ function commit(environment, userId, { productPrices, stapleShoppingListItems, n
         });
       }
 
-      if (newStapleShoppingListNames) {
-        newStapleShoppingListNames.map(newStapleShoppingListName => {
+      if (newStapleItemNames) {
+        newStapleItemNames.map(newStapleItemName => {
           const id = uuid();
           const node = store.create(id, 'item');
 
           node.setValue(id, 'id');
           node.setValue(uuid(), 'stapleItemId');
-          node.setValue(newStapleShoppingListName, 'name');
+          node.setValue(newStapleItemName, 'name');
 
           const shoppingListItemEdge = store.create(uuid(), 'ShoppingListItemEdge');
 

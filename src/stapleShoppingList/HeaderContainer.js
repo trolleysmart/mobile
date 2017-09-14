@@ -27,8 +27,8 @@ class HeaderContainer extends Component {
   addItemsClicked = () => {
     if (this.props.selectedStapleShoppingListItems.size !== 0) {
       AddItemsToShoppingList.commit(this.props.environment, this.props.userId, {
-        newStapleShoppingListNames: this.props.selectedStapleShoppingListItems.filter(_ => _.get('isCustomItem')).map(_ => _.get('name')),
-        stapleShoppingListItems: this.props.selectedStapleShoppingListItems.filterNot(_ => _.get('isCustomItem')),
+        newStapleItemNames: this.props.selectedStapleShoppingListItems.filter(_ => _.get('isCustomItem')).map(_ => _.get('name')),
+        stapleItems: this.props.selectedStapleShoppingListItems.filterNot(_ => _.get('isCustomItem')),
       });
 
       // Clear the selected staple list

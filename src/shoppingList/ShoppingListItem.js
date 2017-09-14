@@ -10,7 +10,7 @@ import { ProductListRowItem } from '../products';
 
 class ShoppingListItem extends React.PureComponent {
   render() {
-    if (!this.props.priceToDisplay && !this.props.imageUrl) {
+    if (this.props.stapleItemId) {
       // Staple item
       return (
         <ListItem
@@ -48,6 +48,7 @@ class ShoppingListItem extends React.PureComponent {
                 multiBuy={this.props.multiBuy}
                 savingPercentage={this.props.savingPercentage}
                 saving={this.props.saving}
+                isInShoppingList={true}
               />
             </Col>
           </Grid>
@@ -59,6 +60,8 @@ class ShoppingListItem extends React.PureComponent {
 
 ShoppingListItem.propTypes = {
   id: PropTypes.string.isRequired,
+  stapleItemId: PropTypes.string,
+  productPriceId: PropTypes.string,
   name: PropTypes.string.isRequired,
   imageUrl: PropTypes.string,
   priceToDisplay: PropTypes.number,
