@@ -7,8 +7,8 @@ import { MessageType } from '../../messageBar';
 import { reduxStore } from '../../navigation';
 
 const mutation = graphql`
-  mutation RemoveItemsFromShopiingListMutation($input: RemoveItemsFromShopiingListInput!) {
-    removeItemsFromShopiingList(input: $input) {
+  mutation RemoveItemsFromShoppingListMutation($input: RemoveItemsFromShoppingListInput!) {
+    removeItemsFromShoppingList(input: $input) {
       errorMessage
     }
   }
@@ -30,7 +30,7 @@ function commit(environment, userId, shoppingListItemIds) {
       },
     },
     updater: store => {
-      const payload = store.getRootField('removeItemsFromShopiingList');
+      const payload = store.getRootField('removeItemsFromShoppingList');
       const errorMessage = payload.getValue('errorMessage');
 
       if (errorMessage) {
@@ -49,4 +49,6 @@ function commit(environment, userId, shoppingListItemIds) {
   });
 }
 
-export default { commit };
+export default {
+  commit,
+};
