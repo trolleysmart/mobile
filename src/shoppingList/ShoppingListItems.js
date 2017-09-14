@@ -41,7 +41,7 @@ class ShoppingListItems extends Component {
         <Text style={Styles.sectionTitle}>
           {section.title}
         </Text>
-        <Image source={ImageUltility.getImageSource(section.title)} style={Styles.sectionHeaderImage} />
+        <Image source={ImageUltility.getImageSource(section.categoryKey.replace(/-/g, ''))} style={Styles.sectionHeaderImage} />
       </View>
     );
   };
@@ -53,12 +53,17 @@ class ShoppingListItems extends Component {
         key,
         {
           data: value.toJS(),
-          title: key,
+          categoryTitle: key,
+          categoryKey:
+            value.first().has('tags') && value.first().get('tags') && !value.first().get('tags').isEmpty()
+              ? value.first().get('tags').first().get('key')
+              : key,
         },
       ])
-      .sortBy(_ => _.title)
+      .sortBy(_ => _.categoryKey)
       .valueSeq()
       .toJS();
+
     return (
       <View style={Styles.container}>
         <SectionList
