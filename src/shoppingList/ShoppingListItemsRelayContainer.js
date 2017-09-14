@@ -17,6 +17,8 @@ export default createPaginationContainer(
           edges {
             node {
               id
+              productPriceId
+              stapleItemId
               name
               imageUrl
               priceToDisplay
