@@ -1,6 +1,6 @@
 // @flow
 
-import Immutable, { List } from 'immutable';
+import Immutable from 'immutable';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -26,15 +26,13 @@ class ProductsContainer extends Component<any, Props, State> {
     const productId = product.id;
 
     if (isInShoppingList) {
-      RemoveItemsFromShoppingList.commit(
-        this.props.relay.environment,
-        this.props.user.id,
-        List.of(this.props.user.shoppingListItems.edges.map(_ => _.node).find(_ => _.productPriceId === productId).id),
-      );
+      RemoveItemsFromShoppingList.commit(this.props.relay.environment, this.props.user.id, [
+        this.props.user.shoppingListItems.edges.map(_ => _.node).find(_ => _.productPriceId === productId).id,
+      ]);
       this.props.productsActions.productDeselected(productId);
     } else {
       AddItemsToShoppingList.commit(this.props.relay.environment, this.props.user.id, {
-        productPrices: List.of(Immutable.fromJS(this.props.user.products.edges.map(_ => _.node).find(_ => _.id === productId))),
+        productPrices: [Immutable.fromJS(this.props.user.products.edges.map(_ => _.node).find(_ => _.id === productId))],
       });
       this.props.productsActions.productSelected(productId);
     }

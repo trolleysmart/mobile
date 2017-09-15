@@ -1,4 +1,5 @@
-import React from 'react';
+// @flow
+
 import { StackNavigator } from 'react-navigation';
 import { ShoppingList } from '../shoppingList';
 import ShoppingListsContainer from './ShoppingListsContainer';

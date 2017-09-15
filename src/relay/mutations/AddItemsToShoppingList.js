@@ -64,9 +64,9 @@ function commit(environment, userId, { productPrices, stapleItems, newStapleItem
     mutation,
     variables: {
       input: {
-        productPriceIds: productPrices ? productPrices.map(productPrice => productPrice.get('id')).toJS() : [],
-        stapleItemIds: stapleItems ? stapleItems.map(stapleItem => stapleItem.get('id')).toJS() : [],
-        newStapleItemNames: newStapleItemNames ? newStapleItemNames.toJS() : [],
+        productPriceIds: productPrices ? productPrices.map(productPrice => productPrice.get('id')) : [],
+        stapleItemIds: stapleItems ? stapleItems.map(stapleItem => stapleItem.get('id')) : [],
+        newStapleItemNames: newStapleItemNames ? newStapleItemNames : [],
       },
     },
     updater: store => {
