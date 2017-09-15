@@ -52,7 +52,7 @@ class ProductsHeaderContainer extends Component {
             </View>
           : <View style={Styles.header}>
               <MainMenuContainer />
-              <View>
+              <View style={Styles.headerOptions}>
                 <TouchableIcon onPress={this.onSearchIconPress} iconName="ios-search" iconType="ionicon" />
               </View>
             </View>}

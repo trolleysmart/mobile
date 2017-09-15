@@ -18,6 +18,9 @@ import AppDrawer from '../app/AppDrawer';
 import * as messageBarActions from '../messageBar/Actions';
 import { MessageType } from '../messageBar';
 import { SignInDisclaimerContainer } from '../disclaimer';
+import PopupDialog, { SlideAnimation } from 'react-native-popup-dialog';
+import { View } from 'react-native';
+import { Button } from 'react-native-elements';
 
 const AppNavigator = StackNavigator(
   {
@@ -217,12 +220,27 @@ class AppWithNavigationState extends Component {
   };
 
   render = () =>
-    <AppNavigator
-      navigation={addNavigationHelpers({
-        dispatch: this.props.dispatch,
-        state: this.props.navigation,
-      })}
-    />;
+    <View style={{ flex: 1 }}>
+      <PopupDialog
+        ref={popupDialog => {
+          this.popupDialog = popupDialog;
+        }}
+        dialogAnimation={new SlideAnimation({ slideFrom: 'bottom' })}
+        width={200}
+        haveOverlay={true}
+      >
+        <View>
+          {/* <Text>Hello</Text> */}
+        </View>
+      </PopupDialog>
+      {/* <Button title='hell' onPress={() => this.popupDialog.show()}/> */}
+      <AppNavigator
+        navigation={addNavigationHelpers({
+          dispatch: this.props.dispatch,
+          state: this.props.navigation,
+        })}
+      />
+    </View>;
 }
 
 AppWithNavigationState.propTypes = {
@@ -252,4 +270,6 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AppWithNavigationState);
+export default connect(mapStateToProps, mapDispatchToProps, null, {
+  withRef: true,
+})(AppWithNavigationState);

@@ -16,15 +16,15 @@ class ShoppingList extends Component {
     tabBarLabel: 'Shopping List',
     tabBarIcon: ({ tintColor, focused }) =>
       <Ionicons name={focused ? 'ios-list-box' : 'ios-list-box-outline'} size={26} style={{ color: tintColor }} />,
-    headerLeft: <HeaderContainer />,
-    headerStyle: {
-      backgroundColor: Color.primaryColorNormal,
-    },
-    title: 'Trolley Smart',
-    headerTitleStyle: {
-      marginLeft: Platform.OS === 'ios' ? null : 70,
-    },
-    headerBackTitle: null,
+    // headerLeft: <HeaderContainer />,
+    // headerStyle: {
+    //   backgroundColor: Color.primaryColorNormal,
+    // },
+    title: 'My Shopping List 1',
+    // headerTitleStyle: {
+    //   marginLeft: Platform.OS === 'ios' ? null : 70,
+    // },
+    // headerBackTitle: null,
   };
 
   render() {
