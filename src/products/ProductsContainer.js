@@ -25,15 +25,15 @@ class ProductsContainer extends Component<any, Props, State> {
 
   onProductItemSelectionChanged = (productId, isInShoppingList) => {
     if (isInShoppingList) {
-      const shoppingListItem = this.props.user.shoppingListItems.edges.map(_ => _.node).find(_ => _.productPriceId === productId);
-
-      RemoveItemsFromShoppingList.commit(this.props.relay.environment, this.props.user.id, List.of(shoppingListItem.id));
+      RemoveItemsFromShoppingList.commit(
+        this.props.relay.environment,
+        this.props.user.id,
+        List.of(this.props.user.shoppingListItems.edges.map(_ => _.node).find(_ => _.productPriceId === productId).id),
+      );
       this.props.productsActions.productDeselected(productId);
     } else {
-      const shoppingListItem = this.props.user.products.edges.map(_ => _.node).find(_ => _.id === productId);
-
       AddItemsToShoppingList.commit(this.props.relay.environment, this.props.user.id, {
-        productPrices: List.of(Immutable.fromJS(shoppingListItem)),
+        productPrices: List.of(Immutable.fromJS(this.props.user.products.edges.map(_ => _.node).find(_ => _.id === productId))),
       });
       this.props.productsActions.productSelected(productId);
     }
@@ -84,7 +84,7 @@ class ProductsContainer extends Component<any, Props, State> {
 
 ProductsContainer.propTypes = {};
 
-function mapStateToProps(state) {
+function mapStateToProps() {
   return {};
 }
 

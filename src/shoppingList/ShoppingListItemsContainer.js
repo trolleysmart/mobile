@@ -26,22 +26,10 @@ class ShoppingListItemsContainer extends Component<any, Props, State> {
 
   constructor(props, context) {
     super(props, context);
-
-    this.props.shoppingListActions.shoppingListChanged(
-      Map({
-        shoppingList: Immutable.fromJS(this.props.user.shoppingListItems.edges.map(_ => _.node)),
-      }),
-    );
   }
 
   componentWillReceiveProps = nextProps => {
     const shoppingListItems = Immutable.fromJS(nextProps.user.shoppingListItems.edges.map(_ => _.node));
-
-    this.props.shoppingListActions.shoppingListChanged(
-      Map({
-        shoppingList: shoppingListItems,
-      }),
-    );
 
     // Remove existing staple item after added relevant products.
     if (

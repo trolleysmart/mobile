@@ -7,9 +7,6 @@ import { Map } from 'immutable';
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case ActionTypes.SHOPPING_LIST_SHOPPING_LIST_CHANGED:
-      return state.set('shoppingList', action.payload.get('shoppingList'));
-
     case ProductsActionTypes.PRODUCTS_PRODUCT_SELECTED:
       return state.set('removeCurrentViewingStapleItem', true);
 
