@@ -18,6 +18,10 @@ function sharedUpdater(store, userId, shoppingListItemId) {
   const userProxy = store.get(userId);
   const connection = ConnectionHandler.getConnection(userProxy, 'ShoppingListItems_shoppingListItems');
 
+  if (!connection) {
+    return;
+  }
+
   ConnectionHandler.deleteNode(connection, shoppingListItemId);
 }
 

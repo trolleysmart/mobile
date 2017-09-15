@@ -48,6 +48,10 @@ function sharedUpdater(store, userId, shoppingListItemsEdge, id) {
   const userProxy = store.get(userId);
   const connection = ConnectionHandler.getConnection(userProxy, 'ShoppingListItems_shoppingListItems');
 
+  if (!connection) {
+    return;
+  }
+
   if (id) {
     ConnectionHandler.deleteNode(connection, id);
   }
