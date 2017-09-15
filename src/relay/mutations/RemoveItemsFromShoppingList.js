@@ -26,7 +26,7 @@ function commit(environment, userId, shoppingListItemIds) {
     mutation,
     variables: {
       input: {
-        shoppingListItemIdsL: shoppingListItemIds.toJS(),
+        shoppingListItemIds: shoppingListItemIds.toJS(),
       },
     },
     updater: store => {
