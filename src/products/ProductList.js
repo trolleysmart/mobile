@@ -7,7 +7,7 @@ import ProductListRow from './ProductListRow';
 import { ListItemSeparator } from '../components/list';
 import Styles from './Styles';
 
-const ProductList = ({ products, shoppingList, onItemSelectionChanged, isFetchingTop, onRefresh, onEndReached }) =>
+const ProductList = ({ products, shoppingListItems, onItemSelectionChanged, isFetchingTop, onRefresh, onEndReached }) =>
   <View style={Styles.container}>
     <FlatList
       data={products}
@@ -25,7 +25,7 @@ const ProductList = ({ products, shoppingList, onItemSelectionChanged, isFetchin
           multiBuy={info.item.multiBuy}
           savingPercentage={info.item.savingPercentage}
           saving={info.item.saving}
-          isInShoppingList={shoppingList ? shoppingList.find(_ => _.productPriceId === info.item.id) != null : false}
+          isInShoppingList={!!shoppingListItems.find(_ => _.productPriceId === info.item.id)}
           onItemSelectionChanged={onItemSelectionChanged}
         />}
       keyExtractor={item => item.id}
@@ -62,7 +62,6 @@ ProductList.propTypes = {
   ).isRequired,
   shoppingList: PropTypes.arrayOf(
     PropTypes.shape({
-      stapleShoppingListId: PropTypes.string,
       productPriceId: PropTypes.string,
     }),
   ).isRequired,

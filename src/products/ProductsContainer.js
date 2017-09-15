@@ -25,7 +25,7 @@ class ProductsContainer extends Component<any, Props, State> {
 
   onProductItemSelectionChanged = (productId, isInShoppingList) => {
     if (isInShoppingList) {
-      const shoppingListItem = this.props.shoppingList.find(_ => _.productPriceId === productId);
+      const shoppingListItem = this.props.user.shoppingListItems.edges.map(_ => _.node).find(_ => _.productPriceId === productId);
 
       RemoveItemsFromShoppingList.commit(this.props.relay.environment, this.props.user.id, List.of(shoppingListItem.id));
       this.props.productsActions.productDeselected(productId);
@@ -72,7 +72,7 @@ class ProductsContainer extends Component<any, Props, State> {
     return (
       <ProductList
         products={this.props.user.products.edges.map(_ => _.node)}
-        shoppingList={this.props.shoppingList}
+        shoppingListItems={this.props.user.shoppingListItems.edges.map(_ => _.node)}
         onItemSelectionChanged={this.onProductItemSelectionChanged}
         isFetchingTop={this.state.isFetchingTop}
         onRefresh={this.onRefresh}
@@ -85,9 +85,7 @@ class ProductsContainer extends Component<any, Props, State> {
 ProductsContainer.propTypes = {};
 
 function mapStateToProps(state) {
-  return {
-    shoppingList: state.shoppingList.get('shoppingList').toJS(),
-  };
+  return {};
 }
 
 function mapDispatchToProps(dispatch) {

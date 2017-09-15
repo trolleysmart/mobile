@@ -9,8 +9,7 @@ export default createPaginationContainer(
     user: graphql`
       fragment ProductsRelayContainer_user on User {
         id
-        products(first: $count, after: $cursor, name: $searchKeyword, sortOption: $sortOption, tagKeys: $categories, storeKeys: $stores)
-          @connection(key: "User_products") {
+        products(first: $count, after: $cursor, name: $searchKeyword, sortOption: $sortOption, tagKeys: $categories, storeKeys: $stores) {
           pageInfo {
             hasNextPage
             endCursor
@@ -38,6 +37,14 @@ export default createPaginationContainer(
               size
               savingPercentage
               saving
+            }
+          }
+        }
+        shoppingListItems(first: 1000) @connection(key: "ShoppingListItems_shoppingListItems") {
+          edges {
+            node {
+              id
+              productPriceId
             }
           }
         }
