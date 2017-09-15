@@ -12,8 +12,11 @@ import { ShoppingListsNavigationStack } from '../shoppingLists';
 const HomeTabs = TabNavigator(
   {
     ShoppingLists: {
-      screen: ShoppingList,
+      screen: ShoppingListsNavigationStack,
       path: '/',
+      navigationOptions: {
+        header: null,
+      },
     },
     Browse: {
       screen: BrowseProductsNavigationTab,
