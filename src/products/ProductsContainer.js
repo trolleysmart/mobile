@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as productsActions from './Actions';
-import { AddItemsToShoppingList, RemoveSpecialItemsFromUserShoppingList } from '../relay/mutations';
+import { AddItemsToShoppingList, RemoveItemsFromShoppingList } from '../relay/mutations';
 import ProductList from './ProductList';
 import { type ProductsRelayContainer_user } from './__generated__/ProductsRelayContainer_user.graphql';
 
@@ -25,9 +25,9 @@ class ProductsContainer extends Component<any, Props, State> {
 
   onProductItemSelectionChanged = (productId, isInShoppingList) => {
     if (isInShoppingList) {
-      const shoppingListItem = this.props.shoppingList.find(_ => _.specialId === productId);
+      const shoppingListItem = this.props.shoppingList.find(_ => _.productPriceId === productId);
 
-      RemoveSpecialItemsFromUserShoppingList.commit(this.props.relay.environment, this.props.user.id, shoppingListItem.id, productId);
+      RemoveItemsFromShoppingList.commit(this.props.relay.environment, this.props.user.id, List.of(shoppingListItem.id));
       this.props.productsActions.productDeselected(productId);
     } else {
       const shoppingListItem = this.props.user.products.edges.map(_ => _.node).find(_ => _.id === productId);
