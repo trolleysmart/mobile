@@ -4,12 +4,8 @@ import React, { Component } from 'react';
 import { Text } from 'react-native-elements';
 import { environment } from '../relay';
 import { graphql, QueryRenderer } from 'react-relay';
-import { connect } from 'react-redux';
-import { Platform } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import ShoppingListItemsRelayContainer from './ShoppingListItemsRelayContainer';
-import HeaderContainer from './HeaderContainer';
-import { Color } from '../style/DefaultStyles';
 
 class ShoppingList extends Component {
   static navigationOptions = {
@@ -64,12 +60,4 @@ class ShoppingList extends Component {
 
 ShoppingList.propTypes = {};
 
-function mapStateToProps(state, props) {
-  return {};
-}
-
-function mapDispatchToProps(dispatch) {
-  return {};
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ShoppingList);
+export default ShoppingList;

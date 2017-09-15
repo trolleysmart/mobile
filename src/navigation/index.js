@@ -7,9 +7,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { addNavigationHelpers, NavigationActions, StackNavigator } from 'react-navigation';
 import { bindActionCreators } from 'redux';
-import { Alert, BackHandler, Platform } from 'react-native';
+import { Alert, BackHandler, Platform, View } from 'react-native';
 import { connect } from 'react-redux';
 import CodePush from 'react-native-code-push';
+import PopupDialog, { SlideAnimation } from 'react-native-popup-dialog';
 import * as appUpdaterActions from '../appUpdater/Actions';
 import { SplashContainer } from '../splash';
 import { SignUpSignInContainer } from '../signUpSignIn';
@@ -18,9 +19,6 @@ import AppDrawer from '../app/AppDrawer';
 import * as messageBarActions from '../messageBar/Actions';
 import { MessageType } from '../messageBar';
 import { SignInDisclaimerContainer } from '../disclaimer';
-import PopupDialog, { SlideAnimation } from 'react-native-popup-dialog';
-import { View } from 'react-native';
-import { Button } from 'react-native-elements';
 
 const AppNavigator = StackNavigator(
   {

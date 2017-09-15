@@ -3,6 +3,7 @@
 import React from 'react';
 import { FlatList, View } from 'react-native';
 import PropTypes from 'prop-types';
+import { ProductsProp, ShoppingListItemsProp } from './PropTypes';
 import ProductListRow from './ProductListRow';
 import { ListItemSeparator } from '../components/list';
 import Styles from './Styles';
@@ -13,18 +14,7 @@ const ProductList = ({ products, shoppingListItems, onItemSelectionChanged, isFe
       data={products}
       renderItem={info =>
         <ProductListRow
-          id={info.item.id}
-          name={info.item.name}
-          imageUrl={info.item.imageUrl}
-          priceToDisplay={info.item.priceToDisplay}
-          store={info.item.store}
-          comments={info.item.comments}
-          unitPrice={info.item.unitPrice}
-          offerEndDate={info.item.offerEndDate}
-          size={info.item.size}
-          multiBuy={info.item.multiBuy}
-          savingPercentage={info.item.savingPercentage}
-          saving={info.item.saving}
+          product={info.item}
           isInShoppingList={!!shoppingListItems.find(_ => _.productPriceId === info.item.id)}
           onItemSelectionChanged={onItemSelectionChanged}
         />}
@@ -37,34 +27,8 @@ const ProductList = ({ products, shoppingListItems, onItemSelectionChanged, isFe
   </View>;
 
 ProductList.propTypes = {
-  products: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      imageUrl: PropTypes.string,
-      priceToDisplay: PropTypes.number,
-      savingPercentage: PropTypes.number,
-      saving: PropTypes.number,
-      storeImageUrl: PropTypes.string,
-      storeName: PropTypes.string,
-      comments: PropTypes.string,
-      unitPrice: PropTypes.shape({
-        price: PropTypes.number.isRequired,
-        size: PropTypes.string.isRequired,
-      }),
-      multiBuy: PropTypes.shape({
-        awardQuantity: PropTypes.number.isRequired,
-        awardValue: PropTypes.number.isRequired,
-      }),
-      offerEndDate: PropTypes.string,
-      size: PropTypes.string,
-    }),
-  ).isRequired,
-  shoppingList: PropTypes.arrayOf(
-    PropTypes.shape({
-      productPriceId: PropTypes.string,
-    }),
-  ).isRequired,
+  products: ProductsProp,
+  shoppingListItems: ShoppingListItemsProp,
   onItemSelectionChanged: PropTypes.func.isRequired,
   isFetchingTop: PropTypes.bool.isRequired,
   onRefresh: PropTypes.func.isRequired,

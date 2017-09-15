@@ -2,7 +2,6 @@
 
 import Immutable, { List } from 'immutable';
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as productsActions from './Actions';
@@ -23,7 +22,9 @@ class ProductsContainer extends Component<any, Props, State> {
     isFetchingTop: false,
   };
 
-  onProductItemSelectionChanged = (productId, isInShoppingList) => {
+  onProductItemSelectionChanged = (product, isInShoppingList) => {
+    const productId = product.id;
+
     if (isInShoppingList) {
       RemoveItemsFromShoppingList.commit(
         this.props.relay.environment,

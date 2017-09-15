@@ -28,15 +28,9 @@ FlyerContainer.propTypes = {
 
 function mapStateToProps(state, props) {
   const storeId = props.navigation.state.params.id;
+  const allFlyers = GetFlyers();
 
-  let allFlyers = GetFlyers();
   return allFlyers.find(_ => _.id === storeId);
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    // productsActions: bindActionCreators(specialsActions, dispatch),
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(FlyerContainer);
+export default connect(mapStateToProps)(FlyerContainer);

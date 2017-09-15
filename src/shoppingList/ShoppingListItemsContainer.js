@@ -49,8 +49,8 @@ class ShoppingListItemsContainer extends Component<any, Props, State> {
     }
   };
 
-  onShoppingListItemSelectionChanged = id => {
-    RemoveItemsFromShoppingList.commit(this.props.relay.environment, this.props.user.id, List.of(id));
+  onShoppingListItemSelectionChanged = shoppingListItem => {
+    RemoveItemsFromShoppingList.commit(this.props.relay.environment, this.props.user.id, List.of(shoppingListItem.id));
   };
 
   onShoppingListAddItemClicked = () => {
@@ -115,7 +115,7 @@ class ShoppingListItemsContainer extends Component<any, Props, State> {
   render = () => {
     return (
       <ShoppingListItems
-        shoppingList={this.props.user.shoppingListItems.edges.map(_ => _.node)}
+        shoppingListItems={this.props.user.shoppingListItems.edges.map(_ => _.node)}
         onShoppingListItemSelectionChanged={this.onShoppingListItemSelectionChanged}
         onViewProductsPressed={this.onViewProductsPressed}
         onShoppingListAddItemClicked={this.onShoppingListAddItemClicked}

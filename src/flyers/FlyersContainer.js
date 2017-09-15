@@ -46,7 +46,7 @@ FlyersContainer.propTypes = {
   ).isRequired,
 };
 
-function mapStateToProps(state) {
+function mapStateToProps() {
   return {
     flyers: GetFlyers(),
   };

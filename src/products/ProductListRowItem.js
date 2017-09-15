@@ -1,19 +1,12 @@
 // @flow
 
 import React from 'react';
-import {
-  View,
-} from 'react-native';
-import {
-  Col,
-  Grid,
-  Row,
-} from 'react-native-easy-grid';
+import { View } from 'react-native';
+import { Col, Grid, Row } from 'react-native-easy-grid';
 import FastImage from 'react-native-fast-image';
-import {
-  Text,
-} from 'react-native-elements';
+import { Text } from 'react-native-elements';
 import PropTypes from 'prop-types';
+import { ProductProp } from './PropTypes';
 import Styles from './Styles';
 import MainStyles from '../style/DefaultStyles';
 
@@ -65,32 +58,32 @@ class ProductListRowItem extends React.PureComponent {
     return (
       <Grid>
         <Col size={20}>
-          {this.props.imageUrl
-            ? <FastImage style={Styles.productImage} resizeMode={FastImage.resizeMode.stretch} source={{ uri: this.props.imageUrl }} />
+          {this.props.product.imageUrl
+            ? <FastImage style={Styles.productImage} resizeMode={FastImage.resizeMode.stretch} source={{ uri: this.props.product.imageUrl }} />
             : <View />}
         </Col>
         <Col size={80}>
           <Row>
             <Col size={70}>
               <Text style={this.props.isInShoppingList ? [MainStyles.primaryFont, Styles.boldText] : MainStyles.primaryFont} numberOfLines={2}>
-                {this.props.name}
+                {this.props.product.name}
               </Text>
             </Col>
             <Col size={30}>
               <Text style={Styles.productSize}>
-                {this.props.size}
+                {this.props.product.size}
               </Text>
             </Col>
           </Row>
           <Row>
             <Col size={70}>
               <Text style={Styles.subTitle} numberOfLines={1}>
-                {getItemSubTitle(this.props.offerEndDate, this.props.multiBuy, this.props.unitPrice)}
+                {getItemSubTitle(this.props.product.offerEndDate, this.props.product.multibuy, this.props.product.unitPrice)}
               </Text>
             </Col>
             <Col size={30}>
               <Text style={Styles.priceToDisplay}>
-                {this.props.priceToDisplay ? '$' + this.props.priceToDisplay.toFixed(2) : ''}
+                {this.props.product.priceToDisplay ? '$' + this.props.product.priceToDisplay.toFixed(2) : ''}
               </Text>
             </Col>
           </Row>
@@ -99,22 +92,26 @@ class ProductListRowItem extends React.PureComponent {
             <Col size={60}>
               <Row>
                 <Col size={15}>
-                  {this.props.store && this.props.store.imageUrl
-                    ? <FastImage style={Styles.storeImage} resizeMode={FastImage.resizeMode.stretch} source={{ uri: this.props.store.imageUrl }} />
+                  {this.props.product.store && this.props.product.store.imageUrl
+                    ? <FastImage
+                        style={Styles.storeImage}
+                        resizeMode={FastImage.resizeMode.stretch}
+                        source={{ uri: this.props.product.store.imageUrl }}
+                      />
                     : <View />}
                 </Col>
                 <Col size={85}>
                   <Text style={Styles.storeName} numberOfLines={1}>
-                    {this.props.store ? this.props.store.name : ''}
+                    {this.props.product.store ? this.props.product.store.name : ''}
                   </Text>
                 </Col>
               </Row>
             </Col>
             <Col size={40}>
-              {this.props.savingPercentage
+              {this.props.product.savingPercentage
                 ? <View style={Styles.pricing}>
                     <Text style={Styles.savingPercentage} numberOfLines={1}>
-                      Save ${this.props.saving ? this.props.saving.toFixed(2) : ''}({this.props.savingPercentage.toFixed(0)}%){' '}
+                      Save ${this.props.product.saving ? this.props.product.saving.toFixed(2) : ''}({this.props.product.savingPercentage.toFixed(0)}%){' '}
                     </Text>
                   </View>
                 : <Text />}
@@ -127,27 +124,7 @@ class ProductListRowItem extends React.PureComponent {
 }
 
 ProductListRowItem.propTypes = {
-  id: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  imageUrl: PropTypes.string,
-  priceToDisplay: PropTypes.number,
-  savingPercentage: PropTypes.number,
-  saving: PropTypes.number,
-  comments: PropTypes.string,
-  store: PropTypes.shape({
-    name: PropTypes.number.isRequired,
-    imageUrl: PropTypes.string.isRequired,
-  }),
-  unitPrice: PropTypes.shape({
-    price: PropTypes.number.isRequired,
-    size: PropTypes.string.isRequired,
-  }),
-  multiBuy: PropTypes.shape({
-    awardQuantity: PropTypes.number.isRequired,
-    awardValue: PropTypes.number.isRequired,
-  }),
-  offerEndDate: PropTypes.string,
-  size: PropTypes.string,
+  product: ProductProp,
   isInShoppingList: PropTypes.bool.isRequired,
 };
 

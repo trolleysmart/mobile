@@ -2,7 +2,6 @@
 import React from 'react';
 import { TabNavigator } from 'react-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { ShoppingList } from '../shoppingList';
 import { BrowseProductsNavigationTab } from '../browseProducts';
 import { FlyersContainer } from '../flyers';
 import { Color } from '../style/DefaultStyles';
