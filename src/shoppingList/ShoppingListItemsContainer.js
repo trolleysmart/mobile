@@ -62,9 +62,7 @@ class ShoppingListItemsContainer extends Component<any, Props, State> {
   };
 
   onShoppingListItemSelectionChanged = id => {
-    const shoppingListItem = this.props.user.shoppingListItems.edges.map(_ => _.node).find(item => item.id.localeCompare(id) === 0);
-
-    RemoveItemsFromShoppingList.commit(this.props.relay.environment, this.props.user.id, id, List.of(shoppingListItem.get('id')));
+    RemoveItemsFromShoppingList.commit(this.props.relay.environment, this.props.user.id, List.of(id));
   };
 
   onShoppingListAddItemClicked = () => {
