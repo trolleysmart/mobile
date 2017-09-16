@@ -9,8 +9,8 @@ export default createPaginationContainer(
     user: graphql`
       fragment SpecialItemsRelayContainer_user on User {
         id
-        specials(first: $count, after: $cursor, name: $searchKeyword, sortOption: $sortOption, tags: $categories, stores: $stores)
-          @connection(key: "User_specials") {
+        products(first: $count, after: $cursor, name: $searchKeyword, sortOption: $sortOption, tagKeys: $categories, storeKeys: $stores)
+          @connection(key: "User_products") {
           pageInfo {
             hasNextPage
             endCursor
@@ -21,8 +21,10 @@ export default createPaginationContainer(
               name
               imageUrl
               priceToDisplay
-              storeImageUrl
-              storeName
+              store {
+                name
+                imageUrl
+              }
               comments
               unitPrice {
                 price
@@ -72,8 +74,8 @@ export default createPaginationContainer(
         $cursor: String
         $searchKeyword: String
         $sortOption: String
-        $categories: [ID]
-        $stores: [ID]
+        $categories: [String]
+        $stores: [String]
       ) {
         user {
           ...SpecialItemsRelayContainer_user

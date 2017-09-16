@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component } from 'react';
+import React from 'react';
 import { SectionList, Text, View, Image } from 'react-native';
 import Immutable from 'immutable';
 import PropTypes from 'prop-types';
@@ -8,7 +8,7 @@ import StapleShoppingListItem from './StapleShoppingListItem';
 import { ImageUltility } from '../components/image';
 import Styles from './Styles';
 
-class StapleShoppingListItems extends Component {
+class StapleShoppingListItems extends React.PureComponent {
   onStapleShoppingListItemSelectionChanged = (id, name, isCustomItem, isSelected) => {
     this.props.onStapleShoppingListItemSelectionChanged(id, name, isCustomItem, isSelected);
   };
@@ -29,26 +29,57 @@ class StapleShoppingListItems extends Component {
     return (
       <View style={Styles.sectionHeader}>
         <Text style={Styles.sectionTitle}>
-          {section.title}
+          {section.categoryTitle}
         </Text>
-        <Image source={ImageUltility.getImageSource(section.title)} style={Styles.sectionHeaderImage} />
+        <Image source={ImageUltility.getImageSource(section.categoryKey.replace(/-/g, ''))} style={Styles.sectionHeaderImage} />
       </View>
     );
   };
 
-  render = () => {
-    let sectionData = Immutable.fromJS(this.props.stapleShoppingList)
-      .groupBy(item => (item.has('tags') && item.get('tags') ? item.get('tags').first().get('name') : 'Unknown'))
+  getSectionData = () => {
+    const data = Immutable.fromJS(this.props.stapleShoppingList);
+    let sectionData = data
+      .groupBy(
+        item =>
+          item.has('tags') && item.get('tags') ? (item.get('tags').isEmpty() ? 'Other' : item.get('tags').first().get('name'): 'Other') : 'Other',
+      )
       .mapEntries(([key, value]) => [
         key,
         {
           data: value.toJS(),
-          title: key,
+          categoryTitle: key,
+          categoryKey:
+            value.first().has('tags') && value.first().get('tags') && !value.first().get('tags').isEmpty()
+              ? value.first().get('tags').first().get('key')
+              : key,
+        },
+      ])
+      .sortBy(_ => _.categoryKey)
+      .valueSeq()
+      .toJS();
+
+    // Get the popular items
+    const popularItems = data
+      .filter(_ => _.get('popular'))
+      .groupBy(() => 'Popular')
+      .mapEntries(([key, value]) => [
+        key,
+        {
+          data: value.toJS(),
+          categoryTitle: key,
+          categoryKey: key,
         },
       ])
       .valueSeq()
       .toJS();
 
+    // Add the popular items to the top of secion data;
+    sectionData.unshift(popularItems[0]);
+    return sectionData;
+  };
+
+  render = () => {
+    const sectionData = this.getSectionData();
     return (
       <View style={Styles.container}>
         <View style={Styles.containerHeader}>

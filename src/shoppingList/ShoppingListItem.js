@@ -3,68 +3,44 @@
 import React from 'react';
 import { TouchableHighlight } from 'react-native';
 import { Col, Grid } from 'react-native-easy-grid';
-import { CheckBox, Text } from 'react-native-elements';
+import { CheckBox, ListItem } from 'react-native-elements';
 import PropTypes from 'prop-types';
+import { ShoppingListItemProp } from './PropTypes';
 import Styles from './Styles';
-import { SpecialItem } from '../specials';
+import { ProductListRowItem } from '../products';
 
 class ShoppingListItem extends React.PureComponent {
   render() {
-    if (!this.props.priceToDisplay && !this.props.imageUrl) {
+    if (this.props.shoppingListItem.stapleItemId) {
       // Staple item
       return (
-        <TouchableHighlight
-          underlayColor="whitesmoke"
-          style={Styles.stapleItemRow}
-        >
-          <Grid>
-            <Col size={10}>
-              <CheckBox
-                style={Styles.stapleItemCheckbox}
-                checked={false}
-                center
-                onPress={() =>
-                  this.props.onShoppingListItemSelectionChanged(this.props.id)}
-              />
-            </Col>
-            <Col size={90} style={Styles.stapleItemName}>
-              <Text style={Styles.name} numberOfLines={1}>
-                {this.props.name}
-              </Text>
-            </Col>
-          </Grid>
-        </TouchableHighlight>
+        <ListItem
+          containerStyle={Styles.stapleItemRow}
+          avatar={
+            <CheckBox
+              style={Styles.stapleItemCheckbox}
+              checked={false}
+              center
+              onPress={() => this.props.onShoppingListItemSelectionChanged(this.props.shoppingListItem)}
+            />
+          }
+          key={this.props.shoppingListItem.name}
+          title={this.props.shoppingListItem.name}
+          onPressRightIcon={() => this.props.onViewProductsPressed(this.props.shoppingListItem.id)}
+        />
       );
     } else {
       return (
-        <TouchableHighlight
-          underlayColor="whitesmoke"
-          style={Styles.specialItemRow}
-        >
+        <TouchableHighlight underlayColor="whitesmoke" style={Styles.specialItemRow}>
           <Grid>
             <CheckBox
               style={Styles.checkbox}
               checked={false}
               center
-              onPress={() =>
-                this.props.onShoppingListItemSelectionChanged(this.props.id)}
+              onPress={() => this.props.onShoppingListItemSelectionChanged(this.props.shoppingListItem)}
             />
             <Col size={80}>
-              <SpecialItem
-                id={this.props.id}
-                name={this.props.name}
-                imageUrl={this.props.imageUrl}
-                priceToDisplay={this.props.priceToDisplay}
-                storeImageUrl={this.props.storeImageUrl}
-                storeName={this.props.storeName}
-                comments={this.props.comments}
-                unitPrice={this.props.unitPrice}
-                offerEndDate={this.props.offerEndDate}
-                size={this.props.size}
-                multiBuy={this.props.multiBuy}
-                savingPercentage={this.props.savingPercentage}
-                saving={this.props.saving}
-              />
+              <ProductListRowItem product={this.props.shoppingListItem} isInShoppingList={true} />
             </Col>
           </Grid>
         </TouchableHighlight>
@@ -74,26 +50,9 @@ class ShoppingListItem extends React.PureComponent {
 }
 
 ShoppingListItem.propTypes = {
-  id: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  imageUrl: PropTypes.string,
-  priceToDisplay: PropTypes.number,
-  storeImageUrl: PropTypes.string,
-  storeName: PropTypes.string,
-  unitPrice: PropTypes.shape({
-    price: PropTypes.number.isRequired,
-    size: PropTypes.string.isRequired,
-  }),
-  multiBuy: PropTypes.shape({
-    awardQuantity: PropTypes.number.isRequired,
-    awardValue: PropTypes.number.isRequired,
-  }),
-  offerEndDate: PropTypes.string,
-  size: PropTypes.string,
-  savingPercentage: PropTypes.number,
-  saving: PropTypes.number,
-  comments: PropTypes.string,
+  shoppingListItem: ShoppingListItemProp,
   onShoppingListItemSelectionChanged: PropTypes.func.isRequired,
+  onViewProductsPressed: PropTypes.func.isRequired,
 };
 
 export default ShoppingListItem;

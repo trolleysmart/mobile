@@ -11,81 +11,62 @@ const mutation = graphql`
   mutation AddItemsToShoppingListMutation($input: AddItemsToShoppingListInput!) {
     addItemsToShoppingList(input: $input) {
       errorMessage
-      productPrices {
+      shoppingListItems {
         __typename
         cursor
         node {
           id
-          specialId
+          productPriceId
+          stapleItemId
           name
           imageUrl
-          barcode
-          specialType
           priceToDisplay
-          wasPrice
-          multiBuy {
-            awardValue
-            awardQuantity
-          }
-          storeName
-          storeImageUrl
           comments
-          offerEndDate
-          unitPrice {
-            price
-            size
-          }
           offerEndDate
           size
           saving
           savingPercentage
-        }
-      }
-      stapleShoppingListItems {
-        __typename
-        cursor
-        node {
-          id
-          stapleShoppingListId
-          name
+          store {
+            name
+            imageUrl
+          }
+          unitPrice {
+            price
+            size
+          }
+          multiBuy {
+            awardQuantity
+            awardValue
+          }
         }
       }
     }
   }
 `;
 
-function sharedProductPriceUpdater(store, userId, productPriceEdge, id) {
+function sharedUpdater(store, userId, shoppingListItemsEdge, id) {
   const userProxy = store.get(userId);
-  const connection = ConnectionHandler.getConnection(userProxy, 'ShoppingList_shoppingList');
+  const connection = ConnectionHandler.getConnection(userProxy, 'ShoppingListItems_shoppingListItems');
+
+  if (!connection) {
+    return;
+  }
 
   if (id) {
     ConnectionHandler.deleteNode(connection, id);
   }
 
-  ConnectionHandler.insertEdgeAfter(connection, productPriceEdge);
+  ConnectionHandler.insertEdgeAfter(connection, shoppingListItemsEdge);
 }
 
-function sharedStapleShoppingListUpdater(store, userId, stapleShoppingListEdge, id) {
-  const userProxy = store.get(userId);
-  const connection = ConnectionHandler.getConnection(userProxy, 'ShoppingList_shoppingList');
-
-  if (id) {
-    ConnectionHandler.deleteNode(connection, id);
-  }
-
-  ConnectionHandler.insertEdgeAfter(connection, stapleShoppingListEdge);
-}
-
-function commit(environment, userId, { productPrices, stapleShoppingListItems, newStapleShoppingListNames }) {
+function commit(environment, userId, { productPrices, stapleItems, newStapleItemNames }) {
   return commitMutation(environment, {
     mutation,
     variables: {
       input: {
-        productPriceIds: productPrices ? productPrices.map(productPrice => productPrice.get('id')).toJS() : [],
-        stapleShoppingListIds: stapleShoppingListItems
-          ? stapleShoppingListItems.map(stapleShoppingListItem => stapleShoppingListItem.get('id')).toJS()
-          : [],
-        newStapleShoppingListNames: newStapleShoppingListNames ? newStapleShoppingListNames.toJS() : [],
+        productPriceIds: productPrices ? productPrices.map(productPrice => productPrice.get('id')) : [],
+        stapleItemIds: stapleItems ? stapleItems.map(stapleItem => stapleItem.get('id')) : [],
+        newStapleItemNames: newStapleItemNames ? newStapleItemNames : [],
       },
     },
     updater: store => {
@@ -95,78 +76,68 @@ function commit(environment, userId, { productPrices, stapleShoppingListItems, n
       if (errorMessage) {
         reduxStore.dispatch(messageBarActions.add(errorMessage, MessageType.ERROR));
       } else {
-        const productPriceEdges = payload.getLinkedRecords('productPrices');
+        const shoppingListItemsEdges = payload.getLinkedRecords('shoppingListItems');
 
-        productPriceEdges.map(productPriceEdge => {
-          const id = productPriceEdge.getLinkedRecord('node').getValue('id');
+        shoppingListItemsEdges.forEach(shoppingListItemsEdge => {
+          const id = shoppingListItemsEdge.getLinkedRecord('node').getValue('id');
 
-          sharedProductPriceUpdater(store, userId, productPriceEdge, id);
-        });
-
-        const stapleShoppingListEdges = payload.getLinkedRecords('stapleShoppingListItems');
-
-        stapleShoppingListEdges.map(stapleShoppingListEdge => {
-          const id = stapleShoppingListEdge.getLinkedRecord('node').getValue('id');
-
-          sharedStapleShoppingListUpdater(store, userId, stapleShoppingListEdge, id);
+          sharedUpdater(store, userId, shoppingListItemsEdge, id);
         });
       }
     },
     optimisticUpdater: store => {
       if (productPrices) {
-        productPrices.map(productPrice => {
+        productPrices.forEach(productPrice => {
           const id = uuid();
           const node = store.create(id, 'item');
 
           node.setValue(id, 'id');
-          node.setValue(productPrice.get('id'), 'specialId');
+          node.setValue(productPrice.get('id'), 'productPriceId');
           node.setValue(productPrice.get('name'), 'name');
           node.setValue(productPrice.get('priceToDisplay'), 'priceToDisplay');
-          node.setValue(productPrice.get('saving'), 'saving');
-          node.setValue(productPrice.get('savingPercentage'), 'savingPercentage');
           node.setValue(productPrice.get('imageUrl'), 'imageUrl');
-          node.setValue(productPrice.get('storeImageUrl'), 'storeImageUrl');
-          node.setValue(productPrice.get('storeName'), 'storeName');
           node.setValue(productPrice.get('comments'), 'comments');
           node.setValue(productPrice.get('offerEndDate'), 'offerEndDate');
           node.setValue(productPrice.get('size'), 'size');
+          node.setValue(productPrice.get('savingPercentage'), 'savingPercentage');
+          node.setValue(productPrice.get('saving'), 'saving');
 
-          const productPriceEdge = store.create(uuid(), 'ProductPriceEdge');
+          const shoppingListItemEdge = store.create(uuid(), 'ShoppingListItemEdge');
 
-          productPriceEdge.setLinkedRecord(node, 'node');
-          sharedProductPriceUpdater(store, userId, productPriceEdge);
+          shoppingListItemEdge.setLinkedRecord(node, 'node');
+          sharedUpdater(store, userId, shoppingListItemEdge);
         });
       }
 
-      if (stapleShoppingListItems) {
-        stapleShoppingListItems.map(stapleShoppingListItem => {
+      if (stapleItems) {
+        stapleItems.forEach(stapleItem => {
           const id = uuid();
           const node = store.create(id, 'item');
 
           node.setValue(id, 'id');
-          node.setValue(stapleShoppingListItem.get('id'), 'stapleShoppingListId');
-          node.setValue(stapleShoppingListItem.get('name'), 'name');
+          node.setValue(stapleItem.get('id'), 'stapleItemId');
+          node.setValue(stapleItem.get('name'), 'name');
 
-          const stapleShoppingListEdge = store.create(uuid(), 'StapleShoppingListEdge');
+          const shoppingListItemEdge = store.create(uuid(), 'ShoppingListItemEdge');
 
-          stapleShoppingListEdge.setLinkedRecord(node, 'node');
-          sharedStapleShoppingListUpdater(store, userId, stapleShoppingListEdge);
+          shoppingListItemEdge.setLinkedRecord(node, 'node');
+          sharedUpdater(store, userId, shoppingListItemEdge);
         });
       }
 
-      if (newStapleShoppingListNames) {
-        newStapleShoppingListNames.map(newStapleShoppingListName => {
+      if (newStapleItemNames) {
+        newStapleItemNames.forEach(newStapleItemName => {
           const id = uuid();
           const node = store.create(id, 'item');
 
           node.setValue(id, 'id');
-          node.setValue(uuid(), 'stapleShoppingListId');
-          node.setValue(newStapleShoppingListName, 'name');
+          node.setValue(uuid(), 'stapleItemId');
+          node.setValue(newStapleItemName, 'name');
 
-          const stapleShoppingListEdge = store.create(uuid(), 'StapleShoppingListEdge');
+          const shoppingListItemEdge = store.create(uuid(), 'ShoppingListItemEdge');
 
-          stapleShoppingListEdge.setLinkedRecord(node, 'node');
-          sharedStapleShoppingListUpdater(store, userId, stapleShoppingListEdge);
+          shoppingListItemEdge.setLinkedRecord(node, 'node');
+          sharedUpdater(store, userId, shoppingListItemEdge);
         });
       }
     },

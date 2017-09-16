@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as specialsActions from './Actions';
-import SpecialItems from './SpecialItems';
+import { ProductList } from '../products';
 import { AddItemsToShoppingList, RemoveSpecialItemsFromUserShoppingList } from '../relay/mutations';
 import { type SpecialItemsRelayContainer_user } from './__generated__/SpecialItemsRelayContainer_user.graphql';
 
@@ -29,14 +29,16 @@ class SpecialItemsContainer extends Component<any, Props, State> {
 
       RemoveSpecialItemsFromUserShoppingList.commit(this.props.relay.environment, this.props.user.id, shoppingListItem.id, specialItemId);
     } else {
-      const shoppingListItem = this.props.user.specials.edges.map(_ => _.node).find(_ => _.id === specialItemId);
+      const shoppingListItem = this.props.user.products.edges.map(_ => _.node).find(_ => _.id === specialItemId);
 
-      AddItemsToShoppingList.commit(this.props.relay.environment, this.props.user.id, { productPrices: List.of(Immutable.fromJS(shoppingListItem)) });
+      AddItemsToShoppingList.commit(this.props.relay.environment, this.props.user.id, {
+        productPrices: List.of(Immutable.fromJS(shoppingListItem)),
+      });
     }
   };
 
   onRefresh = () => {
-    const { specials } = this.props.user;
+    const { products } = this.props.user;
 
     if (this.props.relay.isLoading()) {
       return;
@@ -46,7 +48,7 @@ class SpecialItemsContainer extends Component<any, Props, State> {
       isFetchingTop: true,
     });
 
-    this.props.relay.refetchConnection(specials.edges.length, error => {
+    this.props.relay.refetchConnection(products.edges.length, error => {
       //TODO: 20170610 - Morteza - Should handle the error here
       this.setState({
         isFetchingTop: false,
@@ -66,10 +68,10 @@ class SpecialItemsContainer extends Component<any, Props, State> {
 
   render = () => {
     return (
-      <SpecialItems
-        specials={this.props.user.specials.edges.map(_ => _.node)}
+      <ProductList
+        products={this.props.user.products.edges.map(_ => _.node)}
         shoppingList={this.props.shoppingList}
-        onSpecialItemSelectionChanged={this.onSpecialItemSelectionChanged}
+        onItemSelectionChanged={this.onSpecialItemSelectionChanged}
         isFetchingTop={this.state.isFetchingTop}
         onRefresh={this.onRefresh}
         onEndReached={this.onEndReached}

@@ -20,8 +20,7 @@ export default DrawerNavigator(
       screen: DisclaimerNavigator,
       navigationOptions: {
         drawerLabel: 'Alpha Programme',
-        drawerIcon: () =>
-          <Icon name="new-releases" color="#517fa4" type="material-icons" />,
+        drawerIcon: () => <Icon name="new-releases" color="#517fa4" type="material-icons" />,
       },
     },
     Settings: {

@@ -15,10 +15,7 @@ class SearchBarWithDelay extends Component {
       searchKeyword: props.searchKeyword,
     };
 
-    this.onSearchKeywordChanged = debounce(
-      this.props.onSearchKeywordChanged,
-      300,
-    );
+    this.onSearchKeywordChanged = debounce(this.props.onSearchKeywordChanged, 300);
   }
 
   searchKeywordChanged = searchKeyword => {
@@ -49,6 +46,7 @@ class SearchBarWithDelay extends Component {
         <SearchBar
           clearIcon
           lightTheme
+          noIcon={true}
           containerStyle={Styles.search}
           inputStyle={Styles.searchInput}
           placeholder="Search..."

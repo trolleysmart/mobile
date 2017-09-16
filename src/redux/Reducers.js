@@ -7,6 +7,7 @@ import { SpecialsReducer } from '../specials';
 import { ShoppingListReducer } from '../shoppingList';
 import { StapleShoppingListReducer } from '../stapleShoppingList';
 import { SpecialsFilterReducer } from '../specialsFilter';
+import { ProductReducer } from '../products';
 import { UserAccessReducer } from 'micro-business-parse-server-common-react-native';
 
 export default function getReducers(navigationReducer) {
@@ -19,5 +20,6 @@ export default function getReducers(navigationReducer) {
     shoppingList: ShoppingListReducer,
     stapleShoppingList: StapleShoppingListReducer,
     specialsFilter: SpecialsFilterReducer,
+    products: ProductReducer,
   });
 }

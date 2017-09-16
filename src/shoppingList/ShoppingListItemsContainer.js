@@ -1,15 +1,16 @@
 // @flow
 
-import Immutable, { Map, List } from 'immutable';
+import Immutable, { List, Map } from 'immutable';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { NavigationActions } from 'react-navigation';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import ShoppingListItems from './ShoppingListItems';
-import { RemoveStapleShoppingListItemsFromUserShoppingList, RemoveSpecialItemsFromUserShoppingList } from '../relay/mutations';
+import { RemoveItemsFromShoppingList } from '../relay/mutations';
 import * as ShoppingListActions from './Actions';
 import * as StapleShoppingListActions from '../stapleShoppingList/Actions';
+import * as ProductsActions from '../products/Actions';
 import { type ShoppingListItemsRelayContainer_user } from './__generated__/ShoppingListItemsRelayContainer_user.graphql';
 
 type Props = {
@@ -25,30 +26,27 @@ class ShoppingListItemsContainer extends Component<any, Props, State> {
 
   constructor(props, context) {
     super(props, context);
-
-    this.props.shoppingListActions.shoppingListChanged(
-      Map({
-        shoppingList: Immutable.fromJS(this.props.user.shoppingList.edges.map(_ => _.node)),
-      }),
-    );
   }
 
   componentWillReceiveProps = nextProps => {
-    this.props.shoppingListActions.shoppingListChanged(
-      Map({
-        shoppingList: Immutable.fromJS(nextProps.user.shoppingList.edges.map(_ => _.node)),
-      }),
-    );
+    const shoppingListItems = Immutable.fromJS(nextProps.user.shoppingListItems.edges.map(_ => _.node));
+
+    // Remove existing staple item after added relevant products.
+    if (
+      nextProps.removeCurrentViewingStapleItem &&
+      this.props.viewingStapleItem.has('shoppingListId') &&
+      this.props.viewingStapleItem.get('shoppingListId') &&
+      shoppingListItems.find(_ => _.get('id') === this.props.viewingStapleItem.get('shoppingListId'))
+    ) {
+      RemoveItemsFromShoppingList.commit(this.props.relay.environment, this.props.user.id, [this.props.viewingStapleItem.get('shoppingListId')]);
+
+      // Clear the current viewing staple item
+      this.props.shoppingListActions.currentViewingStapleItemChanged(Map());
+    }
   };
 
-  onShoppingListItemSelectionChanged = id => {
-    const foundItem = this.props.user.shoppingList.edges.map(_ => _.node).find(item => item.id.localeCompare(id) === 0);
-
-    if (foundItem.stapleShoppingListId) {
-      RemoveStapleShoppingListItemsFromUserShoppingList.commit(this.props.relay.environment, this.props.user.id, id, foundItem.stapleShoppingListId);
-    } else {
-      RemoveSpecialItemsFromUserShoppingList.commit(this.props.relay.environment, this.props.user.id, id, foundItem.specialId);
-    }
+  onShoppingListItemSelectionChanged = shoppingListItem => {
+    RemoveItemsFromShoppingList.commit(this.props.relay.environment, this.props.user.id, [shoppingListItem.id]);
   };
 
   onShoppingListAddItemClicked = () => {
@@ -61,8 +59,28 @@ class ShoppingListItemsContainer extends Component<any, Props, State> {
     this.props.gotoAddStapleShoppingListItems();
   };
 
+  onViewProductsPressed = id => {
+    const foundItem = this.props.user.shoppingListItems.edges.map(_ => _.node).find(item => item.id.localeCompare(id) === 0);
+
+    // Set the current viewing staple item
+    this.props.shoppingListActions.currentViewingStapleItemChanged(
+      Map({
+        shoppingListId: id,
+        stapleShoppingListId: foundItem.stapleShoppingListId,
+      }),
+    );
+
+    // Set removeCurrentViewingStapleItem to false
+    this.props.shoppingListActions.removeCurrentViewingStapleItemFlagChanged(
+      Map({
+        removeCurrentViewingStapleItem: false,
+      }),
+    );
+    this.props.gotoProducts(foundItem.name);
+  };
+
   onRefresh = () => {
-    const { shoppingList } = this.props.user;
+    const { shoppingListItems } = this.props.user;
 
     if (this.props.relay.isLoading()) {
       return;
@@ -72,7 +90,7 @@ class ShoppingListItemsContainer extends Component<any, Props, State> {
       isFetchingTop: true,
     });
 
-    this.props.relay.refetchConnection(shoppingList.edges.length, error => {
+    this.props.relay.refetchConnection(shoppingListItems.edges.length, error => {
       //TODO: 20170610 - Morteza - Should handle the error here
       this.setState({
         isFetchingTop: false,
@@ -93,8 +111,9 @@ class ShoppingListItemsContainer extends Component<any, Props, State> {
   render = () => {
     return (
       <ShoppingListItems
-        shoppingList={this.props.user.shoppingList.edges.map(_ => _.node)}
+        shoppingListItems={this.props.user.shoppingListItems.edges.map(_ => _.node)}
         onShoppingListItemSelectionChanged={this.onShoppingListItemSelectionChanged}
+        onViewProductsPressed={this.onViewProductsPressed}
         onShoppingListAddItemClicked={this.onShoppingListAddItemClicked}
         isFetchingTop={this.state.isFetchingTop}
         onRefresh={this.onRefresh}
@@ -105,20 +124,34 @@ class ShoppingListItemsContainer extends Component<any, Props, State> {
 }
 ShoppingListItemsContainer.propTypes = {
   gotoAddStapleShoppingListItems: PropTypes.func.isRequired,
+  removeCurrentViewingStapleItem: PropTypes.bool,
 };
 
-function mapStateToProps() {
-  return {};
+function mapStateToProps(state) {
+  return {
+    removeCurrentViewingStapleItem: state.shoppingList.get('removeCurrentViewingStapleItem'),
+    viewingStapleItem: state.shoppingList.get('currentlyViewingStapleItem'),
+  };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     shoppingListActions: bindActionCreators(ShoppingListActions, dispatch),
     stapleShoppingListActions: bindActionCreators(StapleShoppingListActions, dispatch),
+    productsActions: bindActionCreators(ProductsActions, dispatch),
     gotoAddStapleShoppingListItems: () =>
       dispatch(
         NavigationActions.navigate({
           routeName: 'StapleShoppingList',
+        }),
+      ),
+    gotoProducts: defaultSearchKeyword =>
+      dispatch(
+        NavigationActions.navigate({
+          routeName: 'Products',
+          params: {
+            defaultSearchKeyword,
+          },
         }),
       ),
   };

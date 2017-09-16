@@ -7,6 +7,8 @@ import { UserFeedbackContainer as StapleShoppingListUserFeedback } from '../stap
 import { SpecialsFilterContainer } from '../specialsFilter';
 import { CategoriesFilter } from '../categoriesFilter';
 import { StoresFilter } from '../storesFilter';
+import { FlyerContainer } from '../flyer';
+import { Products } from '../products';
 
 export default StackNavigator({
   Home: {
@@ -26,5 +28,11 @@ export default StackNavigator({
   },
   StoresFilter: {
     screen: StoresFilter,
+  },
+  Flyer: {
+    screen: FlyerContainer,
+  },
+  Products: {
+    screen: Products,
   },
 });

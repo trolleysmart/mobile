@@ -7,9 +7,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { addNavigationHelpers, NavigationActions, StackNavigator } from 'react-navigation';
 import { bindActionCreators } from 'redux';
-import { Alert, BackHandler, Platform } from 'react-native';
+import { Alert, BackHandler, Platform, View } from 'react-native';
 import { connect } from 'react-redux';
 import CodePush from 'react-native-code-push';
+import PopupDialog, { SlideAnimation } from 'react-native-popup-dialog';
 import * as appUpdaterActions from '../appUpdater/Actions';
 import { SplashContainer } from '../splash';
 import { SignUpSignInContainer } from '../signUpSignIn';
@@ -217,12 +218,27 @@ class AppWithNavigationState extends Component {
   };
 
   render = () =>
-    <AppNavigator
-      navigation={addNavigationHelpers({
-        dispatch: this.props.dispatch,
-        state: this.props.navigation,
-      })}
-    />;
+    <View style={{ flex: 1 }}>
+      <PopupDialog
+        ref={popupDialog => {
+          this.popupDialog = popupDialog;
+        }}
+        dialogAnimation={new SlideAnimation({ slideFrom: 'bottom' })}
+        width={200}
+        haveOverlay={true}
+      >
+        <View>
+          {/* <Text>Hello</Text> */}
+        </View>
+      </PopupDialog>
+      {/* <Button title='hell' onPress={() => this.popupDialog.show()}/> */}
+      <AppNavigator
+        navigation={addNavigationHelpers({
+          dispatch: this.props.dispatch,
+          state: this.props.navigation,
+        })}
+      />
+    </View>;
 }
 
 AppWithNavigationState.propTypes = {
@@ -252,4 +268,6 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AppWithNavigationState);
+export default connect(mapStateToProps, mapDispatchToProps, null, {
+  withRef: true,
+})(AppWithNavigationState);
