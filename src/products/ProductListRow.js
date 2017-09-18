@@ -12,11 +12,11 @@ class ProductListRow extends React.PureComponent {
     return (
       <TouchableHighlight
         underlayColor="whitesmoke"
-        onPress={() => this.props.onItemSelectionChanged(this.props.product, this.props.isInShoppingList)}
+        onPress={() => this.props.onItemSelectionChanged(this.props.product)}
         style={this.props.isInShoppingList ? Styles.productListItemRowSelected : Styles.productListItemRow}
       >
         <View>
-          <ProductListRowItem product={this.props.product} isInShoppingList={this.props.isInShoppingList} />
+          <ProductListRowItem product={this.props.product} />
         </View>
       </TouchableHighlight>
     );
@@ -25,7 +25,6 @@ class ProductListRow extends React.PureComponent {
 
 ProductListRow.propTypes = {
   product: ProductProp,
-  isInShoppingList: PropTypes.bool.isRequired,
   onItemSelectionChanged: PropTypes.func.isRequired,
 };
 

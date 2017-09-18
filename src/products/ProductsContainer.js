@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as productsActions from './Actions';
-import { AddItemsToShoppingList, RemoveItemsFromShoppingList } from '../relay/mutations';
+import { AddItemsToShoppingList } from '../relay/mutations';
 import ProductList from './ProductList';
 import { type ProductsRelayContainer_user } from './__generated__/ProductsRelayContainer_user.graphql';
 
@@ -22,20 +22,14 @@ class ProductsContainer extends Component<any, Props, State> {
     isFetchingTop: false,
   };
 
-  onProductItemSelectionChanged = (product, isInShoppingList) => {
+  onProductItemSelectionChanged = product => {
     const productId = product.id;
 
-    if (isInShoppingList) {
-      RemoveItemsFromShoppingList.commit(this.props.relay.environment, this.props.user.id, [
-        this.props.user.shoppingListItems.edges.map(_ => _.node).find(_ => _.productPriceId === productId).id,
-      ]);
-      this.props.productsActions.productDeselected(productId);
-    } else {
-      AddItemsToShoppingList.commit(this.props.relay.environment, this.props.user.id, {
-        productPrices: [Immutable.fromJS(this.props.user.products.edges.map(_ => _.node).find(_ => _.id === productId))],
-      });
-      this.props.productsActions.productSelected(productId);
-    }
+    AddItemsToShoppingList.commit(this.props.relay.environment, this.props.user.id, {
+      productPrices: [Immutable.fromJS(this.props.user.products.edges.map(_ => _.node).find(_ => _.id === productId))],
+    });
+
+    this.props.productsActions.productSelected(productId);
   };
 
   onRefresh = () => {
@@ -71,7 +65,6 @@ class ProductsContainer extends Component<any, Props, State> {
     return (
       <ProductList
         products={this.props.user.products.edges.map(_ => _.node)}
-        shoppingListItems={this.props.user.shoppingListItems.edges.map(_ => _.node)}
         onItemSelectionChanged={this.onProductItemSelectionChanged}
         isFetchingTop={this.state.isFetchingTop}
         onRefresh={this.onRefresh}
