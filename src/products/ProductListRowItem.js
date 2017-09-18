@@ -5,7 +5,6 @@ import { View } from 'react-native';
 import { Col, Grid, Row } from 'react-native-easy-grid';
 import FastImage from 'react-native-fast-image';
 import { Text } from 'react-native-elements';
-import PropTypes from 'prop-types';
 import { ProductProp } from './PropTypes';
 import Styles from './Styles';
 import MainStyles from '../style/DefaultStyles';
@@ -58,21 +57,21 @@ class ProductListRowItem extends React.PureComponent {
     return (
       <Grid>
         <Col size={20}>
-          {this.props.product.imageUrl
-            ? <FastImage style={Styles.productImage} resizeMode={FastImage.resizeMode.stretch} source={{ uri: this.props.product.imageUrl }} />
-            : <View />}
+          {this.props.product.imageUrl ? (
+            <FastImage style={Styles.productImage} resizeMode={FastImage.resizeMode.stretch} source={{ uri: this.props.product.imageUrl }} />
+          ) : (
+            <View />
+          )}
         </Col>
         <Col size={80}>
           <Row>
             <Col size={70}>
-              <Text style={this.props.isInShoppingList ? [MainStyles.primaryFont, Styles.boldText] : MainStyles.primaryFont} numberOfLines={2}>
+              <Text style={MainStyles.primaryFont} numberOfLines={2}>
                 {this.props.product.name}
               </Text>
             </Col>
             <Col size={30}>
-              <Text style={Styles.productSize}>
-                {this.props.product.size}
-              </Text>
+              <Text style={Styles.productSize}>{this.props.product.size}</Text>
             </Col>
           </Row>
           <Row>
@@ -82,9 +81,7 @@ class ProductListRowItem extends React.PureComponent {
               </Text>
             </Col>
             <Col size={30}>
-              <Text style={Styles.priceToDisplay}>
-                {this.props.product.priceToDisplay ? '$' + this.props.product.priceToDisplay.toFixed(2) : ''}
-              </Text>
+              <Text style={Styles.priceToDisplay}>{this.props.product.priceToDisplay ? '$' + this.props.product.priceToDisplay.toFixed(2) : ''}</Text>
             </Col>
           </Row>
 
@@ -92,13 +89,15 @@ class ProductListRowItem extends React.PureComponent {
             <Col size={60}>
               <Row>
                 <Col size={15}>
-                  {this.props.product.store && this.props.product.store.imageUrl
-                    ? <FastImage
-                        style={Styles.storeImage}
-                        resizeMode={FastImage.resizeMode.stretch}
-                        source={{ uri: this.props.product.store.imageUrl }}
-                      />
-                    : <View />}
+                  {this.props.product.store && this.props.product.store.imageUrl ? (
+                    <FastImage
+                      style={Styles.storeImage}
+                      resizeMode={FastImage.resizeMode.stretch}
+                      source={{ uri: this.props.product.store.imageUrl }}
+                    />
+                  ) : (
+                    <View />
+                  )}
                 </Col>
                 <Col size={85}>
                   <Text style={Styles.storeName} numberOfLines={1}>
@@ -108,13 +107,15 @@ class ProductListRowItem extends React.PureComponent {
               </Row>
             </Col>
             <Col size={40}>
-              {this.props.product.savingPercentage
-                ? <View style={Styles.pricing}>
-                    <Text style={Styles.savingPercentage} numberOfLines={1}>
-                      Save ${this.props.product.saving ? this.props.product.saving.toFixed(2) : ''}({this.props.product.savingPercentage.toFixed(0)}%){' '}
-                    </Text>
-                  </View>
-                : <Text />}
+              {this.props.product.savingPercentage ? (
+                <View style={Styles.pricing}>
+                  <Text style={Styles.savingPercentage} numberOfLines={1}>
+                    Save ${this.props.product.saving ? this.props.product.saving.toFixed(2) : ''}({this.props.product.savingPercentage.toFixed(0)}%){' '}
+                  </Text>
+                </View>
+              ) : (
+                <Text />
+              )}
             </Col>
           </Row>
         </Col>
@@ -125,7 +126,6 @@ class ProductListRowItem extends React.PureComponent {
 
 ProductListRowItem.propTypes = {
   product: ProductProp,
-  isInShoppingList: PropTypes.bool.isRequired,
 };
 
 export default ProductListRowItem;

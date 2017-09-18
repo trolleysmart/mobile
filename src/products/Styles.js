@@ -66,7 +66,4 @@ export default StyleSheet.create({
     color: '#3DC62A',
     textAlign: 'right',
   },
-  boldText: {
-    fontWeight: 'bold',
-  },
 });
