@@ -8,11 +8,6 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  touchableContainer: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    backgroundColor: 'transparent',
-  },
   iconContainerStyle: {
     height: Sizes.searchBarHeaderHeight,
     width: Sizes.searchBarHeaderHeight,

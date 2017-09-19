@@ -5,10 +5,10 @@ import PropTypes from 'prop-types';
 import { View } from 'react-native';
 import { Icon } from 'react-native-elements';
 import Styles from './Styles';
-import { Color } from '../../style/DefaultStyles';
+import { Color } from '../../framework/style/DefaultStyles';
 import TouchableItem from './TouchableItem';
 
-const TouchableIcon = ({ onPress, iconName, iconType }) =>
+const TouchableIcon = ({ onPress, iconName, iconType }) => (
   <View style={Styles.container}>
     <TouchableItem
       accessibilityComponentType="button"
@@ -21,7 +21,8 @@ const TouchableIcon = ({ onPress, iconName, iconType }) =>
     >
       <Icon size={28} color={Color.primaryFontColor} name={iconName} type={iconType} containerStyle={Styles.iconContainerStyle} />
     </TouchableItem>
-  </View>;
+  </View>
+);
 
 TouchableIcon.propTypes = {
   onPress: PropTypes.func.isRequired,

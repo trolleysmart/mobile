@@ -6,8 +6,8 @@ import { Alert, Provider } from 'react-redux';
 import { MenuContext } from 'react-native-popup-menu';
 import RNRestart from 'react-native-restart';
 import { setJSExceptionHandler } from 'react-native-exception-handler';
-import Navigation, { reduxStore } from './navigation';
-import Config from './config';
+import Navigation, { reduxStore } from './app/navigation';
+import Config from './framework/config';
 
 const errorHandler = (e, isFatal) => {
   Alert.alert(
