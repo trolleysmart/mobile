@@ -15,6 +15,9 @@ const HomeNavigationTab = TabNavigator(
       path: '/',
       navigationOptions: {
         header: null,
+        headerStyle: {
+          backgroundColor: Color.primaryColorNormal,
+        },
       },
     },
     Browse: {

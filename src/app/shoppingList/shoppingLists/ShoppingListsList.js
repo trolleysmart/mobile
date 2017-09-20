@@ -2,11 +2,12 @@
 
 import React, { Component } from 'react';
 import { FlatList, View } from 'react-native';
-import { ListItem, FormInput } from 'react-native-elements';
+import { ListItem } from 'react-native-elements';
 import PropTypes from 'prop-types';
 import { ListItemSeparator } from '../../../components/list';
 import ShoppingListRow from './ShoppingListRow';
 import Styles from './Styles';
+import { ShoppingListsProp } from './PropTypes';
 
 class ShoppingListsList extends Component {
   render = () => {
@@ -33,24 +34,17 @@ class ShoppingListsList extends Component {
           titleStyle={Styles.createListFont}
           leftIcon={{ name: 'plus', type: 'material-community', color: 'blue' }}
           rightIcon={<View />}
+          onPress={this.props.onCreateShoppingListPressed}
         />
-        <View>
-          <FormInput placeholder="Please enter list name..." />
-        </View>
       </View>
     );
   };
 }
 
 ShoppingListsList.propTypes = {
-  shoppingLists: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      owner: PropTypes.string,
-    }),
-  ).isRequired,
+  shoppingLists: ShoppingListsProp,
   onShoppingListPressed: PropTypes.func.isRequired,
+  onCreateShoppingListPressed: PropTypes.func.isRequired,
 };
 
 export default ShoppingListsList;

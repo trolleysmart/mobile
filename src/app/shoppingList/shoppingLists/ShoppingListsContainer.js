@@ -8,19 +8,32 @@ import { NavigationActions } from 'react-navigation';
 import * as shoppingListsActions from './Actions';
 import ShoppingListsList from './ShoppingListsList';
 import { MainMenuContainer } from '../../../sharedComponents/mainMenu';
+import { Color } from '../../../framework/style/DefaultStyles';
 
 class ShoppingListsContainer extends Component {
   static navigationOptions = {
     title: 'Shopping Lists',
     headerLeft: <MainMenuContainer />,
+    headerStyle: {
+      backgroundColor: Color.primaryColorNormal,
+    },
   };
 
   onShoppingListPressed = id => {
     this.props.showShoppingList(id);
   };
 
+  onCreateShoppingListPressed = () => {
+    this.props.showCreateShoppingList();
+  };
   render = () => {
-    return <ShoppingListsList shoppingLists={this.props.shoppingLists} onShoppingListPressed={this.onShoppingListPressed} />;
+    return (
+      <ShoppingListsList
+        shoppingLists={this.props.shoppingLists}
+        onShoppingListPressed={this.onShoppingListPressed}
+        onCreateShoppingListPressed={this.onCreateShoppingListPressed}
+      />
+    );
   };
 }
 
@@ -61,6 +74,12 @@ function mapDispatchToProps(dispatch) {
           params: {
             id,
           },
+        }),
+      ),
+    showCreateShoppingList: () =>
+      dispatch(
+        NavigationActions.navigate({
+          routeName: 'ShoppingListDetail',
         }),
       ),
   };
