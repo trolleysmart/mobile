@@ -7,7 +7,7 @@ class HeaderContainer extends Component {
   render = () => {
     return (
       <View>
-        <TouchableIcon iconName="tick" iconType="font-awesome" />
+        <TouchableIcon iconName="md-checkmark" iconType="ionicon" />
       </View>
     );
   };

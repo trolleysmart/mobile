@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { ListItem, Icon } from 'react-native-elements';
 import { Menu, MenuTrigger, MenuOptions, MenuOption } from 'react-native-popup-menu';
 import Styles from './Styles';
+import { Color } from '../../../framework/style/DefaultStyles';
 
 class ShoppingListRow extends React.PureComponent {
   renderMenu = () => {
@@ -33,7 +34,11 @@ class ShoppingListRow extends React.PureComponent {
           key={this.props.id}
           title={this.props.name}
           onPress={() => this.props.onShoppingListPressed(this.props.id)}
-          badge={{ value: 3 }}
+          badge={{
+            value: 3,
+            textStyle: { color: 'white' },
+            containerStyle: { backgroundColor: Color.secondaryColorAction },
+          }}
           leftIcon={{ name: 'list', type: 'font-awesome' }}
           rightIcon={this.renderMenu()}
         />

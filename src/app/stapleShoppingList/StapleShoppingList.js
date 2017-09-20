@@ -11,7 +11,8 @@ import HeaderContainer from './HeaderContainer';
 
 class StapleShoppingList extends Component {
   static navigationOptions = {
-    headerTitle: <HeaderContainer environment={environment} />,
+    title: <HeaderContainer environment={environment} />,
+    // title: 'h',
   };
 
   render() {
@@ -32,7 +33,11 @@ class StapleShoppingList extends Component {
         }}
         render={({ error, props }) => {
           if (error) {
-            return <Text>{error.message}</Text>;
+            return (
+              <Text>
+                {error.message}
+              </Text>
+            );
           }
 
           if (props) {

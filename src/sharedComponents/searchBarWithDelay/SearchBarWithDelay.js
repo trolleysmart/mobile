@@ -51,6 +51,7 @@ class SearchBarWithDelay extends Component {
           inputStyle={Styles.searchInput}
           placeholder="Search..."
           textInputRef="textInputRef"
+          placeholderTextColor="white"
           value={this.state.searchKeyword}
           onChangeText={this.searchKeywordChanged}
         />

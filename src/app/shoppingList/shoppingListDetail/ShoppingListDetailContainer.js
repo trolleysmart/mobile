@@ -8,17 +8,31 @@ import { bindActionCreators } from 'redux';
 import { NavigationActions } from 'react-navigation';
 import ShoppingListDetail from './ShoppingListDetail';
 import HeaderContainer from './HeaderContainer';
+import { Color } from '../../../framework/style/DefaultStyles';
 
 class ShoppingListDetailContainer extends Component {
   static navigationOptions = {
     headerRight: <HeaderContainer />,
+    headerStyle: {
+      backgroundColor: Color.primaryColorNormal,
+    },
     // headerBackTitle: null,
     // headerLe: <View />,
   };
 
   render = () => {
-    return <ShoppingListDetail />;
+    return <ShoppingListDetail avatarUrl={this.props.avatarUrl} />;
   };
 }
 
-export default ShoppingListDetailContainer;
+function mapStateToProps(state) {
+  return {
+    avatarUrl: state.userAccess.getIn(['userInfo', 'avatar']) ? state.userAccess.getIn(['userInfo', 'avatar']).data.url : null,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {};
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ShoppingListDetailContainer);
