@@ -1,4 +1,5 @@
 input AddItemsToShoppingListInput {
+  shoppingListId: ID!
   productPriceIds: [ID!]
   stapleItemIds: [ID!]
   newStapleItemNames: [String!]
@@ -11,12 +12,26 @@ type AddItemsToShoppingListPayload {
   clientMutationId: String
 }
 
+input AddShoppingListInput {
+  name: String!
+  clientMutationId: String
+}
+
+type AddShoppingListPayload {
+  errorMessage: String
+  shoppingList: ShoppingListEdge
+  clientMutationId: String
+}
+
 type MultiBuy {
   awardQuantity: Int
   awardValue: Float
 }
 
 type Mutation {
+  addShoppingList(input: AddShoppingListInput!): AddShoppingListPayload
+  removeShoppingList(input: RemoveShoppingListInput!): RemoveShoppingListPayload
+  updateShoppingList(input: UpdateShoppingListInput!): UpdateShoppingListPayload
   addItemsToShoppingList(input: AddItemsToShoppingListInput!): AddItemsToShoppingListPayload
   removeItemsFromShoppingList(input: RemoveItemsFromShoppingListInput!): RemoveItemsFromShoppingListPayload
   submitUserFeedback(input: SubmitUserFeedbackInput!): SubmitUserFeedbackPayload
@@ -113,6 +128,7 @@ type Query {
 }
 
 input RemoveItemsFromShoppingListInput {
+  shoppingListId: ID!
   shoppingListItemIds: [ID!]
   clientMutationId: String
 }
@@ -120,6 +136,40 @@ input RemoveItemsFromShoppingListInput {
 type RemoveItemsFromShoppingListPayload {
   errorMessage: String
   clientMutationId: String
+}
+
+input RemoveShoppingListInput {
+  shoppingListId: ID!
+  clientMutationId: String
+}
+
+type RemoveShoppingListPayload {
+  errorMessage: String
+  clientMutationId: String
+}
+
+type ShoppingList implements Node {
+  id: ID!
+  name: String
+  shoppingListItems(after: String, first: Int, before: String, last: Int, name: String, addedByUserId: ID, removedByUserId: ID, tagKeys: [String], storeKeys: [String]): ShoppingListItemConnection
+}
+
+# A connection to a list of items.
+type ShoppingListConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [ShoppingListEdge]
+}
+
+# An edge in a connection.
+type ShoppingListEdge {
+  # The item at the end of the edge
+  node: ShoppingList
+
+  # A cursor for use in pagination
+  cursor: String!
 }
 
 type ShoppingListItem implements Node {
@@ -264,11 +314,24 @@ type UnitPrice {
   size: String
 }
 
+input UpdateShoppingListInput {
+  shoppingListId: ID!
+  name: String
+  clientMutationId: String
+}
+
+type UpdateShoppingListPayload {
+  errorMessage: String
+  shoppingList: ShoppingListEdge
+  clientMutationId: String
+}
+
 type User implements Node {
   id: ID!
-  shoppingListItems(after: String, first: Int, before: String, last: Int, name: String, tagKeys: [String], storeKeys: [String]): ShoppingListItemConnection
-  products(after: String, first: Int, before: String, last: Int, name: String, description: String, sortOption: String, tagKeys: [String], storeKeys: [String], special: Boolean): ProductConnection
+  shoppingLists(after: String, first: Int, before: String, last: Int, name: String, shoppingListIds: [ID]): ShoppingListConnection
+  shoppingListItems(after: String, first: Int, before: String, last: Int, shoppingListId: ID!, name: String, tagKeys: [String], storeKeys: [String]): ShoppingListItemConnection
   stapleItems(after: String, first: Int, before: String, last: Int, name: String, tagKeys: [String]): StapleItemConnection
+  products(after: String, first: Int, before: String, last: Int, name: String, description: String, sortOption: String, tagKeys: [String], storeKeys: [String], special: Boolean): ProductConnection
 }
 
 type Viewer implements Node {

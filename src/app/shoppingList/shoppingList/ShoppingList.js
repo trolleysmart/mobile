@@ -28,7 +28,7 @@ class ShoppingList extends Component {
       <QueryRenderer
         environment={environment}
         query={graphql`
-          query ShoppingListQuery($count: Int!, $cursor: String) {
+          query ShoppingListQuery($count: Int!, $cursor: String, $shoppingListId: ID! ) {
             user {
               ...ShoppingListItemsRelayContainer_user
             }
@@ -37,6 +37,7 @@ class ShoppingList extends Component {
         variables={{
           cursor: null,
           count: 30,
+          shoppingListId: 'Test Id',
         }}
         render={({ error, props }) => {
           if (error) {
