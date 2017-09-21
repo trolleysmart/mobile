@@ -24,7 +24,7 @@ class ProductListRow extends React.PureComponent {
 }
 
 ProductListRow.propTypes = {
-  product: ProductProp,
+  product: ProductProp.isRequired,
   onItemSelectionChanged: PropTypes.func.isRequired,
 };
 

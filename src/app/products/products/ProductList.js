@@ -23,7 +23,7 @@ const ProductList = ({ products, onItemSelectionChanged, isFetchingTop, onRefres
 );
 
 ProductList.propTypes = {
-  products: ProductsProp,
+  products: ProductsProp.isRequired,
   onItemSelectionChanged: PropTypes.func.isRequired,
   isFetchingTop: PropTypes.bool.isRequired,
   onRefresh: PropTypes.func.isRequired,

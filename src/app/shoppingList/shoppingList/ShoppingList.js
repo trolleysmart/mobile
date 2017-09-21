@@ -10,8 +10,9 @@ import ShoppingListItemsRelayContainer from './ShoppingListItemsRelayContainer';
 class ShoppingList extends Component {
   static navigationOptions = {
     tabBarLabel: 'Shopping List',
-    tabBarIcon: ({ tintColor, focused }) =>
-      <Ionicons name={focused ? 'ios-list-box' : 'ios-list-box-outline'} size={26} style={{ color: tintColor }} />,
+    tabBarIcon: ({ tintColor, focused }) => (
+      <Ionicons name={focused ? 'ios-list-box' : 'ios-list-box-outline'} size={26} style={{ color: tintColor }} />
+    ),
     // headerLeft: <HeaderContainer />,
     // headerStyle: {
     //   backgroundColor: Color.primaryColorNormal,
@@ -28,7 +29,7 @@ class ShoppingList extends Component {
       <QueryRenderer
         environment={environment}
         query={graphql`
-          query ShoppingListQuery($count: Int!, $cursor: String, $shoppingListId: ID! ) {
+          query ShoppingListQuery($count: Int!, $cursor: String, $shoppingListId: ID!) {
             user {
               ...ShoppingListItemsRelayContainer_user
             }
@@ -41,11 +42,7 @@ class ShoppingList extends Component {
         }}
         render={({ error, props }) => {
           if (error) {
-            return (
-              <Text>
-                {error.message}
-              </Text>
-            );
+            return <Text>{error.message}</Text>;
           }
 
           if (props) {

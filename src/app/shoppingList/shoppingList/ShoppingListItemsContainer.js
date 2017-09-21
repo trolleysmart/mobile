@@ -24,10 +24,6 @@ class ShoppingListItemsContainer extends Component<any, Props, State> {
     isFetchingTop: false,
   };
 
-  constructor(props, context) {
-    super(props, context);
-  }
-
   componentWillReceiveProps = nextProps => {
     const shoppingListItems = Immutable.fromJS(nextProps.user.shoppingListItems.edges.map(_ => _.node));
 

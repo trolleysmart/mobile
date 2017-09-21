@@ -1,67 +1,72 @@
 // @flow
 
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { NavigationActions } from 'react-navigation';
 import * as shoppingListsActions from './Actions';
 import ShoppingListsList from './ShoppingListsList';
-import { MainMenuContainer } from '../../../sharedComponents/mainMenu';
-import { Color } from '../../../framework/style/DefaultStyles';
 
 class ShoppingListsContainer extends Component {
-  static navigationOptions = {
-    title: 'Shopping Lists',
-    headerLeft: <MainMenuContainer />,
-    headerStyle: {
-      backgroundColor: Color.primaryColorNormal,
-    },
+  state = {
+    isFetchingTop: false,
   };
 
-  onShoppingListPressed = id => {
-    this.props.showShoppingList(id);
+  onShoppingListPressed = shoppingList => {
+    this.props.showShoppingList(shoppingList.id);
   };
 
   onCreateShoppingListPressed = () => {
     this.props.showCreateShoppingList();
   };
+
+  onRefresh = () => {
+    const { shoppingLists } = this.props.user;
+
+    if (this.props.relay.isLoading()) {
+      return;
+    }
+
+    this.setState({
+      isFetchingTop: true,
+    });
+
+    this.props.relay.refetchConnection(shoppingLists.edges.length, error => {
+      //TODO: 20170610 - Morteza - Should handle the error here
+      this.setState({
+        isFetchingTop: false,
+      });
+    });
+  };
+
+  onEndReached = () => {
+    if (!this.props.relay.hasMore() || this.props.relay.isLoading()) {
+      return;
+    }
+
+    this.props.relay.loadMore(30, error => {
+      //TODO: 20170610 - Morteza - Should handle the error here
+    });
+  };
+
   render = () => {
     return (
       <ShoppingListsList
-        shoppingLists={this.props.shoppingLists}
+        shoppingLists={this.props.user.shoppingLists.edges.map(_ => _.node)}
         onShoppingListPressed={this.onShoppingListPressed}
         onCreateShoppingListPressed={this.onCreateShoppingListPressed}
+        isFetchingTop={this.state.isFetchingTop}
+        onRefresh={this.onRefresh}
+        onEndReached={this.onEndReached}
       />
     );
   };
 }
 
-ShoppingListsContainer.propTypes = {
-  shoppingLists: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string,
-      name: PropTypes.string,
-      owner: PropTypes.string,
-    }),
-  ).isRequired,
-};
+ShoppingListsContainer.propTypes = {};
 
 function mapStateToProps() {
-  return {
-    shoppingLists: [
-      {
-        id: 1,
-        name: 'My List 1',
-        owner: 'Fred',
-      },
-      {
-        id: 2,
-        name: 'Weekend Veg',
-        owner: 'Fred',
-      },
-    ],
-  };
+  return {};
 }
 
 function mapDispatchToProps(dispatch) {

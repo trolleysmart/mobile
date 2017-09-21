@@ -15,14 +15,7 @@ class ShoppingListsList extends Component {
       <View style={Styles.container}>
         <FlatList
           data={this.props.shoppingLists}
-          renderItem={info => (
-            <ShoppingListRow
-              id={info.item.id}
-              name={info.item.name}
-              owner={info.item.owner}
-              onShoppingListPressed={this.props.onShoppingListPressed}
-            />
-          )}
+          renderItem={info => <ShoppingListRow shoppingList={info.item} onShoppingListPressed={this.props.onShoppingListPressed} />}
           keyExtractor={item => item.id}
           onEndReached={this.props.onEndReached}
           onRefresh={this.props.onRefresh}
@@ -42,7 +35,7 @@ class ShoppingListsList extends Component {
 }
 
 ShoppingListsList.propTypes = {
-  shoppingLists: ShoppingListsProp,
+  shoppingLists: ShoppingListsProp.isRequired,
   onShoppingListPressed: PropTypes.func.isRequired,
   onCreateShoppingListPressed: PropTypes.func.isRequired,
 };

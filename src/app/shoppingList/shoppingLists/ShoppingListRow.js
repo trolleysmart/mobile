@@ -7,6 +7,7 @@ import { ListItem, Icon } from 'react-native-elements';
 import { Menu, MenuTrigger, MenuOptions, MenuOption } from 'react-native-popup-menu';
 import Styles from './Styles';
 import { Color } from '../../../framework/style/DefaultStyles';
+import { ShoppingListProp } from './PropTypes';
 
 class ShoppingListRow extends React.PureComponent {
   renderMenu = () => {
@@ -18,7 +19,6 @@ class ShoppingListRow extends React.PureComponent {
         <MenuOptions>
           <MenuOption>
             <View style={Styles.menuOption}>
-              {/* <Icon name='sort-amount-asc' type='font-awesome' size={20} /> */}
               <Text>Edit</Text>
             </View>
           </MenuOption>
@@ -31,9 +31,9 @@ class ShoppingListRow extends React.PureComponent {
     return (
       <View>
         <ListItem
-          key={this.props.id}
-          title={this.props.name}
-          onPress={() => this.props.onShoppingListPressed(this.props.id)}
+          key={this.props.shoppingList.id}
+          title={this.props.shoppingList.name}
+          onPress={() => this.props.onShoppingListPressed(this.props.shoppingList)}
           badge={{
             value: 3,
             textStyle: { color: 'white' },
@@ -48,9 +48,7 @@ class ShoppingListRow extends React.PureComponent {
 }
 
 ShoppingListRow.propTypes = {
-  id: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  owner: PropTypes.string.isRequired,
+  shoppingList: ShoppingListProp.isRequired,
   onShoppingListPressed: PropTypes.func.isRequired,
 };
 
