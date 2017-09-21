@@ -1,7 +1,9 @@
 // @flow
 
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Text } from 'react-native-elements';
+import { connect } from 'react-redux';
 import { environment } from '../../../framework/relay';
 import { graphql, QueryRenderer } from 'react-relay';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -13,15 +15,7 @@ class ShoppingList extends Component {
     tabBarIcon: ({ tintColor, focused }) => (
       <Ionicons name={focused ? 'ios-list-box' : 'ios-list-box-outline'} size={26} style={{ color: tintColor }} />
     ),
-    // headerLeft: <HeaderContainer />,
-    // headerStyle: {
-    //   backgroundColor: Color.primaryColorNormal,
-    // },
     title: 'My Shopping List 1',
-    // headerTitleStyle: {
-    //   marginLeft: Platform.OS === 'ios' ? null : 70,
-    // },
-    // headerBackTitle: null,
   };
 
   render() {
@@ -38,7 +32,7 @@ class ShoppingList extends Component {
         variables={{
           cursor: null,
           count: 30,
-          shoppingListId: 'Test Id',
+          shoppingListId: this.props.shoppingListId,
         }}
         render={({ error, props }) => {
           if (error) {
@@ -56,6 +50,14 @@ class ShoppingList extends Component {
   }
 }
 
-ShoppingList.propTypes = {};
+ShoppingList.propTypes = {
+  shoppingListId: PropTypes.string.isRequired,
+};
 
-export default ShoppingList;
+function mapStateToProps(state, props) {
+  return {
+    shoppingListId: props.navigation.state.params.shoppingListId,
+  };
+}
+
+export default connect(mapStateToProps)(ShoppingList);

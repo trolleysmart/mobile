@@ -13,7 +13,7 @@ class ShoppingListsContainer extends Component {
   };
 
   onShoppingListPressed = shoppingList => {
-    this.props.showShoppingList(shoppingList.id);
+    this.props.showShoppingList(shoppingList);
   };
 
   onCreateShoppingListPressed = () => {
@@ -72,12 +72,12 @@ function mapStateToProps() {
 function mapDispatchToProps(dispatch) {
   return {
     shoppingListsActions: bindActionCreators(shoppingListsActions, dispatch),
-    showShoppingList: id =>
+    showShoppingList: shoppingList =>
       dispatch(
         NavigationActions.navigate({
           routeName: 'ShoppingList',
           params: {
-            id,
+            shoppingListId: shoppingList.id,
           },
         }),
       ),
