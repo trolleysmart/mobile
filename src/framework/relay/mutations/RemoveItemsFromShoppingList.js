@@ -25,11 +25,12 @@ function sharedUpdater(store, userId, shoppingListItemId) {
   ConnectionHandler.deleteNode(connection, shoppingListItemId);
 }
 
-function commit(environment, userId, shoppingListItemIds) {
+function commit(environment, userId, shoppingListId, shoppingListItemIds) {
   return commitMutation(environment, {
     mutation,
     variables: {
       input: {
+        shoppingListId,
         shoppingListItemIds,
       },
     },

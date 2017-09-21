@@ -6,8 +6,15 @@ import { bindActionCreators } from 'redux';
 import { NavigationActions } from 'react-navigation';
 import * as shoppingListsActions from './Actions';
 import ShoppingListsList from './ShoppingListsList';
+import { type ShoppingListsRelayContainer_user } from './__generated__/ShoppingListsRelayContainer_user.graphql';
 
-class ShoppingListsContainer extends Component {
+type Props = {
+  user: ShoppingListsRelayContainer_user,
+};
+
+type State = {};
+
+class ShoppingListsContainer extends Component<any, Props, State> {
   state = {
     isFetchingTop: false,
   };
