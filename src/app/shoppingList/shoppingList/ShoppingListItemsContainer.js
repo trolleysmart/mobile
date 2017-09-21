@@ -34,7 +34,9 @@ class ShoppingListItemsContainer extends Component<any, Props, State> {
       this.props.viewingStapleItem.get('shoppingListId') &&
       shoppingListItems.find(_ => _.get('id') === this.props.viewingStapleItem.get('shoppingListId'))
     ) {
-      RemoveItemsFromShoppingList.commit(this.props.relay.environment, this.props.user.id, [this.props.viewingStapleItem.get('shoppingListId')]);
+      RemoveItemsFromShoppingList.commit(this.props.relay.environment, this.props.user.id, this.props.shoppingListId, [
+        this.props.viewingStapleItem.get('shoppingListId'),
+      ]);
 
       // Clear the current viewing staple item
       this.props.shoppingListActions.currentViewingStapleItemChanged(Map());
@@ -42,7 +44,7 @@ class ShoppingListItemsContainer extends Component<any, Props, State> {
   };
 
   onShoppingListItemSelectionChanged = shoppingListItem => {
-    RemoveItemsFromShoppingList.commit(this.props.relay.environment, this.props.user.id, [shoppingListItem.id]);
+    RemoveItemsFromShoppingList.commit(this.props.relay.environment, this.props.user.id, this.props.shoppingListId, [shoppingListItem.id]);
   };
 
   onShoppingListAddItemClicked = () => {

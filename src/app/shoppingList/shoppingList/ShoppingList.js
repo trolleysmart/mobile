@@ -40,7 +40,7 @@ class ShoppingList extends Component {
           }
 
           if (props) {
-            return <ShoppingListItemsRelayContainer user={props.user} />;
+            return <ShoppingListItemsRelayContainer user={props.user} shoppingListId={this.props.shoppingListId} />;
           } else {
             return <Text>Loading</Text>;
           }
