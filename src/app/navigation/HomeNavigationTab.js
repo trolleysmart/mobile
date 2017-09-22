@@ -41,7 +41,7 @@ const HomeNavigationTab = TabNavigator(
     tabBarPosition: 'bottom',
     animationEnabled: false,
     swipeEnabled: false,
-    lazyLoad: true,
+    lazy: true,
     tabBarOptions: {
       showIcon: true,
       tabStyle: {
