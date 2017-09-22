@@ -14,32 +14,16 @@ import Styles from './Styles';
 
 class ProductsHeaderContainer extends Component {
   onSearchKeywordChanged = searchKeyword => {
-    this.props.productsActions.searchKeywordChanged(
-      Map({
-        searchKeyword,
-      }),
-    );
+    this.props.productsActions.searchKeywordChanged(Map({ searchKeyword }));
   };
 
   onSearchIconPress = () => {
-    this.props.productsActions.productsSearchingModeChanged(
-      Map({
-        isSearchingMode: true,
-      }),
-    );
+    this.props.productsActions.productsSearchingModeChanged(Map({ isSearchingMode: true }));
   };
 
   onExitsSearchModeIconPress = () => {
-    this.props.productsActions.searchKeywordChanged(
-      Map({
-        searchKeyword: '',
-      }),
-    );
-    this.props.productsActions.productsSearchingModeChanged(
-      Map({
-        isSearchingMode: false,
-      }),
-    );
+    this.props.productsActions.searchKeywordChanged(Map({ searchKeyword: '' }));
+    this.props.productsActions.productsSearchingModeChanged(Map({ isSearchingMode: false }));
   };
 
   render = () => {
