@@ -43,7 +43,6 @@ const BrowseProductsNavigationTab = TabNavigator(
       scrollEnabled: true,
       showIcon: false,
       tabStyle: {
-        // height: 30,
         width: 150,
       },
       labelStyle: {
