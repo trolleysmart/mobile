@@ -50,7 +50,7 @@ function commit(environment, userId, shoppingListId, name) {
       if (errorMessage) {
         reduxStore.dispatch(messageBarActions.add(errorMessage, MessageType.ERROR));
       } else {
-        const shoppingListEdge = payload.getLinkedRecords('shoppingList');
+        const shoppingListEdge = payload.getLinkedRecord('shoppingList');
 
         sharedUpdater(store, userId, shoppingListEdge);
       }
