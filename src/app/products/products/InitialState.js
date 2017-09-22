@@ -4,7 +4,7 @@ import { List, Map } from 'immutable';
 
 export default Map({
   isSearchingMode: false,
-  searchKeyword: 'adadadadadasdasdasdasdasdad',
+  searchKeyword: '',
   filterOptions: Map({
     sortOption: 'NameAscending',
     categories: List(),
