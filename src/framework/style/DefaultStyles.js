@@ -10,6 +10,7 @@ const PRIMARY_COLOR_NORMAL = '#3DC62A';
 const PRIMARY_COLOR_DARK = '#649A59';
 const PRIMARY_COLOR_LIGHT = '#A6D891';
 const PRIMARY_FONT_COLOR = '#333333';
+const PRIMARY_FONT_COLOR_DISABLED = '#cccccc';
 const SECONDARY_COLOR_ACTION = '#F4CC62';
 const ICON_PRESS_COLOR = 'rgba(100,154,89, .32)';
 const screen = Dimensions.get('window');
@@ -19,6 +20,7 @@ export const Color = {
   primaryColorDark: PRIMARY_COLOR_DARK,
   primaryColorLight: PRIMARY_COLOR_LIGHT,
   primaryFontColor: PRIMARY_FONT_COLOR,
+  primaryFontColorDisabled: PRIMARY_FONT_COLOR_DISABLED,
   secondaryColorAction: SECONDARY_COLOR_ACTION,
   touchableIconPressColor: ICON_PRESS_COLOR,
 };

@@ -48,7 +48,7 @@ class ShoppingListRow extends React.PureComponent {
 }
 
 ShoppingListRow.propTypes = {
-  shoppingList: ShoppingListProp.isRequired,
+  shoppingList: ShoppingListProp,
   onShoppingListPressed: PropTypes.func.isRequired,
 };
 

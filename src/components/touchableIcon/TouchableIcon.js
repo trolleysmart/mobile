@@ -8,7 +8,7 @@ import Styles from './Styles';
 import { Color } from '../../framework/style/DefaultStyles';
 import TouchableItem from './TouchableItem';
 
-const TouchableIcon = ({ onPress, iconName, iconType }) => (
+const TouchableIcon = ({ onPress, iconName, iconType, disabled }) => (
   <View style={Styles.container}>
     <TouchableItem
       accessibilityComponentType="button"
@@ -18,8 +18,15 @@ const TouchableIcon = ({ onPress, iconName, iconType }) => (
       pressColor={Color.touchableIconPressColor}
       style={Styles.touchableContainer}
       borderless
+      disabled={disabled || false}
     >
-      <Icon size={28} color={Color.primaryFontColor} name={iconName} type={iconType} containerStyle={Styles.iconContainerStyle} />
+      <Icon
+        size={28}
+        color={disabled ? Color.primaryFontColorDisabled : Color.primaryFontColor}
+        name={iconName}
+        type={iconType}
+        containerStyle={Styles.iconContainerStyle}
+      />
     </TouchableItem>
   </View>
 );

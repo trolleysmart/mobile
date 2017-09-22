@@ -35,7 +35,7 @@ class ShoppingListsList extends Component {
 }
 
 ShoppingListsList.propTypes = {
-  shoppingLists: ShoppingListsProp.isRequired,
+  shoppingLists: ShoppingListsProp,
   onShoppingListPressed: PropTypes.func.isRequired,
   onCreateShoppingListPressed: PropTypes.func.isRequired,
 };

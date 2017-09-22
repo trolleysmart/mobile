@@ -13,24 +13,30 @@ class ShoppingListDetail extends Component {
       <View style={Styles.container}>
         <View style={Styles.listNameContainer}>
           <Text style={Styles.listNameLabel}>List Name</Text>
-          <FormInput placeholder="Please enter list name..." />
+          <FormInput
+            inputStyle={Styles.listNameInput}
+            autoFocus={true}
+            placeholder="Please enter list name..."
+            onChangeText={name => this.props.shoppingListNameChanged(name)}
+            value={this.props.shoppingListName}
+          />
         </View>
         <View style={Styles.membersContainer}>
           <Text style={Styles.membersLabel}>List Members</Text>
           <View style={Styles.avatarContainer}>
-            {this.props.avatarUrl
-              ? <Avatar containerStyle={Styles.profileAvatar} small rounded source={{ uri: this.props.avatarUrl }} activeOpacity={0.7} />
-              : <Avatar containerStyle={Styles.profileAvatar} small rounded icon={{ name: 'person', type: 'material-icons' }} activeOpacity={0.7} />}
+            {this.props.avatarUrl ? (
+              <Avatar containerStyle={Styles.profileAvatar} small rounded source={{ uri: this.props.avatarUrl }} activeOpacity={0.7} />
+            ) : (
+              <Avatar containerStyle={Styles.profileAvatar} small rounded icon={{ name: 'person', type: 'material-icons' }} activeOpacity={0.7} />
+            )}
             <Text style={Styles.memberName}>You</Text>
           </View>
           <View style={Styles.avatarContainer}>
-            {/* <TouchableIcon iconName='plus-circle-outline' iconType='material-community' /> */}
             {/* <View style={Styles.container}> */}
             <TouchableItem
               accessibilityComponentType="button"
               accessibilityTraits="button"
               delayPressIn={0}
-              // pressColor={Color.touchableIconPressColor}
               style={Styles.touchableContainer}
               borderless
             >

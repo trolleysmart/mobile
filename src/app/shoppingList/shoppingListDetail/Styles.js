@@ -40,4 +40,7 @@ export default StyleSheet.create({
   profileAvatar: {
     paddingTop: 10,
   },
+  listNameInput: {
+    color: 'white',
+  },
 });

@@ -2,8 +2,11 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { Map } from 'immutable';
 import ShoppingListDetail from './ShoppingListDetail';
 import HeaderContainer from './HeaderContainer';
+import * as ShoppingListDetailActions from './Actions';
 import { Color } from '../../../framework/style/DefaultStyles';
 
 class ShoppingListDetailContainer extends Component {
@@ -16,8 +19,16 @@ class ShoppingListDetailContainer extends Component {
     // headerLe: <View />,
   };
 
+  shoppingListNameChanged = name => {
+    this.props.shoppingListDetailActions.shoppingListNameChanged(
+      Map({
+        shoppingListName: name,
+      }),
+    );
+  };
+
   render = () => {
-    return <ShoppingListDetail avatarUrl={this.props.avatarUrl} />;
+    return <ShoppingListDetail avatarUrl={this.props.avatarUrl} shoppingListNameChanged={this.shoppingListNameChanged} />;
   };
 }
 
@@ -27,8 +38,10 @@ function mapStateToProps(state) {
   };
 }
 
-function mapDispatchToProps() {
-  return {};
+function mapDispatchToProps(dispatch) {
+  return {
+    shoppingListDetailActions: bindActionCreators(ShoppingListDetailActions, dispatch),
+  };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShoppingListDetailContainer);

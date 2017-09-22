@@ -3,7 +3,7 @@
 import { combineReducers } from 'redux';
 import { AppUpdaterReducer } from '../../app/navigation/appUpdater';
 import { MessageBarReducer } from '../../sharedComponents/messageBar';
-import { ShoppingListReducer } from '../../app/shoppingList';
+import { ShoppingListReducer, ShoppingListDetailReducer } from '../../app/shoppingList';
 import { StapleShoppingListReducer } from '../../app/stapleShoppingList';
 import { ProductsFilterReducer } from '../../sharedComponents/productsFilter';
 import { ProductReducer } from '../../app/products';
@@ -19,5 +19,6 @@ export default function getReducers(navigationReducer) {
     stapleShoppingList: StapleShoppingListReducer,
     productsFilter: ProductsFilterReducer,
     products: ProductReducer,
+    shoppingListDetail: ShoppingListDetailReducer,
   });
 }

@@ -20,10 +20,10 @@ export const ProductProp = PropTypes.shape({
     awardValue: PropTypes.number.isRequired,
   }),
   store: PropTypes.shape({
-    name: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
     imageUrl: PropTypes.string.isRequired,
   }),
-});
+}).isRequired;
 
 export const ProductsProp = PropTypes.arrayOf(ProductProp).isRequired;
 

@@ -2,7 +2,7 @@ export function GetFlyers() {
   const baseImageUrl = 'https://firebasestorage.googleapis.com/v0/b/smart-grocery-modern.appspot.com/o/Flyers%2F';
   const stores = [
     {
-      id: 1,
+      id: '1',
       storeName: 'briscoes',
       storeDisplayName: 'Briscoes',
       expiryDate: '25/9/2017',
@@ -10,7 +10,7 @@ export function GetFlyers() {
       slides: [],
     },
     {
-      id: 2,
+      id: '2',
       storeName: 'farmers',
       storeDisplayName: 'Farmers',
       expiryDate: '25/9/2017',
@@ -18,7 +18,7 @@ export function GetFlyers() {
       slides: [],
     },
     {
-      id: 3,
+      id: '3',
       storeName: 'rebel',
       storeDisplayName: 'Rebel',
       expiryDate: '25/9/2017',
