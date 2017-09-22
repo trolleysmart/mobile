@@ -655,6 +655,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				805E7D530A584B88AC9E5DD3 /* Frameworks */,
 				AC5011B1811146C18252636F /* Resources */,
+				B6F0F8AC1F73B5EC0044ECCC /* Recovered References */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -727,6 +728,20 @@
 				B63F6B951F2C83690065609B /* libRNVectorIcons.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		B6F0F8AC1F73B5EC0044ECCC /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				A998CFA855C44C9CA0D55167 /* libCodePush.a */,
+				8522D073062E4B8A8E117996 /* libFastImage.a */,
+				44B03F516E1B4769AD08F656 /* libRCTRestart.a */,
+				0A0226DA3F4C4E32BFB0D9A0 /* libRNVectorIcons.a */,
+				FC5783B2F58744EFB0082C8C /* libRCTFBSDK.a */,
+				0D9EA0A55CF14992AA0B3BDA /* libAirMaps.a */,
+				8425382955934D1CB2874809 /* libReactNativeExceptionHandler.a */,
+			);
+			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

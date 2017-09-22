@@ -1,1 +1,0 @@
-export FlyersContainer from './FlyersContainer';
