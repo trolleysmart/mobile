@@ -44,9 +44,9 @@ const mutation = graphql`
   }
 `;
 
-function sharedUpdater(store, userId, shoppingListItemsEdge, id) {
+function sharedUpdater(store, userId, shoppingListId, shoppingListItemsEdge, id) {
   const userProxy = store.get(userId);
-  const connection = ConnectionHandler.getConnection(userProxy, 'ShoppingListItems_shoppingListItems');
+  const connection = ConnectionHandler.getConnection(userProxy, 'ShoppingListItems_shoppingListItems', { shoppingListId });
 
   if (!connection) {
     return;
@@ -59,11 +59,12 @@ function sharedUpdater(store, userId, shoppingListItemsEdge, id) {
   ConnectionHandler.insertEdgeAfter(connection, shoppingListItemsEdge);
 }
 
-function commit(environment, userId, { productPrices, stapleItems, newStapleItemNames }) {
+function commit(environment, userId, shoppingListId, { productPrices, stapleItems, newStapleItemNames }) {
   return commitMutation(environment, {
     mutation,
     variables: {
       input: {
+        shoppingListId,
         productPriceIds: productPrices ? productPrices.map(productPrice => productPrice.get('id')) : [],
         stapleItemIds: stapleItems ? stapleItems.map(stapleItem => stapleItem.get('id')) : [],
         newStapleItemNames: newStapleItemNames ? newStapleItemNames : [],
@@ -81,7 +82,7 @@ function commit(environment, userId, { productPrices, stapleItems, newStapleItem
         shoppingListItemsEdges.forEach(shoppingListItemsEdge => {
           const id = shoppingListItemsEdge.getLinkedRecord('node').getValue('id');
 
-          sharedUpdater(store, userId, shoppingListItemsEdge, id);
+          sharedUpdater(store, userId, shoppingListId, shoppingListItemsEdge, id);
         });
       }
     },
@@ -105,7 +106,7 @@ function commit(environment, userId, { productPrices, stapleItems, newStapleItem
           const shoppingListItemEdge = store.create(uuid(), 'ShoppingListItemEdge');
 
           shoppingListItemEdge.setLinkedRecord(node, 'node');
-          sharedUpdater(store, userId, shoppingListItemEdge);
+          sharedUpdater(store, userId, shoppingListId, shoppingListItemEdge);
         });
       }
 
@@ -121,7 +122,7 @@ function commit(environment, userId, { productPrices, stapleItems, newStapleItem
           const shoppingListItemEdge = store.create(uuid(), 'ShoppingListItemEdge');
 
           shoppingListItemEdge.setLinkedRecord(node, 'node');
-          sharedUpdater(store, userId, shoppingListItemEdge);
+          sharedUpdater(store, userId, shoppingListId, shoppingListItemEdge);
         });
       }
 
@@ -137,7 +138,7 @@ function commit(environment, userId, { productPrices, stapleItems, newStapleItem
           const shoppingListItemEdge = store.create(uuid(), 'ShoppingListItemEdge');
 
           shoppingListItemEdge.setLinkedRecord(node, 'node');
-          sharedUpdater(store, userId, shoppingListItemEdge);
+          sharedUpdater(store, userId, shoppingListId, shoppingListItemEdge);
         });
       }
     },

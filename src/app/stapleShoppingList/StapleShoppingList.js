@@ -36,7 +36,7 @@ class StapleShoppingList extends Component {
           }
 
           if (props) {
-            return <StapleShoppingListItemsRelayContainer user={props.user} />;
+            return <StapleShoppingListItemsRelayContainer user={props.user} shoppingList={this.props.shoppingList} />;
           } else {
             return <Text>Loading</Text>;
           }
@@ -50,9 +50,10 @@ StapleShoppingList.propTypes = {
   searchKeyword: PropTypes.string,
 };
 
-function mapStateToProps(state) {
+function mapStateToProps(state, props) {
   return {
     searchKeyword: state.stapleShoppingList.get('searchKeyword'),
+    shoppingList: { id: props.navigation.state.params.shoppingListId },
   };
 }
 

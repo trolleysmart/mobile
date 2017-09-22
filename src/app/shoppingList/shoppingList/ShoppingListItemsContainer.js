@@ -54,7 +54,7 @@ class ShoppingListItemsContainer extends Component<any, Props, State> {
         selectedStapleShoppingListItems: List(),
       }),
     );
-    this.props.gotoAddStapleShoppingListItems();
+    this.props.gotoAddStapleShoppingListItems(this.props.shoppingListId);
   };
 
   onViewProductsPressed = id => {
@@ -137,10 +137,13 @@ function mapDispatchToProps(dispatch) {
     shoppingListActions: bindActionCreators(ShoppingListActions, dispatch),
     stapleShoppingListActions: bindActionCreators(StapleShoppingListActions, dispatch),
     productsActions: bindActionCreators(ProductsActions, dispatch),
-    gotoAddStapleShoppingListItems: () =>
+    gotoAddStapleShoppingListItems: shoppingListId =>
       dispatch(
         NavigationActions.navigate({
           routeName: 'StapleShoppingList',
+          params: {
+            shoppingListId,
+          },
         }),
       ),
     gotoProducts: defaultSearchKeyword =>

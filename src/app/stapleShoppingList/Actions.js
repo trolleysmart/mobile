@@ -29,3 +29,10 @@ export function userIdChanged(payload) {
     payload,
   };
 }
+
+export function shoppingListChanged(payload) {
+  return {
+    type: ActionTypes.STAPLE_SHOPPING_LIST_SHOPPING_LIST_CHANGED,
+    payload,
+  };
+}

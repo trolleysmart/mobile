@@ -23,20 +23,13 @@ class StapleShoppingListItemsContrainer extends Component<any, Props, State> {
     isFetchingTop: false,
   };
 
-  componentWillReceiveProps = nextProps => {
-    this.props.stapleShoppingListActions.userIdChanged(
-      Map({
-        userId: nextProps.user.id,
-      }),
-    );
+  componentDidMount = () => {
+    this.props.stapleShoppingListActions.userIdChanged(Map({ userId: this.props.user.id }));
+    this.props.stapleShoppingListActions.shoppingListChanged(Immutable.fromJS(this.props.shoppingList));
   };
 
   clearSearchKeyword = () => {
-    this.props.stapleShoppingListActions.searchKeywordChanged(
-      Map({
-        searchKeyword: '',
-      }),
-    );
+    this.props.stapleShoppingListActions.searchKeywordChanged(Map({ searchKeyword: '' }));
   };
 
   onStapleShoppingListItemSelectionChanged = (stapleShoppingListId, name, isCustomItem, isSelected) => {
@@ -139,6 +132,7 @@ function getStapleShoppingListItemsWithCustomItem(stapleList, customStapleShoppi
 StapleShoppingListItemsContrainer.propTypes = {
   customStapleShoppingListItem: PropTypes.string,
   stapleShoppingListActions: PropTypes.object.isRequired,
+  shoppingList: PropTypes.shape({ id: PropTypes.string.isRequired }).isRequired,
 };
 
 function mapStateToProps(state) {

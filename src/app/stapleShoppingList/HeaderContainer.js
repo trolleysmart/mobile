@@ -26,7 +26,7 @@ class HeaderContainer extends Component {
 
   addItemsClicked = () => {
     if (this.props.selectedStapleShoppingListItems.size !== 0) {
-      AddItemsToShoppingList.commit(this.props.environment, this.props.userId, {
+      AddItemsToShoppingList.commit(this.props.environment, this.props.userId, this.props.shoppingList.id, {
         newStapleItemNames: this.props.selectedStapleShoppingListItems.filter(_ => _.get('isCustomItem')).map(_ => _.get('name')),
         stapleItems: this.props.selectedStapleShoppingListItems.filterNot(_ => _.get('isCustomItem')),
       });
@@ -66,6 +66,7 @@ class HeaderContainer extends Component {
 HeaderContainer.propTypes = {
   searchKeyword: PropTypes.string,
   stapleShoppingListActions: PropTypes.object.isRequired,
+  shoppingList: PropTypes.shape({ id: PropTypes.string.isRequired }).isRequired,
 };
 
 HeaderContainer.defaultProps = {
@@ -78,6 +79,7 @@ function mapStateToProps(state) {
     searchKeyword: state.stapleShoppingList.get('searchKeyword'),
     userId: state.stapleShoppingList.get('userId'),
     selectedStapleShoppingListItems: state.stapleShoppingList.get('selectedStapleShoppingListItems'),
+    shoppingList: state.stapleShoppingList.get('shoppingList').toJS(),
   };
 }
 

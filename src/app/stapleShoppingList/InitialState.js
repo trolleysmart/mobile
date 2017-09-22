@@ -7,4 +7,5 @@ export default Map({
   selectedStapleShoppingListItems: List(),
   temporaryCustomItems: List(),
   userId: '',
+  shoppingList: Map(),
 });
