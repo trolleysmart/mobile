@@ -17,11 +17,7 @@ import { Color } from '../../framework/style/DefaultStyles';
 
 class HeaderContainer extends Component {
   onSearchKeywordChanged = searchKeyword => {
-    this.props.stapleShoppingListActions.searchKeywordChanged(
-      Map({
-        searchKeyword,
-      }),
-    );
+    this.props.stapleShoppingListActions.searchKeywordChanged(Map({ searchKeyword }));
   };
 
   addItemsClicked = () => {
@@ -32,11 +28,7 @@ class HeaderContainer extends Component {
       });
 
       // Clear the selected staple list
-      this.props.stapleShoppingListActions.stapleShoppingListItemSelectionChanged(
-        Map({
-          selectedStapleShoppingListItems: List(),
-        }),
-      );
+      this.props.stapleShoppingListActions.stapleShoppingListItemSelectionChanged(Map({ selectedStapleShoppingListItems: List() }));
       this.props.gotoShoppingList();
     }
   };
