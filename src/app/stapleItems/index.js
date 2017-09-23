@@ -1,4 +1,4 @@
 // @flow
 
-export StapleShoppingList from './StapleItems';
-export StapleShoppingListReducer from './Reducer';
+export StapleItems from './StapleItems';
+export StapleItemsReducer from './Reducer';

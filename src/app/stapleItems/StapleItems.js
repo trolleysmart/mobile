@@ -52,7 +52,7 @@ StapleShoppingList.propTypes = {
 
 function mapStateToProps(state, props) {
   return {
-    searchKeyword: state.stapleShoppingList.get('searchKeyword'),
+    searchKeyword: state.stapleItems.get('searchKeyword'),
     shoppingList: { id: props.navigation.state.params.shoppingListId },
   };
 }

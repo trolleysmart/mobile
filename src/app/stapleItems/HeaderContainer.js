@@ -8,7 +8,7 @@ import { bindActionCreators } from 'redux';
 import { View } from 'react-native';
 import { connect } from 'react-redux';
 import { Icon } from 'react-native-elements';
-import * as StapleShoppingListActions from './Actions';
+import * as StapleItemsActions from './Actions';
 import { AddItemsToShoppingList } from '../../framework/relay/mutations';
 import { SearchBarWithDelay } from '../../sharedComponents/searchBarWithDelay';
 import Styles from './Styles';
@@ -17,7 +17,7 @@ import { Color } from '../../framework/style/DefaultStyles';
 
 class HeaderContainer extends Component {
   onSearchKeywordChanged = searchKeyword => {
-    this.props.stapleShoppingListActions.searchKeywordChanged(Map({ searchKeyword }));
+    this.props.stapleItemsActions.searchKeywordChanged(Map({ searchKeyword }));
   };
 
   addItemsClicked = () => {
@@ -28,7 +28,7 @@ class HeaderContainer extends Component {
       });
 
       // Clear the selected staple list
-      this.props.stapleShoppingListActions.stapleShoppingListItemSelectionChanged(Map({ selectedStapleShoppingListItems: List() }));
+      this.props.stapleItemsActions.stapleShoppingListItemSelectionChanged(Map({ selectedStapleShoppingListItems: List() }));
       this.props.gotoShoppingList();
     }
   };
@@ -57,7 +57,7 @@ class HeaderContainer extends Component {
 
 HeaderContainer.propTypes = {
   searchKeyword: PropTypes.string,
-  stapleShoppingListActions: PropTypes.object.isRequired,
+  stapleItemsActions: PropTypes.object.isRequired,
   shoppingList: PropTypes.shape({ id: PropTypes.string.isRequired }).isRequired,
 };
 
@@ -68,16 +68,16 @@ HeaderContainer.defaultProps = {
 
 function mapStateToProps(state) {
   return {
-    searchKeyword: state.stapleShoppingList.get('searchKeyword'),
-    userId: state.stapleShoppingList.get('userId'),
-    selectedStapleShoppingListItems: state.stapleShoppingList.get('selectedStapleShoppingListItems'),
-    shoppingList: state.stapleShoppingList.get('shoppingList').toJS(),
+    searchKeyword: state.stapleItems.get('searchKeyword'),
+    userId: state.stapleItems.get('userId'),
+    selectedStapleShoppingListItems: state.stapleItems.get('selectedStapleShoppingListItems'),
+    shoppingList: state.stapleItems.get('shoppingList').toJS(),
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    stapleShoppingListActions: bindActionCreators(StapleShoppingListActions, dispatch),
+    stapleItemsActions: bindActionCreators(StapleItemsActions, dispatch),
     gotoShoppingList: () => dispatch(NavigationActions.back()),
   };
 }

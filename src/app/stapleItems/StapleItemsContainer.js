@@ -7,7 +7,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import uuid from 'uuid/v4';
 import StapleShoppingListItems from './StapleShoppingListItems';
-import * as StapleShoppingListActions from './Actions';
+import * as StapleItemsActions from './Actions';
 import { type StapleItemsRelayContainer_user } from './__generated__/StapleItemsRelayContainer_user.graphql';
 
 type Props = {
@@ -24,12 +24,12 @@ class StapleItemsContrainer extends Component<any, Props, State> {
   };
 
   componentDidMount = () => {
-    this.props.stapleShoppingListActions.userIdChanged(Map({ userId: this.props.user.id }));
-    this.props.stapleShoppingListActions.shoppingListChanged(Immutable.fromJS(this.props.shoppingList));
+    this.props.stapleItemsActions.userIdChanged(Map({ userId: this.props.user.id }));
+    this.props.stapleItemsActions.shoppingListChanged(Immutable.fromJS(this.props.shoppingList));
   };
 
   clearSearchKeyword = () => {
-    this.props.stapleShoppingListActions.searchKeywordChanged(Map({ searchKeyword: '' }));
+    this.props.stapleItemsActions.searchKeywordChanged(Map({ searchKeyword: '' }));
   };
 
   onStapleShoppingListItemSelectionChanged = (stapleShoppingListId, name, isCustomItem, isSelected) => {
@@ -37,7 +37,7 @@ class StapleItemsContrainer extends Component<any, Props, State> {
 
     // original state is selected, so remove from selected list
     if (isSelected) {
-      this.props.stapleShoppingListActions.stapleShoppingListItemSelectionChanged(
+      this.props.stapleItemsActions.stapleShoppingListItemSelectionChanged(
         Map({
           selectedStapleShoppingListItems: selectedItems.filterNot(_ => _.get('id') === stapleShoppingListId),
         }),
@@ -47,7 +47,7 @@ class StapleItemsContrainer extends Component<any, Props, State> {
         this.clearSearchKeyword();
       }
 
-      this.props.stapleShoppingListActions.stapleShoppingListItemSelectionChanged(
+      this.props.stapleItemsActions.stapleShoppingListItemSelectionChanged(
         Map({
           selectedStapleShoppingListItems: selectedItems.push(
             Map({
@@ -131,21 +131,21 @@ function getStapleShoppingListItemsWithCustomItem(stapleList, customStapleShoppi
 
 StapleItemsContrainer.propTypes = {
   customStapleShoppingListItem: PropTypes.string,
-  stapleShoppingListActions: PropTypes.object.isRequired,
+  stapleItemsActions: PropTypes.object.isRequired,
   shoppingList: PropTypes.shape({ id: PropTypes.string.isRequired }).isRequired,
 };
 
 function mapStateToProps(state) {
   return {
-    customStapleShoppingListItem: state.stapleShoppingList.get('searchKeyword'),
-    selectedStapleShoppingListItems: state.stapleShoppingList.get('selectedStapleShoppingListItems').toJS(),
-    temporaryCustomItems: state.stapleShoppingList.get('temporaryCustomItems').toJS(),
+    customStapleShoppingListItem: state.stapleItems.get('searchKeyword'),
+    selectedStapleShoppingListItems: state.stapleItems.get('selectedStapleShoppingListItems').toJS(),
+    temporaryCustomItems: state.stapleItems.get('temporaryCustomItems').toJS(),
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    stapleShoppingListActions: bindActionCreators(StapleShoppingListActions, dispatch),
+    stapleItemsActions: bindActionCreators(StapleItemsActions, dispatch),
   };
 }
 
