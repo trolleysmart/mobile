@@ -11,7 +11,7 @@ import { ImageUltility } from '../../components/image';
 
 class StapleShoppingListItem extends React.PureComponent {
   onItemPressed = () => {
-    this.props.onStapleShoppingListItemSelectionChanged(this.props.id, this.props.name, this.props.isCustomItem, this.props.isSelected);
+    this.props.onStapleItemSelectionChanged(this.props.id, this.props.name, this.props.isCustomItem, this.props.isSelected);
   };
 
   render() {

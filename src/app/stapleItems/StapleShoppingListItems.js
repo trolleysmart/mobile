@@ -9,8 +9,8 @@ import { ImageUltility } from '../../components/image';
 import Styles from './Styles';
 
 class StapleShoppingListItems extends React.PureComponent {
-  onStapleShoppingListItemSelectionChanged = (id, name, isCustomItem, isSelected) => {
-    this.props.onStapleShoppingListItemSelectionChanged(id, name, isCustomItem, isSelected);
+  onStapleItemSelectionChanged = (id, name, isCustomItem, isSelected) => {
+    this.props.onStapleItemSelectionChanged(id, name, isCustomItem, isSelected);
   };
 
   renderItem = ({ item }) => {
@@ -18,7 +18,7 @@ class StapleShoppingListItems extends React.PureComponent {
       <StapleShoppingListItem
         id={item.id}
         name={item.name}
-        onStapleShoppingListItemSelectionChanged={this.onStapleShoppingListItemSelectionChanged}
+        onStapleItemSelectionChanged={this.onStapleItemSelectionChanged}
         isCustomItem={item.isCustomItem}
         isSelected={this.props.selectedStapleItems.find(_ => _.id === item.id) != null}
       />
@@ -130,7 +130,7 @@ StapleShoppingListItems.propTypes = {
     }),
   ).isRequired,
   onStapleShoppingListItemAdded: PropTypes.func.isRequired,
-  onStapleShoppingListItemSelectionChanged: PropTypes.func.isRequired,
+  onStapleItemSelectionChanged: PropTypes.func.isRequired,
   isFetchingTop: PropTypes.bool.isRequired,
   onRefresh: PropTypes.func.isRequired,
   onEndReached: PropTypes.func.isRequired,
