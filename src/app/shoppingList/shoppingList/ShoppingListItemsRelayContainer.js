@@ -10,7 +10,7 @@ export default createPaginationContainer(
       fragment ShoppingListItemsRelayContainer_user on User {
         id
         shoppingListItems(first: $count, after: $cursor, shoppingListId: $shoppingListId)
-          @connection(key: "ShoppingListItems_shoppingListItems") {
+          @connection(key: "User_shoppingListItems") {
           pageInfo {
             hasNextPage
             endCursor

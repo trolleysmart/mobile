@@ -35,7 +35,7 @@ class ShoppingListRow extends React.PureComponent {
           title={this.props.shoppingList.name}
           onPress={() => this.props.onShoppingListPressed(this.props.shoppingList)}
           badge={{
-            value: 3,
+            value: this.props.shoppingList.totalItemsCount,
             textStyle: { color: 'white' },
             containerStyle: { backgroundColor: Color.secondaryColorAction },
           }}

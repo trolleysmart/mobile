@@ -46,7 +46,7 @@ const mutation = graphql`
 
 function sharedUpdater(store, userId, shoppingListId, shoppingListItemsEdge, id) {
   const userProxy = store.get(userId);
-  const connection = ConnectionHandler.getConnection(userProxy, 'ShoppingListItems_shoppingListItems', { shoppingListId });
+  const connection = ConnectionHandler.getConnection(userProxy, 'User_shoppingListItems', { shoppingListId });
 
   if (!connection) {
     return;

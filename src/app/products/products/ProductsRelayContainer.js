@@ -10,7 +10,7 @@ export default createPaginationContainer(
       fragment ProductsRelayContainer_user on User {
         id
         products(first: $count, after: $cursor, name: $searchKeyword, sortOption: $sortOption, tagKeys: $categories, storeKeys: $stores)
-          @connection(key: "Products_products") {
+          @connection(key: "User_products") {
           pageInfo {
             hasNextPage
             endCursor
