@@ -9,7 +9,7 @@ import { graphql, QueryRenderer } from 'react-relay';
 import StapleItemsRelayContainer from './StapleItemsRelayContainer';
 import HeaderContainer from './HeaderContainer';
 
-class StapleShoppingList extends Component {
+class StapleItems extends Component {
   static navigationOptions = {
     headerTitle: <HeaderContainer environment={environment} />,
   };
@@ -46,7 +46,7 @@ class StapleShoppingList extends Component {
   }
 }
 
-StapleShoppingList.propTypes = {
+StapleItems.propTypes = {
   searchKeyword: PropTypes.string,
 };
 
@@ -57,4 +57,4 @@ function mapStateToProps(state, props) {
   };
 }
 
-export default connect(mapStateToProps)(StapleShoppingList);
+export default connect(mapStateToProps)(StapleItems);
