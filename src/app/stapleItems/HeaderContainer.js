@@ -21,14 +21,14 @@ class HeaderContainer extends Component {
   };
 
   addItemsClicked = () => {
-    if (this.props.selectedStapleShoppingListItems.size !== 0) {
+    if (this.props.selectedStapleItems.size !== 0) {
       AddItemsToShoppingList.commit(this.props.environment, this.props.userId, this.props.shoppingList.id, {
-        newStapleItemNames: this.props.selectedStapleShoppingListItems.filter(_ => _.get('isCustomItem')).map(_ => _.get('name')),
-        stapleItems: this.props.selectedStapleShoppingListItems.filterNot(_ => _.get('isCustomItem')),
+        newStapleItemNames: this.props.selectedStapleItems.filter(_ => _.get('isCustomItem')).map(_ => _.get('name')),
+        stapleItems: this.props.selectedStapleItems.filterNot(_ => _.get('isCustomItem')),
       });
 
       // Clear the selected staple list
-      this.props.stapleItemsActions.stapleShoppingListItemSelectionChanged(Map({ selectedStapleShoppingListItems: List() }));
+      this.props.stapleItemsActions.stapleShoppingListItemSelectionChanged(Map({ selectedStapleItems: List() }));
       this.props.gotoShoppingList();
     }
   };
@@ -70,7 +70,7 @@ function mapStateToProps(state) {
   return {
     searchKeyword: state.stapleItems.get('searchKeyword'),
     userId: state.stapleItems.get('userId'),
-    selectedStapleShoppingListItems: state.stapleItems.get('selectedStapleShoppingListItems'),
+    selectedStapleItems: state.stapleItems.get('selectedStapleItems'),
     shoppingList: state.stapleItems.get('shoppingList').toJS(),
   };
 }

@@ -33,13 +33,13 @@ class StapleItemsContrainer extends Component<any, Props, State> {
   };
 
   onStapleShoppingListItemSelectionChanged = (stapleShoppingListId, name, isCustomItem, isSelected) => {
-    const selectedItems = Immutable.fromJS(this.props.selectedStapleShoppingListItems);
+    const selectedItems = Immutable.fromJS(this.props.selectedStapleItems);
 
     // original state is selected, so remove from selected list
     if (isSelected) {
       this.props.stapleItemsActions.stapleShoppingListItemSelectionChanged(
         Map({
-          selectedStapleShoppingListItems: selectedItems.filterNot(_ => _.get('id') === stapleShoppingListId),
+          selectedStapleItems: selectedItems.filterNot(_ => _.get('id') === stapleShoppingListId),
         }),
       );
     } else {
@@ -49,7 +49,7 @@ class StapleItemsContrainer extends Component<any, Props, State> {
 
       this.props.stapleItemsActions.stapleShoppingListItemSelectionChanged(
         Map({
-          selectedStapleShoppingListItems: selectedItems.push(
+          selectedStapleItems: selectedItems.push(
             Map({
               id: stapleShoppingListId || uuid(),
               name: name,
@@ -98,7 +98,7 @@ class StapleItemsContrainer extends Component<any, Props, State> {
           this.props.customStapleShoppingListItem,
         )}
         onStapleShoppingListItemSelectionChanged={this.onStapleShoppingListItemSelectionChanged}
-        selectedStapleShoppingListItems={this.props.selectedStapleShoppingListItems}
+        selectedStapleItems={this.props.selectedStapleItems}
         isFetchingTop={this.state.isFetchingTop}
         onRefresh={this.onRefresh}
         onEndReached={this.onEndReached}
@@ -138,7 +138,7 @@ StapleItemsContrainer.propTypes = {
 function mapStateToProps(state) {
   return {
     customStapleShoppingListItem: state.stapleItems.get('searchKeyword'),
-    selectedStapleShoppingListItems: state.stapleItems.get('selectedStapleShoppingListItems').toJS(),
+    selectedStapleItems: state.stapleItems.get('selectedStapleItems').toJS(),
     temporaryCustomItems: state.stapleItems.get('temporaryCustomItems').toJS(),
   };
 }

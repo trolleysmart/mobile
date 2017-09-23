@@ -49,7 +49,7 @@ class ShoppingListItemsContainer extends Component<any, Props, State> {
 
   onShoppingListAddItemClicked = () => {
     // Clear the selected staple list
-    this.props.stapleItemsActions.stapleShoppingListItemSelectionChanged(Map({ selectedStapleShoppingListItems: List() }));
+    this.props.stapleItemsActions.stapleShoppingListItemSelectionChanged(Map({ selectedStapleItems: List() }));
     this.props.gotoAddStapleItemsItems(this.props.shoppingListId);
   };
 

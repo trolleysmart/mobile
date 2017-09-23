@@ -4,7 +4,7 @@ import { Map, List } from 'immutable';
 
 export default Map({
   searchKeyword: '',
-  selectedStapleShoppingListItems: List(),
+  selectedStapleItems: List(),
   temporaryCustomItems: List(),
   userId: '',
   shoppingList: Map(),

@@ -20,7 +20,7 @@ class StapleShoppingListItems extends React.PureComponent {
         name={item.name}
         onStapleShoppingListItemSelectionChanged={this.onStapleShoppingListItemSelectionChanged}
         isCustomItem={item.isCustomItem}
-        isSelected={this.props.selectedStapleShoppingListItems.find(_ => _.id === item.id) != null}
+        isSelected={this.props.selectedStapleItems.find(_ => _.id === item.id) != null}
       />
     );
   };
@@ -97,7 +97,7 @@ class StapleShoppingListItems extends React.PureComponent {
     return (
       <View style={Styles.container}>
         <View style={Styles.containerHeader}>
-          <Text style={Styles.itemsCount}>{this.props.selectedStapleShoppingListItems.length} items selected</Text>
+          <Text style={Styles.itemsCount}>{this.props.selectedStapleItems.length} items selected</Text>
         </View>
         <SectionList
           contentContainerStyle={Styles.sectionListContainer}
@@ -122,7 +122,7 @@ StapleShoppingListItems.propTypes = {
       isCustomItem: PropTypes.bool,
     }),
   ).isRequired,
-  selectedStapleShoppingListItems: PropTypes.arrayOf(
+  selectedStapleItems: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,

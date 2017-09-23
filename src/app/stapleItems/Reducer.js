@@ -13,11 +13,11 @@ export default (state = initialState, action) => {
 
     case ActionTypes.STAPLE_SHOPPING_LIST_ITEM_SELECTION_CHANGED:
       return state
-        .set('selectedStapleShoppingListItems', action.payload.get('selectedStapleShoppingListItems'))
+        .set('selectedStapleItems', action.payload.get('selectedStapleItems'))
         .update('temporaryCustomItems', items =>
           items.concat(
             action.payload
-              .get('selectedStapleShoppingListItems')
+              .get('selectedStapleItems')
               .filter(_ => _.get('isCustomItem'))
               .filterNot(_ => items.find(item => item.get('id') === _.get('id'))),
           ),
