@@ -6,7 +6,7 @@ import { Text } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { environment } from '../../framework/relay';
 import { graphql, QueryRenderer } from 'react-relay';
-import StapleShoppingListItemsRelayContainer from './StapleShoppingListItemsRelayContainer';
+import StapleItemsRelayContainer from './StapleItemsRelayContainer';
 import HeaderContainer from './HeaderContainer';
 
 class StapleShoppingList extends Component {
@@ -19,9 +19,9 @@ class StapleShoppingList extends Component {
       <QueryRenderer
         environment={environment}
         query={graphql`
-          query StapleShoppingListQuery($count: Int!, $cursor: String, $searchKeyword: String) {
+          query StapleItemsQuery($count: Int!, $cursor: String, $searchKeyword: String) {
             user {
-              ...StapleShoppingListItemsRelayContainer_user
+              ...StapleItemsRelayContainer_user
             }
           }
         `}
@@ -36,7 +36,7 @@ class StapleShoppingList extends Component {
           }
 
           if (props) {
-            return <StapleShoppingListItemsRelayContainer user={props.user} shoppingList={this.props.shoppingList} />;
+            return <StapleItemsRelayContainer user={props.user} shoppingList={this.props.shoppingList} />;
           } else {
             return <Text>Loading</Text>;
           }

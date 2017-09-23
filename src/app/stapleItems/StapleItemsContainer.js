@@ -8,17 +8,17 @@ import { connect } from 'react-redux';
 import uuid from 'uuid/v4';
 import StapleShoppingListItems from './StapleShoppingListItems';
 import * as StapleShoppingListActions from './Actions';
-import { type StapleShoppingListItemsRelayContainer_user } from './__generated__/StapleShoppingListItemsRelayContainer_user.graphql';
+import { type StapleItemsRelayContainer_user } from './__generated__/StapleItemsRelayContainer_user.graphql';
 
 type Props = {
-  user: StapleShoppingListItemsRelayContainer_user,
+  user: StapleItemsRelayContainer_user,
 };
 
 type State = {
   isFetchingTop: boolean,
 };
 
-class StapleShoppingListItemsContrainer extends Component<any, Props, State> {
+class StapleItemsContrainer extends Component<any, Props, State> {
   state = {
     isFetchingTop: false,
   };
@@ -129,7 +129,7 @@ function getStapleShoppingListItemsWithCustomItem(stapleList, customStapleShoppi
   return stapleList;
 }
 
-StapleShoppingListItemsContrainer.propTypes = {
+StapleItemsContrainer.propTypes = {
   customStapleShoppingListItem: PropTypes.string,
   stapleShoppingListActions: PropTypes.object.isRequired,
   shoppingList: PropTypes.shape({ id: PropTypes.string.isRequired }).isRequired,
@@ -149,4 +149,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(StapleShoppingListItemsContrainer);
+export default connect(mapStateToProps, mapDispatchToProps)(StapleItemsContrainer);
