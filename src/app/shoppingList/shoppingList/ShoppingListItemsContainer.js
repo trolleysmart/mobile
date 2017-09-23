@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import ShoppingListItems from './ShoppingListItems';
 import { RemoveItemsFromShoppingList } from '../../../framework/relay/mutations';
 import * as ShoppingListActions from './Actions';
-import * as StapleShoppingListActions from '../../stapleShoppingList/Actions';
+import * as StapleShoppingListActions from '../../stapleItems/Actions';
 import * as ProductsActions from '../../products/products/Actions';
 import { type ShoppingListItemsRelayContainer_user } from './__generated__/ShoppingListItemsRelayContainer_user.graphql';
 
