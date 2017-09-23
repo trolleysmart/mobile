@@ -4,23 +4,23 @@ import React from 'react';
 import { SectionList, Text, View, Image } from 'react-native';
 import Immutable from 'immutable';
 import PropTypes from 'prop-types';
-import StapleShoppingListItem from './StapleShoppingListItem';
+import StapleItem from './StapleItem';
 import { ImageUltility } from '../../components/image';
 import Styles from './Styles';
 
-class StapleShoppingListItems extends React.PureComponent {
-  onStapleShoppingListItemSelectionChanged = (id, name, isCustomItem, isSelected) => {
-    this.props.onStapleShoppingListItemSelectionChanged(id, name, isCustomItem, isSelected);
+class StapleItemsList extends React.PureComponent {
+  onStapleItemSelectionChanged = (id, name, isCustomItem, isSelected) => {
+    this.props.onStapleItemSelectionChanged(id, name, isCustomItem, isSelected);
   };
 
   renderItem = ({ item }) => {
     return (
-      <StapleShoppingListItem
+      <StapleItem
         id={item.id}
         name={item.name}
-        onStapleShoppingListItemSelectionChanged={this.onStapleShoppingListItemSelectionChanged}
+        onStapleItemSelectionChanged={this.onStapleItemSelectionChanged}
         isCustomItem={item.isCustomItem}
-        isSelected={this.props.selectedStapleShoppingListItems.find(_ => _.id === item.id) != null}
+        isSelected={this.props.selectedStapleItems.find(_ => _.id === item.id) != null}
       />
     );
   };
@@ -35,7 +35,7 @@ class StapleShoppingListItems extends React.PureComponent {
   };
 
   getSectionData = () => {
-    const data = Immutable.fromJS(this.props.stapleShoppingList);
+    const data = Immutable.fromJS(this.props.stapleItems);
     let sectionData = data
       .groupBy(
         item =>
@@ -97,7 +97,7 @@ class StapleShoppingListItems extends React.PureComponent {
     return (
       <View style={Styles.container}>
         <View style={Styles.containerHeader}>
-          <Text style={Styles.itemsCount}>{this.props.selectedStapleShoppingListItems.length} items selected</Text>
+          <Text style={Styles.itemsCount}>{this.props.selectedStapleItems.length} items selected</Text>
         </View>
         <SectionList
           contentContainerStyle={Styles.sectionListContainer}
@@ -114,26 +114,25 @@ class StapleShoppingListItems extends React.PureComponent {
   };
 }
 
-StapleShoppingListItems.propTypes = {
-  stapleShoppingList: PropTypes.arrayOf(
+StapleItemsList.propTypes = {
+  stapleItems: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
       isCustomItem: PropTypes.bool,
     }),
   ).isRequired,
-  selectedStapleShoppingListItems: PropTypes.arrayOf(
+  selectedStapleItems: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
       isCustomItem: PropTypes.bool,
     }),
   ).isRequired,
-  onStapleShoppingListItemAdded: PropTypes.func.isRequired,
-  onStapleShoppingListItemSelectionChanged: PropTypes.func.isRequired,
+  onStapleItemSelectionChanged: PropTypes.func.isRequired,
   isFetchingTop: PropTypes.bool.isRequired,
   onRefresh: PropTypes.func.isRequired,
   onEndReached: PropTypes.func.isRequired,
 };
 
-export default StapleShoppingListItems;
+export default StapleItemsList;

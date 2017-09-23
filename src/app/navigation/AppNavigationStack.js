@@ -2,7 +2,7 @@
 
 import { StackNavigator } from 'react-navigation';
 import HomeNavigationTab from './HomeNavigationTab';
-import { StapleShoppingList } from '../stapleShoppingList';
+import { StapleItems } from '../stapleItems';
 import { ProductsFilterContainer } from '../../sharedComponents/productsFilter';
 import { CategoriesFilter } from '../../sharedComponents/categoriesFilter';
 import { StoresFilter } from '../../sharedComponents/storesFilter';
@@ -13,8 +13,8 @@ export default StackNavigator({
   Home: {
     screen: HomeNavigationTab,
   },
-  StapleShoppingList: {
-    screen: StapleShoppingList,
+  StapleItems: {
+    screen: StapleItems,
   },
   ProductsFilter: {
     screen: ProductsFilterContainer,

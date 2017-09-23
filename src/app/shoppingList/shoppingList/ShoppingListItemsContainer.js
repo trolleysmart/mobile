@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import ShoppingListItems from './ShoppingListItems';
 import { RemoveItemsFromShoppingList } from '../../../framework/relay/mutations';
 import * as ShoppingListActions from './Actions';
-import * as StapleShoppingListActions from '../../stapleShoppingList/Actions';
+import * as StapleItemsActions from '../../stapleItems/Actions';
 import * as ProductsActions from '../../products/products/Actions';
 import { type ShoppingListItemsRelayContainer_user } from './__generated__/ShoppingListItemsRelayContainer_user.graphql';
 
@@ -49,31 +49,18 @@ class ShoppingListItemsContainer extends Component<any, Props, State> {
 
   onShoppingListAddItemClicked = () => {
     // Clear the selected staple list
-    this.props.stapleShoppingListActions.stapleShoppingListItemSelectionChanged(
-      Map({
-        selectedStapleShoppingListItems: List(),
-      }),
-    );
-    this.props.gotoAddStapleShoppingListItems(this.props.shoppingListId);
+    this.props.stapleItemsActions.stapleItemSelectionChanged(Map({ selectedStapleItems: List() }));
+    this.props.gotoAddStapleItemsItems(this.props.shoppingListId);
   };
 
   onViewProductsPressed = id => {
     const foundItem = this.props.user.shoppingListItems.edges.map(_ => _.node).find(item => item.id.localeCompare(id) === 0);
 
     // Set the current viewing staple item
-    this.props.shoppingListActions.currentViewingStapleItemChanged(
-      Map({
-        shoppingListId: id,
-        stapleShoppingListId: foundItem.stapleShoppingListId,
-      }),
-    );
+    this.props.shoppingListActions.currentViewingStapleItemChanged(Map({ shoppingListId: id, stapleShoppingListId: foundItem.stapleShoppingListId }));
 
     // Set removeCurrentViewingStapleItem to false
-    this.props.shoppingListActions.removeCurrentViewingStapleItemFlagChanged(
-      Map({
-        removeCurrentViewingStapleItem: false,
-      }),
-    );
+    this.props.shoppingListActions.removeCurrentViewingStapleItemFlagChanged(Map({ removeCurrentViewingStapleItem: false }));
     this.props.gotoProducts(foundItem.name);
   };
 
@@ -121,7 +108,7 @@ class ShoppingListItemsContainer extends Component<any, Props, State> {
   };
 }
 ShoppingListItemsContainer.propTypes = {
-  gotoAddStapleShoppingListItems: PropTypes.func.isRequired,
+  gotoAddStapleItemsItems: PropTypes.func.isRequired,
   removeCurrentViewingStapleItem: PropTypes.bool,
 };
 
@@ -135,12 +122,12 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     shoppingListActions: bindActionCreators(ShoppingListActions, dispatch),
-    stapleShoppingListActions: bindActionCreators(StapleShoppingListActions, dispatch),
+    stapleItemsActions: bindActionCreators(StapleItemsActions, dispatch),
     productsActions: bindActionCreators(ProductsActions, dispatch),
-    gotoAddStapleShoppingListItems: shoppingListId =>
+    gotoAddStapleItemsItems: shoppingListId =>
       dispatch(
         NavigationActions.navigate({
-          routeName: 'StapleShoppingList',
+          routeName: 'StapleItems',
           params: {
             shoppingListId,
           },
