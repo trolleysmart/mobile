@@ -109,7 +109,7 @@ class StapleItemsContrainer extends Component<any, Props, State> {
   render = () => {
     return (
       <StapleShoppingListItems
-        stapleShoppingList={this.getStapleShoppingListItemsWithCustomItem()}
+        stapleItems={this.getStapleShoppingListItemsWithCustomItem()}
         onStapleItemSelectionChanged={this.onStapleItemSelectionChanged}
         selectedStapleItems={this.props.selectedStapleItems}
         isFetchingTop={this.state.isFetchingTop}

@@ -35,7 +35,7 @@ class StapleShoppingListItems extends React.PureComponent {
   };
 
   getSectionData = () => {
-    const data = Immutable.fromJS(this.props.stapleShoppingList);
+    const data = Immutable.fromJS(this.props.stapleItems);
     let sectionData = data
       .groupBy(
         item =>
@@ -115,7 +115,7 @@ class StapleShoppingListItems extends React.PureComponent {
 }
 
 StapleShoppingListItems.propTypes = {
-  stapleShoppingList: PropTypes.arrayOf(
+  stapleItems: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
