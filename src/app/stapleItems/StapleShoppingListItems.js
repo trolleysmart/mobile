@@ -4,7 +4,7 @@ import React from 'react';
 import { SectionList, Text, View, Image } from 'react-native';
 import Immutable from 'immutable';
 import PropTypes from 'prop-types';
-import StapleShoppingListItem from './StapleShoppingListItem';
+import StapleItem from './StapleItem';
 import { ImageUltility } from '../../components/image';
 import Styles from './Styles';
 
@@ -15,7 +15,7 @@ class StapleShoppingListItems extends React.PureComponent {
 
   renderItem = ({ item }) => {
     return (
-      <StapleShoppingListItem
+      <StapleItem
         id={item.id}
         name={item.name}
         onStapleItemSelectionChanged={this.onStapleItemSelectionChanged}
@@ -129,7 +129,6 @@ StapleShoppingListItems.propTypes = {
       isCustomItem: PropTypes.bool,
     }),
   ).isRequired,
-  onStapleShoppingListItemAdded: PropTypes.func.isRequired,
   onStapleItemSelectionChanged: PropTypes.func.isRequired,
   isFetchingTop: PropTypes.bool.isRequired,
   onRefresh: PropTypes.func.isRequired,

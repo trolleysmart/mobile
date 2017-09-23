@@ -9,7 +9,7 @@ import { TouchableItem } from '../../components/touchableIcon';
 import { Color } from '../../framework/style/DefaultStyles';
 import { ImageUltility } from '../../components/image';
 
-class StapleShoppingListItem extends React.PureComponent {
+class StapleItem extends React.PureComponent {
   onItemPressed = () => {
     this.props.onStapleItemSelectionChanged(this.props.id, this.props.name, this.props.isCustomItem, this.props.isSelected);
   };
@@ -39,15 +39,14 @@ class StapleShoppingListItem extends React.PureComponent {
   }
 }
 
-StapleShoppingListItem.propTypes = {
+StapleItem.propTypes = {
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   isCustomItem: PropTypes.bool,
-  onStapleShoppingListItemAdded: PropTypes.func.isRequired,
 };
 
-StapleShoppingListItem.defaultProps = {
+StapleItem.defaultProps = {
   isCustomItem: false,
 };
 
-export default StapleShoppingListItem;
+export default StapleItem;
