@@ -88,13 +88,28 @@ class StapleItemsContrainer extends Component<any, Props, State> {
     });
   };
 
+  getStapleShoppingListItemsWithCustomItem = () => {
+    const stapleList = this.props.temporaryCustomItems.concat(this.props.user.stapleItems.edges.map(_ => _.node));
+    const customStapleItem = this.props.customStapleItem;
+
+    if (customStapleItem) {
+      const customItemName = customStapleItem.trim();
+      const exactMatchStapleItem = stapleList.find(_ => _.name.toLowerCase() === customItemName.toLowerCase());
+
+      if (!exactMatchStapleItem) {
+        return [{ name: customItemName, isCustomItem: true }].concat(stapleList);
+      }
+
+      return stapleList;
+    }
+
+    return stapleList;
+  };
+
   render = () => {
     return (
       <StapleShoppingListItems
-        stapleShoppingList={getStapleShoppingListItemsWithCustomItem(
-          this.props.temporaryCustomItems.concat(this.props.user.stapleItems.edges.map(_ => _.node)),
-          this.props.customStapleShoppingListItem,
-        )}
+        stapleShoppingList={this.getStapleShoppingListItemsWithCustomItem()}
         onStapleItemSelectionChanged={this.onStapleItemSelectionChanged}
         selectedStapleItems={this.props.selectedStapleItems}
         isFetchingTop={this.state.isFetchingTop}
@@ -105,37 +120,15 @@ class StapleItemsContrainer extends Component<any, Props, State> {
   };
 }
 
-function getStapleShoppingListItemsWithCustomItem(stapleList, customStapleShoppingListItem) {
-  if (customStapleShoppingListItem) {
-    const customItemName = customStapleShoppingListItem.trim();
-    const exactMatchStapleItem = stapleList.find(_ => _.name.toLowerCase() === customItemName.toLowerCase());
-
-    if (!exactMatchStapleItem) {
-      const customStapleItems = [];
-
-      customStapleItems.push({
-        name: customItemName,
-        isCustomItem: true,
-      });
-
-      return customStapleItems.concat(stapleList);
-    }
-
-    return stapleList;
-  }
-
-  return stapleList;
-}
-
 StapleItemsContrainer.propTypes = {
-  customStapleShoppingListItem: PropTypes.string,
+  customStapleItem: PropTypes.string,
   stapleItemsActions: PropTypes.object.isRequired,
   shoppingList: PropTypes.shape({ id: PropTypes.string.isRequired }).isRequired,
 };
 
 function mapStateToProps(state) {
   return {
-    customStapleShoppingListItem: state.stapleItems.get('searchKeyword'),
+    customStapleItem: state.stapleItems.get('searchKeyword'),
     selectedStapleItems: state.stapleItems.get('selectedStapleItems').toJS(),
     temporaryCustomItems: state.stapleItems.get('temporaryCustomItems').toJS(),
   };
