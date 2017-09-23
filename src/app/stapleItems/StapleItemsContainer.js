@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import uuid from 'uuid/v4';
-import StapleShoppingListItems from './StapleShoppingListItems';
+import StapleItemsList from './StapleItemsList';
 import * as StapleItemsActions from './Actions';
 import { type StapleItemsRelayContainer_user } from './__generated__/StapleItemsRelayContainer_user.graphql';
 
@@ -88,7 +88,7 @@ class StapleItemsContrainer extends Component<any, Props, State> {
     });
   };
 
-  getStapleShoppingListItemsWithCustomItem = () => {
+  getStapleItemsWithCustomItem = () => {
     const stapleList = this.props.temporaryCustomItems.concat(this.props.user.stapleItems.edges.map(_ => _.node));
     const customStapleItem = this.props.customStapleItem;
 
@@ -108,8 +108,8 @@ class StapleItemsContrainer extends Component<any, Props, State> {
 
   render = () => {
     return (
-      <StapleShoppingListItems
-        stapleItems={this.getStapleShoppingListItemsWithCustomItem()}
+      <StapleItemsList
+        stapleItems={this.getStapleItemsWithCustomItem()}
         onStapleItemSelectionChanged={this.onStapleItemSelectionChanged}
         selectedStapleItems={this.props.selectedStapleItems}
         isFetchingTop={this.state.isFetchingTop}

@@ -8,7 +8,7 @@ import StapleItem from './StapleItem';
 import { ImageUltility } from '../../components/image';
 import Styles from './Styles';
 
-class StapleShoppingListItems extends React.PureComponent {
+class StapleItemsList extends React.PureComponent {
   onStapleItemSelectionChanged = (id, name, isCustomItem, isSelected) => {
     this.props.onStapleItemSelectionChanged(id, name, isCustomItem, isSelected);
   };
@@ -114,7 +114,7 @@ class StapleShoppingListItems extends React.PureComponent {
   };
 }
 
-StapleShoppingListItems.propTypes = {
+StapleItemsList.propTypes = {
   stapleItems: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
@@ -135,4 +135,4 @@ StapleShoppingListItems.propTypes = {
   onEndReached: PropTypes.func.isRequired,
 };
 
-export default StapleShoppingListItems;
+export default StapleItemsList;
