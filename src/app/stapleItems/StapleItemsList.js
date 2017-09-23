@@ -88,7 +88,10 @@ class StapleItemsList extends React.PureComponent {
       .toJS();
 
     // Add the popular items to the top of secion data;
-    sectionData.unshift(popularItems[0]);
+    if (popularItems[0]) {
+      sectionData.unshift(popularItems[0]);
+    }
+
     return sectionData;
   };
 
