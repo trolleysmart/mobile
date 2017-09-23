@@ -32,16 +32,16 @@ class StapleItemsContrainer extends Component<any, Props, State> {
     this.props.stapleItemsActions.searchKeywordChanged(Map({ searchKeyword: '' }));
   };
 
-  onStapleShoppingListItemSelectionChanged = (stapleShoppingListId, name, isCustomItem, isSelected) => {
+  onStapleShoppingListItemSelectionChanged = (stapleItemId, name, isCustomItem, isSelected) => {
     const selectedItems = Immutable.fromJS(this.props.selectedStapleItems);
 
     // original state is selected, so remove from selected list
     if (isSelected) {
       this.props.stapleItemsActions.stapleItemSelectionChanged(
-        Map({ selectedStapleItems: selectedItems.filterNot(_ => _.get('id') === stapleShoppingListId) }),
+        Map({ selectedStapleItems: selectedItems.filterNot(_ => _.get('id') === stapleItemId) }),
       );
     } else {
-      if (!stapleShoppingListId) {
+      if (!stapleItemId) {
         this.clearSearchKeyword();
       }
 
@@ -49,7 +49,7 @@ class StapleItemsContrainer extends Component<any, Props, State> {
         Map({
           selectedStapleItems: selectedItems.push(
             Map({
-              id: stapleShoppingListId || uuid(),
+              id: stapleItemId || uuid(),
               name: name,
               isCustomItem: isCustomItem,
             }),
