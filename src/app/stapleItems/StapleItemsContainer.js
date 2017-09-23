@@ -37,17 +37,15 @@ class StapleItemsContrainer extends Component<any, Props, State> {
 
     // original state is selected, so remove from selected list
     if (isSelected) {
-      this.props.stapleItemsActions.stapleShoppingListItemSelectionChanged(
-        Map({
-          selectedStapleItems: selectedItems.filterNot(_ => _.get('id') === stapleShoppingListId),
-        }),
+      this.props.stapleItemsActions.stapleItemSelectionChanged(
+        Map({ selectedStapleItems: selectedItems.filterNot(_ => _.get('id') === stapleShoppingListId) }),
       );
     } else {
       if (!stapleShoppingListId) {
         this.clearSearchKeyword();
       }
 
-      this.props.stapleItemsActions.stapleShoppingListItemSelectionChanged(
+      this.props.stapleItemsActions.stapleItemSelectionChanged(
         Map({
           selectedStapleItems: selectedItems.push(
             Map({

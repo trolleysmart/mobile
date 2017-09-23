@@ -28,7 +28,7 @@ class HeaderContainer extends Component {
       });
 
       // Clear the selected staple list
-      this.props.stapleItemsActions.stapleShoppingListItemSelectionChanged(Map({ selectedStapleItems: List() }));
+      this.props.stapleItemsActions.stapleItemSelectionChanged(Map({ selectedStapleItems: List() }));
       this.props.gotoShoppingList();
     }
   };
