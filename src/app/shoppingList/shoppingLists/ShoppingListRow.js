@@ -17,9 +17,14 @@ class ShoppingListRow extends React.PureComponent {
           <Icon name="dots-vertical" type="material-community" />
         </MenuTrigger>
         <MenuOptions>
-          <MenuOption>
+          <MenuOption onSelect={() => this.props.onEditShoppingListPressed(this.props.shoppingList.id, this.props.shoppingList.name)}>
             <View style={Styles.menuOption}>
               <Text>Edit</Text>
+            </View>
+          </MenuOption>
+          <MenuOption onSelect={() => this.props.onDeleteShoppingListPressed(this.props.shoppingList.id, this.props.shoppingList.name)}>
+            <View style={Styles.menuOption}>
+              <Text>Delete</Text>
             </View>
           </MenuOption>
         </MenuOptions>
@@ -50,6 +55,8 @@ class ShoppingListRow extends React.PureComponent {
 ShoppingListRow.propTypes = {
   shoppingList: ShoppingListProp,
   onShoppingListPressed: PropTypes.func.isRequired,
+  onEditShoppingListPressed: PropTypes.func.isRequired,
+  onDeleteShoppingListPressed: PropTypes.func.isRequired,
 };
 
 export default ShoppingListRow;

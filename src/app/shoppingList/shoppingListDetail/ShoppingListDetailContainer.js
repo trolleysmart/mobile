@@ -10,31 +10,41 @@ import * as ShoppingListDetailActions from './Actions';
 import { Color } from '../../../framework/style/DefaultStyles';
 
 class ShoppingListDetailContainer extends Component {
-  static navigationOptions = {
+  static navigationOptions = ({ navigation }) => ({
     headerRight: <HeaderContainer />,
     headerStyle: {
       backgroundColor: Color.primaryColorNormal,
     },
-    // headerBackTitle: null,
-    // headerLe: <View />,
-  };
+    title: navigation.state.params ? navigation.state.params.title : '',
+  });
 
   shoppingListNameChanged = name => {
     this.props.shoppingListDetailActions.shoppingListNameChanged(
       Map({
         shoppingListName: name,
+        shoppingListId: this.props.shoppingListId,
       }),
     );
   };
 
   render = () => {
-    return <ShoppingListDetail avatarUrl={this.props.avatarUrl} shoppingListNameChanged={this.shoppingListNameChanged} />;
+    return (
+      <ShoppingListDetail
+        shoppingListName={this.props.shoppingListName}
+        avatarUrl={this.props.avatarUrl}
+        shoppingListNameChanged={this.shoppingListNameChanged}
+      />
+    );
   };
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state, props) {
   return {
     avatarUrl: state.userAccess.getIn(['userInfo', 'avatar']) ? state.userAccess.getIn(['userInfo', 'avatar']).data.url : null,
+    shoppingListName: state.shoppingListDetail.get('shoppingListName')
+      ? state.shoppingListDetail.get('shoppingListName')
+      : props.navigation.state.params ? props.navigation.state.params.shoppingListName : '',
+    shoppingListId: props.navigation.state.params ? props.navigation.state.params.shoppingListId : '',
   };
 }
 

@@ -10,13 +10,13 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import ShoppingListItemsRelayContainer from './ShoppingListItemsRelayContainer';
 
 class ShoppingList extends Component {
-  static navigationOptions = {
+  static navigationOptions = ({ navigation }) => ({
     tabBarLabel: 'Shopping List',
     tabBarIcon: ({ tintColor, focused }) => (
       <Ionicons name={focused ? 'ios-list-box' : 'ios-list-box-outline'} size={26} style={{ color: tintColor }} />
     ),
-    title: 'My Shopping List 1',
-  };
+    title: navigation.state.params ? navigation.state.params.title : '',
+  });
 
   render() {
     return (
