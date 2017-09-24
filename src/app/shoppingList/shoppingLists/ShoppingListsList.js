@@ -15,7 +15,14 @@ class ShoppingListsList extends Component {
       <View style={Styles.container}>
         <FlatList
           data={this.props.shoppingLists}
-          renderItem={info => <ShoppingListRow shoppingList={info.item} onShoppingListPressed={this.props.onShoppingListPressed} />}
+          renderItem={info => (
+            <ShoppingListRow
+              shoppingList={info.item}
+              onShoppingListPressed={this.props.onShoppingListPressed}
+              onEditShoppingListPressed={this.props.onEditShoppingListPressed}
+              onDeleteShoppingListPressed={this.props.onDeleteShoppingListPressed}
+            />
+          )}
           keyExtractor={item => item.id}
           onEndReached={this.props.onEndReached}
           onRefresh={this.props.onRefresh}
@@ -38,6 +45,8 @@ ShoppingListsList.propTypes = {
   shoppingLists: ShoppingListsProp,
   onShoppingListPressed: PropTypes.func.isRequired,
   onCreateShoppingListPressed: PropTypes.func.isRequired,
+  onEditShoppingListPressed: PropTypes.func.isRequired,
+  onDeleteShoppingListPressed: PropTypes.func.isRequired,
 };
 
 export default ShoppingListsList;

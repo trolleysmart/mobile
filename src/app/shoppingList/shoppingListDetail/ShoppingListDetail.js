@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
-import { FormInput, Avatar, Icon } from 'react-native-elements';
+import { FormInput, Avatar, Icon, FormValidationMessage } from 'react-native-elements';
 import Styles from './Styles';
 import { TouchableItem } from '../../../components/touchableIcon';
 import { Color } from '../../../framework/style/DefaultStyles';
@@ -20,6 +20,9 @@ class ShoppingListDetail extends Component {
             onChangeText={name => this.props.shoppingListNameChanged(name)}
             value={this.props.shoppingListName}
           />
+          <FormValidationMessage>
+            {this.props.shoppingListName ? (this.props.shoppingListName.length > 20 ? 'List name must be less than 20 characters' : '') : ''}
+          </FormValidationMessage>
         </View>
         <View style={Styles.membersContainer}>
           <Text style={Styles.membersLabel}>List Members</Text>

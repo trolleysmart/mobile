@@ -8,6 +8,7 @@ import { CategoriesFilter } from '../../sharedComponents/categoriesFilter';
 import { StoresFilter } from '../../sharedComponents/storesFilter';
 import { FlyerContainer } from '../flyer';
 import { Products } from '../products';
+import ShoppingListDetailContainer from '../shoppingList/shoppingListDetail/ShoppingListDetailContainer';
 
 export default StackNavigator({
   Home: {
@@ -30,5 +31,8 @@ export default StackNavigator({
   },
   Products: {
     screen: Products,
+  },
+  ShoppingListDetail: {
+    screen: ShoppingListDetailContainer,
   },
 });

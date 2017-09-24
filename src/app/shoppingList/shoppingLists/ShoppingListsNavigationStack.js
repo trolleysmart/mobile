@@ -3,7 +3,6 @@
 import { StackNavigator } from 'react-navigation';
 import ShoppingList from '../shoppingList/ShoppingList';
 import ShoppingLists from './ShoppingLists';
-import ShoppingListDetailContainer from '../shoppingListDetail/ShoppingListDetailContainer';
 
 const ShoppingListsNavigationStack = StackNavigator(
   {
@@ -12,9 +11,6 @@ const ShoppingListsNavigationStack = StackNavigator(
     },
     ShoppingList: {
       screen: ShoppingList,
-    },
-    ShoppingListDetail: {
-      screen: ShoppingListDetailContainer,
     },
   },
   {

@@ -9,8 +9,7 @@ export default createPaginationContainer(
     user: graphql`
       fragment ShoppingListItemsRelayContainer_user on User {
         id
-        shoppingListItems(first: $count, after: $cursor, shoppingListId: $shoppingListId)
-          @connection(key: "User_shoppingListItems") {
+        shoppingListItems(first: $count, after: $cursor, shoppingListId: $shoppingListId) @connection(key: "User_shoppingListItems") {
           pageInfo {
             hasNextPage
             endCursor
@@ -40,6 +39,10 @@ export default createPaginationContainer(
               size
               savingPercentage
               saving
+              tags {
+                name
+                key
+              }
             }
           }
         }
@@ -64,7 +67,9 @@ export default createPaginationContainer(
         shoppingListId: fragmentVariables.shoppingListId,
       };
     },
-    variables: { cursor: null },
+    variables: {
+      cursor: null,
+    },
     query: graphql`
       query ShoppingListItemsRelayContainer_user_PaginationQuery($count: Int!, $cursor: String, $shoppingListId: ID!) {
         user {

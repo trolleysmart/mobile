@@ -4,7 +4,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { NavigationActions } from 'react-navigation';
+import { Map } from 'immutable';
 import * as shoppingListsActions from './Actions';
+import * as shoppingListDetailActions from '../shoppingListDetail/Actions';
 import ShoppingListsList from './ShoppingListsList';
 import { type ShoppingListsRelayContainer_user } from './__generated__/ShoppingListsRelayContainer_user.graphql';
 
@@ -20,12 +22,30 @@ class ShoppingListsContainer extends Component<any, Props, State> {
   };
 
   onShoppingListPressed = shoppingList => {
-    this.props.showShoppingList(shoppingList);
+    this.props.gotoShoppingList(shoppingList);
   };
 
   onCreateShoppingListPressed = () => {
-    this.props.showCreateShoppingList();
+    this.props.shoppingListDetailActions.shoppingListNameChanged(
+      Map({
+        shoppingListName: '',
+        shoppingListId: '',
+      }),
+    );
+    this.props.gotoCreateShoppingList();
   };
+
+  onEditShoppingListPressed = (shoppingListId, shoppingListName) => {
+    this.props.shoppingListDetailActions.shoppingListNameChanged(
+      Map({
+        shoppingListName: '',
+        shoppingListId: '',
+      }),
+    );
+    this.props.gotoEditShoppingList(shoppingListId, shoppingListName);
+  };
+
+  onDeleteShoppingListPressed = shoppingListId => {};
 
   onRefresh = () => {
     const { shoppingLists } = this.props.user;
@@ -62,6 +82,8 @@ class ShoppingListsContainer extends Component<any, Props, State> {
         shoppingLists={this.props.user.shoppingLists.edges.map(_ => _.node)}
         onShoppingListPressed={this.onShoppingListPressed}
         onCreateShoppingListPressed={this.onCreateShoppingListPressed}
+        onEditShoppingListPressed={this.onEditShoppingListPressed}
+        onDeleteShoppingListPressed={this.onDeleteShoppingListPressed}
         isFetchingTop={this.state.isFetchingTop}
         onRefresh={this.onRefresh}
         onEndReached={this.onEndReached}
@@ -79,19 +101,35 @@ function mapStateToProps() {
 function mapDispatchToProps(dispatch) {
   return {
     shoppingListsActions: bindActionCreators(shoppingListsActions, dispatch),
-    showShoppingList: shoppingList =>
+    shoppingListDetailActions: bindActionCreators(shoppingListDetailActions, dispatch),
+    gotoShoppingList: shoppingList =>
       dispatch(
         NavigationActions.navigate({
           routeName: 'ShoppingList',
           params: {
             shoppingListId: shoppingList.id,
+            title: shoppingList.name,
           },
         }),
       ),
-    showCreateShoppingList: () =>
+    gotoCreateShoppingList: () =>
       dispatch(
         NavigationActions.navigate({
           routeName: 'ShoppingListDetail',
+          params: {
+            title: 'Create shopping list',
+          },
+        }),
+      ),
+    gotoEditShoppingList: (shoppingListId, shoppingListName) =>
+      dispatch(
+        NavigationActions.navigate({
+          routeName: 'ShoppingListDetail',
+          params: {
+            shoppingListId,
+            shoppingListName,
+            title: shoppingListName,
+          },
         }),
       ),
   };
