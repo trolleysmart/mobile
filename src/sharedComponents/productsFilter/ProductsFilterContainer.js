@@ -62,7 +62,7 @@ class ProductsFilterContainer extends Component {
 ProductsFilterContainer.propTypes = {
   productsFilterActions: PropTypes.object.isRequired,
   gotoScreen: PropTypes.func.isRequired,
-  goBack: PropTypes.object.isRequired,
+  goBack: PropTypes.func.isRequired,
   sortOption: PropTypes.string.isRequired,
   categories: PropTypes.arrayOf(
     PropTypes.shape({

@@ -38,7 +38,7 @@ function mapDispatchToProps(dispatch) {
     showProductsFilter: (sortOption, categoriesFilterOption) =>
       dispatch(
         NavigationActions.navigate({
-          routeName: 'SpecialsFilter',
+          routeName: 'ProductsFilter',
           params: {
             sortOption,
             categoriesFilterOption,

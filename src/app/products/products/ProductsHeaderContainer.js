@@ -8,22 +8,39 @@ import { View } from 'react-native';
 import { connect } from 'react-redux';
 import { MainMenuContainer } from '../../../sharedComponents/mainMenu';
 import { SearchBarWithDelay } from '../../../sharedComponents/searchBarWithDelay';
+import { ProductsFilterMenuContainer } from '../../../sharedComponents/productsFilterMenu';
 import { TouchableIcon } from '../../../components/touchableIcon';
 import * as productsActions from './Actions';
 import Styles from './Styles';
 
 class ProductsHeaderContainer extends Component {
   onSearchKeywordChanged = searchKeyword => {
-    this.props.productsActions.searchKeywordChanged(Map({ searchKeyword }));
+    this.props.productsActions.searchKeywordChanged(
+      Map({
+        searchKeyword,
+      }),
+    );
   };
 
   onSearchIconPress = () => {
-    this.props.productsActions.productsSearchingModeChanged(Map({ isSearchingMode: true }));
+    this.props.productsActions.productsSearchingModeChanged(
+      Map({
+        isSearchingMode: true,
+      }),
+    );
   };
 
   onExitsSearchModeIconPress = () => {
-    this.props.productsActions.searchKeywordChanged(Map({ searchKeyword: '' }));
-    this.props.productsActions.productsSearchingModeChanged(Map({ isSearchingMode: false }));
+    this.props.productsActions.searchKeywordChanged(
+      Map({
+        searchKeyword: '',
+      }),
+    );
+    this.props.productsActions.productsSearchingModeChanged(
+      Map({
+        isSearchingMode: false,
+      }),
+    );
   };
 
   render = () => {
@@ -39,6 +56,7 @@ class ProductsHeaderContainer extends Component {
             <MainMenuContainer />
             <View style={Styles.headerOptions}>
               <TouchableIcon onPress={this.onSearchIconPress} iconName="ios-search" iconType="ionicon" />
+              <ProductsFilterMenuContainer />
             </View>
           </View>
         )}

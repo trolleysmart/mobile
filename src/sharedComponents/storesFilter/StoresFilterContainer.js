@@ -105,7 +105,7 @@ StoresFilterContainer.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    selectedStores: state.specialsFilter.get('stores').toJS(),
+    selectedStores: state.productsFilter.get('stores').toJS(),
   };
 }
 

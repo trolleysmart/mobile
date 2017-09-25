@@ -1,3 +1,3 @@
 // @flow
 
-export SpecialsMenuContainer from './SpecialsMenuContainer';
+export ProductsFilterMenuContainer from './ProductsFilterMenuContainer';
