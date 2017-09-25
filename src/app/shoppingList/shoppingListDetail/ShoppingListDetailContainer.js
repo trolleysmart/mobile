@@ -27,6 +27,13 @@ class ShoppingListDetailContainer extends Component {
     );
   };
 
+  componentWillMount = () => {
+    // Set the inital shopping list name when editing existing shopping list, but only do it once when UI is mounted.
+    if (this.props.defaultShoppingListName) {
+      this.shoppingListNameChanged(this.props.defaultShoppingListName);
+    }
+  };
+
   render = () => {
     return (
       <ShoppingListDetail
@@ -41,9 +48,8 @@ class ShoppingListDetailContainer extends Component {
 function mapStateToProps(state, props) {
   return {
     avatarUrl: state.userAccess.getIn(['userInfo', 'avatar']) ? state.userAccess.getIn(['userInfo', 'avatar']).data.url : null,
-    shoppingListName: state.shoppingListDetail.get('shoppingListName')
-      ? state.shoppingListDetail.get('shoppingListName')
-      : props.navigation.state.params ? props.navigation.state.params.shoppingListName : '',
+    defaultShoppingListName: props.navigation.state.params ? props.navigation.state.params.shoppingListName : '',
+    shoppingListName: state.shoppingListDetail.get('shoppingListName'),
     shoppingListId: props.navigation.state.params ? props.navigation.state.params.shoppingListId : '',
   };
 }

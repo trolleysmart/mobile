@@ -8,6 +8,8 @@ import { Map } from 'immutable';
 import * as shoppingListsActions from './Actions';
 import * as shoppingListDetailActions from '../shoppingListDetail/Actions';
 import ShoppingListsList from './ShoppingListsList';
+import { RemoveShoppingList } from '../../../framework/relay/mutations';
+import { environment } from '../../../framework/relay';
 import { type ShoppingListsRelayContainer_user } from './__generated__/ShoppingListsRelayContainer_user.graphql';
 
 type Props = {
@@ -45,7 +47,9 @@ class ShoppingListsContainer extends Component<any, Props, State> {
     this.props.gotoEditShoppingList(shoppingListId, shoppingListName);
   };
 
-  onDeleteShoppingListPressed = shoppingListId => {};
+  onDeleteShoppingListPressed = shoppingListId => {
+    RemoveShoppingList.commit(environment, this.props.userId, shoppingListId);
+  };
 
   onRefresh = () => {
     const { shoppingLists } = this.props.user;
@@ -94,8 +98,10 @@ class ShoppingListsContainer extends Component<any, Props, State> {
 
 ShoppingListsContainer.propTypes = {};
 
-function mapStateToProps() {
-  return {};
+function mapStateToProps(state) {
+  return {
+    userId: state.userAccess.get('userInfo').get('id'),
+  };
 }
 
 function mapDispatchToProps(dispatch) {
