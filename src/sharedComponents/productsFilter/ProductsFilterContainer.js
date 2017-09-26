@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import Immutable, { Map } from 'immutable';
+import Immutable, { List, Map } from 'immutable';
 import { Platform } from 'react-native';
 import * as productsFilterActions from './Actions';
 import ProductsFilter from './ProductsFilter';
@@ -34,12 +34,20 @@ class ProductsFilterContainer extends Component {
     );
   };
 
-  applyFilters = () => {
-    this.props.goBack(
+  clearFilters = () => {
+    this.props.productsFilterActions.sortOptionChanged(
       Map({
-        sortOption: this.props.sortOption,
-        categories: Immutable.fromJS(this.props.categories),
-        stores: Immutable.fromJS(this.props.stores),
+        sortOption: '',
+      }),
+    );
+    this.props.productsFilterActions.categoriesFilterOptionChanged(
+      Map({
+        categories: List(),
+      }),
+    );
+    this.props.productsFilterActions.storesFilterOptionChanged(
+      Map({
+        stores: List(),
       }),
     );
   };
@@ -52,7 +60,7 @@ class ProductsFilterContainer extends Component {
         stores={this.props.stores}
         gotoCategoryFilter={this.gotoCategoryFilter}
         gotoStoreFilter={this.gotoStoreFilter}
-        applyFilters={this.applyFilters}
+        clearFilters={this.clearFilters}
         onSortOptionChanged={this.onSortOptionChanged}
       />
     );
@@ -62,7 +70,6 @@ class ProductsFilterContainer extends Component {
 ProductsFilterContainer.propTypes = {
   productsFilterActions: PropTypes.object.isRequired,
   gotoScreen: PropTypes.func.isRequired,
-  goBack: PropTypes.func.isRequired,
   sortOption: PropTypes.string.isRequired,
   categories: PropTypes.arrayOf(
     PropTypes.shape({
@@ -90,14 +97,6 @@ function mapDispatchToProps(dispatch) {
       dispatch(
         NavigationActions.navigate({
           routeName,
-        }),
-      ),
-    goBack: filterOptions =>
-      dispatch(
-        NavigationActions.back({
-          params: {
-            filterOptions,
-          },
         }),
       ),
     productsFilterActions: bindActionCreators(productsFilterActions, dispatch),

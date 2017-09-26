@@ -4,29 +4,21 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
-import Immutable, { Map } from 'immutable';
 import ProductsFilterMenu from './ProductsFilterMenu';
 
 class ProductsFilterMenuContainer extends Component {
   showProductsFilter = () => {
-    this.props.showProductsFilter(
-      Map({
-        sortOption: this.props.sortOption,
-      }),
-      Map({
-        categories: Immutable.fromJS(this.props.categories),
-        stores: Immutable.fromJS(this.props.stores),
-      }),
-    );
+    this.props.showProductsFilter();
   };
 
   render = () => {
-    return <ProductsFilterMenu showProductsFilter={this.showProductsFilter} />;
+    return <ProductsFilterMenu showProductsFilter={this.showProductsFilter} isFilterSet={this.props.isFilterSet} />;
   };
 }
 
 ProductsFilterMenuContainer.propTypes = {
   showProductsFilter: PropTypes.func.isRequired,
+  isFilterSet: PropTypes.bool,
 };
 
 function mapStateToProps() {
@@ -35,14 +27,10 @@ function mapStateToProps() {
 
 function mapDispatchToProps(dispatch) {
   return {
-    showProductsFilter: (sortOption, categoriesFilterOption) =>
+    showProductsFilter: () =>
       dispatch(
         NavigationActions.navigate({
           routeName: 'ProductsFilter',
-          params: {
-            sortOption,
-            categoriesFilterOption,
-          },
         }),
       ),
   };

@@ -56,7 +56,7 @@ class ProductsHeaderContainer extends Component {
             <MainMenuContainer />
             <View style={Styles.headerOptions}>
               <TouchableIcon onPress={this.onSearchIconPress} iconName="ios-search" iconType="ionicon" />
-              <ProductsFilterMenuContainer />
+              <ProductsFilterMenuContainer isFilterSet={this.props.hasProductsFilterSet} />
             </View>
           </View>
         )}
@@ -69,6 +69,7 @@ ProductsHeaderContainer.propTypes = {
   searchKeyword: PropTypes.string,
   isSearchingMode: PropTypes.bool,
   productsActions: PropTypes.object.isRequired,
+  hasProductsFilterSet: PropTypes.bool.isRequired,
 };
 
 ProductsHeaderContainer.defaultProps = {
@@ -79,6 +80,7 @@ function mapStateToProps(state) {
   return {
     isSearchingMode: state.products.get('isSearchingMode'),
     searchKeyword: state.products.get('searchKeyword'),
+    hasProductsFilterSet: !state.productsFilter.get('categories').isEmpty() || !state.productsFilter.get('stores').isEmpty(),
   };
 }
 

@@ -72,25 +72,9 @@ function mapStateToProps(state, props) {
     defaultSortOption: props.defaultSortOption,
     defaultSearchKeyword: props.navigation.state.params ? props.navigation.state.params.defaultSearchKeyword : props.defaultSearchKeyword,
     searchKeyword: state.products.get('searchKeyword'),
-    sortOption: state.products.get('filterOptions').get('sortOption'),
-    categories: state.products
-      .get('filterOptions')
-      .get('categories')
-      .isEmpty()
-      ? null
-      : state.products
-          .get('filterOptions')
-          .get('categories')
-          .map(_ => _.get('id')),
-    stores: state.products
-      .get('filterOptions')
-      .get('stores')
-      .isEmpty()
-      ? null
-      : state.products
-          .get('filterOptions')
-          .get('stores')
-          .map(_ => _.get('id')),
+    sortOption: state.productsFilter.get('sortOption'),
+    categories: state.productsFilter.get('categories').isEmpty() ? null : state.productsFilter.get('categories').map(_ => _.get('id')),
+    stores: state.productsFilter.get('stores').isEmpty() ? null : state.productsFilter.get('stores').map(_ => _.get('id')),
   };
 }
 
