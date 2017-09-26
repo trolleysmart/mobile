@@ -5,6 +5,7 @@ import { FlatList, View } from 'react-native';
 import PropTypes from 'prop-types';
 import CategoryItem from './CategoryItem';
 import { ListItemSeparator } from '../../components/list';
+import { CategoryItemsProp } from './PropTypes';
 import Styles from './Styles';
 
 const CategoryItems = ({ categories, selectedCategories, onCategoryItemSelectionChanged, isFetchingTop, onRefresh, onEndReached }) => (
@@ -13,8 +14,7 @@ const CategoryItems = ({ categories, selectedCategories, onCategoryItemSelection
       data={categories}
       renderItem={info => (
         <CategoryItem
-          id={info.item.id}
-          name={info.item.name}
+          category={info.item}
           isSelected={selectedCategories.find(_ => _.id === info.item.id) != null}
           onCategoryItemSelectionChanged={onCategoryItemSelectionChanged}
         />
@@ -29,17 +29,8 @@ const CategoryItems = ({ categories, selectedCategories, onCategoryItemSelection
 );
 
 CategoryItems.propTypes = {
-  categories: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-    }),
-  ).isRequired,
-  selectedCategories: PropTypes.arrayOf(
-    PropTypes.shape({
-      categoryId: PropTypes.string,
-    }),
-  ).isRequired,
+  categories: CategoryItemsProp,
+  selectedCategories: CategoryItemsProp,
   onCategoryItemSelectionChanged: PropTypes.func.isRequired,
   isFetchingTop: PropTypes.bool.isRequired,
   onRefresh: PropTypes.func.isRequired,

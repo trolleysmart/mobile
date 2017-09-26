@@ -9,7 +9,7 @@ import { Color } from '../../framework/style/DefaultStyles';
 
 const ProductsFilterMenu = ({ showProductsFilter, isFilterSet }) => (
   <View style={Styles.container}>
-    <TouchableIcon onPress={showProductsFilter} iconColor={isFilterSet ? Color.primaryColorLight : null} iconName="sliders" iconType="font-awesome" />
+    <TouchableIcon onPress={showProductsFilter} iconColor={isFilterSet ? 'white' : null} iconName="sliders" iconType="font-awesome" />
   </View>
 );
 

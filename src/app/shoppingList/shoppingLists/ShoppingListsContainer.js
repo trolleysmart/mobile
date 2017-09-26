@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { NavigationActions } from 'react-navigation';
 import { Map } from 'immutable';
+import PropTypes from 'prop-types';
 import * as shoppingListsActions from './Actions';
 import * as shoppingListDetailActions from '../shoppingListDetail/Actions';
 import ShoppingListsList from './ShoppingListsList';
@@ -96,7 +97,9 @@ class ShoppingListsContainer extends Component<any, Props, State> {
   };
 }
 
-ShoppingListsContainer.propTypes = {};
+ShoppingListsContainer.propTypes = {
+  userId: PropTypes.string.isRequired,
+};
 
 function mapStateToProps(state) {
   return {

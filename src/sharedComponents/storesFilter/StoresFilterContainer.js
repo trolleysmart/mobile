@@ -5,8 +5,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Immutable, { Map } from 'immutable';
-import * as specialsFilterActions from '../productsFilter/Actions';
+import * as productsFilterActions from '../productsFilter/Actions';
 import Stores from './Stores';
+import { StoreItemsProp } from './PropTypes';
 import { type StoresFilterRelayContainer_viewer } from './__generated__/StoresFilterRelayContainer_viewer.graphql';
 
 type Props = {
@@ -22,23 +23,24 @@ class StoresFilterContainer extends Component<any, Props, State> {
     isFetchingTop: false,
   };
 
-  onStoreSelectionChanged = (storeId, name, isSelected) => {
+  onStoreSelectionChanged = (id, key, name, isSelected) => {
     const selectedItems = Immutable.fromJS(this.props.selectedStores);
 
     // original state is selected, so remove from selected list
     if (isSelected) {
-      this.props.specialsFilterActions.storesFilterOptionChanged(
+      this.props.productsFilterActions.storesFilterOptionChanged(
         Map({
-          stores: selectedItems.filterNot(_ => _.get('id') === storeId),
+          stores: selectedItems.filterNot(_ => _.get('id') === id),
         }),
       );
     } else {
-      this.props.specialsFilterActions.storesFilterOptionChanged(
+      this.props.productsFilterActions.storesFilterOptionChanged(
         Map({
           stores: selectedItems.push(
             Map({
-              id: storeId,
-              name: name,
+              id,
+              name,
+              key,
             }),
           ),
         }),
@@ -90,17 +92,8 @@ class StoresFilterContainer extends Component<any, Props, State> {
 }
 
 StoresFilterContainer.propTypes = {
-  stores: PropTypes.arrayOf(
-    PropTypes.shape({
-      storeId: PropTypes.string,
-    }),
-  ).isRequired,
-  selectedStores: PropTypes.arrayOf(
-    PropTypes.shape({
-      storeId: PropTypes.string,
-    }),
-  ).isRequired,
-  specialsFilterActions: PropTypes.object.isRequired,
+  selectedStores: StoreItemsProp,
+  productsFilterActions: PropTypes.object.isRequired,
 };
 
 function mapStateToProps(state) {
@@ -111,7 +104,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    specialsFilterActions: bindActionCreators(specialsFilterActions, dispatch),
+    productsFilterActions: bindActionCreators(productsFilterActions, dispatch),
   };
 }
 
