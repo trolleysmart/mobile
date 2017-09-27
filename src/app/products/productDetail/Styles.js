@@ -7,4 +7,8 @@ export default StyleSheet.create({
   container: {
     flex: 1,
   },
+  productImage: {
+    height: 300,
+    width: 400,
+  },
 });
