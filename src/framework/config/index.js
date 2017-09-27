@@ -1,8 +1,8 @@
 // @flow
 
 export default {
-  parseServerServerUrl: 'https://trolleysmart-backend-v1-alpha.herokuapp.com/parse/',
-  parseServerApplicationId: 'TrolleySmart-v1-alpha',
-  parseServerJavascriptKey: '9c6b195e-8b8e-401b-9cb7-4eff2417fb1b',
-  graphqlEndpoint: 'https://trolleysmart-backend-v1-alpha.herokuapp.com/graphql',
+  parseServerServerUrl: 'https://parse.buddy.com/parse/',
+  parseServerApplicationId: '50a47f7f-411a-4abb-8c50-3daabac420eb',
+  parseServerJavascriptKey: 'w2GaCmTc2U7QwjbR3NGA1cg0UTjvbSYE',
+  graphqlEndpoint: 'https://50a47f7f-411a-4abb-8c50-3daabac420eb.parse.buddy.express/graphql',
 };
