@@ -25,6 +25,9 @@ export default StyleSheet.create({
     backgroundColor: 'white',
     padding: 10,
   },
+  productListItemRowContainer: {
+    flexDirection: 'row',
+  },
   productListItemRowSelected: {
     backgroundColor: 'white',
     padding: 10,

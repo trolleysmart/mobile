@@ -34,7 +34,7 @@ function commit(environment, userId, shoppingListId) {
       },
     },
     updater: store => {
-      const payload = store.getRootField('removesShoppingList');
+      const payload = store.getRootField('removeShoppingList');
       const errorMessage = payload.getValue('errorMessage');
 
       if (errorMessage) {

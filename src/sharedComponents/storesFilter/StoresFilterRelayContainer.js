@@ -18,6 +18,7 @@ export default createPaginationContainer(
             node {
               id
               name
+              key
             }
           }
         }

@@ -8,7 +8,7 @@ import Styles from './Styles';
 import { Color } from '../../framework/style/DefaultStyles';
 import TouchableItem from './TouchableItem';
 
-const TouchableIcon = ({ onPress, iconName, iconType, disabled }) => (
+const TouchableIcon = ({ onPress, iconName, iconType, iconColor, disabled }) => (
   <View style={Styles.container}>
     <TouchableItem
       accessibilityComponentType="button"
@@ -22,7 +22,7 @@ const TouchableIcon = ({ onPress, iconName, iconType, disabled }) => (
     >
       <Icon
         size={28}
-        color={disabled ? Color.primaryFontColorDisabled : Color.primaryFontColor}
+        color={disabled ? Color.primaryFontColorDisabled : iconColor || Color.primaryFontColor}
         name={iconName}
         type={iconType}
         containerStyle={Styles.iconContainerStyle}

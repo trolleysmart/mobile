@@ -5,6 +5,7 @@ import { FlatList, View } from 'react-native';
 import PropTypes from 'prop-types';
 import Store from './Store';
 import { ListItemSeparator } from '../../components/list';
+import { StoreItemsProp } from './PropTypes';
 import Styles from './Styles';
 
 const Stores = ({ stores, selectedStores, onStoreSelectionChanged, isFetchingTop, onRefresh, onEndReached }) => (
@@ -13,8 +14,7 @@ const Stores = ({ stores, selectedStores, onStoreSelectionChanged, isFetchingTop
       data={stores}
       renderItem={info => (
         <Store
-          id={info.item.id}
-          name={info.item.name}
+          store={info.item}
           isSelected={selectedStores.find(_ => _.id === info.item.id) != null}
           onStoreSelectionChanged={onStoreSelectionChanged}
         />
@@ -29,17 +29,8 @@ const Stores = ({ stores, selectedStores, onStoreSelectionChanged, isFetchingTop
 );
 
 Stores.propTypes = {
-  stores: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-    }),
-  ).isRequired,
-  selectedStores: PropTypes.arrayOf(
-    PropTypes.shape({
-      storeId: PropTypes.string,
-    }),
-  ).isRequired,
+  stores: StoreItemsProp,
+  selectedStores: StoreItemsProp,
   onStoreSelectionChanged: PropTypes.func.isRequired,
   isFetchingTop: PropTypes.bool.isRequired,
   onRefresh: PropTypes.func.isRequired,

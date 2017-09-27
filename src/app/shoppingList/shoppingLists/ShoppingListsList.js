@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import { FlatList, View } from 'react-native';
-import { ListItem } from 'react-native-elements';
+import ActionButton from 'react-native-action-button';
 import PropTypes from 'prop-types';
 import { ListItemSeparator } from '../../../components/list';
 import ShoppingListRow from './ShoppingListRow';
@@ -29,13 +29,7 @@ class ShoppingListsList extends Component {
           refreshing={this.props.isFetchingTop}
           ItemSeparatorComponent={() => <ListItemSeparator />}
         />
-        <ListItem
-          title="Create list"
-          titleStyle={Styles.createListFont}
-          leftIcon={{ name: 'plus', type: 'material-community', color: 'blue' }}
-          rightIcon={<View />}
-          onPress={this.props.onCreateShoppingListPressed}
-        />
+        <ActionButton buttonColor="rgba(242,135,79,1)" onPress={() => this.props.onCreateShoppingListPressed()} />
       </View>
     );
   };

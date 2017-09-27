@@ -4,6 +4,8 @@ import Immutable from 'immutable';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { NavigationActions } from 'react-navigation';
+import PropTypes from 'prop-types';
 import * as productsActions from './Actions';
 import { AddItemsToShoppingList } from '../../../framework/relay/mutations';
 import ProductList from './ProductList';
@@ -30,6 +32,10 @@ class ProductsContainer extends Component<any, Props, State> {
     });
 
     this.props.productsActions.productSelected(productId);
+  };
+
+  onViewProductDetailPressed = productId => {
+    this.props.gotoProductDetail(productId);
   };
 
   onRefresh = () => {
@@ -66,6 +72,7 @@ class ProductsContainer extends Component<any, Props, State> {
       <ProductList
         products={this.props.user.products.edges.map(_ => _.node)}
         onItemSelectionChanged={this.onProductItemSelectionChanged}
+        onViewProductDetailPressed={this.onViewProductDetailPressed}
         isFetchingTop={this.state.isFetchingTop}
         onRefresh={this.onRefresh}
         onEndReached={this.onEndReached}
@@ -74,7 +81,9 @@ class ProductsContainer extends Component<any, Props, State> {
   };
 }
 
-ProductsContainer.propTypes = {};
+ProductsContainer.propTypes = {
+  gotoProductDetail: PropTypes.func.isRequired,
+};
 
 function mapStateToProps() {
   return {};
@@ -83,6 +92,16 @@ function mapStateToProps() {
 function mapDispatchToProps(dispatch) {
   return {
     productsActions: bindActionCreators(productsActions, dispatch),
+    gotoProductDetail: productId =>
+      dispatch(
+        NavigationActions.navigate({
+          routeName: 'ProductDetail',
+          params: {
+            title: 'Product detail',
+            productId,
+          },
+        }),
+      ),
   };
 }
 

@@ -8,6 +8,7 @@ import Immutable, { Map } from 'immutable';
 import * as productsFilterActions from '../productsFilter/Actions';
 import CategoryItems from './CategoryItems';
 import { type CategoriesFilterRelayContainer_viewer } from './__generated__/CategoriesFilterRelayContainer_viewer.graphql';
+import { CategoryItemsProp } from './PropTypes';
 
 type Props = {
   viewer: CategoriesFilterRelayContainer_viewer,
@@ -22,14 +23,14 @@ class CategoriesFilterContainer extends Component<any, Props, State> {
     isFetchingTop: false,
   };
 
-  onCategoryItemSelectionChanged = (categoryId, name, isSelected) => {
+  onCategoryItemSelectionChanged = (id, key, name, isSelected) => {
     const selectedItems = Immutable.fromJS(this.props.selectedCategories);
 
     // original state is selected, so remove from selected list
     if (isSelected) {
       this.props.productsFilterActions.categoriesFilterOptionChanged(
         Map({
-          categories: selectedItems.filterNot(_ => _.get('id') === categoryId),
+          categories: selectedItems.filterNot(_ => _.get('id') === id),
         }),
       );
     } else {
@@ -37,8 +38,9 @@ class CategoriesFilterContainer extends Component<any, Props, State> {
         Map({
           categories: selectedItems.push(
             Map({
-              id: categoryId,
-              name: name,
+              id,
+              key,
+              name,
             }),
           ),
         }),
@@ -90,16 +92,7 @@ class CategoriesFilterContainer extends Component<any, Props, State> {
 }
 
 CategoriesFilterContainer.propTypes = {
-  categories: PropTypes.arrayOf(
-    PropTypes.shape({
-      categoryId: PropTypes.string,
-    }),
-  ).isRequired,
-  selectedCategories: PropTypes.arrayOf(
-    PropTypes.shape({
-      categoryId: PropTypes.string,
-    }),
-  ).isRequired,
+  selectedCategories: CategoryItemsProp,
   productsFilterActions: PropTypes.object.isRequired,
 };
 

@@ -8,7 +8,7 @@ import ProductsFilterSorting from './ProductsFilterSorting';
 import Styles from './Styles';
 import { Color } from '../../framework/style/DefaultStyles';
 
-const ProductsFilter = ({ sortOption, onSortOptionChanged, gotoCategoryFilter, categories, gotoStoreFilter, stores, applyFilters }) => (
+const ProductsFilter = ({ sortOption, onSortOptionChanged, gotoCategoryFilter, categories, gotoStoreFilter, stores, clearFilters }) => (
   <View style={Styles.container}>
     <View style={Styles.filterOptionContainer}>
       <Text style={Styles.filterTitle}>Sort order</Text>
@@ -45,7 +45,7 @@ const ProductsFilter = ({ sortOption, onSortOptionChanged, gotoCategoryFilter, c
     </View>
     <View style={Styles.filterOptionContainer}>
       <View style={Styles.applyButton}>
-        <Button title="Apply Filters" backgroundColor={Color.secondaryColorAction} onPress={applyFilters} />
+        <Button title="Clear Filters" backgroundColor={Color.secondaryColorAction} onPress={clearFilters} />
       </View>
     </View>
   </View>
@@ -54,7 +54,7 @@ const ProductsFilter = ({ sortOption, onSortOptionChanged, gotoCategoryFilter, c
 ProductsFilter.propTypes = {
   gotoCategoryFilter: PropTypes.func.isRequired,
   gotoStoreFilter: PropTypes.func.isRequired,
-  applyFilters: PropTypes.func.isRequired,
+  clearFilters: PropTypes.func.isRequired,
   sortOption: PropTypes.string.isRequired,
   categories: PropTypes.arrayOf(
     PropTypes.shape({
