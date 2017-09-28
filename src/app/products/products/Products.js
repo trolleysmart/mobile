@@ -68,7 +68,7 @@ Products.propTypes = {
 
 function mapStateToProps(state, props) {
   return {
-    defaultCategories: props.defaultCategories,
+    defaultCategories: props.navigation.state.params ? props.navigation.state.params.defaultCategories : props.defaultCategories,
     defaultSortOption: props.defaultSortOption,
     defaultSearchKeyword: props.navigation.state.params ? props.navigation.state.params.defaultSearchKeyword : props.defaultSearchKeyword,
     searchKeyword: state.products.get('searchKeyword'),

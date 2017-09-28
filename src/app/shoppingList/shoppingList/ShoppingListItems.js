@@ -25,7 +25,7 @@ class ShoppingListItems extends Component {
   renderSectionHeader = ({ section }) => {
     return (
       <View style={Styles.sectionHeader}>
-        <Text style={Styles.sectionTitle}>{section.title}</Text>
+        <Text style={Styles.sectionTitle}>{section.categoryTitle}</Text>
         <Image source={ImageUltility.getImageSource(section.categoryKey.replace(/-/g, ''))} style={Styles.sectionHeaderImage} />
       </View>
     );

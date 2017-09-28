@@ -3,12 +3,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { View } from 'react-native';
-import { Text, Button, List, ListItem } from 'react-native-elements';
+import { Text, List, ListItem } from 'react-native-elements';
 import ProductsFilterSorting from './ProductsFilterSorting';
 import Styles from './Styles';
 import { Color } from '../../framework/style/DefaultStyles';
 
-const ProductsFilter = ({ sortOption, onSortOptionChanged, gotoCategoryFilter, categories, gotoStoreFilter, stores, clearFilters }) => (
+const ProductsFilter = ({ sortOption, onSortOptionChanged, gotoCategoryFilter, categories, gotoStoreFilter, stores }) => (
   <View style={Styles.container}>
     <View style={Styles.filterOptionContainer}>
       <Text style={Styles.filterTitle}>Sort order</Text>
@@ -43,18 +43,12 @@ const ProductsFilter = ({ sortOption, onSortOptionChanged, gotoCategoryFilter, c
         />
       </List>
     </View>
-    <View style={Styles.filterOptionContainer}>
-      <View style={Styles.applyButton}>
-        <Button title="Clear Filters" backgroundColor={Color.secondaryColorAction} onPress={clearFilters} />
-      </View>
-    </View>
   </View>
 );
 
 ProductsFilter.propTypes = {
   gotoCategoryFilter: PropTypes.func.isRequired,
   gotoStoreFilter: PropTypes.func.isRequired,
-  clearFilters: PropTypes.func.isRequired,
   sortOption: PropTypes.string.isRequired,
   categories: PropTypes.arrayOf(
     PropTypes.shape({

@@ -14,6 +14,9 @@ export default StyleSheet.create({
   filterOptionContainer: {
     padding: 5,
   },
+  clearFilterHeaderContainer: {
+    paddingRight: 10,
+  },
   filterTitle: {
     fontWeight: 'bold',
   },
