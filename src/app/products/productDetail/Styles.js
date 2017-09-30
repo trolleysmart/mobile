@@ -28,25 +28,47 @@ export default StyleSheet.create({
     padding: 15,
     backgroundColor: 'white',
   },
+  storeInfoContainer:{
+    flexDirection: 'row',
+  },
+  storeDetail:{
+    marginLeft: 10,
+    flexDirection: 'row',
+    justifyContent:'space-between',
+    alignItems: 'center',
+  },
   productTitle: {
     color: Color.primaryFontColor,
-    fontSize: 14,
+    fontSize: 20,
+  },
+  productDescription:{
+    color: Color.primaryFontColor,
   },
   productPriceContainer: {
     justifyContent: 'space-between',
     alignItems: 'center',
     flexDirection: 'row',
   },
-  productPrice: {
-    fontSize: 14,
-    color: Color.primaryColorLight,
-    textDecorationLine: 'line-through',
-    textDecorationStyle: 'solid',
-  },
-  productSpecialPrice: {
+  savingPercentage: {
+    fontSize: 10,
     color: 'red',
-    fontSize: 20,
-    fontWeight: 'bold',
-
+    textAlign: 'right',
   },
+  priceToDisplay: {
+    fontWeight: 'bold',
+    fontSize: 18,
+    color: Color.primaryColorNormal,
+    textAlign: 'right',
+  },
+  // productPrice: {
+  //   fontSize: 14,
+  //   color: Color.primaryColorLight,
+  //   textDecorationLine: 'line-through',
+  //   textDecorationStyle: 'solid',
+  // },
+  // productSpecialPrice: {
+  //   color: 'red',
+  //   fontSize: 20,
+  //   fontWeight: 'bold',
+  // },
 });

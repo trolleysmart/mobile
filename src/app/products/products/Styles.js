@@ -66,7 +66,7 @@ export default StyleSheet.create({
   },
   priceToDisplay: {
     fontWeight: 'bold',
-    color: '#3DC62A',
+    color: Color.primaryColorNormal,
     textAlign: 'right',
   },
 });

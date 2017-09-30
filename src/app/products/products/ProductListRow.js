@@ -25,7 +25,7 @@ class ProductListRow extends React.PureComponent {
       >
         <View style={Styles.productListItemRowContainer}>
           <ProductListRowItem product={this.props.product} />
-          <TouchableIcon iconName="chevron-right" iconType="material-community" onPress={this.props.onViewProductDetailPressed} />
+          <TouchableIcon iconName="chevron-right" iconType="material-community" onPress={() =>this.props.onViewProductDetailPressed(this.props.product)} />
         </View>
       </TouchableHighlight>
     );
