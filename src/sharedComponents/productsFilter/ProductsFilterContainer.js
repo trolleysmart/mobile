@@ -5,17 +5,19 @@ import PropTypes from 'prop-types';
 import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import Immutable, { List, Map } from 'immutable';
+import { List, Map } from 'immutable';
 import { Platform } from 'react-native';
 import * as productsFilterActions from './Actions';
 import ProductsFilter from './ProductsFilter';
+import HeaderContainer from './HeaderContainer';
 
 class ProductsFilterContainer extends Component {
   static navigationOptions = {
     title: 'Filter',
-    headerTitleStyle: {
-      marginLeft: Platform.OS === 'ios' ? null : 100,
-    },
+    headerRight: <HeaderContainer onClearFilterPress={this.clearFilters} />,
+    // headerTitleStyle: {
+    //   marginLeft: Platform.OS === 'ios' ? null : 100,
+    // },
   };
 
   gotoCategoryFilter = () => {
@@ -34,24 +36,6 @@ class ProductsFilterContainer extends Component {
     );
   };
 
-  clearFilters = () => {
-    this.props.productsFilterActions.sortOptionChanged(
-      Map({
-        sortOption: '',
-      }),
-    );
-    this.props.productsFilterActions.categoriesFilterOptionChanged(
-      Map({
-        categories: List(),
-      }),
-    );
-    this.props.productsFilterActions.storesFilterOptionChanged(
-      Map({
-        stores: List(),
-      }),
-    );
-  };
-
   render = () => {
     return (
       <ProductsFilter
@@ -60,7 +44,6 @@ class ProductsFilterContainer extends Component {
         stores={this.props.stores}
         gotoCategoryFilter={this.gotoCategoryFilter}
         gotoStoreFilter={this.gotoStoreFilter}
-        clearFilters={this.clearFilters}
         onSortOptionChanged={this.onSortOptionChanged}
       />
     );

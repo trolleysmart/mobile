@@ -34,8 +34,8 @@ class ProductsContainer extends Component<any, Props, State> {
     this.props.productsActions.productSelected(productId);
   };
 
-  onViewProductDetailPressed = productId => {
-    this.props.gotoProductDetail(productId);
+  onViewProductDetailPressed = product => {
+    this.props.gotoProductDetail(product);
   };
 
   onRefresh = () => {
@@ -92,13 +92,13 @@ function mapStateToProps() {
 function mapDispatchToProps(dispatch) {
   return {
     productsActions: bindActionCreators(productsActions, dispatch),
-    gotoProductDetail: productId =>
+    gotoProductDetail: product =>
       dispatch(
         NavigationActions.navigate({
           routeName: 'ProductDetail',
           params: {
             title: 'Product detail',
-            productId,
+            product,
           },
         }),
       ),

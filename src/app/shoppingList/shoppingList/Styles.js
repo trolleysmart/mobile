@@ -40,9 +40,10 @@ export default StyleSheet.create({
   sectionHeader: {
     width: Sizes.screenWidth,
     backgroundColor: '#E9E9EF',
-    padding: 10,
+    padding: 5,
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
   },
   sectionTitle: {
     fontWeight: '700',

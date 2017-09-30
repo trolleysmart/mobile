@@ -11,7 +11,6 @@ import { RemoveItemsFromShoppingList } from '../../../framework/relay/mutations'
 import * as ShoppingListActions from './Actions';
 import * as StapleItemsActions from '../../stapleItems/Actions';
 import * as ProductsActions from '../../products/products/Actions';
-import { type ShoppingListItemsRelayContainer_user } from './__generated__/ShoppingListItemsRelayContainer_user.graphql';
 
 type Props = {
   user: ShoppingListItemsRelayContainer_user,
@@ -61,7 +60,7 @@ class ShoppingListItemsContainer extends Component<any, Props, State> {
 
     // Set removeCurrentViewingStapleItem to false
     this.props.shoppingListActions.removeCurrentViewingStapleItemFlagChanged(Map({ removeCurrentViewingStapleItem: false }));
-    this.props.gotoProducts(foundItem.name);
+    this.props.gotoProducts(foundItem.name, foundItem.tags.map(_ => _.key));
   };
 
   onRefresh = () => {
@@ -133,12 +132,13 @@ function mapDispatchToProps(dispatch) {
           },
         }),
       ),
-    gotoProducts: defaultSearchKeyword =>
+    gotoProducts: (defaultSearchKeyword, defaultCategories) =>
       dispatch(
         NavigationActions.navigate({
           routeName: 'Products',
           params: {
             defaultSearchKeyword,
+            defaultCategories,
           },
         }),
       ),
