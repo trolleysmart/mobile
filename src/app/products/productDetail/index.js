@@ -1,1 +1,1 @@
-export ProductDetailContainer from './ProductDetailContainer';
+export ProductDetail from './ProductDetail';

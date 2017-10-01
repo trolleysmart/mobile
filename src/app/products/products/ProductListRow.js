@@ -1,19 +1,12 @@
 // @flow
 
 import React from 'react';
-import {
-  View,
-  TouchableHighlight,
-} from 'react-native';
+import { View, TouchableHighlight } from 'react-native';
 import PropTypes from 'prop-types';
-import {
-  ProductProp,
-} from './PropTypes';
+import { ProductProp } from './PropTypes';
 import Styles from './Styles';
 import ProductListRowItem from './ProductListRowItem';
-import {
-  TouchableIcon,
-} from '../../../components/touchableIcon';
+import { TouchableIcon } from '../../../components/touchableIcon';
 
 class ProductListRow extends React.PureComponent {
   render() {
@@ -25,7 +18,11 @@ class ProductListRow extends React.PureComponent {
       >
         <View style={Styles.productListItemRowContainer}>
           <ProductListRowItem product={this.props.product} />
-          <TouchableIcon iconName="chevron-right" iconType="material-community" onPress={() =>this.props.onViewProductDetailPressed(this.props.product)} />
+          <TouchableIcon
+            iconName="chevron-right"
+            iconType="material-community"
+            onPress={() => this.props.onViewProductDetailPressed(this.props.product.id)}
+          />
         </View>
       </TouchableHighlight>
     );

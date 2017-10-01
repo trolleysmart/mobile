@@ -1,12 +1,7 @@
 // @flow
 
-import {
-  StyleSheet,
-} from 'react-native';
-import {
-  Color,
-  Sizes,
-} from '../../../framework/style/DefaultStyles';
+import { StyleSheet } from 'react-native';
+import { Color, Sizes } from '../../../framework/style/DefaultStyles';
 
 export default StyleSheet.create({
   container: {
@@ -28,21 +23,22 @@ export default StyleSheet.create({
     padding: 15,
     backgroundColor: 'white',
   },
-  storeInfoContainer:{
+  storeInfoContainer: {
     flexDirection: 'row',
   },
-  storeDetail:{
+  storeDetail: {
     marginLeft: 10,
     flexDirection: 'row',
-    justifyContent:'space-between',
+    justifyContent: 'space-between',
     alignItems: 'center',
   },
   productTitle: {
     color: Color.primaryFontColor,
     fontSize: 20,
   },
-  productDescription:{
+  productDescription: {
     color: Color.primaryFontColor,
+    paddingBottom: 10,
   },
   productPriceContainer: {
     justifyContent: 'space-between',
@@ -53,6 +49,7 @@ export default StyleSheet.create({
     fontSize: 10,
     color: 'red',
     textAlign: 'right',
+    marginLeft: 10,
   },
   priceToDisplay: {
     fontWeight: 'bold',
