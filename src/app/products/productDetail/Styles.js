@@ -11,10 +11,14 @@ export default StyleSheet.create({
     height: 300,
     width: 400,
   },
+  rowContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   addProductContainer: {
     // marginBottom: 10,
     justifyContent: 'space-between',
-    padding: 10,
+    // padding: 10,
     height: 50,
     flexDirection: 'row',
     backgroundColor: '#262626',
@@ -35,6 +39,7 @@ export default StyleSheet.create({
   productTitle: {
     color: Color.primaryFontColor,
     fontSize: 20,
+    marginBottom: 5,
   },
   productDescription: {
     color: Color.primaryFontColor,
@@ -46,16 +51,31 @@ export default StyleSheet.create({
     flexDirection: 'row',
   },
   savingPercentage: {
-    fontSize: 10,
+    fontSize: 16,
+    color: 'red',
+    textAlign: 'right',
+    marginLeft: 10,
+  },
+  savingPercentageSmall: {
+    fontSize: 12,
     color: 'red',
     textAlign: 'right',
     marginLeft: 10,
   },
   priceToDisplay: {
     fontWeight: 'bold',
-    fontSize: 18,
+    fontSize: 20,
     color: Color.primaryColorNormal,
     textAlign: 'right',
+  },
+  icon: {
+    margin: 5,
+  },
+  link: {
+    color: 'blue',
+  },
+  addButton: {
+    height: 10,
   },
   // productPrice: {
   //   fontSize: 14,

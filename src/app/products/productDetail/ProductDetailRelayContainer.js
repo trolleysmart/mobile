@@ -15,6 +15,7 @@ export default createFragmentContainer(
           description
           imageUrl
           priceToDisplay
+          productPageUrl
           store {
             name
             imageUrl

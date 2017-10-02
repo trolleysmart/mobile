@@ -5,10 +5,10 @@ import { Text, View, Image, ScrollView } from 'react-native';
 import { Card, Button, Icon, Avatar } from 'react-native-elements';
 // import FastImage from 'react-native-fast-image';
 import PropTypes from 'prop-types';
-import { Grid, Row } from 'react-native-elements';
 import Styles from './Styles';
 import { Color } from '../../../framework/style/DefaultStyles';
 import { ProductProp } from './PropTypes';
+import { TouchableIcon } from '../../../components/touchableIcon';
 
 class ProductDetailView extends Component {
   render = () => {
@@ -18,40 +18,42 @@ class ProductDetailView extends Component {
           <Image source={{ uri: this.props.product.imageUrl }} resizeMode="cover" style={Styles.productImage} />
           <View style={Styles.productTitleContainer}>
             <Text style={Styles.productTitle}>{this.props.product.name}</Text>
-            <Row>
-              <Text style={Styles.priceToDisplay}>${this.props.product.priceToDisplay}</Text>
-              <Text style={Styles.savingPercentage}>
+            <View style={Styles.rowContainer}>
+              <Text style={Styles.priceToDisplay}>${this.props.product.priceToDisplay.toFixed(2)}</Text>
+              <Text style={Styles.savingPercentageSmall}>
                 {this.props.product.saving
                   ? 'Save $' + this.props.product.saving.toFixed(2) + '(' + this.props.product.savingPercentage.toFixed(0) + '%)'
                   : ''}
               </Text>
               <Text>{this.props.product.offerEndDate ? this.props.product.offerEndDate + 'day(s) left' : ''}</Text>
-            </Row>
+            </View>
           </View>
           <Card title="Detail">
             <Text style={Styles.productDescription}>{this.props.product.description}</Text>
             {this.props.product.size ? (
-              <Row>
+              <View style={Styles.rowContainer}>
+                <Icon style={Styles.icon} color="#bfc4c9" name="weight" type="material-community" />
                 <Text>Size: </Text>
                 <Text style={Styles.productSize}>{this.props.product.size}</Text>
-              </Row>
+              </View>
             ) : (
               <View />
             )}
             {this.props.product.unitPrice ? (
-              <Row>
-                <Text>Price per unit: </Text>
+              <View style={Styles.rowContainer}>
+                <Icon style={Styles.icon} color="#bfc4c9" name="md-pricetag" type="ionicon" />
+                <Text> Price per unit: </Text>
                 <Text style={Styles.unitPrice}>{'$' + this.props.product.unitPrice.price.toFixed(2) + '/' + this.props.product.unitPrice.size}</Text>
-              </Row>
+              </View>
             ) : (
               <View />
             )}
-            <Button
-              icon={{ name: 'web', type: 'material-community' }}
-              title="View product on web"
-              backgroundColor={Color.secondaryColorAction}
-              onPress={() => this.props.handleVisitStorePressed(this.props.product.imageUrl)}
-            />
+            <View style={Styles.rowContainer}>
+              <Icon style={Styles.icon} color="#bfc4c9" name="web" type="material-community" />
+              <Text style={Styles.link} onPress={() => this.props.handleVisitStorePressed(this.props.product.productPageUrl)}>
+                View on web
+              </Text>
+            </View>
           </Card>
           <Card title="Store Info">
             <View style={Styles.storeInfoContainer}>
@@ -64,14 +66,14 @@ class ProductDetailView extends Component {
               </View>
               <View style={Styles.storeDetail}>
                 <Text>{this.props.product.store ? this.props.product.store.name : ''}</Text>
-                <Icon name="google-maps" type="material-community" />
+                {/*<Icon name="google-maps" type="material-community" />*/}
               </View>
             </View>
           </Card>
         </ScrollView>
         <View style={Styles.addProductContainer}>
           <View style={Styles.productPriceContainer}>
-            <Text style={Styles.priceToDisplay}>${this.props.product.priceToDisplay}</Text>
+            <Text style={Styles.priceToDisplay}>${this.props.product.priceToDisplay.toFixed(2)}</Text>
             <Text style={Styles.savingPercentage}>
               {this.props.product.saving
                 ? 'Save $' + this.props.product.saving.toFixed(2) + '(' + this.props.product.savingPercentage.toFixed(0) + '%)'
@@ -79,29 +81,23 @@ class ProductDetailView extends Component {
             </Text>
           </View>
           <View>
-            <Button title="Add" raised borderRadius={10} backgroundColor={Color.secondaryColorAction} buttonStyle={{}} />
+            <TouchableIcon
+              iconName="plus-circle"
+              iconType="material-community"
+              iconColor={Color.secondaryColorAction}
+              iconSize={40}
+              onPress={() => this.props.onAddProductPressed(this.props.product.id)}
+            />
+            {/*<Button*/}
+            {/*icon={{name: 'plus'}}*/}
+            {/*title='Add'*/}
+            {/*large={false}*/}
+            {/*raised*/}
+            {/*borderRadius={10}*/}
+            {/*backgroundColor={Color.secondaryColorAction}*/}
+            {/*// buttonStyle={Styles.addButton}*/}
+            {/*/>*/}
           </View>
-
-          {/*<View>*/}
-          {/*<Menu>*/}
-          {/*<MenuTrigger>*/}
-          {/*<Icon name="dots-vertical" type="material-community" color="white" />*/}
-          {/*/!* <Text style={{ color: 'white' }}>Select List</Text> *!/*/}
-          {/*</MenuTrigger>*/}
-          {/*<MenuOptions>*/}
-          {/*<MenuOption onSelect={() => this.props.onEditShoppingListPressed(this.props.shoppingList.id, this.props.shoppingList.name)}>*/}
-          {/*<View style={Styles.menuOption}>*/}
-          {/*<Text>Shopping List 1</Text>*/}
-          {/*</View>*/}
-          {/*</MenuOption>*/}
-          {/*<MenuOption onSelect={() => this.props.onDeleteShoppingListPressed(this.props.shoppingList.id, this.props.shoppingList.name)}>*/}
-          {/*<View style={Styles.menuOption}>*/}
-          {/*<Text>Shopping List 2</Text>*/}
-          {/*</View>*/}
-          {/*</MenuOption>*/}
-          {/*</MenuOptions>*/}
-          {/*</Menu>*/}
-          {/*</View>*/}
         </View>
       </View>
     );
@@ -111,6 +107,7 @@ class ProductDetailView extends Component {
 ProductDetailView.propTypes = {
   product: ProductProp,
   handleVisitStorePressed: PropTypes.func.isRequired,
+  onAddProductPressed: PropTypes.func.isRequired,
 };
 
 export default ProductDetailView;

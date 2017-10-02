@@ -10,14 +10,8 @@ import ProductDetailRelayContainer from './ProductDetailRelayContainer';
 
 class ProductDetail extends Component {
   static navigationOptions = ({ navigation }) => ({
-    title: navigation.state.params ? (navigation.state.params.productName ? navigation.state.params.productName : '') : '',
+    title: navigation.state.params ? (navigation.state.params.title ? navigation.state.params.title : '') : '',
   });
-
-  componentDidMount = () => {
-    this.props.navigation.setParams({
-      title: this.props.productName,
-    });
-  };
 
   render = () => {
     return (
