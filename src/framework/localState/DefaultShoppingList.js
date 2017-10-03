@@ -22,9 +22,9 @@ export function* watchGetDefaultShoppingList() {
 
 function* setDefaultShoppingListAsync(action) {
   try {
-    const value = yield call(AsyncStorage.setItem, 'defaultShoppingList:Id', action.get('defaultShoppingListId'));
+    yield call(AsyncStorage.setItem, 'defaultShoppingList:Id', action.get('defaultShoppingListId'));
 
-    yield put(Actions.defaultShoppingListChanged(Map({ defaultShoppingListId: value ? value : '' })));
+    yield put(Actions.defaultShoppingListChanged(Map({ defaultShoppingListId: action.get('defaultShoppingListId') })));
   } catch (exception) {
     yield put(Actions.defaultShoppingListChanged(Map({ defaultShoppingListId: '' })));
   }
