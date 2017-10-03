@@ -9,6 +9,9 @@ export default createPaginationContainer(
     user: graphql`
       fragment ShoppingListItemsRelayContainer_user on User {
         id
+        shoppingList(shoppingListId: $shoppingListId){
+          name
+        }
         shoppingListItems(first: $count, after: $cursor, shoppingListId: $shoppingListId) @connection(key: "User_shoppingListItems") {
           pageInfo {
             hasNextPage

@@ -42,6 +42,10 @@ class ShoppingListItemsContainer extends Component<any, Props, State> {
     }
   };
 
+  componentWillMount = () => {
+    console.log(this.props.user);
+  };
+
   onShoppingListItemSelectionChanged = shoppingListItem => {
     RemoveItemsFromShoppingList.commit(this.props.relay.environment, this.props.user.id, this.props.shoppingListId, [shoppingListItem.id]);
   };

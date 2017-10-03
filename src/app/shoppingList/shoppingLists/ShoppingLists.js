@@ -8,7 +8,7 @@ import { MainMenuContainer } from '../../../sharedComponents/mainMenu';
 import ShoppingListsRelayContainer from './ShoppingListsRelayContainer';
 import { Color } from '../../../framework/style/DefaultStyles';
 
-class ShoppingList extends Component {
+class ShoppingLists extends Component {
   static navigationOptions = {
     title: 'Shopping Lists',
     headerLeft: <MainMenuContainer />,
@@ -48,6 +48,6 @@ class ShoppingList extends Component {
   }
 }
 
-ShoppingList.propTypes = {};
+ShoppingLists.propTypes = {};
 
-export default ShoppingList;
+export default ShoppingLists;
