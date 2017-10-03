@@ -19,7 +19,7 @@ class ProductDetailContainer extends Component<any, Props, State> {
 
   onAddProductPressed = productId => {
     // TODO: Refactor once multiple shopping list home done
-    if (this.props.user.product.id === productId){
+    if (this.props.user.product.id === productId) {
       AddItemsToShoppingList.commit(this.props.relay.environment, this.props.user.id, this.props.user.shoppingLists.edges[0].node.id, {
         productPrices: [Immutable.fromJS(this.props.user.product)],
       });
@@ -48,7 +48,7 @@ ProductDetailContainer.propTypes = {
   // product: ProductProp,
 };
 
-function mapStateToProps(state, props) {
+function mapStateToProps() {
   return {};
 }
 
