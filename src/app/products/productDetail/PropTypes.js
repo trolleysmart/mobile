@@ -6,6 +6,8 @@ export const ProductProp = PropTypes.shape({
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   imageUrl: PropTypes.string,
+  productPageUrl: PropTypes.string,
+  description: PropTypes.string,
   priceToDisplay: PropTypes.number,
   savingPercentage: PropTypes.number,
   saving: PropTypes.number,

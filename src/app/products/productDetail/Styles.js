@@ -1,12 +1,7 @@
 // @flow
 
-import {
-  StyleSheet,
-} from 'react-native';
-import {
-  Color,
-  Sizes,
-} from '../../../framework/style/DefaultStyles';
+import { StyleSheet } from 'react-native';
+import { Color, Sizes } from '../../../framework/style/DefaultStyles';
 
 export default StyleSheet.create({
   container: {
@@ -16,10 +11,14 @@ export default StyleSheet.create({
     height: 300,
     width: 400,
   },
+  rowContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   addProductContainer: {
     // marginBottom: 10,
     justifyContent: 'space-between',
-    padding: 10,
+    // padding: 10,
     height: 50,
     flexDirection: 'row',
     backgroundColor: '#262626',
@@ -28,21 +27,23 @@ export default StyleSheet.create({
     padding: 15,
     backgroundColor: 'white',
   },
-  storeInfoContainer:{
+  storeInfoContainer: {
     flexDirection: 'row',
   },
-  storeDetail:{
+  storeDetail: {
     marginLeft: 10,
     flexDirection: 'row',
-    justifyContent:'space-between',
+    justifyContent: 'space-between',
     alignItems: 'center',
   },
   productTitle: {
     color: Color.primaryFontColor,
     fontSize: 20,
+    marginBottom: 5,
   },
-  productDescription:{
+  productDescription: {
     color: Color.primaryFontColor,
+    paddingBottom: 10,
   },
   productPriceContainer: {
     justifyContent: 'space-between',
@@ -50,15 +51,31 @@ export default StyleSheet.create({
     flexDirection: 'row',
   },
   savingPercentage: {
-    fontSize: 10,
+    fontSize: 16,
     color: 'red',
     textAlign: 'right',
+    marginLeft: 10,
+  },
+  savingPercentageSmall: {
+    fontSize: 12,
+    color: 'red',
+    textAlign: 'right',
+    marginLeft: 10,
   },
   priceToDisplay: {
     fontWeight: 'bold',
-    fontSize: 18,
+    fontSize: 20,
     color: Color.primaryColorNormal,
     textAlign: 'right',
+  },
+  icon: {
+    margin: 5,
+  },
+  link: {
+    color: 'blue',
+  },
+  addButton: {
+    height: 10,
   },
   // productPrice: {
   //   fontSize: 14,

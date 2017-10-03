@@ -69,4 +69,8 @@ export default StyleSheet.create({
     color: Color.primaryColorNormal,
     textAlign: 'right',
   },
+  viewProductIconContainerStyle: {
+    height: 60,
+    width: 30,
+  },
 });

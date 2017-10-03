@@ -35,7 +35,7 @@ class ShoppingListItems extends Component {
     let sectionData = Immutable.fromJS(this.props.shoppingListItems)
       .groupBy(
         item =>
-          item.has('tags') && item.get('tags')
+          item.has('tags') && item.get('tags') && !item.get('tags').isEmpty()
             ? item
                 .get('tags')
                 .first()
