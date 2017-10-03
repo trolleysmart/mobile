@@ -7,6 +7,7 @@ import { ShoppingListReducer, ShoppingListDetailReducer } from '../../app/shoppi
 import { StapleItemsReducer } from '../../app/stapleItems';
 import { ProductsFilterReducer } from '../../sharedComponents/productsFilter';
 import { ProductReducer } from '../../app/products';
+import { LocalStateReducer } from '../localState';
 import { UserAccessReducer } from 'micro-business-parse-server-common-react-native';
 
 export default function getReducers(navigationReducer) {
@@ -20,5 +21,6 @@ export default function getReducers(navigationReducer) {
     productsFilter: ProductsFilterReducer,
     products: ProductReducer,
     shoppingListDetail: ShoppingListDetailReducer,
+    localState: LocalStateReducer,
   });
 }

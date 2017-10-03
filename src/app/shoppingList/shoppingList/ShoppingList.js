@@ -56,7 +56,7 @@ ShoppingList.propTypes = {
 
 function mapStateToProps(state, props) {
   return {
-    shoppingListId: props.navigation.state.params.shoppingListId,
+    shoppingListId: state.localState.get('defaultShoppingListId'), //props.navigation.state.params.shoppingListId,
   };
 }
 
