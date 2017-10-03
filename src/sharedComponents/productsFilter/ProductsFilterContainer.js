@@ -1,12 +1,11 @@
 // @flow
 
+import { Map } from 'immutable';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { List, Map } from 'immutable';
-import { Platform } from 'react-native';
 import * as productsFilterActions from './Actions';
 import ProductsFilter from './ProductsFilter';
 import HeaderContainer from './HeaderContainer';

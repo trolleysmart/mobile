@@ -1,7 +1,7 @@
 // @flow
 
 import { StyleSheet } from 'react-native';
-import { Color, Sizes } from '../../../framework/style/DefaultStyles';
+import { Color } from '../../../framework/style/DefaultStyles';
 
 export default StyleSheet.create({
   container: {

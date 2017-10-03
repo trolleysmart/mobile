@@ -2,8 +2,7 @@
 
 import React, { Component } from 'react';
 import { Text, View, Image, ScrollView } from 'react-native';
-import { Card, Button, Icon, Avatar } from 'react-native-elements';
-// import FastImage from 'react-native-fast-image';
+import { Card, Icon, Avatar } from 'react-native-elements';
 import PropTypes from 'prop-types';
 import Styles from './Styles';
 import { Color } from '../../../framework/style/DefaultStyles';
