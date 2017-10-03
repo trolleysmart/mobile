@@ -34,6 +34,13 @@ export default createFragmentContainer(
           savingPercentage
           saving
         }
+        shoppingLists(first: 1) {
+          edges {
+            node {
+              id
+            }
+          }
+        }
       }
     `,
   },
