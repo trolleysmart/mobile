@@ -11,6 +11,7 @@ import * as shoppingListDetailActions from '../shoppingListDetail/Actions';
 import ShoppingListsList from './ShoppingListsList';
 import { RemoveShoppingList } from '../../../framework/relay/mutations';
 import { environment } from '../../../framework/relay';
+import * as localStateActions from '../../../framework/localState/Actions';
 import { type ShoppingListsRelayContainer_user } from './__generated__/ShoppingListsRelayContainer_user.graphql';
 
 type Props = {
@@ -25,7 +26,9 @@ class ShoppingListsContainer extends Component<any, Props, State> {
   };
 
   onShoppingListPressed = shoppingList => {
-    this.props.gotoShoppingList(shoppingList);
+
+    this.props.localStateActions.setDefaultShoppingList(Map({ defaultShoppingListId: shoppingList.id }));
+    this.props.goBack();
   };
 
   onCreateShoppingListPressed = () => {
@@ -111,15 +114,18 @@ function mapDispatchToProps(dispatch) {
   return {
     shoppingListsActions: bindActionCreators(shoppingListsActions, dispatch),
     shoppingListDetailActions: bindActionCreators(shoppingListDetailActions, dispatch),
-    gotoShoppingList: shoppingList =>
+    localStateActions: bindActionCreators(localStateActions, dispatch),
+    goBack: () =>
       dispatch(
-        NavigationActions.navigate({
-          routeName: 'ShoppingList',
-          params: {
-            shoppingListId: shoppingList.id,
-            title: shoppingList.name,
-          },
-        }),
+        NavigationActions.back(
+          // {
+          // routeName: 'ShoppingList',
+          // params: {
+          //   shoppingListId: shoppingList.id,
+          //   title: shoppingList.name,
+          // },
+        // }
+        ),
       ),
     gotoCreateShoppingList: () =>
       dispatch(

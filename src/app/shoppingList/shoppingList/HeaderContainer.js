@@ -3,6 +3,7 @@
 import React, {Component} from 'react';
 import { View } from 'react-native';
 import { connect } from 'react-redux';
+import { NavigationActions } from 'react-navigation';
 import PropTypes from 'prop-types';
 import { Menu, MenuTrigger, MenuOptions, MenuOption } from 'react-native-popup-menu';
 import { TouchableIcon } from '../../../components/touchableIcon';
@@ -10,7 +11,7 @@ import Styles from './Styles';
 
 class ShoppingListHeaderContainer extends Component {
   onViewShoppingListsPressed = () => {
-
+    this.props.gotoShoppingLists();
   }
 
   render = () => {
@@ -36,6 +37,12 @@ function mapStateToProps() {
 
 function mapDispatchToProps(dispatch) {
   return {
+    gotoShoppingLists: () =>
+      dispatch(
+        NavigationActions.navigate({
+          routeName: 'ShoppingLists',
+        }),
+      ),
   };
 }
 

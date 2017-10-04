@@ -20,9 +20,6 @@ const fetchQuery = async (operation, variables) => {
   });
 
   const result = await response.json();
-  console.log(result);
-  console.log(operation.text);
-  console.log(variables);
 
   return result;
 };
