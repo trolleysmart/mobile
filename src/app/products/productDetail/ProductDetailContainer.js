@@ -4,8 +4,11 @@ import Immutable from 'immutable';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Linking } from 'react-native';
+import { bindActionCreators } from 'redux';
 import { NavigationActions } from 'react-navigation';
+import PropTypes from 'prop-types';
 import ProductDetailView from './ProductDetailView';
+import * as productsActions from '../products/Actions';
 import { AddItemsToShoppingList } from '../../../framework/relay/mutations';
 
 class ProductDetailContainer extends Component<any, Props, State> {
@@ -18,15 +21,14 @@ class ProductDetailContainer extends Component<any, Props, State> {
   };
 
   onAddProductPressed = productId => {
-    // TODO: Refactor once multiple shopping list home done
     if (this.props.user.product.id === productId) {
-      AddItemsToShoppingList.commit(this.props.relay.environment, this.props.user.id, this.props.user.shoppingLists.edges[0].node.id, {
+      AddItemsToShoppingList.commit(this.props.relay.environment, this.props.user.id, this.props.defaultShoppingListId, {
         productPrices: [Immutable.fromJS(this.props.user.product)],
       });
     }
 
     this.props.goBack();
-    // this.props.productsActions.productSelected(productId);
+    this.props.productsActions.productSelected(productId);
   };
 
   handleVisitStorePressed = url => {
@@ -45,15 +47,18 @@ class ProductDetailContainer extends Component<any, Props, State> {
 }
 
 ProductDetailContainer.propTypes = {
-  // product: ProductProp,
+  defaultShoppingListId: PropTypes.string.isRequired,
 };
 
-function mapStateToProps() {
-  return {};
+function mapStateToProps(state) {
+  return {
+    defaultShoppingListId: state.localState.getIn(['defaultShoppingList', 'id']),
+  };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
+    productsActions: bindActionCreators(productsActions, dispatch),
     goBack: () => dispatch(NavigationActions.back()),
   };
 }
