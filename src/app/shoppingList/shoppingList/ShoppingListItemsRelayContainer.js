@@ -9,6 +9,9 @@ export default createPaginationContainer(
     user: graphql`
       fragment ShoppingListItemsRelayContainer_user on User {
         id
+        shoppingList(shoppingListId: $shoppingListId){
+          name
+        }
         shoppingLists(first: 1) {
           edges {
             node {

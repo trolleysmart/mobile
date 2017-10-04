@@ -14,6 +14,10 @@ const HomeNavigationTab = TabNavigator(
       screen: ShoppingList,
       path: '/',
       navigationOptions: {
+        tabBarLabel: 'Shopping List',
+        tabBarIcon: ({ tintColor, focused }) => (
+          <Ionicons name={focused ? 'ios-list-box' : 'ios-list-box-outline'} size={26} style={{ color: tintColor }} />
+        ),
         // header: null,
         headerStyle: {
           backgroundColor: Color.primaryColorNormal,
