@@ -108,6 +108,23 @@ function commit(environment, userId, shoppingListId, { productPrices, stapleItem
           node.setValue(productPrice.get('savingPercentage'), 'savingPercentage');
           node.setValue(productPrice.get('saving'), 'saving');
 
+          if (productPrice.get('tags')) {
+            node.setLinkedRecords(
+              productPrice
+                .get('tags')
+                .map(_ => {
+                  const tag = store.create(uuid(), 'tag');
+
+                  tag.setValue(_.get('key'), 'key');
+                  tag.setValue(_.get('name'), 'name');
+
+                  return tag;
+                })
+                .toArray(),
+              'tags',
+            );
+          }
+
           const shoppingListItemEdge = store.create(uuid(), 'ShoppingListItemEdge');
 
           shoppingListItemEdge.setLinkedRecord(node, 'node');
@@ -124,15 +141,22 @@ function commit(environment, userId, shoppingListId, { productPrices, stapleItem
           node.setValue(stapleItem.get('id'), 'stapleItemId');
           node.setValue(stapleItem.get('name'), 'name');
 
-          const tags = stapleItem.get('tags').map(_ => {
-            const tag = store.create(uuid(), 'tag');
+          if (stapleItem.get('tags')) {
+            node.setLinkedRecords(
+              stapleItem
+                .get('tags')
+                .map(_ => {
+                  const tag = store.create(uuid(), 'tag');
 
-            tag.setValue(_.key, 'key');
-            tag.setValue(_.name, 'name');
+                  tag.setValue(_.get('key'), 'key');
+                  tag.setValue(_.get('name'), 'name');
 
-            return tag;
-          });
-          node.setLinkedRecords(tags, 'tags');
+                  return tag;
+                })
+                .toArray(),
+              'tags',
+            );
+          }
 
           const shoppingListItemEdge = store.create(uuid(), 'ShoppingListItemEdge');
 

@@ -52,7 +52,7 @@ class StapleItemsContrainer extends Component<any, Props, State> {
               id: stapleItem.id || uuid(),
               name: stapleItem.name,
               isCustomItem: stapleItem.isCustomItem,
-              tags: stapleItem.tags,
+              tags: Immutable.fromJS(stapleItem.tags),
             }),
           ),
         }),
