@@ -12,10 +12,7 @@ import HeaderContainer from './HeaderContainer';
 import HeaderTitleContainer from './HeaderTitleContainer';
 
 class ShoppingList extends Component {
-  static navigationOptions = ({ navigation }) => ({
-    // headerTitle: navigation.state.params
-    //   ? navigation.state.params.shoppingListName ? navigation.state.params.shoppingListName : ''
-    //   : '',
+  static navigationOptions = () => ({
     headerTitle: <HeaderTitleContainer />,
     headerLeft: <MainMenuContainer />,
     headerRight: <HeaderContainer />,
