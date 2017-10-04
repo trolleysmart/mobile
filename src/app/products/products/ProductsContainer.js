@@ -27,7 +27,7 @@ class ProductsContainer extends Component<any, Props, State> {
   onProductItemSelectionChanged = product => {
     const productId = product.id;
 
-    AddItemsToShoppingList.commit(this.props.relay.environment, this.props.user.id, this.props.user.shoppingLists.edges[0].node.id, {
+    AddItemsToShoppingList.commit(this.props.relay.environment, this.props.user.id, this.props.defaultShoppingListId, {
       productPrices: [Immutable.fromJS(this.props.user.products.edges.map(_ => _.node).find(_ => _.id === productId))],
     });
 
@@ -83,10 +83,13 @@ class ProductsContainer extends Component<any, Props, State> {
 
 ProductsContainer.propTypes = {
   gotoProductDetail: PropTypes.func.isRequired,
+  defaultShoppingListId: PropTypes.string.isRequired,
 };
 
-function mapStateToProps() {
-  return {};
+function mapStateToProps(state) {
+  return {
+    defaultShoppingListId: state.localState.getIn(['defaultShoppingList', 'id']),
+  };
 }
 
 function mapDispatchToProps(dispatch) {

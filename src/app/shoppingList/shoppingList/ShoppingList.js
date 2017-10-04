@@ -6,16 +6,16 @@ import { Text } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { environment } from '../../../framework/relay';
 import { graphql, QueryRenderer } from 'react-relay';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import { MainMenuContainer } from '../../../sharedComponents/mainMenu';
 import ShoppingListItemsRelayContainer from './ShoppingListItemsRelayContainer';
+import HeaderContainer from './HeaderContainer';
+import HeaderTitleContainer from './HeaderTitleContainer';
 
 class ShoppingList extends Component {
-  static navigationOptions = ({ navigation }) => ({
-    tabBarLabel: 'Shopping List',
-    tabBarIcon: ({ tintColor, focused }) => (
-      <Ionicons name={focused ? 'ios-list-box' : 'ios-list-box-outline'} size={26} style={{ color: tintColor }} />
-    ),
-    title: navigation.state.params ? navigation.state.params.title : '',
+  static navigationOptions = () => ({
+    headerTitle: <HeaderTitleContainer />,
+    headerLeft: <MainMenuContainer />,
+    headerRight: <HeaderContainer />,
   });
 
   render() {
@@ -54,9 +54,9 @@ ShoppingList.propTypes = {
   shoppingListId: PropTypes.string.isRequired,
 };
 
-function mapStateToProps(state, props) {
+function mapStateToProps(state) {
   return {
-    shoppingListId: props.navigation.state.params.shoppingListId,
+    shoppingListId: state.localState.getIn(['defaultShoppingList', 'id']),
   };
 }
 

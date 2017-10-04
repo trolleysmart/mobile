@@ -19,6 +19,7 @@ import AppDrawer from './AppDrawer';
 import * as messageBarActions from '../../sharedComponents/messageBar/Actions';
 import { MessageType } from '../../sharedComponents/messageBar';
 import { SignInDisclaimerContainer } from '../../sharedComponents/disclaimer';
+import * as localStateActions from '../../framework/localState/Actions';
 
 const AppNavigator = StackNavigator(
   {
@@ -136,6 +137,8 @@ class AppWithNavigationState extends Component {
   };
 
   componentWillMount() {
+    this.props.localStateActions.getDefaultShoppingList();
+
     CodePush.sync(
       {
         updateDialog: true,
@@ -227,9 +230,8 @@ class AppWithNavigationState extends Component {
         width={200}
         haveOverlay={true}
       >
-        <View>{/* <Text>Hello</Text> */}</View>
+        <View />
       </PopupDialog>
-      {/* <Button title='hell' onPress={() => this.popupDialog.show()}/> */}
       <AppNavigator
         navigation={addNavigationHelpers({
           dispatch: this.props.dispatch,
@@ -246,6 +248,7 @@ AppWithNavigationState.propTypes = {
   navigation: PropTypes.object.isRequired,
   messageBarActions: PropTypes.object.isRequired,
   userAccessActions: PropTypes.object.isRequired,
+  localStateActions: PropTypes.object.isRequired,
   goBack: PropTypes.func.isRequired,
 };
 
@@ -263,6 +266,7 @@ function mapDispatchToProps(dispatch) {
     dispatch,
     messageBarActions: bindActionCreators(messageBarActions, dispatch),
     userAccessActions: bindActionCreators(userAccessActions, dispatch),
+    localStateActions: bindActionCreators(localStateActions, dispatch),
     goBack: () => dispatch(NavigationActions.back()),
   };
 }

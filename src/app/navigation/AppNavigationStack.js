@@ -10,6 +10,7 @@ import { FlyerContainer } from '../flyer';
 import { Products } from '../products';
 import ShoppingListDetailContainer from '../shoppingList/shoppingListDetail/ShoppingListDetailContainer';
 import ProductDetail from '../products/productDetail/ProductDetail';
+import ShoppingLists from '../shoppingList/shoppingLists/ShoppingLists';
 
 export default StackNavigator({
   Home: {
@@ -32,6 +33,9 @@ export default StackNavigator({
   },
   Products: {
     screen: Products,
+  },
+  ShoppingLists:{
+    screen: ShoppingLists,
   },
   ShoppingListDetail: {
     screen: ShoppingListDetailContainer,

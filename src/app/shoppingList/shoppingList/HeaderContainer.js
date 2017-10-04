@@ -1,13 +1,44 @@
 // @flow
 
-import React from 'react';
+import React, { Component } from 'react';
 import { View } from 'react-native';
-import { MainMenuContainer } from '../../../sharedComponents/mainMenu';
+import { connect } from 'react-redux';
+import { NavigationActions } from 'react-navigation';
+import PropTypes from 'prop-types';
+import { TouchableIcon } from '../../../components/touchableIcon';
+import Styles from './Styles';
 
-const HeaderContainer = () => (
-  <View>
-    <MainMenuContainer />
-  </View>
-);
+class ShoppingListHeaderContainer extends Component {
+  onViewShoppingListsPressed = () => {
+    this.props.gotoShoppingLists();
+  };
 
-export default HeaderContainer;
+  render = () => {
+    return (
+      <View style={Styles.header}>
+        <TouchableIcon iconName="view-list" iconType="material-community" onPress={this.onViewShoppingListsPressed} />
+      </View>
+    );
+  };
+}
+
+ShoppingListHeaderContainer.propTypes = {
+  gotoShoppingLists: PropTypes.func.isRequired,
+};
+
+function mapStateToProps() {
+  return {};
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    gotoShoppingLists: () =>
+      dispatch(
+        NavigationActions.navigate({
+          routeName: 'ShoppingLists',
+        }),
+      ),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ShoppingListHeaderContainer);

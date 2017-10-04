@@ -17,6 +17,7 @@ const mutation = graphql`
         node {
           id
           name
+          totalItemsCount
         }
       }
     }

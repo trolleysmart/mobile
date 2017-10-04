@@ -11,6 +11,7 @@ import { RemoveItemsFromShoppingList } from '../../../framework/relay/mutations'
 import * as ShoppingListActions from './Actions';
 import * as StapleItemsActions from '../../stapleItems/Actions';
 import * as ProductsActions from '../../products/products/Actions';
+import * as localStateActions from '../../../framework/localState/Actions';
 
 type Props = {
   user: ShoppingListItemsRelayContainer_user,
@@ -21,6 +22,14 @@ type State = {};
 class ShoppingListItemsContainer extends Component<any, Props, State> {
   state = {
     isFetchingTop: false,
+  };
+
+  componentWillMount = () => {
+    if (!this.props.defaultShoppingListId) {
+      this.props.localStateActions.setDefaultShoppingList(
+        Map({ id: this.props.user.shoppingLists.edges[0].node.id, name: this.props.user.shoppingLists.edges[0].node.name }),
+      );
+    }
   };
 
   componentWillReceiveProps = nextProps => {
@@ -49,7 +58,7 @@ class ShoppingListItemsContainer extends Component<any, Props, State> {
   onShoppingListAddItemClicked = () => {
     // Clear the selected staple list
     this.props.stapleItemsActions.stapleItemSelectionChanged(Map({ selectedStapleItems: List() }));
-    this.props.gotoAddStapleItemsItems(this.props.shoppingListId);
+    this.props.gotoAddStapleItemsItems(this.props.defaultShoppingListId);
   };
 
   onViewProductsPressed = id => {
@@ -60,7 +69,7 @@ class ShoppingListItemsContainer extends Component<any, Props, State> {
 
     // Set removeCurrentViewingStapleItem to false
     this.props.shoppingListActions.removeCurrentViewingStapleItemFlagChanged(Map({ removeCurrentViewingStapleItem: false }));
-    this.props.gotoProducts(foundItem.name, foundItem.tags.map(_ => _.key));
+    this.props.gotoProducts(foundItem.name, foundItem.tags ? foundItem.tags.map(_ => _.key) : '');
   };
 
   onRefresh = () => {
@@ -109,12 +118,18 @@ class ShoppingListItemsContainer extends Component<any, Props, State> {
 ShoppingListItemsContainer.propTypes = {
   gotoAddStapleItemsItems: PropTypes.func.isRequired,
   removeCurrentViewingStapleItem: PropTypes.bool,
+  shoppingListActions: PropTypes.object.isRequired,
+  stapleItemsActions: PropTypes.object.isRequired,
+  productsActions: PropTypes.object.isRequired,
+  localStateActions: PropTypes.object.isRequired,
+  defaultShoppingListId: PropTypes.string.isRequired,
 };
 
 function mapStateToProps(state) {
   return {
     removeCurrentViewingStapleItem: state.shoppingList.get('removeCurrentViewingStapleItem'),
     viewingStapleItem: state.shoppingList.get('currentlyViewingStapleItem'),
+    defaultShoppingListId: state.localState.getIn(['defaultShoppingList', 'id']),
   };
 }
 
@@ -123,6 +138,7 @@ function mapDispatchToProps(dispatch) {
     shoppingListActions: bindActionCreators(ShoppingListActions, dispatch),
     stapleItemsActions: bindActionCreators(StapleItemsActions, dispatch),
     productsActions: bindActionCreators(ProductsActions, dispatch),
+    localStateActions: bindActionCreators(localStateActions, dispatch),
     gotoAddStapleItemsItems: shoppingListId =>
       dispatch(
         NavigationActions.navigate({

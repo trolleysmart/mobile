@@ -4,14 +4,12 @@ import React, { Component } from 'react';
 import { Text } from 'react-native-elements';
 import { graphql, QueryRenderer } from 'react-relay';
 import { environment } from '../../../framework/relay';
-import { MainMenuContainer } from '../../../sharedComponents/mainMenu';
 import ShoppingListsRelayContainer from './ShoppingListsRelayContainer';
 import { Color } from '../../../framework/style/DefaultStyles';
 
-class ShoppingList extends Component {
+class ShoppingLists extends Component {
   static navigationOptions = {
     title: 'Shopping Lists',
-    headerLeft: <MainMenuContainer />,
     headerStyle: {
       backgroundColor: Color.primaryColorNormal,
     },
@@ -48,6 +46,6 @@ class ShoppingList extends Component {
   }
 }
 
-ShoppingList.propTypes = {};
+ShoppingLists.propTypes = {};
 
-export default ShoppingList;
+export default ShoppingLists;

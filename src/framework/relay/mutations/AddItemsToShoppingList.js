@@ -38,6 +38,11 @@ const mutation = graphql`
             awardQuantity
             awardValue
           }
+          tags {
+            id
+            key
+            name
+          }
         }
       }
     }
@@ -103,6 +108,50 @@ function commit(environment, userId, shoppingListId, { productPrices, stapleItem
           node.setValue(productPrice.get('savingPercentage'), 'savingPercentage');
           node.setValue(productPrice.get('saving'), 'saving');
 
+          if (productPrice.get('store')) {
+            const saleStore = store.create(uuid(), 'store');
+
+            saleStore.setValue(productPrice.getIn(['store', 'name']), 'name');
+            saleStore.setValue(productPrice.getIn(['store', 'imageUrl']), 'imageUrl');
+
+            node.setLinkedRecord(saleStore, 'store');
+          }
+
+          if (productPrice.get('unitPrice')) {
+            const unitPrice = store.create(uuid(), 'unitPrice');
+
+            unitPrice.setValue(productPrice.getIn(['unitPrice', 'price']), 'price');
+            unitPrice.setValue(productPrice.getIn(['unitPrice', 'size']), 'size');
+
+            node.setLinkedRecord(unitPrice, 'unitPrice');
+          }
+
+          if (productPrice.get('multiBuy')) {
+            const multiBuy = store.create(uuid(), 'multiBuy');
+
+            multiBuy.setValue(productPrice.getIn(['multiBuy', 'awardQuantity']), 'awardQuantity');
+            multiBuy.setValue(productPrice.getIn(['multiBuy', 'awardValue']), 'awardValue');
+
+            node.setLinkedRecord(multiBuy, 'multiBuy');
+          }
+
+          if (productPrice.get('tags')) {
+            node.setLinkedRecords(
+              productPrice
+                .get('tags')
+                .map(_ => {
+                  const tag = store.create(uuid(), 'tag');
+
+                  tag.setValue(_.get('key'), 'key');
+                  tag.setValue(_.get('name'), 'name');
+
+                  return tag;
+                })
+                .toArray(),
+              'tags',
+            );
+          }
+
           const shoppingListItemEdge = store.create(uuid(), 'ShoppingListItemEdge');
 
           shoppingListItemEdge.setLinkedRecord(node, 'node');
@@ -118,6 +167,23 @@ function commit(environment, userId, shoppingListId, { productPrices, stapleItem
           node.setValue(id, 'id');
           node.setValue(stapleItem.get('id'), 'stapleItemId');
           node.setValue(stapleItem.get('name'), 'name');
+
+          if (stapleItem.get('tags')) {
+            node.setLinkedRecords(
+              stapleItem
+                .get('tags')
+                .map(_ => {
+                  const tag = store.create(uuid(), 'tag');
+
+                  tag.setValue(_.get('key'), 'key');
+                  tag.setValue(_.get('name'), 'name');
+
+                  return tag;
+                })
+                .toArray(),
+              'tags',
+            );
+          }
 
           const shoppingListItemEdge = store.create(uuid(), 'ShoppingListItemEdge');
 

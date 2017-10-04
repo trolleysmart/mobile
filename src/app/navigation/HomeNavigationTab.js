@@ -6,15 +6,19 @@ import { BrowseProductsNavigationTab } from '../products';
 import { FlyersContainer } from '../flyer';
 import { Color } from '../../framework/style/DefaultStyles';
 import { ProductsHeaderContainer } from '../products';
-import { ShoppingListsNavigationStack } from '../shoppingList';
+import { ShoppingList } from '../shoppingList';
 
 const HomeNavigationTab = TabNavigator(
   {
-    ShoppingLists: {
-      screen: ShoppingListsNavigationStack,
+    ShoppingList: {
+      screen: ShoppingList,
       path: '/',
       navigationOptions: {
-        header: null,
+        tabBarLabel: 'Shopping List',
+        tabBarIcon: ({ tintColor, focused }) => (
+          <Ionicons name={focused ? 'ios-list-box' : 'ios-list-box-outline'} size={26} style={{ color: tintColor }} />
+        ),
+        // header: null,
         headerStyle: {
           backgroundColor: Color.primaryColorNormal,
         },
