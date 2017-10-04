@@ -5,7 +5,6 @@ import { View } from 'react-native';
 import { connect } from 'react-redux';
 import { NavigationActions } from 'react-navigation';
 import PropTypes from 'prop-types';
-import { Menu, MenuTrigger, MenuOptions, MenuOption } from 'react-native-popup-menu';
 import { TouchableIcon } from '../../../components/touchableIcon';
 import Styles from './Styles';
 

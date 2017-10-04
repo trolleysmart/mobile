@@ -41,9 +41,9 @@ AppDrawerMenuContainer.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    name: state.userAccess.get('userInfo').get('name')
-      ? state.userAccess.get('userInfo').get('name')
-      : state.userAccess.get('userInfo').get('emailAddress'),
+    name: state.userAccess.getIn(['userInfo', 'name'])
+      ? state.userAccess.getIn(['userInfo', 'name'])
+      : state.userAccess.getIn(['userInfo', 'emailAddress']),
     avatarUrl: state.userAccess.getIn(['userInfo', 'avatar']) ? state.userAccess.getIn(['userInfo', 'avatar']).data.url : null,
   };
 }

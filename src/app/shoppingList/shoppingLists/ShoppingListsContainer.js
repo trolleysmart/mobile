@@ -105,7 +105,7 @@ ShoppingListsContainer.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    userId: state.userAccess.get('userInfo').get('id'),
+    userId: state.userAccess.getIn(['userInfo', 'id']),
   };
 }
 
@@ -114,19 +114,7 @@ function mapDispatchToProps(dispatch) {
     shoppingListsActions: bindActionCreators(shoppingListsActions, dispatch),
     shoppingListDetailActions: bindActionCreators(shoppingListDetailActions, dispatch),
     localStateActions: bindActionCreators(localStateActions, dispatch),
-    goBack: () =>
-      dispatch(
-        NavigationActions
-          .back
-          // {
-          // routeName: 'ShoppingList',
-          // params: {
-          //   shoppingListId: shoppingList.id,
-          //   title: shoppingList.name,
-          // },
-          // }
-          (),
-      ),
+    goBack: () => dispatch(NavigationActions.back()),
     gotoCreateShoppingList: () =>
       dispatch(
         NavigationActions.navigate({
