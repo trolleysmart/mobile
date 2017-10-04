@@ -38,6 +38,11 @@ const mutation = graphql`
             awardQuantity
             awardValue
           }
+          tags {
+            id
+            key
+            name
+          }
         }
       }
     }
@@ -118,6 +123,16 @@ function commit(environment, userId, shoppingListId, { productPrices, stapleItem
           node.setValue(id, 'id');
           node.setValue(stapleItem.get('id'), 'stapleItemId');
           node.setValue(stapleItem.get('name'), 'name');
+
+          const tags = stapleItem.get('tags').map(_ => {
+            const tag = store.create(uuid(), 'tag');
+
+            tag.setValue(_.key, 'key');
+            tag.setValue(_.name, 'name');
+
+            return tag;
+          });
+          node.setLinkedRecords(tags, 'tags');
 
           const shoppingListItemEdge = store.create(uuid(), 'ShoppingListItemEdge');
 
