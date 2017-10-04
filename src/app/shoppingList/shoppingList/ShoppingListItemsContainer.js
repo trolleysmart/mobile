@@ -58,7 +58,7 @@ class ShoppingListItemsContainer extends Component<any, Props, State> {
   onShoppingListAddItemClicked = () => {
     // Clear the selected staple list
     this.props.stapleItemsActions.stapleItemSelectionChanged(Map({ selectedStapleItems: List() }));
-    this.props.gotoAddStapleItemsItems(this.props.shoppingListId);
+    this.props.gotoAddStapleItemsItems(this.props.defaultShoppingListId);
   };
 
   onViewProductsPressed = id => {
@@ -69,7 +69,7 @@ class ShoppingListItemsContainer extends Component<any, Props, State> {
 
     // Set removeCurrentViewingStapleItem to false
     this.props.shoppingListActions.removeCurrentViewingStapleItemFlagChanged(Map({ removeCurrentViewingStapleItem: false }));
-    this.props.gotoProducts(foundItem.name, foundItem.tags.map(_ => _.key));
+    this.props.gotoProducts(foundItem.name, foundItem.tags ? foundItem.tags.map(_ => _.key) : '');
   };
 
   onRefresh = () => {

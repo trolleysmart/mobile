@@ -9,10 +9,14 @@ import { graphql, QueryRenderer } from 'react-relay';
 import { MainMenuContainer } from '../../../sharedComponents/mainMenu';
 import ShoppingListItemsRelayContainer from './ShoppingListItemsRelayContainer';
 import HeaderContainer from './HeaderContainer';
+import HeaderTitleContainer from './HeaderTitleContainer';
 
 class ShoppingList extends Component {
-  static navigationOptions = () => ({
-    headerTitle: 'haha',
+  static navigationOptions = ({ navigation }) => ({
+    // headerTitle: navigation.state.params
+    //   ? navigation.state.params.shoppingListName ? navigation.state.params.shoppingListName : ''
+    //   : '',
+    headerTitle: <HeaderTitleContainer />,
     headerLeft: <MainMenuContainer />,
     headerRight: <HeaderContainer />,
   });
