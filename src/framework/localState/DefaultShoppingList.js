@@ -8,9 +8,10 @@ import * as Actions from './Actions';
 
 function* getDefaultShoppingListAsync() {
   try {
-    const value = yield call(AsyncStorage.getItem, 'defaultShoppingList:Id');
+    const id = yield call(AsyncStorage.getItem, 'defaultShoppingList:Id');
+    const name = yield call(AsyncStorage.getItem, 'defaultShoppingList:Name');
 
-    yield put(Actions.defaultShoppingListChanged(Map({ defaultShoppingListId: value ? value : '' })));
+    yield put(Actions.defaultShoppingListChanged(Map({ id: id ? id : '', name: name ? name : '' })));
   } catch (exception) {
     yield put(Actions.defaultShoppingListChanged(Map({ defaultShoppingListId: '' })));
   }
@@ -22,9 +23,10 @@ export function* watchGetDefaultShoppingList() {
 
 function* setDefaultShoppingListAsync(action) {
   try {
-    yield call(AsyncStorage.setItem, 'defaultShoppingList:Id', action.payload.get('defaultShoppingListId'));
+    yield call(AsyncStorage.setItem, 'defaultShoppingList:Id', action.payload.get('id'));
+    yield call(AsyncStorage.setItem, 'defaultShoppingList:Name', action.payload.get('name'));
 
-    yield put(Actions.defaultShoppingListChanged(Map({ defaultShoppingListId: action.payload.get('defaultShoppingListId') })));
+    yield put(Actions.defaultShoppingListChanged(Map({ id: action.payload.get('id'), name: action.payload.get('name') })));
   } catch (exception) {}
 }
 

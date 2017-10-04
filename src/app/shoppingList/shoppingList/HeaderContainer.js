@@ -1,6 +1,6 @@
 // @flow
 
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { View } from 'react-native';
 import { connect } from 'react-redux';
 import { NavigationActions } from 'react-navigation';
@@ -12,24 +12,20 @@ import Styles from './Styles';
 class ShoppingListHeaderContainer extends Component {
   onViewShoppingListsPressed = () => {
     this.props.gotoShoppingLists();
-  }
+  };
 
   render = () => {
     return (
       <View style={Styles.header}>
-        <TouchableIcon
-          iconName='view-list'
-          iconType='material-community'
-          onPress={this.onViewShoppingListsPressed}
-        />
+        <TouchableIcon iconName="view-list" iconType="material-community" onPress={this.onViewShoppingListsPressed} />
       </View>
     );
-  }
+  };
 }
 
 ShoppingListHeaderContainer.propTypes = {
   // onViewShoppingListsPressed: PropTypes.func.isRequired,
-}
+};
 
 function mapStateToProps() {
   return {};

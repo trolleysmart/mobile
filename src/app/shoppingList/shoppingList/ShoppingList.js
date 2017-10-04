@@ -11,11 +11,10 @@ import ShoppingListItemsRelayContainer from './ShoppingListItemsRelayContainer';
 import HeaderContainer from './HeaderContainer';
 
 class ShoppingList extends Component {
-  static navigationOptions = ({ navigation }) => ({
+  static navigationOptions = () => ({
     headerTitle: 'haha',
-    // title: navigation.state.params ? navigation.state.params.title : '',
-    headerLeft: <MainMenuContainer/>,
-    headerRight: <HeaderContainer/>,
+    headerLeft: <MainMenuContainer />,
+    headerRight: <HeaderContainer />,
   });
 
   render() {
@@ -54,9 +53,9 @@ ShoppingList.propTypes = {
   shoppingListId: PropTypes.string.isRequired,
 };
 
-function mapStateToProps(state, props) {
+function mapStateToProps(state) {
   return {
-    shoppingListId: state.localState.get('defaultShoppingListId'), //props.navigation.state.params.shoppingListId,
+    shoppingListId: state.localState.getIn(['defaultShoppingList', 'id']),
   };
 }
 

@@ -26,7 +26,9 @@ class ShoppingListItemsContainer extends Component<any, Props, State> {
 
   componentWillMount = () => {
     if (!this.props.defaultShoppingListId) {
-      this.props.localStateActions.setDefaultShoppingList(Map({ defaultShoppingListId: this.props.user.shoppingLists.edges[0].node.id }));
+      this.props.localStateActions.setDefaultShoppingList(
+        Map({ id: this.props.user.shoppingLists.edges[0].node.id, name: this.props.user.shoppingLists.edges[0].node.name }),
+      );
     }
   };
 
@@ -127,7 +129,7 @@ function mapStateToProps(state) {
   return {
     removeCurrentViewingStapleItem: state.shoppingList.get('removeCurrentViewingStapleItem'),
     viewingStapleItem: state.shoppingList.get('currentlyViewingStapleItem'),
-    defaultShoppingListId: state.localState.get('defaultShoppingListId'),
+    defaultShoppingListId: state.localState.getIn(['defaultShoppingList', 'id']),
   };
 }
 

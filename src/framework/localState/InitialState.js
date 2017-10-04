@@ -3,6 +3,5 @@
 import { Map } from 'immutable';
 
 export default Map({
-  defaultShoppingListId: '',
-  defaultShoppingListName: '',
+  defaultShoppingList: Map({ id: '', name: '' }),
 });

@@ -26,8 +26,7 @@ class ShoppingListsContainer extends Component<any, Props, State> {
   };
 
   onShoppingListPressed = shoppingList => {
-
-    this.props.localStateActions.setDefaultShoppingList(Map({ defaultShoppingListId: shoppingList.id }));
+    this.props.localStateActions.setDefaultShoppingList(Map({ id: shoppingList.id, name: shoppingList.name }));
     this.props.goBack();
   };
 
@@ -117,15 +116,16 @@ function mapDispatchToProps(dispatch) {
     localStateActions: bindActionCreators(localStateActions, dispatch),
     goBack: () =>
       dispatch(
-        NavigationActions.back(
+        NavigationActions
+          .back
           // {
           // routeName: 'ShoppingList',
           // params: {
           //   shoppingListId: shoppingList.id,
           //   title: shoppingList.name,
           // },
-        // }
-        ),
+          // }
+          (),
       ),
     gotoCreateShoppingList: () =>
       dispatch(
