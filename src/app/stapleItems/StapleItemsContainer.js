@@ -23,11 +23,6 @@ class StapleItemsContrainer extends Component<any, Props, State> {
     isFetchingTop: false,
   };
 
-  componentDidMount = () => {
-    this.props.stapleItemsActions.userIdChanged(Map({ userId: this.props.user.id }));
-    this.props.stapleItemsActions.shoppingListChanged(Immutable.fromJS(this.props.shoppingList));
-  };
-
   clearSearchKeyword = () => {
     this.props.stapleItemsActions.searchKeywordChanged(Map({ searchKeyword: '' }));
   };

@@ -22,17 +22,3 @@ export function stapleItemSelectionChanged(payload) {
     payload,
   };
 }
-
-export function userIdChanged(payload) {
-  return {
-    type: ActionTypes.STAPLE_ITEMS_USER_ID_CHANGED,
-    payload,
-  };
-}
-
-export function shoppingListChanged(payload) {
-  return {
-    type: ActionTypes.STAPLE_ITEMS_SHOPPING_LIST_CHANGED,
-    payload,
-  };
-}
