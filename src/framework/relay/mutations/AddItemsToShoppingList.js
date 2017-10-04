@@ -108,6 +108,33 @@ function commit(environment, userId, shoppingListId, { productPrices, stapleItem
           node.setValue(productPrice.get('savingPercentage'), 'savingPercentage');
           node.setValue(productPrice.get('saving'), 'saving');
 
+          if (productPrice.get('store')) {
+            const saleStore = store.create(uuid(), 'store');
+
+            saleStore.setValue(productPrice.getIn(['store', 'name']), 'name');
+            saleStore.setValue(productPrice.getIn(['store', 'imageUrl']), 'imageUrl');
+
+            node.setLinkedRecord(saleStore, 'store');
+          }
+
+          if (productPrice.get('unitPrice')) {
+            const unitPrice = store.create(uuid(), 'unitPrice');
+
+            unitPrice.setValue(productPrice.getIn(['unitPrice', 'price']), 'price');
+            unitPrice.setValue(productPrice.getIn(['unitPrice', 'size']), 'size');
+
+            node.setLinkedRecord(unitPrice, 'unitPrice');
+          }
+
+          if (productPrice.get('multiBuy')) {
+            const multiBuy = store.create(uuid(), 'multiBuy');
+
+            multiBuy.setValue(productPrice.getIn(['multiBuy', 'awardQuantity']), 'awardQuantity');
+            multiBuy.setValue(productPrice.getIn(['multiBuy', 'awardValue']), 'awardValue');
+
+            node.setLinkedRecord(multiBuy, 'multiBuy');
+          }
+
           if (productPrice.get('tags')) {
             node.setLinkedRecords(
               productPrice
