@@ -8,10 +8,11 @@ import Styles from './Styles';
 import { TouchableItem } from '../../components/touchableIcon';
 import { Color } from '../../framework/style/DefaultStyles';
 import { ImageUltility } from '../../components/image';
+import { StapleItemProp } from './PropTypes';
 
 class StapleItem extends React.PureComponent {
   onItemPressed = () => {
-    this.props.onStapleItemSelectionChanged(this.props.id, this.props.name, this.props.isCustomItem, this.props.isSelected);
+    this.props.onStapleItemSelectionChanged(this.props.stapleItem, this.props.isSelected);
   };
 
   render() {
@@ -29,10 +30,10 @@ class StapleItem extends React.PureComponent {
           <Avatar
             rounded
             overlayContainerStyle={{ backgroundColor: this.props.isSelected ? '#F4CC62' : '#EFF0F1' }}
-            source={ImageUltility.getImageSource(this.props.name.toLowerCase().replace(/\s+/g, ''))}
+            source={ImageUltility.getImageSource(this.props.stapleItem.name.toLowerCase().replace(/\s+/g, ''))}
             activeOpacity={0.7}
           />
-          <Text style={Styles.itemName}>{this.props.name}</Text>
+          <Text style={Styles.itemName}>{this.props.stapleItem.name}</Text>
         </View>
       </TouchableItem>
     );
@@ -40,9 +41,8 @@ class StapleItem extends React.PureComponent {
 }
 
 StapleItem.propTypes = {
-  id: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  isCustomItem: PropTypes.bool,
+  stapleItem: StapleItemProp,
+  isSelected: PropTypes.bool,
 };
 
 StapleItem.defaultProps = {

@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import StapleItem from './StapleItem';
 import { ImageUltility } from '../../components/image';
 import Styles from './Styles';
+import { StapleItemsProp } from './PropTypes';
 
 class StapleItemsList extends React.PureComponent {
   onStapleItemSelectionChanged = (id, name, isCustomItem, isSelected) => {
@@ -16,10 +17,8 @@ class StapleItemsList extends React.PureComponent {
   renderItem = ({ item }) => {
     return (
       <StapleItem
-        id={item.id}
-        name={item.name}
+        stapleItem={item}
         onStapleItemSelectionChanged={this.onStapleItemSelectionChanged}
-        isCustomItem={item.isCustomItem}
         isSelected={this.props.selectedStapleItems.find(_ => _.id === item.id) != null}
       />
     );
@@ -36,6 +35,7 @@ class StapleItemsList extends React.PureComponent {
 
   getSectionData = () => {
     const data = Immutable.fromJS(this.props.stapleItems);
+
     let sectionData = data
       .groupBy(
         item =>
@@ -97,6 +97,7 @@ class StapleItemsList extends React.PureComponent {
 
   render = () => {
     const sectionData = this.getSectionData();
+
     return (
       <View style={Styles.container}>
         <View style={Styles.containerHeader}>
@@ -118,20 +119,8 @@ class StapleItemsList extends React.PureComponent {
 }
 
 StapleItemsList.propTypes = {
-  stapleItems: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      isCustomItem: PropTypes.bool,
-    }),
-  ).isRequired,
-  selectedStapleItems: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      isCustomItem: PropTypes.bool,
-    }),
-  ).isRequired,
+  stapleItems: StapleItemsProp,
+  selectedStapleItems: StapleItemsProp,
   onStapleItemSelectionChanged: PropTypes.func.isRequired,
   isFetchingTop: PropTypes.bool.isRequired,
   onRefresh: PropTypes.func.isRequired,
