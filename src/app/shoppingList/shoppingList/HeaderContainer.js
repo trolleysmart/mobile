@@ -24,7 +24,7 @@ class ShoppingListHeaderContainer extends Component {
 }
 
 ShoppingListHeaderContainer.propTypes = {
-  // onViewShoppingListsPressed: PropTypes.func.isRequired,
+  gotoShoppingLists: PropTypes.func.isRequired,
 };
 
 function mapStateToProps() {

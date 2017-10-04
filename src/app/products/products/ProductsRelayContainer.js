@@ -41,13 +41,6 @@ export default createPaginationContainer(
             }
           }
         }
-        shoppingLists(first: 1) {
-          edges {
-            node {
-              id
-            }
-          }
-        }
       }
     `,
   },

@@ -52,4 +52,8 @@ export default StyleSheet.create({
     width: 25,
     height: 25,
   },
+  headerTitleText:{
+    fontSize: 17,
+    fontWeight: '600',
+  },
 });
