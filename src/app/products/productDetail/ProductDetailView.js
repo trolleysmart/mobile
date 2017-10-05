@@ -85,6 +85,7 @@ class ProductDetailView extends Component {
               iconType="material-community"
               iconColor={Color.secondaryColorAction}
               iconSize={40}
+              disabled={this.props.isInShoppingList}
               onPress={() => this.props.onAddProductPressed(this.props.product.id)}
             />
             {/*<Button*/}
@@ -107,6 +108,7 @@ ProductDetailView.propTypes = {
   product: ProductProp,
   handleVisitStorePressed: PropTypes.func.isRequired,
   onAddProductPressed: PropTypes.func.isRequired,
+  isInShoppingList: PropTypes.bool.isRequired,
 };
 
 export default ProductDetailView;

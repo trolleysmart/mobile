@@ -28,7 +28,6 @@ class ProductDetailContainer extends Component<any, Props, State> {
     }
 
     this.props.goBack();
-    this.props.productsActions.productSelected(productId);
   };
 
   handleVisitStorePressed = url => {
@@ -41,6 +40,7 @@ class ProductDetailContainer extends Component<any, Props, State> {
         product={this.props.user.product}
         handleVisitStorePressed={this.handleVisitStorePressed}
         onAddProductPressed={this.onAddProductPressed}
+        isInShoppingList={this.props.isInShoppingList}
       />
     );
   };
@@ -48,11 +48,13 @@ class ProductDetailContainer extends Component<any, Props, State> {
 
 ProductDetailContainer.propTypes = {
   defaultShoppingListId: PropTypes.string.isRequired,
+  isInShoppingList: PropTypes.bool.isRequired,
 };
 
-function mapStateToProps(state) {
+function mapStateToProps(state, props) {
   return {
     defaultShoppingListId: state.localState.getIn(['defaultShoppingList', 'id']),
+    isInShoppingList: props.isInShoppingList,
   };
 }
 
