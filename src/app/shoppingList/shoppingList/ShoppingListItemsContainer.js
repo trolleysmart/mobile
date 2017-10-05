@@ -32,25 +32,6 @@ class ShoppingListItemsContainer extends Component<any, Props, State> {
     }
   };
 
-  componentWillReceiveProps = nextProps => {
-    const shoppingListItems = Immutable.fromJS(nextProps.user.shoppingListItems.edges.map(_ => _.node));
-
-    // Remove existing staple item after added relevant products.
-    if (
-      nextProps.removeCurrentViewingStapleItem &&
-      this.props.viewingStapleItem.has('shoppingListId') &&
-      this.props.viewingStapleItem.get('shoppingListId') &&
-      shoppingListItems.find(_ => _.get('id') === this.props.viewingStapleItem.get('shoppingListId'))
-    ) {
-      RemoveItemsFromShoppingList.commit(this.props.relay.environment, this.props.user.id, this.props.shoppingListId, [
-        this.props.viewingStapleItem.get('shoppingListId'),
-      ]);
-
-      // Clear the current viewing staple item
-      this.props.shoppingListActions.currentViewingStapleItemChanged(Map());
-    }
-  };
-
   onShoppingListItemSelectionChanged = shoppingListItem => {
     RemoveItemsFromShoppingList.commit(this.props.relay.environment, this.props.user.id, this.props.shoppingListId, [shoppingListItem.id]);
   };
@@ -64,12 +45,11 @@ class ShoppingListItemsContainer extends Component<any, Props, State> {
   onViewProductsPressed = id => {
     const foundItem = this.props.user.shoppingListItems.edges.map(_ => _.node).find(item => item.id.localeCompare(id) === 0);
 
-    // Set the current viewing staple item
-    this.props.shoppingListActions.currentViewingStapleItemChanged(Map({ shoppingListId: id, stapleShoppingListId: foundItem.stapleShoppingListId }));
-
-    // Set removeCurrentViewingStapleItem to false
-    this.props.shoppingListActions.removeCurrentViewingStapleItemFlagChanged(Map({ removeCurrentViewingStapleItem: false }));
     this.props.gotoProducts(foundItem.name, foundItem.tags ? foundItem.tags.map(_ => _.key) : '');
+  };
+
+  onViewProductDetailPressed = (productId, productName) => {
+    this.props.gotoProductDetail(productId, productName);
   };
 
   onRefresh = () => {
@@ -108,6 +88,7 @@ class ShoppingListItemsContainer extends Component<any, Props, State> {
         onShoppingListItemSelectionChanged={this.onShoppingListItemSelectionChanged}
         onViewProductsPressed={this.onViewProductsPressed}
         onShoppingListAddItemClicked={this.onShoppingListAddItemClicked}
+        onViewProductDetailPressed={this.onViewProductDetailPressed}
         isFetchingTop={this.state.isFetchingTop}
         onRefresh={this.onRefresh}
         onEndReached={this.onEndReached}
@@ -117,7 +98,6 @@ class ShoppingListItemsContainer extends Component<any, Props, State> {
 }
 ShoppingListItemsContainer.propTypes = {
   gotoAddStapleItemsItems: PropTypes.func.isRequired,
-  removeCurrentViewingStapleItem: PropTypes.bool,
   shoppingListActions: PropTypes.object.isRequired,
   stapleItemsActions: PropTypes.object.isRequired,
   productsActions: PropTypes.object.isRequired,
@@ -127,8 +107,6 @@ ShoppingListItemsContainer.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    removeCurrentViewingStapleItem: state.shoppingList.get('removeCurrentViewingStapleItem'),
-    viewingStapleItem: state.shoppingList.get('currentlyViewingStapleItem'),
     defaultShoppingListId: state.localState.getIn(['defaultShoppingList', 'id']),
   };
 }
@@ -155,6 +133,17 @@ function mapDispatchToProps(dispatch) {
           params: {
             defaultSearchKeyword,
             defaultCategories,
+          },
+        }),
+      ),
+    gotoProductDetail: (productId, productName) =>
+      dispatch(
+        NavigationActions.navigate({
+          routeName: 'ProductDetail',
+          params: {
+            title: productName,
+            productId,
+            isInShoppingList: true,
           },
         }),
       ),

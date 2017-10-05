@@ -33,7 +33,7 @@ class ProductDetail extends Component {
           }
 
           if (props) {
-            return <ProductDetailRelayContainer user={props.user} productId={this.props.productId} />;
+            return <ProductDetailRelayContainer user={props.user} productId={this.props.productId} isInShoppingList={this.props.isInShoppingList} />;
           } else {
             return <Text>Loading</Text>;
           }
@@ -45,11 +45,13 @@ class ProductDetail extends Component {
 
 ProductDetail.propTypes = {
   productId: PropTypes.string.isRequired,
+  isInShoppingList: PropTypes.bool.isRequired,
 };
 
 function mapStateToProps(state, props) {
   return {
     productId: props.navigation.state.params.productId,
+    isInShoppingList: !!props.navigation.state.params.isInShoppingList,
   };
 }
 

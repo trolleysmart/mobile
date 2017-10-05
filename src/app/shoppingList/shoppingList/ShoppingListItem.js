@@ -7,7 +7,7 @@ import { CheckBox, ListItem } from 'react-native-elements';
 import PropTypes from 'prop-types';
 import { ShoppingListItemProp } from './PropTypes';
 import Styles from './Styles';
-import { ProductListRowItem } from '../../products';
+import { ProductListRow } from '../../products';
 
 class ShoppingListItem extends React.PureComponent {
   render() {
@@ -40,7 +40,14 @@ class ShoppingListItem extends React.PureComponent {
               onPress={() => this.props.onShoppingListItemSelectionChanged(this.props.shoppingListItem)}
             />
             <Col size={80}>
-              <ProductListRowItem product={this.props.shoppingListItem} isInShoppingList={true} />
+              <ProductListRow
+                product={this.props.shoppingListItem}
+                onViewProductDetailPressed={() =>
+                  this.props.onViewProductDetailPressed(this.props.shoppingListItem.productPriceId, this.props.shoppingListItem.name)}
+                onItemSelectionChanged={() =>
+                  this.props.onViewProductDetailPressed(this.props.shoppingListItem.productPriceId, this.props.shoppingListItem.name)}
+                isInShoppingList={true}
+              />
             </Col>
           </Grid>
         </TouchableHighlight>

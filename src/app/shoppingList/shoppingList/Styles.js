@@ -25,7 +25,7 @@ export default StyleSheet.create({
   },
   specialItemRow: {
     backgroundColor: 'white',
-    padding: 10,
+    // padding: 10,
   },
   stapleItemRow: {
     alignItems: 'center',
@@ -52,7 +52,7 @@ export default StyleSheet.create({
     width: 25,
     height: 25,
   },
-  headerTitleText:{
+  headerTitleText: {
     fontSize: 17,
     fontWeight: '600',
   },

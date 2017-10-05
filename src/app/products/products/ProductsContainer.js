@@ -30,8 +30,6 @@ class ProductsContainer extends Component<any, Props, State> {
     AddItemsToShoppingList.commit(this.props.relay.environment, this.props.user.id, this.props.defaultShoppingListId, {
       productPrices: [Immutable.fromJS(this.props.user.products.edges.map(_ => _.node).find(_ => _.id === productId))],
     });
-
-    this.props.productsActions.productSelected(productId);
   };
 
   onViewProductDetailPressed = (productId, productName) => {

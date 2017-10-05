@@ -18,6 +18,7 @@ class ShoppingListItems extends Component {
         shoppingListItem={item}
         onShoppingListItemSelectionChanged={this.props.onShoppingListItemSelectionChanged}
         onViewProductsPressed={this.props.onViewProductsPressed}
+        onViewProductDetailPressed={this.props.onViewProductDetailPressed}
       />
     );
   };
@@ -88,6 +89,7 @@ ShoppingListItems.propTypes = {
   shoppingListItems: ShoppingListItemsProp,
   onShoppingListItemSelectionChanged: PropTypes.func.isRequired,
   onViewProductsPressed: PropTypes.func.isRequired,
+  onViewProductDetailPressed: PropTypes.func.isRequired,
   onShoppingListAddItemClicked: PropTypes.func.isRequired,
   isFetchingTop: PropTypes.bool.isRequired,
   onRefresh: PropTypes.func.isRequired,
