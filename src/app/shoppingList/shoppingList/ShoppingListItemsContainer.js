@@ -30,6 +30,12 @@ class ShoppingListItemsContainer extends Component<any, Props, State> {
         Map({ id: this.props.user.shoppingLists.edges[0].node.id, name: this.props.user.shoppingLists.edges[0].node.name }),
       );
     }
+
+    this.props.shoppingListActions.shoppingListItemsCountChanged(Map({ numberOfItems: this.props.user.shoppingListItems.edges.length }));
+  };
+
+  componentWillReceiveProps = nextProps => {
+    nextProps.shoppingListActions.shoppingListItemsCountChanged(Map({ numberOfItems: nextProps.user.shoppingListItems.edges.length }));
   };
 
   onShoppingListItemSelectionChanged = shoppingListItem => {

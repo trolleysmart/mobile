@@ -52,8 +52,15 @@ export default StyleSheet.create({
     width: 25,
     height: 25,
   },
+  headerTitleContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   headerTitleText: {
     fontSize: 17,
     fontWeight: '600',
+  },
+  headerTitleNumberText: {
+    fontSize: 12,
   },
 });
