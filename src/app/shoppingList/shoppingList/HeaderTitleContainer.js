@@ -11,7 +11,7 @@ class HeaderTitleContainer extends Component {
     return (
       <View style={Styles.headerTitleContainer}>
         <Text style={Styles.headerTitleText}>{this.props.shoppingListName}</Text>
-        <Text style={Styles.headerTitleNumberText}>{this.props.numberOfItems !== '' ? this.props.numberOfItems.toString() + ' items' : ''}</Text>
+        <Text style={Styles.headerTitleNumberText}>{this.props.numberOfItems !== '' ? this.props.numberOfItems + ' items' : ''}</Text>
       </View>
     );
   };
