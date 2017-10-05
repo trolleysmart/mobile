@@ -11,7 +11,7 @@ class HeaderTitleContainer extends Component {
     return (
       <View style={Styles.headerTitleContainer}>
         <Text style={Styles.headerTitleText}>{this.props.shoppingListName}</Text>
-        <Text style={Styles.headerTitleNumberText}>{this.props.numberOfItems !== '' ? this.props.numberOfItems + ' items' : ''}</Text>
+        <Text style={Styles.headerTitleNumberText}>{this.props.numberOfItems !== '' ? this.props.numberOfItems.toString() + ' items' : ''}</Text>
       </View>
     );
   };
@@ -19,7 +19,7 @@ class HeaderTitleContainer extends Component {
 
 HeaderTitleContainer.propTypes = {
   shoppingListName: PropTypes.string.isRequired,
-  numberOfItems: PropTypes.string.isRequired,
+  numberOfItems: PropTypes.number.isRequired,
 };
 
 function mapStateToProps(state) {
