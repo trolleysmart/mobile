@@ -19,7 +19,7 @@ class HeaderTitleContainer extends Component {
 
 HeaderTitleContainer.propTypes = {
   shoppingListName: PropTypes.string.isRequired,
-  numberOfItems: PropTypes.number.isRequired,
+  numberOfItems: PropTypes.string.isRequired,
 };
 
 function mapStateToProps(state) {
