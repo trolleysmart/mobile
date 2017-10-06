@@ -19,7 +19,11 @@ import AppDrawer from './AppDrawer';
 import * as messageBarActions from '../../sharedComponents/messageBar/Actions';
 import { MessageType } from '../../sharedComponents/messageBar';
 import { SignInDisclaimerContainer } from '../../sharedComponents/disclaimer';
+import * as appActions from './Actions';
 import * as localStateActions from '../../framework/localState/Actions';
+
+export AppReducer from './Reducer';
+export watchRefreshNetInfoStat from './NetInfo';
 
 const AppNavigator = StackNavigator(
   {
@@ -137,7 +141,8 @@ class AppWithNavigationState extends Component {
   };
 
   componentWillMount() {
-    this.props.localStateActions.getDefaultShoppingList();
+    this.props.appActions.refreshNetInfoState(Map());
+    this.props.localStateActions.getDefaultShoppingList(Map());
 
     CodePush.sync(
       {
@@ -152,7 +157,10 @@ class AppWithNavigationState extends Component {
             break;
 
           case CodePush.SyncStatus.UNKNOWN_ERROR:
-            this.props.messageBarActions.add('Failed to update the application', MessageType.ERROR);
+            if (this.props.netInfo.netInfoExists && this.netInfo.isConnected) {
+              this.props.messageBarActions.add('Failed to update the application', MessageType.ERROR);
+            }
+
             this.props.appUpdaterActions.failed('Failed to update the application');
 
             break;
@@ -243,6 +251,7 @@ class AppWithNavigationState extends Component {
 }
 
 AppWithNavigationState.propTypes = {
+  appActions: PropTypes.object.isRequired,
   appUpdaterActions: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
   navigation: PropTypes.object.isRequired,
@@ -250,11 +259,21 @@ AppWithNavigationState.propTypes = {
   userAccessActions: PropTypes.object.isRequired,
   localStateActions: PropTypes.object.isRequired,
   goBack: PropTypes.func.isRequired,
+  netInfo: PropTypes.shape({
+    netInfoExists: PropTypes.bool.isRequired,
+    connectionInfo: PropTypes.shape({
+      type: PropTypes.string.isRequired,
+      effectiveType: PropTypes.string.isRequired,
+    }),
+    isConnectionExpensive: PropTypes.bool,
+    isConnected: PropTypes.bool,
+  }).isRequired,
 };
 
 function mapStateToProps(state) {
   return {
     navigation: state.navigation,
+    netInfo: state.appReducer.get('netInfo').toJS(),
     messagesInfo: state.messageBar.get('messages').toJS(),
     userAccessFailedOperations: state.userAccess.get('failedOperations').toJS(),
   };
@@ -262,6 +281,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
+    appActions: bindActionCreators(appActions, dispatch),
     appUpdaterActions: bindActionCreators(appUpdaterActions, dispatch),
     dispatch,
     messageBarActions: bindActionCreators(messageBarActions, dispatch),
