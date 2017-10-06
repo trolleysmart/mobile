@@ -157,7 +157,7 @@ class AppWithNavigationState extends Component {
             break;
 
           case CodePush.SyncStatus.UNKNOWN_ERROR:
-            if (this.props.netInfo.netInfoExists && this.netInfo.isConnected) {
+            if (this.props.netInfo.netInfoExists && this.props.netInfo.isConnected) {
               this.props.messageBarActions.add('Failed to update the application', MessageType.ERROR);
             }
 
