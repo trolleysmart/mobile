@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux';
 import { NavigationActions } from 'react-navigation';
 import { Map } from 'immutable';
 import PropTypes from 'prop-types';
+import { Alert } from 'react-native';
 import * as shoppingListsActions from './Actions';
 import * as shoppingListDetailActions from '../shoppingListDetail/Actions';
 import ShoppingListsList from './ShoppingListsList';
@@ -26,7 +27,12 @@ class ShoppingListsContainer extends Component<any, Props, State> {
   };
 
   onShoppingListPressed = shoppingList => {
-    this.props.localStateActions.setDefaultShoppingList(Map({ id: shoppingList.id, name: shoppingList.name }));
+    this.props.localStateActions.setDefaultShoppingList(
+      Map({
+        id: shoppingList.id,
+        name: shoppingList.name,
+      }),
+    );
     this.props.goBack();
   };
 
@@ -51,7 +57,11 @@ class ShoppingListsContainer extends Component<any, Props, State> {
   };
 
   onDeleteShoppingListPressed = shoppingListId => {
-    RemoveShoppingList.commit(environment, this.props.userId, shoppingListId);
+    if (this.props.user.shoppingLists.edges.length <= 1) {
+      Alert.alert('Warning', 'Unable to delete the last shopping list.');
+    } else {
+      RemoveShoppingList.commit(environment, this.props.userId, shoppingListId);
+    }
   };
 
   onRefresh = () => {
