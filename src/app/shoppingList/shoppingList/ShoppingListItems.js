@@ -98,11 +98,11 @@ class ShoppingListItems extends Component {
         <View style={Styles.summaryContainer}>
           <View style={Styles.summaryBlockContainer}>
             <Text style={Styles.summaryLabel}>Total Cost: </Text>
-            <Text style={Styles.totalCostText}>{totalCost.toFixed(2)}</Text>
+            <Text style={Styles.totalCostText}>${totalCost.toFixed(2)}</Text>
           </View>
           <View style={Styles.summaryBlockContainer}>
             <Text style={Styles.summaryLabel}>Est Total Saved: </Text>
-            <Text style={Styles.totalSavingText}>{totalSaving.toFixed(2)}</Text>
+            <Text style={Styles.totalSavingText}>${totalSaving.toFixed(2)}</Text>
           </View>
         </View>
         <ActionButton buttonColor="rgba(242,135,79,1)" onPress={() => this.props.onShoppingListAddItemClicked()} />
