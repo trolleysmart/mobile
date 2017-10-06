@@ -77,15 +77,4 @@ export default StyleSheet.create({
   addButton: {
     height: 10,
   },
-  // productPrice: {
-  //   fontSize: 14,
-  //   color: Color.primaryColorLight,
-  //   textDecorationLine: 'line-through',
-  //   textDecorationStyle: 'solid',
-  // },
-  // productSpecialPrice: {
-  //   color: 'red',
-  //   fontSize: 20,
-  //   fontWeight: 'bold',
-  // },
 });

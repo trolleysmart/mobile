@@ -31,7 +31,7 @@ class ShoppingList extends Component {
         `}
         variables={{
           cursor: null,
-          count: 30,
+          count: 1000,
           shoppingListId: this.props.shoppingListId,
         }}
         render={({ error, props }) => {

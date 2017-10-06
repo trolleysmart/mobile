@@ -1,11 +1,27 @@
 // @flow
 
 import { StyleSheet } from 'react-native';
-import { Sizes } from '../../../framework/style/DefaultStyles';
+import { Sizes, Color } from '../../../framework/style/DefaultStyles';
 
 export default StyleSheet.create({
   container: {
     flex: 1,
+  },
+  headerContainer: {
+    flexDirection: 'row',
+    // flex: 1,
+    // width: 100,
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
+  menuOptionContainer: {
+    flexDirection: 'row',
+    // justifyContent: 'center',
+    alignItems: 'center',
+  },
+  headerIconContainerStyle: {
+    height: 32,
+    width: 32,
   },
   checkbox: {
     justifyContent: 'center',
@@ -62,5 +78,28 @@ export default StyleSheet.create({
   },
   headerTitleNumberText: {
     fontSize: 12,
+  },
+  summaryContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 10,
+    backgroundColor: Color.primaryColorLight,
+  },
+  summaryBlockContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  totalCostText: {
+    color: Color.primaryColorNormal,
+    fontWeight: '600',
+  },
+  totalSavingText: {
+    color: 'red',
+    fontWeight: '600',
+  },
+  summaryLabel: {
+    color: Color.primaryFontColor,
+    fontSize: 14,
   },
 });

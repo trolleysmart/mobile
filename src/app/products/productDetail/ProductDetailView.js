@@ -81,22 +81,13 @@ class ProductDetailView extends Component {
           </View>
           <View>
             <TouchableIcon
-              iconName="plus-circle"
+              iconName={this.props.isInShoppingList ? 'check-circle-outline' : 'plus-circle'}
               iconType="material-community"
               iconColor={Color.secondaryColorAction}
               iconSize={40}
               disabled={this.props.isInShoppingList}
               onPress={() => this.props.onAddProductPressed(this.props.product.id)}
             />
-            {/*<Button*/}
-            {/*icon={{name: 'plus'}}*/}
-            {/*title='Add'*/}
-            {/*large={false}*/}
-            {/*raised*/}
-            {/*borderRadius={10}*/}
-            {/*backgroundColor={Color.secondaryColorAction}*/}
-            {/*// buttonStyle={Styles.addButton}*/}
-            {/*/>*/}
           </View>
         </View>
       </View>
