@@ -1,8 +1,12 @@
 // @flow
 
 import { Map } from 'immutable';
-import { ActionTypes } from 'micro-business-parse-server-common-react-native';
-import * as userAccessActions from 'micro-business-parse-server-common-react-native/src/userAccess/redux/Actions';
+import { UserAccessActionTypes } from 'micro-business-parse-server-common-react-native';
+import { MessageType } from 'micro-business-common-react-native';
+import * as appUpdaterActions from 'micro-business-common-react-native/src/appUpdater/Actions';
+import * as messageBarActions from 'micro-business-common-react-native/src/messageBar/Actions';
+import * as netInfoActions from 'micro-business-common-react-native/src/netInfo/Actions';
+import * as userAccessActions from 'micro-business-parse-server-common-react-native/src/userAccess/Actions';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { addNavigationHelpers, NavigationActions, StackNavigator } from 'react-navigation';
@@ -11,19 +15,12 @@ import { Alert, BackHandler, Platform, View } from 'react-native';
 import { connect } from 'react-redux';
 import CodePush from 'react-native-code-push';
 import PopupDialog, { SlideAnimation } from 'react-native-popup-dialog';
-import * as appUpdaterActions from './appUpdater/Actions';
 import { SplashContainer } from '../splash';
 import { SignUpSignInContainer } from '../signUpSignIn';
 import { configureStore } from '../../framework/redux';
 import AppDrawer from './AppDrawer';
-import * as messageBarActions from '../../sharedComponents/messageBar/Actions';
-import { MessageType } from '../../sharedComponents/messageBar';
 import { SignInDisclaimerContainer } from '../../sharedComponents/disclaimer';
-import * as appActions from './Actions';
 import * as localStateActions from '../../framework/localState/Actions';
-
-export AppReducer from './Reducer';
-export watchRefreshNetInfoStat from './NetInfo';
 
 const AppNavigator = StackNavigator(
   {
@@ -53,7 +50,7 @@ const navigationReducer = (state, action) => {
   let newState;
 
   switch (action.type) {
-    case ActionTypes.USER_ACCESS_SIGNOUT_IN_PROGRESS:
+    case UserAccessActionTypes.USER_ACCESS_SIGNOUT_IN_PROGRESS:
       newState = AppNavigator.router.getStateForAction(
         NavigationActions.reset({
           index: 0,
@@ -68,7 +65,7 @@ const navigationReducer = (state, action) => {
       );
       break;
 
-    case ActionTypes.USER_ACCESS_GET_CURRENT_USER_SUCCEEDED:
+    case UserAccessActionTypes.USER_ACCESS_GET_CURRENT_USER_SUCCEEDED:
       if (action.payload.get('userExists')) {
         newState = AppNavigator.router.getStateForAction(
           NavigationActions.reset({
@@ -97,9 +94,9 @@ const navigationReducer = (state, action) => {
       }
       break;
 
-    case ActionTypes.USER_ACCESS_SIGNUP_WITH_USERNAME_AND_PASSWORD_SUCCEEDED:
-    case ActionTypes.USER_ACCESS_SIGNIN_WITH_USERNAME_AND_PASSWORD_SUCCEEDED:
-    case ActionTypes.USER_ACCESS_SIGNIN_WITH_FACEBOOK_SUCCEEDED:
+    case UserAccessActionTypes.USER_ACCESS_SIGNUP_WITH_USERNAME_AND_PASSWORD_SUCCEEDED:
+    case UserAccessActionTypes.USER_ACCESS_SIGNIN_WITH_USERNAME_AND_PASSWORD_SUCCEEDED:
+    case UserAccessActionTypes.USER_ACCESS_SIGNIN_WITH_FACEBOOK_SUCCEEDED:
       newState = AppNavigator.router.getStateForAction(
         NavigationActions.reset({
           index: 0,
@@ -141,7 +138,7 @@ class AppWithNavigationState extends Component {
   };
 
   componentWillMount() {
-    this.props.appActions.refreshNetInfoState(Map());
+    this.props.netInfoActions.refreshState(Map());
     this.props.localStateActions.getDefaultShoppingList(Map());
 
     CodePush.sync(
@@ -251,7 +248,7 @@ class AppWithNavigationState extends Component {
 }
 
 AppWithNavigationState.propTypes = {
-  appActions: PropTypes.object.isRequired,
+  netInfoActions: PropTypes.object.isRequired,
   appUpdaterActions: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
   navigation: PropTypes.object.isRequired,
@@ -273,7 +270,7 @@ AppWithNavigationState.propTypes = {
 function mapStateToProps(state) {
   return {
     navigation: state.navigation,
-    netInfo: state.appReducer.get('netInfo').toJS(),
+    netInfo: state.netInfo.toJS(),
     messagesInfo: state.messageBar.get('messages').toJS(),
     userAccessFailedOperations: state.userAccess.get('failedOperations').toJS(),
   };
@@ -281,7 +278,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    appActions: bindActionCreators(appActions, dispatch),
+    netInfoActions: bindActionCreators(netInfoActions, dispatch),
     appUpdaterActions: bindActionCreators(appUpdaterActions, dispatch),
     dispatch,
     messageBarActions: bindActionCreators(messageBarActions, dispatch),

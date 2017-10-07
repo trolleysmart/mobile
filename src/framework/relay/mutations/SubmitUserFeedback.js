@@ -1,8 +1,8 @@
 // @flow
 
 import { commitMutation, graphql } from 'react-relay';
-import * as messageBarActions from '../../../sharedComponents/messageBar/Actions';
-import { MessageType } from '../../../sharedComponents/messageBar';
+import { MessageType } from 'micro-business-common-react-native';
+import * as messageBarActions from 'micro-business-common-react-native/src/messageBar/Actions';
 import { reduxStore } from '../../../app/navigation';
 
 const mutation = graphql`
