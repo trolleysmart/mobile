@@ -38,7 +38,7 @@ class ShoppingList extends Component {
           if (error || props) {
             return (
               <ShoppingListItemsRelayContainer
-                errorMessage={error.message}
+                errorMessage={error ? error.message : null}
                 user={error ? null : props.user}
                 shoppingListId={this.props.shoppingListId}
               />
