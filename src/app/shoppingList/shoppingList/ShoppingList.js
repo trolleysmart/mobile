@@ -37,9 +37,9 @@ class ShoppingList extends Component {
         render={({ error, props }) => {
           if (error || props) {
             return <ShoppingListItemsRelayContainer errorMessage={error} user={props.user} shoppingListId={this.props.shoppingListId} />;
-          } else {
-            return <LoadingInProgress />;
           }
+
+          return <LoadingInProgress />;
         }}
       />
     );
