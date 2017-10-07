@@ -42,7 +42,7 @@ class Products extends Component {
         }}
         render={({ error, props }) => {
           if (error || props) {
-            return <ProductsRelayContainer errorMessage={error} user={props.user} />;
+            return <ProductsRelayContainer errorMessage={error.message} user={error ? null : props.user} />;
           }
 
           return <LoadingInProgress />;

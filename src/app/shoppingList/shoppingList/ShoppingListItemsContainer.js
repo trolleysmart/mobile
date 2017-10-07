@@ -27,6 +27,10 @@ class ShoppingListItemsContainer extends Component<any, Props, State> {
   };
 
   componentWillMount = () => {
+    if (this.props.errorMessage) {
+      return;
+    }
+
     if (!this.props.defaultShoppingListId) {
       this.props.localStateActions.setDefaultShoppingList(
         Map({ id: this.props.user.shoppingLists.edges[0].node.id, name: this.props.user.shoppingLists.edges[0].node.name }),
@@ -37,6 +41,10 @@ class ShoppingListItemsContainer extends Component<any, Props, State> {
   };
 
   componentWillReceiveProps = nextProps => {
+    if (this.props.errorMessage) {
+      return;
+    }
+
     nextProps.shoppingListActions.shoppingListItemsCountChanged(Map({ numberOfItems: nextProps.user.shoppingListItems.edges.length }));
   };
 
