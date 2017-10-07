@@ -15,6 +15,6 @@ export default StyleSheet.create({
   },
   iconContainerStyle: {
     height: Sizes.searchBarHeaderHeight,
-    width: Sizes.searchBarHeaderHeight,
+    width: 40,
   },
 });

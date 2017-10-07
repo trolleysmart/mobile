@@ -44,14 +44,15 @@ class SearchBarWithDelay extends Component {
     return (
       <View style={Styles.container}>
         <SearchBar
-          clearIcon
+          clearIcon={{ color: 'black' }}
           lightTheme
           noIcon={true}
+          autoFocus={true}
           containerStyle={Styles.search}
           inputStyle={Styles.searchInput}
           placeholder="Search..."
           textInputRef="textInputRef"
-          placeholderTextColor="white"
+          placeholderTextColor="#232425"
           value={this.state.searchKeyword}
           onChangeText={this.searchKeywordChanged}
         />

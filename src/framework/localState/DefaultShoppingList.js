@@ -3,6 +3,8 @@
 import { Map } from 'immutable';
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { AsyncStorage } from 'react-native';
+import { MessageType } from 'micro-business-common-react-native';
+import * as MessageBarActions from 'micro-business-common-react-native/src/messageBar/Actions';
 import ActionTypes from './ActionTypes';
 import * as Actions from './Actions';
 
@@ -14,6 +16,7 @@ function* getDefaultShoppingListAsync() {
     yield put(Actions.defaultShoppingListChanged(Map({ id: id ? id : '', name: name ? name : '' })));
   } catch (exception) {
     yield put(Actions.defaultShoppingListChanged(Map({ defaultShoppingListId: '' })));
+    yield put(MessageBarActions.add(exception, MessageType.ERROR));
   }
 }
 
@@ -27,7 +30,9 @@ function* setDefaultShoppingListAsync(action) {
     yield call(AsyncStorage.setItem, 'defaultShoppingList:Name', action.payload.get('name'));
 
     yield put(Actions.defaultShoppingListChanged(Map({ id: action.payload.get('id'), name: action.payload.get('name') })));
-  } catch (exception) {}
+  } catch (exception) {
+    yield put(MessageBarActions.add(exception, MessageType.ERROR));
+  }
 }
 
 export function* watchSetDefaultShoppingList() {

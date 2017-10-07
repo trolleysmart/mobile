@@ -1,7 +1,7 @@
 // @flow
 
-import * as userAccessActions from 'micro-business-parse-server-common-react-native/src/userAccess/redux/Actions';
-import { Status } from 'micro-business-parse-server-common-react-native';
+import * as userAccessActions from 'micro-business-parse-server-common-react-native/src/userAccess/Actions';
+import { UserAccessStatus } from 'micro-business-parse-server-common-react-native';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
@@ -31,7 +31,9 @@ class UserSignInSignUpContainer extends Component {
         onSignInWithFacebookClicked={this.onSignInWithFacebookClicked}
         onSignInClicked={this.onSignInClicked}
         onSignUpClicked={this.onSignUpClicked}
-        signUpOrSignInIsInProgress={this.props.signInStatus === Status.IN_PROGRESS || this.props.signUpStatus === Status.IN_PROGRESS}
+        signUpOrSignInIsInProgress={
+          this.props.signInStatus === UserAccessStatus.IN_PROGRESS || this.props.signUpStatus === UserAccessStatus.IN_PROGRESS
+        }
       />
     );
   };

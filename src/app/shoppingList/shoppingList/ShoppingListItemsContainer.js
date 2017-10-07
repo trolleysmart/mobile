@@ -1,6 +1,6 @@
 // @flow
 
-import Immutable, { List, Map } from 'immutable';
+import { List, Map } from 'immutable';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { NavigationActions } from 'react-navigation';
@@ -69,8 +69,7 @@ class ShoppingListItemsContainer extends Component<any, Props, State> {
       isFetchingTop: true,
     });
 
-    this.props.relay.refetchConnection(shoppingListItems.edges.length, error => {
-      //TODO: 20170610 - Morteza - Should handle the error here
+    this.props.relay.refetchConnection(shoppingListItems.edges.length, () => {
       this.setState({
         isFetchingTop: false,
       });
@@ -82,9 +81,7 @@ class ShoppingListItemsContainer extends Component<any, Props, State> {
       return;
     }
 
-    this.props.relay.loadMore(30, error => {
-      //TODO: 20170610 - Morteza - Should handle the error here
-    });
+    this.props.relay.loadMore(30, () => {});
   };
 
   render = () => {

@@ -1,7 +1,7 @@
 // @flow
 
-import { Status as UserAccessStatus } from 'micro-business-parse-server-common-react-native';
-import * as userAccessActions from 'micro-business-parse-server-common-react-native/src/userAccess/redux/Actions';
+import { UserAccessStatus } from 'micro-business-parse-server-common-react-native';
+import * as userAccessActions from 'micro-business-parse-server-common-react-native/src/userAccess/Actions';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
