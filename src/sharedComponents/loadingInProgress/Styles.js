@@ -3,12 +3,15 @@
 import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
-  grid: {
+  container: {
+    flex: 1,
+    justifyContent: 'center',
     alignItems: 'center',
   },
   activityIndicator: {
-    alignItems: 'center',
+    flex: 1,
     justifyContent: 'center',
-    padding: 8,
+    alignItems: 'center',
+    height: 80,
   },
 });

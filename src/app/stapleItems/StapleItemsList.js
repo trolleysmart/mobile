@@ -4,10 +4,10 @@ import React from 'react';
 import { SectionList, Text, View, Image } from 'react-native';
 import Immutable from 'immutable';
 import PropTypes from 'prop-types';
-import StapleItem from './StapleItem';
 import { ImageUltility } from '../../components/image';
 import Styles from './Styles';
 import { StapleItemsProp } from './PropTypes';
+import StapleItemsSection from './StapleItemsSection';
 
 class StapleItemsList extends React.PureComponent {
   onStapleItemSelectionChanged = (id, name, isCustomItem, isSelected) => {
@@ -16,10 +16,10 @@ class StapleItemsList extends React.PureComponent {
 
   renderItem = ({ item }) => {
     return (
-      <StapleItem
-        stapleItem={item}
-        onStapleItemSelectionChanged={this.onStapleItemSelectionChanged}
-        isSelected={this.props.selectedStapleItems.find(_ => _.id === item.id) != null}
+      <StapleItemsSection
+        sectionItems={item.stapleList}
+        onStapleItemSelectionChanged={this.props.onStapleItemSelectionChanged}
+        selectedStapleItems={this.props.selectedStapleItems}
       />
     );
   };
@@ -51,7 +51,7 @@ class StapleItemsList extends React.PureComponent {
       .mapEntries(([key, value]) => [
         key,
         {
-          data: value.toJS(),
+          data: [{ stapleList: value.toJS(), key: key }],
           categoryTitle: key,
           categoryKey:
             value.first().has('tags') &&
@@ -68,7 +68,7 @@ class StapleItemsList extends React.PureComponent {
               : key,
         },
       ])
-      .sortBy(_ => _.categoryKey)
+      .sortBy(_ => _.categoryTitle)
       .valueSeq()
       .toJS();
 
@@ -79,7 +79,7 @@ class StapleItemsList extends React.PureComponent {
       .mapEntries(([key, value]) => [
         key,
         {
-          data: value.toJS(),
+          data: [{ stapleList: value.toJS(), key: key }],
           categoryTitle: key,
           categoryKey: key,
         },

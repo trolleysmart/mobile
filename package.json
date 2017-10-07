@@ -1,7 +1,7 @@
 {
   "name": "TrolleySmart",
   "description": "Trolley Smart",
-  "version": "1.0.39-alpha",
+  "version": "1.0.40-alpha",
   "author": {
     "name": "Micro Business Ltd",
     "email": "micro.business.ltd@gmail.com",
@@ -36,7 +36,7 @@
     "prop-types": "15.6.0",
     "react": "16.0.0",
     "react-immutable-proptypes": "2.1.0",
-    "react-native": "0.49.1",
+    "react-native": "0.49.2",
     "react-native-action-button": "^2.8.0",
     "react-native-code-push": "^5.1.3-beta",
     "react-native-easy-grid": "0.1.15",

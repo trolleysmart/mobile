@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import { environment } from '../../../framework/relay';
 import { graphql, QueryRenderer } from 'react-relay';
 import ProductsRelayContainer from './ProductsRelayContainer';
+import { LoadingInProgress } from '../../../sharedComponents/loadingInProgress';
 
 class Products extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -48,7 +49,7 @@ class Products extends Component {
           if (props) {
             return <ProductsRelayContainer user={props.user} />;
           } else {
-            return <Text>Loading...</Text>;
+            return <LoadingInProgress />;
           }
         }}
       />
@@ -68,9 +69,15 @@ Products.propTypes = {
 
 function mapStateToProps(state, props) {
   return {
-    defaultCategories: props.navigation.state.params && props.navigation.state.params.defaultCategories ? props.navigation.state.params.defaultCategories : props.defaultCategories,
+    defaultCategories:
+      props.navigation.state.params && props.navigation.state.params.defaultCategories
+        ? props.navigation.state.params.defaultCategories
+        : props.defaultCategories,
     defaultSortOption: props.defaultSortOption,
-    defaultSearchKeyword: props.navigation.state.params && props.navigation.state.params.defaultSearchKeyword ? props.navigation.state.params.defaultSearchKeyword : props.defaultSearchKeyword,
+    defaultSearchKeyword:
+      props.navigation.state.params && props.navigation.state.params.defaultSearchKeyword
+        ? props.navigation.state.params.defaultSearchKeyword
+        : props.defaultSearchKeyword,
     searchKeyword: state.products.get('searchKeyword'),
     sortOption: state.productsFilter.get('sortOption'),
     categories: state.productsFilter.get('categories').isEmpty()

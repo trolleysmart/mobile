@@ -63,7 +63,7 @@ class ShoppingListItems extends Component {
               : key,
         },
       ])
-      .sortBy(_ => _.categoryKey)
+      .sortBy(_ => _.categoryTitle)
       .valueSeq()
       .toJS();
 
@@ -105,7 +105,7 @@ class ShoppingListItems extends Component {
             <Text style={Styles.totalSavingText}>${totalSaving.toFixed(2)}</Text>
           </View>
         </View>
-        <ActionButton buttonColor="rgba(242,135,79,1)" onPress={() => this.props.onShoppingListAddItemClicked()} />
+        <ActionButton buttonColor="rgba(242,135,79,1)" offsetX={50} onPress={() => this.props.onShoppingListAddItemClicked()} />
       </View>
     );
   };

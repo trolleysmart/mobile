@@ -8,6 +8,7 @@ import { environment } from '../../framework/relay';
 import { graphql, QueryRenderer } from 'react-relay';
 import StapleItemsRelayContainer from './StapleItemsRelayContainer';
 import HeaderContainer from './HeaderContainer';
+import { LoadingInProgress } from '../../sharedComponents/loadingInProgress';
 
 class StapleItems extends Component {
   static navigationOptions = {
@@ -38,7 +39,7 @@ class StapleItems extends Component {
           if (props) {
             return <StapleItemsRelayContainer user={props.user} shoppingList={this.props.shoppingList} />;
           } else {
-            return <Text>Loading</Text>;
+            return <LoadingInProgress />;
           }
         }}
       />

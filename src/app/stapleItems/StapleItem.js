@@ -23,17 +23,16 @@ class StapleItem extends React.PureComponent {
         delayPressIn={0}
         pressColor={Color.touchableIconPressColor}
         onPress={this.onItemPressed}
-        style={Styles.touchableContainer}
         borderless
       >
         <View style={Styles.touchableContainer}>
           <Avatar
             rounded
-            overlayContainerStyle={{ backgroundColor: this.props.isSelected ? '#F4CC62' : '#EFF0F1' }}
+            overlayContainerStyle={{ backgroundColor: this.props.isSelected ? Color.primaryColorLight : '#EFF0F1' }}
             source={ImageUltility.getImageSource(this.props.stapleItem.name.toLowerCase().replace(/\s+/g, ''))}
             activeOpacity={0.7}
           />
-          <Text style={Styles.itemName}>{this.props.stapleItem.name}</Text>
+          <Text style={this.props.isSelected ? Styles.itemNameSelected : Styles.itemName}>{this.props.stapleItem.name}</Text>
         </View>
       </TouchableItem>
     );

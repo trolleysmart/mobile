@@ -26,6 +26,12 @@ export default StyleSheet.create({
     fontSize: 10,
     textAlign: 'center',
   },
+  itemNameSelected: {
+    fontSize: 10,
+    fontWeight: '500',
+    color: '#3a69e0',
+    textAlign: 'center',
+  },
   sectionHeaderImage: {
     width: 25,
     height: 25,
@@ -43,7 +49,9 @@ export default StyleSheet.create({
     justifyContent: 'center',
   },
   itemsCount: {
-    color: 'blue',
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#3a69e0',
   },
   select: {
     color: 'blue',
@@ -53,8 +61,8 @@ export default StyleSheet.create({
   },
   sectionListContainer: {
     // flex: 1,
-    flexDirection: 'row',
-    flexWrap: 'wrap',
+    // flexDirection: 'row',
+    // flexWrap: 'wrap',
     // justifyContent: 'center',
   },
   addItemsHeaderContainer: {
