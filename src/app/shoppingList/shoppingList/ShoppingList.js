@@ -2,7 +2,6 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Text } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { environment } from '../../../framework/relay';
 import { graphql, QueryRenderer } from 'react-relay';
@@ -36,12 +35,8 @@ class ShoppingList extends Component {
           shoppingListId: this.props.shoppingListId,
         }}
         render={({ error, props }) => {
-          if (error) {
-            return <Text>{error.message}</Text>;
-          }
-
-          if (props) {
-            return <ShoppingListItemsRelayContainer user={props.user} shoppingListId={this.props.shoppingListId} />;
+          if (error || props) {
+            return <ShoppingListItemsRelayContainer errorMessage={error} user={props.user} shoppingListId={this.props.shoppingListId} />;
           } else {
             return <LoadingInProgress />;
           }
