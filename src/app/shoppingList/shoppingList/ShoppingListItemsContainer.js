@@ -12,6 +12,7 @@ import * as ShoppingListActions from './Actions';
 import * as StapleItemsActions from '../../stapleItems/Actions';
 import * as ProductsActions from '../../products/products/Actions';
 import * as localStateActions from '../../../framework/localState/Actions';
+import { ErrorMessageWithRetry } from '../../../sharedComponents/errorMessageWithRetry';
 
 type Props = {
   user: ShoppingListItemsRelayContainer_user,
@@ -84,7 +85,19 @@ class ShoppingListItemsContainer extends Component<any, Props, State> {
     this.props.relay.loadMore(30, () => {});
   };
 
+  onRetryPressed = () => {
+    if (this.props.relay.isLoading()) {
+      return;
+    }
+
+    this.props.relay.refetchConnection(1000, () => {});
+  };
+
   render = () => {
+    if (this.props.errorMessage) {
+      return <ErrorMessageWithRetry errorMessage="Error Message" onRetryPressed={this.onRetryPressed} />;
+    }
+
     return (
       <ShoppingListItems
         shoppingListItems={this.props.user.shoppingListItems.edges.map(_ => _.node)}
@@ -106,6 +119,7 @@ ShoppingListItemsContainer.propTypes = {
   productsActions: PropTypes.object.isRequired,
   localStateActions: PropTypes.object.isRequired,
   defaultShoppingListId: PropTypes.string.isRequired,
+  errorMessage: PropTypes.string,
 };
 
 function mapStateToProps(state) {
