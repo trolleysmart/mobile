@@ -3,10 +3,10 @@
 import { Map } from 'immutable';
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { AsyncStorage } from 'react-native';
+import { MessageType } from 'micro-business-common-react-native';
+import * as MessageBarActions from 'micro-business-common-react-native/src/messageBar/Actions';
 import ActionTypes from './ActionTypes';
 import * as Actions from './Actions';
-import * as MessageBarActions from '../../sharedComponents/messageBar/Actions';
-import { MessageType } from '../../sharedComponents/messageBar';
 
 function* getDefaultShoppingListAsync() {
   try {
