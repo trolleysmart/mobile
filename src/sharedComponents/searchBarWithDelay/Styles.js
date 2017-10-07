@@ -13,5 +13,6 @@ export default StyleSheet.create({
   },
   searchInput: {
     backgroundColor: 'transparent',
+    color: 'black',
   },
 });

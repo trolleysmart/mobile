@@ -58,7 +58,7 @@ class ShoppingListsContainer extends Component<any, Props, State> {
 
   onDeleteShoppingListPressed = shoppingListId => {
     if (this.props.user.shoppingLists.edges.length <= 1) {
-      Alert.alert('Warning', 'Unable to delete the last shopping list.');
+      Alert.alert('Error', 'Sorry, you must have at least one shopping list.');
     } else {
       RemoveShoppingList.commit(environment, this.props.userId, shoppingListId);
     }

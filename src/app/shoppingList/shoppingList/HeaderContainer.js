@@ -1,12 +1,12 @@
 // @flow
 
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import { connect } from 'react-redux';
 import { NavigationActions } from 'react-navigation';
-import { Icon } from 'react-native-elements';
+// import { Icon } from 'react-native-elements';
 import PropTypes from 'prop-types';
-import { Menu, MenuOptions, MenuOption, MenuTrigger } from 'react-native-popup-menu';
+// import { Menu, MenuOptions, MenuOption, MenuTrigger } from 'react-native-popup-menu';
 import { TouchableIcon } from '../../../components/touchableIcon';
 import Styles from './Styles';
 

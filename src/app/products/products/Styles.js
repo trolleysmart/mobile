@@ -73,4 +73,8 @@ export default StyleSheet.create({
     height: 60,
     width: 30,
   },
+  iconContainerStyle: {
+    height: Sizes.searchBarHeaderHeight,
+    width: 40,
+  },
 });
