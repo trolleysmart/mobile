@@ -68,7 +68,7 @@ class StapleItemsList extends React.PureComponent {
               : key,
         },
       ])
-      .sortBy(_ => _.categoryKey)
+      .sortBy(_ => _.categoryTitle)
       .valueSeq()
       .toJS();
 
