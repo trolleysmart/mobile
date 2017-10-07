@@ -2,8 +2,9 @@
 
 import { Map } from 'immutable';
 import { ActionTypes } from 'micro-business-parse-server-common-react-native';
-import * as userAccessActions from 'micro-business-parse-server-common-react-native/src/userAccess/redux/Actions';
+import * as appUpdaterActions from 'micro-business-common-react-native/src/appUpdater/Actions';
 import * as netInfoActions from 'micro-business-common-react-native/src/netInfo/Actions';
+import * as userAccessActions from 'micro-business-parse-server-common-react-native/src/userAccess/redux/Actions';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { addNavigationHelpers, NavigationActions, StackNavigator } from 'react-navigation';
@@ -12,7 +13,6 @@ import { Alert, BackHandler, Platform, View } from 'react-native';
 import { connect } from 'react-redux';
 import CodePush from 'react-native-code-push';
 import PopupDialog, { SlideAnimation } from 'react-native-popup-dialog';
-import * as appUpdaterActions from './appUpdater/Actions';
 import { SplashContainer } from '../splash';
 import { SignUpSignInContainer } from '../signUpSignIn';
 import { configureStore } from '../../framework/redux';
