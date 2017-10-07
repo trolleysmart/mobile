@@ -47,8 +47,7 @@ class ProductsContainer extends Component<any, Props, State> {
       isFetchingTop: true,
     });
 
-    this.props.relay.refetchConnection(products.edges.length, error => {
-      //TODO: 20170610 - Morteza - Should handle the error here
+    this.props.relay.refetchConnection(products.edges.length, () => {
       this.setState({
         isFetchingTop: false,
       });
@@ -60,9 +59,7 @@ class ProductsContainer extends Component<any, Props, State> {
       return;
     }
 
-    this.props.relay.loadMore(30, error => {
-      //TODO: 20170610 - Morteza - Should handle the error here
-    });
+    this.props.relay.loadMore(30, () => {});
   };
 
   render = () => {

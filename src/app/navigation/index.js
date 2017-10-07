@@ -3,6 +3,7 @@
 import { Map } from 'immutable';
 import { ActionTypes } from 'micro-business-parse-server-common-react-native';
 import * as userAccessActions from 'micro-business-parse-server-common-react-native/src/userAccess/redux/Actions';
+import * as netInfoActions from 'micro-business-common-react-native/src/netInfo/Actions';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { addNavigationHelpers, NavigationActions, StackNavigator } from 'react-navigation';
@@ -19,11 +20,7 @@ import AppDrawer from './AppDrawer';
 import * as messageBarActions from '../../sharedComponents/messageBar/Actions';
 import { MessageType } from '../../sharedComponents/messageBar';
 import { SignInDisclaimerContainer } from '../../sharedComponents/disclaimer';
-import * as appActions from './Actions';
 import * as localStateActions from '../../framework/localState/Actions';
-
-export AppReducer from './Reducer';
-export watchRefreshNetInfoStat from './NetInfo';
 
 const AppNavigator = StackNavigator(
   {
@@ -141,7 +138,7 @@ class AppWithNavigationState extends Component {
   };
 
   componentWillMount() {
-    this.props.appActions.refreshNetInfoState(Map());
+    this.props.netInfoActions.refreshState(Map());
     this.props.localStateActions.getDefaultShoppingList(Map());
 
     CodePush.sync(
@@ -251,7 +248,7 @@ class AppWithNavigationState extends Component {
 }
 
 AppWithNavigationState.propTypes = {
-  appActions: PropTypes.object.isRequired,
+  netInfoActions: PropTypes.object.isRequired,
   appUpdaterActions: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
   navigation: PropTypes.object.isRequired,
@@ -273,7 +270,7 @@ AppWithNavigationState.propTypes = {
 function mapStateToProps(state) {
   return {
     navigation: state.navigation,
-    netInfo: state.appReducer.get('netInfo').toJS(),
+    netInfo: state.netInfo.toJS(),
     messagesInfo: state.messageBar.get('messages').toJS(),
     userAccessFailedOperations: state.userAccess.get('failedOperations').toJS(),
   };
@@ -281,7 +278,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    appActions: bindActionCreators(appActions, dispatch),
+    netInfoActions: bindActionCreators(netInfoActions, dispatch),
     appUpdaterActions: bindActionCreators(appUpdaterActions, dispatch),
     dispatch,
     messageBarActions: bindActionCreators(messageBarActions, dispatch),
