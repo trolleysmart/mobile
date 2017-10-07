@@ -2,7 +2,6 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Text } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { environment } from '../../../framework/relay';
 import { graphql, QueryRenderer } from 'react-relay';
@@ -42,15 +41,11 @@ class Products extends Component {
           stores: this.props.stores,
         }}
         render={({ error, props }) => {
-          if (error) {
-            return <Text>{error.message}</Text>;
+          if (error || props) {
+            return <ProductsRelayContainer errorMessage={error} user={props.user} />;
           }
 
-          if (props) {
-            return <ProductsRelayContainer user={props.user} />;
-          } else {
-            return <LoadingInProgress />;
-          }
+          return <LoadingInProgress />;
         }}
       />
     );

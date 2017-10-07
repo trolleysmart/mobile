@@ -13,6 +13,7 @@ import * as StapleItemsActions from '../../stapleItems/Actions';
 import * as ProductsActions from '../../products/products/Actions';
 import * as localStateActions from '../../../framework/localState/Actions';
 import { ErrorMessageWithRetry } from '../../../sharedComponents/errorMessageWithRetry';
+import { type ShoppingListItemsRelayContainer_user } from './__generated__/ShoppingListItemsRelayContainer_user.graphql';
 
 type Props = {
   user: ShoppingListItemsRelayContainer_user,
@@ -60,8 +61,6 @@ class ShoppingListItemsContainer extends Component<any, Props, State> {
   };
 
   onRefresh = () => {
-    const { shoppingListItems } = this.props.user;
-
     if (this.props.relay.isLoading()) {
       return;
     }
@@ -70,7 +69,7 @@ class ShoppingListItemsContainer extends Component<any, Props, State> {
       isFetchingTop: true,
     });
 
-    this.props.relay.refetchConnection(shoppingListItems.edges.length, () => {
+    this.props.relay.refetchConnection(this.props.user.shoppingListItems.edges.length, () => {
       this.setState({
         isFetchingTop: false,
       });
@@ -90,12 +89,18 @@ class ShoppingListItemsContainer extends Component<any, Props, State> {
       return;
     }
 
-    this.props.relay.refetchConnection(1000, () => {});
+    const { shoppingListItems } = this.props.user;
+
+    if (shoppingListItems) {
+      this.props.relay.refetchConnection(shoppingListItems.edges.length, () => {});
+    } else {
+      this.props.relay.refetchConnection(30, () => {});
+    }
   };
 
   render = () => {
     if (this.props.errorMessage) {
-      return <ErrorMessageWithRetry errorMessage="Error Message" onRetryPressed={this.onRetryPressed} />;
+      return <ErrorMessageWithRetry errorMessage={this.props.errorMessage} onRetryPressed={this.onRetryPressed} />;
     }
 
     return (
