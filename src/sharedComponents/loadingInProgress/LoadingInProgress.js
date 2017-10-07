@@ -6,19 +6,19 @@ import { View, ActivityIndicator } from 'react-native';
 import { Text } from 'react-native-elements';
 import Styles from './Styles';
 
-const LoadingInProgressPresentational = ({ messageToDisplay }) => (
-  <View style={Styles.activityIndicator}>
+const LoadingInProgress = ({ messageToDisplay }) => (
+  <View style={Styles.container}>
     <Text>{messageToDisplay}</Text>
     <ActivityIndicator size="large" color="#3b5998" style={Styles.activityIndicator} />
   </View>
 );
 
-LoadingInProgressPresentational.propTypes = {
+LoadingInProgress.propTypes = {
   messageToDisplay: PropTypes.string,
 };
 
-LoadingInProgressPresentational.defaultProps = {
+LoadingInProgress.defaultProps = {
   messageToDisplay: '',
 };
 
-export default LoadingInProgressPresentational;
+export default LoadingInProgress;
