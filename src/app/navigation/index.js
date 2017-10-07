@@ -1,12 +1,12 @@
 // @flow
 
 import { Map } from 'immutable';
-import { ActionTypes } from 'micro-business-parse-server-common-react-native';
+import { UserAccessActionTypes } from 'micro-business-parse-server-common-react-native';
 import { MessageType } from 'micro-business-common-react-native';
 import * as appUpdaterActions from 'micro-business-common-react-native/src/appUpdater/Actions';
 import * as messageBarActions from 'micro-business-common-react-native/src/messageBar/Actions';
 import * as netInfoActions from 'micro-business-common-react-native/src/netInfo/Actions';
-import * as userAccessActions from 'micro-business-parse-server-common-react-native/src/userAccess/redux/Actions';
+import * as userAccessActions from 'micro-business-parse-server-common-react-native/src/userAccess/Actions';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { addNavigationHelpers, NavigationActions, StackNavigator } from 'react-navigation';
@@ -50,7 +50,7 @@ const navigationReducer = (state, action) => {
   let newState;
 
   switch (action.type) {
-    case ActionTypes.USER_ACCESS_SIGNOUT_IN_PROGRESS:
+    case UserAccessActionTypes.USER_ACCESS_SIGNOUT_IN_PROGRESS:
       newState = AppNavigator.router.getStateForAction(
         NavigationActions.reset({
           index: 0,
@@ -65,7 +65,7 @@ const navigationReducer = (state, action) => {
       );
       break;
 
-    case ActionTypes.USER_ACCESS_GET_CURRENT_USER_SUCCEEDED:
+    case UserAccessActionTypes.USER_ACCESS_GET_CURRENT_USER_SUCCEEDED:
       if (action.payload.get('userExists')) {
         newState = AppNavigator.router.getStateForAction(
           NavigationActions.reset({
@@ -94,9 +94,9 @@ const navigationReducer = (state, action) => {
       }
       break;
 
-    case ActionTypes.USER_ACCESS_SIGNUP_WITH_USERNAME_AND_PASSWORD_SUCCEEDED:
-    case ActionTypes.USER_ACCESS_SIGNIN_WITH_USERNAME_AND_PASSWORD_SUCCEEDED:
-    case ActionTypes.USER_ACCESS_SIGNIN_WITH_FACEBOOK_SUCCEEDED:
+    case UserAccessActionTypes.USER_ACCESS_SIGNUP_WITH_USERNAME_AND_PASSWORD_SUCCEEDED:
+    case UserAccessActionTypes.USER_ACCESS_SIGNIN_WITH_USERNAME_AND_PASSWORD_SUCCEEDED:
+    case UserAccessActionTypes.USER_ACCESS_SIGNIN_WITH_FACEBOOK_SUCCEEDED:
       newState = AppNavigator.router.getStateForAction(
         NavigationActions.reset({
           index: 0,
