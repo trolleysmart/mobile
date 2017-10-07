@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import { environment } from '../../../framework/relay';
 import { graphql, QueryRenderer } from 'react-relay';
 import ProductDetailRelayContainer from './ProductDetailRelayContainer';
+import { LoadingInProgress } from '../../../sharedComponents/loadingInProgress';
 
 class ProductDetail extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -35,7 +36,7 @@ class ProductDetail extends Component {
           if (props) {
             return <ProductDetailRelayContainer user={props.user} productId={this.props.productId} isInShoppingList={this.props.isInShoppingList} />;
           } else {
-            return <Text>Loading</Text>;
+            return <LoadingInProgress />;
           }
         }}
       />

@@ -7,6 +7,7 @@ import { environment } from '../../framework/relay';
 import { graphql, QueryRenderer } from 'react-relay';
 import { Platform } from 'react-native';
 import CategoriesFilterRelayContainer from './CategoriesFilterRelayContainer';
+import { LoadingInProgress } from '../loadingInProgress';
 
 class CategoriesFilter extends Component {
   static navigationOptions = {
@@ -39,7 +40,7 @@ class CategoriesFilter extends Component {
           if (props) {
             return <CategoriesFilterRelayContainer viewer={props.viewer} />;
           } else {
-            return <Text>Loading</Text>;
+            return <LoadingInProgress />;
           }
         }}
       />

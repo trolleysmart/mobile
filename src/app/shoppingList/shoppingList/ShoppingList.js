@@ -10,6 +10,7 @@ import { MainMenuContainer } from '../../../sharedComponents/mainMenu';
 import ShoppingListItemsRelayContainer from './ShoppingListItemsRelayContainer';
 import HeaderContainer from './HeaderContainer';
 import HeaderTitleContainer from './HeaderTitleContainer';
+import { LoadingInProgress } from '../../../sharedComponents/loadingInProgress';
 
 class ShoppingList extends Component {
   static navigationOptions = () => ({
@@ -42,7 +43,7 @@ class ShoppingList extends Component {
           if (props) {
             return <ShoppingListItemsRelayContainer user={props.user} shoppingListId={this.props.shoppingListId} />;
           } else {
-            return <Text>Loading</Text>;
+            return <LoadingInProgress />;
           }
         }}
       />

@@ -6,6 +6,7 @@ import { graphql, QueryRenderer } from 'react-relay';
 import { environment } from '../../../framework/relay';
 import ShoppingListsRelayContainer from './ShoppingListsRelayContainer';
 import { Color } from '../../../framework/style/DefaultStyles';
+import { LoadingInProgress } from '../../../sharedComponents/loadingInProgress';
 
 class ShoppingLists extends Component {
   static navigationOptions = {
@@ -38,7 +39,7 @@ class ShoppingLists extends Component {
           if (props) {
             return <ShoppingListsRelayContainer user={props.user} />;
           } else {
-            return <Text>Loading</Text>;
+            return <LoadingInProgress />;
           }
         }}
       />
