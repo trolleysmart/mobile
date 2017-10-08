@@ -41,8 +41,12 @@ class Products extends Component {
           stores: this.props.stores,
         }}
         render={({ error, props }) => {
-          if (error || props) {
-            return <ProductsRelayContainer errorMessage={error ? error.message : null} user={error ? null : props.user} />;
+          if (error) {
+            return <ProductsRelayContainer errorMessage={error.message} />;
+          }
+
+          if (props) {
+            return <ProductsRelayContainer user={props.user} />;
           }
 
           return <LoadingInProgress />;

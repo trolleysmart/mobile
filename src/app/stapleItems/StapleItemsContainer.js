@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import uuid from 'uuid/v4';
 import StapleItemsList from './StapleItemsList';
 import * as StapleItemsActions from './Actions';
+import { ErrorMessageWithRetry } from '../../sharedComponents/errorMessageWithRetry';
 import { type StapleItemsRelayContainer_user } from './__generated__/StapleItemsRelayContainer_user.graphql';
 
 type Props = {
@@ -56,8 +57,6 @@ class StapleItemsContrainer extends Component<any, Props, State> {
   };
 
   onRefresh = () => {
-    const { stapleItems } = this.props.user;
-
     if (this.props.relay.isLoading()) {
       return;
     }
@@ -66,7 +65,7 @@ class StapleItemsContrainer extends Component<any, Props, State> {
       isFetchingTop: true,
     });
 
-    this.props.relay.refetchConnection(stapleItems.edges.length, () => {
+    this.props.relay.refetchConnection(this.props.user.stapleItems.edges.length, () => {
       this.setState({
         isFetchingTop: false,
       });
@@ -99,7 +98,23 @@ class StapleItemsContrainer extends Component<any, Props, State> {
     return stapleList;
   };
 
+  onRetryPressed = () => {
+    if (this.props.relay.isLoading()) {
+      return;
+    }
+
+    if (this.props.user && this.props.user.stapleItems) {
+      this.props.relay.refetchConnection(this.props.user.stapleItems.edges.length, () => {});
+    } else {
+      this.props.relay.refetchConnection(1000, () => {});
+    }
+  };
+
   render = () => {
+    if (this.props.errorMessage) {
+      return <ErrorMessageWithRetry errorMessage={this.props.errorMessage} onRetryPressed={this.onRetryPressed} />;
+    }
+
     return (
       <StapleItemsList
         stapleItems={this.getStapleItemsWithCustomItem()}
@@ -116,7 +131,6 @@ class StapleItemsContrainer extends Component<any, Props, State> {
 StapleItemsContrainer.propTypes = {
   customStapleItem: PropTypes.string,
   stapleItemsActions: PropTypes.object.isRequired,
-  shoppingList: PropTypes.shape({ id: PropTypes.string.isRequired }).isRequired,
 };
 
 function mapStateToProps(state) {
