@@ -2,7 +2,6 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Text } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { environment } from '../../framework/relay';
 import { graphql, QueryRenderer } from 'react-relay';
@@ -33,14 +32,14 @@ class StapleItems extends Component {
         }}
         render={({ error, props }) => {
           if (error) {
-            return <Text>{error.message}</Text>;
+            return <StapleItemsRelayContainer errorMessage={error.message} />;
           }
 
           if (props) {
-            return <StapleItemsRelayContainer user={props.user} shoppingList={this.props.shoppingList} />;
-          } else {
-            return <LoadingInProgress />;
+            return <StapleItemsRelayContainer user={props.user} />;
           }
+
+          return <LoadingInProgress />;
         }}
       />
     );

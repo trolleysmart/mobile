@@ -66,10 +66,8 @@ class ProductsContainer extends Component<any, Props, State> {
       return;
     }
 
-    const { products } = this.props.user;
-
-    if (products) {
-      this.props.relay.refetchConnection(products.edges.length, () => {});
+    if (this.props.user && this.props.user.products) {
+      this.props.relay.refetchConnection(this.props.user.products.edges.length, () => {});
     } else {
       this.props.relay.refetchConnection(30, () => {});
     }

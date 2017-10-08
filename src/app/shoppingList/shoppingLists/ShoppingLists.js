@@ -1,7 +1,6 @@
 // @flow
 
 import React, { Component } from 'react';
-import { Text } from 'react-native-elements';
 import { graphql, QueryRenderer } from 'react-relay';
 import { environment } from '../../../framework/relay';
 import ShoppingListsRelayContainer from './ShoppingListsRelayContainer';
@@ -33,14 +32,14 @@ class ShoppingLists extends Component {
         }}
         render={({ error, props }) => {
           if (error) {
-            return <Text>{error.message}</Text>;
+            return <ShoppingListsRelayContainer errorMessage={error.message} />;
           }
 
           if (props) {
             return <ShoppingListsRelayContainer user={props.user} />;
-          } else {
-            return <LoadingInProgress />;
           }
+
+          return <LoadingInProgress />;
         }}
       />
     );
