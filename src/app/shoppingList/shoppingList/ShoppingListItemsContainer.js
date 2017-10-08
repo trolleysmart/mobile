@@ -97,10 +97,8 @@ class ShoppingListItemsContainer extends Component<any, Props, State> {
       return;
     }
 
-    const { shoppingListItems } = this.props.user;
-
-    if (shoppingListItems) {
-      this.props.relay.refetchConnection(shoppingListItems.edges.length, () => {});
+    if (this.props.user && this.props.user.shoppingListItems) {
+      this.props.relay.refetchConnection(this.props.user.shoppingListItems.edges.length, () => {});
     } else {
       this.props.relay.refetchConnection(30, () => {});
     }

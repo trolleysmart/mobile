@@ -71,11 +71,11 @@ export default createPaginationContainer(
         count: totalCount,
       };
     },
-    getVariables(props, { count, cursor }, fragmentVariables) {
+    getVariables(props, { count, cursor }) {
       return {
         count,
         cursor,
-        shoppingListId: fragmentVariables.shoppingListId,
+        shoppingListId: props.shoppingListId,
       };
     },
     variables: {
