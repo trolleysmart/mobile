@@ -131,6 +131,7 @@ class StapleItemsContrainer extends Component<any, Props, State> {
 StapleItemsContrainer.propTypes = {
   customStapleItem: PropTypes.string,
   stapleItemsActions: PropTypes.object.isRequired,
+  errorMessage: PropTypes.string,
 };
 
 function mapStateToProps(state) {

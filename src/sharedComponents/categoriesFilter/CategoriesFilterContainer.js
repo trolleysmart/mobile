@@ -7,8 +7,9 @@ import { bindActionCreators } from 'redux';
 import Immutable, { Map } from 'immutable';
 import * as productsFilterActions from '../productsFilter/Actions';
 import CategoryItems from './CategoryItems';
-import { type CategoriesFilterRelayContainer_viewer } from './__generated__/CategoriesFilterRelayContainer_viewer.graphql';
 import { CategoryItemsProp } from './PropTypes';
+import { ErrorMessageWithRetry } from '../errorMessageWithRetry';
+import { type CategoriesFilterRelayContainer_viewer } from './__generated__/CategoriesFilterRelayContainer_viewer.graphql';
 
 type Props = {
   viewer: CategoriesFilterRelayContainer_viewer,
@@ -49,8 +50,6 @@ class CategoriesFilterContainer extends Component<any, Props, State> {
   };
 
   onRefresh = () => {
-    const { tags } = this.props.viewer.tags;
-
     if (this.props.relay.isLoading()) {
       return;
     }
@@ -59,7 +58,7 @@ class CategoriesFilterContainer extends Component<any, Props, State> {
       isFetchingTop: true,
     });
 
-    this.props.relay.refetchConnection(tags.edges.length, () => {
+    this.props.relay.refetchConnection(this.props.viewer.tags.edges.length, () => {
       this.setState({
         isFetchingTop: false,
       });
@@ -74,7 +73,23 @@ class CategoriesFilterContainer extends Component<any, Props, State> {
     this.props.relay.loadMore(30, () => {});
   };
 
+  onRetryPressed = () => {
+    if (this.props.relay.isLoading()) {
+      return;
+    }
+
+    if (this.props.viewer && this.props.viewer.tags) {
+      this.props.relay.refetchConnection(this.props.viewer.tags.edges.length, () => {});
+    } else {
+      this.props.relay.refetchConnection(30, () => {});
+    }
+  };
+
   render = () => {
+    if (this.props.errorMessage) {
+      return <ErrorMessageWithRetry errorMessage={this.props.errorMessage} onRetryPressed={this.onRetryPressed} />;
+    }
+
     return (
       <CategoryItems
         categories={this.props.viewer.tags.edges.map(_ => _.node)}
@@ -91,6 +106,7 @@ class CategoriesFilterContainer extends Component<any, Props, State> {
 CategoriesFilterContainer.propTypes = {
   selectedCategories: CategoryItemsProp,
   productsFilterActions: PropTypes.object.isRequired,
+  errorMessage: PropTypes.string,
 };
 
 function mapStateToProps(state) {

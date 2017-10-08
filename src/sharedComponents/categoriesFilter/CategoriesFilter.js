@@ -1,7 +1,6 @@
 // @flow
 
 import React, { Component } from 'react';
-import { Text } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { environment } from '../../framework/relay';
 import { graphql, QueryRenderer } from 'react-relay';
@@ -30,18 +29,18 @@ class CategoriesFilter extends Component {
         `}
         variables={{
           cursor: null,
-          count: 100,
+          count: 30,
         }}
         render={({ error, props }) => {
           if (error) {
-            return <Text>{error.message}</Text>;
+            return <CategoriesFilterRelayContainer errorMessage={error.message} />;
           }
 
           if (props) {
             return <CategoriesFilterRelayContainer viewer={props.viewer} />;
-          } else {
-            return <LoadingInProgress />;
           }
+
+          return <LoadingInProgress />;
         }}
       />
     );
