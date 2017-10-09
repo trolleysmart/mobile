@@ -49,7 +49,7 @@ class ProductsHeaderContainer extends Component {
         {this.props.isSearchingMode ? (
           <View style={Styles.header}>
             <TouchableIcon onPress={this.onExitsSearchModeIconPress} iconName="ios-arrow-back" iconType="ionicon" />
-            <SearchBarWithDelay searchKeyword={this.props.searchKeyword} onSearchKeywordChanged={this.onSearchKeywordChanged} />
+            <SearchBarWithDelay searchKeyword={this.props.searchKeyword} onSearchKeywordChanged={this.onSearchKeywordChanged} autoFocus={true} />
             <ProductsFilterMenuContainer isFilterSet={this.props.hasProductsFilterSet} />
           </View>
         ) : (

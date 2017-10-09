@@ -47,7 +47,7 @@ class SearchBarWithDelay extends Component {
           clearIcon={{ color: 'black' }}
           lightTheme
           noIcon={true}
-          autoFocus={true}
+          autoFocus={this.props.autoFocus}
           containerStyle={Styles.search}
           inputStyle={Styles.searchInput}
           placeholder="Search..."
@@ -64,6 +64,7 @@ class SearchBarWithDelay extends Component {
 SearchBarWithDelay.propTypes = {
   searchKeyword: PropTypes.string,
   onSearchKeywordChanged: PropTypes.func.isRequired,
+  autoFocus: PropTypes.bool.isRequired,
 };
 
 SearchBarWithDelay.defaultProps = {
