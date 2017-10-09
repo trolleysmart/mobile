@@ -8,6 +8,7 @@ import { graphql, QueryRenderer } from 'react-relay';
 import StapleItemsRelayContainer from './StapleItemsRelayContainer';
 import HeaderContainer from './HeaderContainer';
 import { LoadingInProgress } from '../../sharedComponents/loadingInProgress';
+import { ErrorMessageWithRetry } from '../../sharedComponents/errorMessageWithRetry';
 
 class StapleItems extends Component {
   static navigationOptions = {
@@ -30,9 +31,9 @@ class StapleItems extends Component {
           count: 1000,
           searchKeyword: this.props.searchKeyword,
         }}
-        render={({ error, props }) => {
+        render={({ error, props, retry }) => {
           if (error) {
-            return <StapleItemsRelayContainer errorMessage={error.message} />;
+            return <ErrorMessageWithRetry errorMessage={error.message} onRetryPressed={retry} />;
           }
 
           if (props) {

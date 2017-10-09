@@ -6,6 +6,7 @@ import { environment } from '../../../framework/relay';
 import ShoppingListsRelayContainer from './ShoppingListsRelayContainer';
 import { Color } from '../../../framework/style/DefaultStyles';
 import { LoadingInProgress } from '../../../sharedComponents/loadingInProgress';
+import { ErrorMessageWithRetry } from '../../../sharedComponents/errorMessageWithRetry';
 
 class ShoppingLists extends Component {
   static navigationOptions = {
@@ -30,9 +31,9 @@ class ShoppingLists extends Component {
           cursor: null,
           count: 30,
         }}
-        render={({ error, props }) => {
+        render={({ error, props, retry }) => {
           if (error) {
-            return <ShoppingListsRelayContainer errorMessage={error.message} />;
+            return <ErrorMessageWithRetry errorMessage={error.message} onRetryPressed={retry} />;
           }
 
           if (props) {

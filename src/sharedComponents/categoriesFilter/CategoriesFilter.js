@@ -7,6 +7,7 @@ import { graphql, QueryRenderer } from 'react-relay';
 import { Platform } from 'react-native';
 import CategoriesFilterRelayContainer from './CategoriesFilterRelayContainer';
 import { LoadingInProgress } from '../loadingInProgress';
+import { ErrorMessageWithRetry } from '../errorMessageWithRetry';
 
 class CategoriesFilter extends Component {
   static navigationOptions = {
@@ -31,9 +32,9 @@ class CategoriesFilter extends Component {
           cursor: null,
           count: 30,
         }}
-        render={({ error, props }) => {
+        render={({ error, props, retry }) => {
           if (error) {
-            return <CategoriesFilterRelayContainer errorMessage={error.message} />;
+            return <ErrorMessageWithRetry errorMessage={error.message} onRetryPressed={retry} />;
           }
 
           if (props) {

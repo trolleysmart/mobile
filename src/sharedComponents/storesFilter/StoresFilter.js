@@ -7,6 +7,7 @@ import { graphql, QueryRenderer } from 'react-relay';
 import { Platform } from 'react-native';
 import StoresFilterRelayContainer from './StoresFilterRelayContainer';
 import { LoadingInProgress } from '../loadingInProgress';
+import { ErrorMessageWithRetry } from '../errorMessageWithRetry';
 
 class StoresFilter extends Component {
   static navigationOptions = {
@@ -31,9 +32,9 @@ class StoresFilter extends Component {
           cursor: null,
           count: 100,
         }}
-        render={({ error, props }) => {
+        render={({ error, props, retry }) => {
           if (error) {
-            return <StoresFilterRelayContainer errorMessage={error.message} />;
+            return <ErrorMessageWithRetry errorMessage={error.message} onRetryPressed={retry} />;
           }
 
           if (props) {

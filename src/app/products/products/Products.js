@@ -7,6 +7,7 @@ import { environment } from '../../../framework/relay';
 import { graphql, QueryRenderer } from 'react-relay';
 import ProductsRelayContainer from './ProductsRelayContainer';
 import { LoadingInProgress } from '../../../sharedComponents/loadingInProgress';
+import { ErrorMessageWithRetry } from '../../../sharedComponents/errorMessageWithRetry';
 
 class Products extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -40,9 +41,9 @@ class Products extends Component {
           categories: this.props.defaultCategories ? this.props.defaultCategories : this.props.categories, // Use default categories if supplied
           stores: this.props.stores,
         }}
-        render={({ error, props }) => {
+        render={({ error, props, retry }) => {
           if (error) {
-            return <ProductsRelayContainer errorMessage={error.message} />;
+            return <ErrorMessageWithRetry errorMessage={error.message} onRetryPressed={retry} />;
           }
 
           if (props) {
