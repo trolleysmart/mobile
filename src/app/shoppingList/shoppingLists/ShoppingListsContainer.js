@@ -13,7 +13,6 @@ import ShoppingListsList from './ShoppingListsList';
 import { RemoveShoppingList } from '../../../framework/relay/mutations';
 import { environment } from '../../../framework/relay';
 import * as localStateActions from '../../../framework/localState/Actions';
-import { ErrorMessageWithRetry } from '../../../sharedComponents/errorMessageWithRetry';
 import { type ShoppingListsRelayContainer_user } from './__generated__/ShoppingListsRelayContainer_user.graphql';
 
 type Props = {
@@ -89,23 +88,7 @@ class ShoppingListsContainer extends Component<any, Props, State> {
     this.props.relay.loadMore(30, () => {});
   };
 
-  onRetryPressed = () => {
-    if (this.props.relay.isLoading()) {
-      return;
-    }
-
-    if (this.props.user && this.props.user.shoppingLists) {
-      this.props.relay.refetchConnection(this.props.user.shoppingLists.edges.length, () => {});
-    } else {
-      this.props.relay.refetchConnection(30, () => {});
-    }
-  };
-
   render = () => {
-    if (this.props.errorMessage) {
-      return <ErrorMessageWithRetry errorMessage={this.props.errorMessage} onRetryPressed={this.onRetryPressed} />;
-    }
-
     return (
       <ShoppingListsList
         shoppingLists={this.props.user.shoppingLists.edges.map(_ => _.node)}
@@ -123,7 +106,6 @@ class ShoppingListsContainer extends Component<any, Props, State> {
 
 ShoppingListsContainer.propTypes = {
   userId: PropTypes.string.isRequired,
-  errorMessage: PropTypes.string,
 };
 
 function mapStateToProps(state) {

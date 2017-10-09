@@ -2,12 +2,12 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Text } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { environment } from '../../../framework/relay';
 import { graphql, QueryRenderer } from 'react-relay';
 import ProductDetailRelayContainer from './ProductDetailRelayContainer';
 import { LoadingInProgress } from '../../../sharedComponents/loadingInProgress';
+import { ErrorMessageWithRetry } from '../../../sharedComponents/errorMessageWithRetry';
 
 class ProductDetail extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -28,16 +28,16 @@ class ProductDetail extends Component {
         variables={{
           productId: this.props.productId,
         }}
-        render={({ error, props }) => {
+        render={({ error, props, retry }) => {
           if (error) {
-            return <Text>{error.message}</Text>;
+            return <ErrorMessageWithRetry errorMessage={error.message} onRetryPressed={retry} />;
           }
 
           if (props) {
             return <ProductDetailRelayContainer user={props.user} productId={this.props.productId} isInShoppingList={this.props.isInShoppingList} />;
-          } else {
-            return <LoadingInProgress />;
           }
+
+          return <LoadingInProgress />;
         }}
       />
     );
