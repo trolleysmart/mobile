@@ -1,6 +1,6 @@
 // @flow
 
-import Immutable, { Map } from 'immutable';
+import Immutable, { Map, List } from 'immutable';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import uuid from 'uuid/v4';
 import StapleItemsList from './StapleItemsList';
 import * as StapleItemsActions from './Actions';
+import { AddItemsToShoppingList } from '../../framework/relay/mutations';
 import { type StapleItemsRelayContainer_user } from './__generated__/StapleItemsRelayContainer_user.graphql';
 
 type Props = {
@@ -21,6 +22,22 @@ type State = {
 class StapleItemsContrainer extends Component<any, Props, State> {
   state = {
     isFetchingTop: false,
+  };
+
+  tryAddStapleItems = () => {
+    if (this.props.selectedStapleItems.length !== 0) {
+      AddItemsToShoppingList.commit(this.props.relay.environment, this.props.user.id, this.props.shoppingList.id, {
+        newStapleItemNames: this.props.selectedStapleItems.filter(_ => _.isCustomItem).map(_ => _.name),
+        stapleItems: Immutable.fromJS(this.props.selectedStapleItems.filter(_ => !_.isCustomItem)),
+      });
+
+      // Clear the selected staple list
+      this.props.stapleItemsActions.stapleItemSelectionChanged(Map({ selectedStapleItems: List()}));
+    }
+  };
+
+  componentWillUnmount =() => {
+    this.tryAddStapleItems();
   };
 
   clearSearchKeyword = () => {
