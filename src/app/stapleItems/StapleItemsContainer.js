@@ -26,7 +26,7 @@ class StapleItemsContrainer extends Component<any, Props, State> {
 
   tryAddStapleItems = () => {
     if (this.props.selectedStapleItems.length !== 0) {
-      AddItemsToShoppingList.commit(this.props.relay.environment, this.props.user.id, this.props.shoppingList.id, {
+      AddItemsToShoppingList.commit(this.props.relay.environment, this.props.user.id, this.props.shoppingListId, {
         newStapleItemNames: this.props.selectedStapleItems.filter(_ => _.isCustomItem).map(_ => _.name),
         stapleItems: Immutable.fromJS(this.props.selectedStapleItems.filter(_ => !_.isCustomItem)),
       });
@@ -131,6 +131,7 @@ class StapleItemsContrainer extends Component<any, Props, State> {
 StapleItemsContrainer.propTypes = {
   customStapleItem: PropTypes.string,
   stapleItemsActions: PropTypes.object.isRequired,
+  shoppingListId: PropTypes.string.isRequired,
 };
 
 function mapStateToProps(state) {
