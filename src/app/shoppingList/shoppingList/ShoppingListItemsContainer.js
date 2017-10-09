@@ -12,7 +12,6 @@ import * as ShoppingListActions from './Actions';
 import * as StapleItemsActions from '../../stapleItems/Actions';
 import * as ProductsActions from '../../products/products/Actions';
 import * as localStateActions from '../../../framework/localState/Actions';
-import { ErrorMessageWithRetry } from '../../../sharedComponents/errorMessageWithRetry';
 import { type ShoppingListItemsRelayContainer_user } from './__generated__/ShoppingListItemsRelayContainer_user.graphql';
 
 type Props = {
@@ -92,25 +91,7 @@ class ShoppingListItemsContainer extends Component<any, Props, State> {
     this.props.relay.loadMore(30, () => {});
   };
 
-  onRetryPressed = () => {
-    if (this.props.relay.isLoading()) {
-      return;
-    }
-
-    const { shoppingListItems } = this.props.user;
-
-    if (shoppingListItems) {
-      this.props.relay.refetchConnection(shoppingListItems.edges.length, () => {});
-    } else {
-      this.props.relay.refetchConnection(30, () => {});
-    }
-  };
-
   render = () => {
-    if (this.props.errorMessage) {
-      return <ErrorMessageWithRetry errorMessage={this.props.errorMessage} onRetryPressed={this.onRetryPressed} />;
-    }
-
     return (
       <ShoppingListItems
         shoppingListItems={this.props.user.shoppingListItems.edges.map(_ => _.node)}
@@ -132,7 +113,6 @@ ShoppingListItemsContainer.propTypes = {
   productsActions: PropTypes.object.isRequired,
   localStateActions: PropTypes.object.isRequired,
   defaultShoppingListId: PropTypes.string.isRequired,
-  errorMessage: PropTypes.string,
 };
 
 function mapStateToProps(state) {

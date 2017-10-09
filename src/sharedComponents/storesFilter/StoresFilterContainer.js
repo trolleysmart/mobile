@@ -49,8 +49,6 @@ class StoresFilterContainer extends Component<any, Props, State> {
   };
 
   onRefresh = () => {
-    const { stores } = this.props.viewer.stores;
-
     if (this.props.relay.isLoading()) {
       return;
     }
@@ -59,7 +57,7 @@ class StoresFilterContainer extends Component<any, Props, State> {
       isFetchingTop: true,
     });
 
-    this.props.relay.refetchConnection(stores.edges.length, () => {
+    this.props.relay.refetchConnection(this.props.viewer.stores.edges.length, () => {
       this.setState({
         isFetchingTop: false,
       });

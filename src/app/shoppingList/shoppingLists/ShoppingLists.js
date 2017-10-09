@@ -1,12 +1,12 @@
 // @flow
 
 import React, { Component } from 'react';
-import { Text } from 'react-native-elements';
 import { graphql, QueryRenderer } from 'react-relay';
 import { environment } from '../../../framework/relay';
 import ShoppingListsRelayContainer from './ShoppingListsRelayContainer';
 import { Color } from '../../../framework/style/DefaultStyles';
 import { LoadingInProgress } from '../../../sharedComponents/loadingInProgress';
+import { ErrorMessageWithRetry } from '../../../sharedComponents/errorMessageWithRetry';
 
 class ShoppingLists extends Component {
   static navigationOptions = {
@@ -31,16 +31,16 @@ class ShoppingLists extends Component {
           cursor: null,
           count: 30,
         }}
-        render={({ error, props }) => {
+        render={({ error, props, retry }) => {
           if (error) {
-            return <Text>{error.message}</Text>;
+            return <ErrorMessageWithRetry errorMessage={error.message} onRetryPressed={retry} />;
           }
 
           if (props) {
             return <ShoppingListsRelayContainer user={props.user} />;
-          } else {
-            return <LoadingInProgress />;
           }
+
+          return <LoadingInProgress />;
         }}
       />
     );

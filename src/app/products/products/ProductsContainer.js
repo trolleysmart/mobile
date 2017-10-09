@@ -9,7 +9,6 @@ import PropTypes from 'prop-types';
 import * as productsActions from './Actions';
 import { AddItemsToShoppingList } from '../../../framework/relay/mutations';
 import ProductList from './ProductList';
-import { ErrorMessageWithRetry } from '../../../sharedComponents/errorMessageWithRetry';
 import { type ProductsRelayContainer_user } from './__generated__/ProductsRelayContainer_user.graphql';
 
 type Props = {
@@ -61,25 +60,7 @@ class ProductsContainer extends Component<any, Props, State> {
     this.props.relay.loadMore(30, () => {});
   };
 
-  onRetryPressed = () => {
-    if (this.props.relay.isLoading()) {
-      return;
-    }
-
-    const { products } = this.props.user;
-
-    if (products) {
-      this.props.relay.refetchConnection(products.edges.length, () => {});
-    } else {
-      this.props.relay.refetchConnection(30, () => {});
-    }
-  };
-
   render = () => {
-    if (this.props.errorMessage) {
-      return <ErrorMessageWithRetry errorMessage={this.props.errorMessage} onRetryPressed={this.onRetryPressed} />;
-    }
-
     return (
       <ProductList
         products={this.props.user.products.edges.map(_ => _.node)}
@@ -96,7 +77,6 @@ class ProductsContainer extends Component<any, Props, State> {
 ProductsContainer.propTypes = {
   gotoProductDetail: PropTypes.func.isRequired,
   defaultShoppingListId: PropTypes.string.isRequired,
-  errorMessage: PropTypes.string,
 };
 
 function mapStateToProps(state) {

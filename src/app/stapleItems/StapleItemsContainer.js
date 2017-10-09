@@ -73,8 +73,6 @@ class StapleItemsContrainer extends Component<any, Props, State> {
   };
 
   onRefresh = () => {
-    const { stapleItems } = this.props.user;
-
     if (this.props.relay.isLoading()) {
       return;
     }
@@ -83,7 +81,7 @@ class StapleItemsContrainer extends Component<any, Props, State> {
       isFetchingTop: true,
     });
 
-    this.props.relay.refetchConnection(stapleItems.edges.length, () => {
+    this.props.relay.refetchConnection(this.props.user.stapleItems.edges.length, () => {
       this.setState({
         isFetchingTop: false,
       });
@@ -133,7 +131,6 @@ class StapleItemsContrainer extends Component<any, Props, State> {
 StapleItemsContrainer.propTypes = {
   customStapleItem: PropTypes.string,
   stapleItemsActions: PropTypes.object.isRequired,
-  shoppingList: PropTypes.shape({ id: PropTypes.string.isRequired }).isRequired,
 };
 
 function mapStateToProps(state) {

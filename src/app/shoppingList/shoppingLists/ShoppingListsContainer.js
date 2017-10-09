@@ -65,8 +65,6 @@ class ShoppingListsContainer extends Component<any, Props, State> {
   };
 
   onRefresh = () => {
-    const { shoppingLists } = this.props.user;
-
     if (this.props.relay.isLoading()) {
       return;
     }
@@ -75,7 +73,7 @@ class ShoppingListsContainer extends Component<any, Props, State> {
       isFetchingTop: true,
     });
 
-    this.props.relay.refetchConnection(shoppingLists.edges.length, () => {
+    this.props.relay.refetchConnection(this.props.shoppingLists.edges.length, () => {
       this.setState({
         isFetchingTop: false,
       });

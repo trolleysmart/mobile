@@ -10,6 +10,7 @@ import ShoppingListItemsRelayContainer from './ShoppingListItemsRelayContainer';
 import HeaderContainer from './HeaderContainer';
 import HeaderTitleContainer from './HeaderTitleContainer';
 import { LoadingInProgress } from '../../../sharedComponents/loadingInProgress';
+import { ErrorMessageWithRetry } from '../../../sharedComponents/errorMessageWithRetry';
 
 class ShoppingList extends Component {
   static navigationOptions = () => ({
@@ -34,15 +35,13 @@ class ShoppingList extends Component {
           count: 1000,
           shoppingListId: this.props.shoppingListId,
         }}
-        render={({ error, props }) => {
-          if (error || props) {
-            return (
-              <ShoppingListItemsRelayContainer
-                errorMessage={error ? error.message : null}
-                user={error ? null : props.user}
-                shoppingListId={this.props.shoppingListId}
-              />
-            );
+        render={({ error, props, retry }) => {
+          if (error) {
+            return <ErrorMessageWithRetry errorMessage={error.message} onRetryPressed={retry} />;
+          }
+
+          if (props) {
+            return <ShoppingListItemsRelayContainer user={props.user} shoppingListId={this.props.shoppingListId} />;
           }
 
           return <LoadingInProgress />;
