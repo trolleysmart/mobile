@@ -40,6 +40,7 @@ const Images = {
   frozenfoods: require('../../../assets/img/frozen-food.png'),
   fruitvegetables: require('../../../assets/img/fruit-vegetables.png'),
   fruit: require('../../../assets/img/fruit.png'),
+  groceries: require('../../../assets/img/groceries.png'),
   ham: require('../../../assets/img/ham.png'),
   handwash: require('../../../assets/img/handwash.png'),
   healthwellness: require('../../../assets/img/health-wellness.png'),

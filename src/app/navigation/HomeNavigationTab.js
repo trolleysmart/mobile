@@ -58,7 +58,7 @@ const HomeNavigationTab = TabNavigator(
         marginBottom: 0,
       },
       style: {
-        backgroundColor: 'white', //Color.primaryColorLight, //'#3DC62A',
+        backgroundColor: Color.primaryBackgroundColor, //'#3DC62A',
       },
       inactiveTintColor: Color.primaryColorDark,
       activeTintColor: Color.primaryColorNormal, //'#FAFBFA',

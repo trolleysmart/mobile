@@ -41,6 +41,6 @@ export default StyleSheet.create({
     paddingTop: 10,
   },
   listNameInput: {
-    color: 'white',
+    color: Color.primaryFontColor,
   },
 });

@@ -11,36 +11,44 @@ import { Products } from '../products';
 import ShoppingListDetailContainer from '../shoppingList/shoppingListDetail/ShoppingListDetailContainer';
 import ProductDetail from '../products/productDetail/ProductDetail';
 import ShoppingLists from '../shoppingList/shoppingLists/ShoppingLists';
+import { Color } from '../../framework/style/DefaultStyles';
 
-export default StackNavigator({
-  Home: {
-    screen: HomeNavigationTab,
+export default StackNavigator(
+  {
+    Home: {
+      screen: HomeNavigationTab,
+    },
+    StapleItems: {
+      screen: StapleItems,
+    },
+    ProductsFilter: {
+      screen: ProductsFilterContainer,
+    },
+    CategoriesFilter: {
+      screen: CategoriesFilter,
+    },
+    StoresFilter: {
+      screen: StoresFilter,
+    },
+    Flyer: {
+      screen: FlyerContainer,
+    },
+    Products: {
+      screen: Products,
+    },
+    ShoppingLists: {
+      screen: ShoppingLists,
+    },
+    ShoppingListDetail: {
+      screen: ShoppingListDetailContainer,
+    },
+    ProductDetail: {
+      screen: ProductDetail,
+    },
   },
-  StapleItems: {
-    screen: StapleItems,
+  {
+    cardStyle: {
+      backgroundColor: Color.primaryBackgroundColor,
+    },
   },
-  ProductsFilter: {
-    screen: ProductsFilterContainer,
-  },
-  CategoriesFilter: {
-    screen: CategoriesFilter,
-  },
-  StoresFilter: {
-    screen: StoresFilter,
-  },
-  Flyer: {
-    screen: FlyerContainer,
-  },
-  Products: {
-    screen: Products,
-  },
-  ShoppingLists:{
-    screen: ShoppingLists,
-  },
-  ShoppingListDetail: {
-    screen: ShoppingListDetailContainer,
-  },
-  ProductDetail: {
-    screen: ProductDetail,
-  },
-});
+);

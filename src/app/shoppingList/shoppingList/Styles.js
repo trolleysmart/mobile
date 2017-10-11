@@ -84,7 +84,7 @@ export default StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: 10,
-    backgroundColor: Color.primaryColorLight,
+    // backgroundColor: Color.primaryColorLight,
   },
   summaryBlockContainer: {
     flexDirection: 'row',
@@ -101,5 +101,18 @@ export default StyleSheet.create({
   summaryLabel: {
     color: Color.primaryFontColor,
     fontSize: 14,
+  },
+  addItemsBackgroundContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  addItemsText: {
+    fontSize: 20,
+    fontWeight: '600',
+    color: 'grey',
+  },
+  addItemsBackgroundImage: {
+    width: 150,
+    height: 150,
   },
 });
