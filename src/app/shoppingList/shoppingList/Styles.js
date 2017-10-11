@@ -55,7 +55,7 @@ export default StyleSheet.create({
   },
   sectionHeader: {
     width: Sizes.screenWidth,
-    backgroundColor: '#E9E9EF',
+    backgroundColor: 'transparent',
     padding: 5,
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -105,6 +105,7 @@ export default StyleSheet.create({
   addItemsBackgroundContainer: {
     justifyContent: 'center',
     alignItems: 'center',
+    flex: 1,
   },
   addItemsText: {
     fontSize: 20,

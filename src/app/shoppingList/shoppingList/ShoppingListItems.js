@@ -89,7 +89,7 @@ class ShoppingListItems extends Component {
     return (
       <View style={Styles.container}>
         {hasItem ? (
-          <View>
+          <View style={Styles.container}>
             <SectionList
               renderItem={this.renderItem}
               renderSectionHeader={this.renderSectionHeader}
