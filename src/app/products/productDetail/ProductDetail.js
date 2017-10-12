@@ -16,6 +16,7 @@ class ProductDetail extends Component {
     headerStyle: {
       backgroundColor: Color.secondaryColorAction,
     },
+    headerTintColor: Color.headerIconDefaultColor,
   });
 
   render = () => {

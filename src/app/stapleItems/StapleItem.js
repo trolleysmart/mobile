@@ -44,7 +44,7 @@ class StapleItem extends Component {
         <View style={Styles.touchableContainer}>
           <Avatar
             rounded
-            overlayContainerStyle={{ backgroundColor: this.props.isSelected ? Color.primaryColorLight : '#EFF0F1' }}
+            overlayContainerStyle={this.props.isSelected ? Styles.itemIconSelectedContainer : Styles.itemIconContainer}
             source={ImageUltility.getImageSource(this.props.stapleItem.name.toLowerCase().replace(/\s+/g, ''))}
             activeOpacity={0.7}
           />

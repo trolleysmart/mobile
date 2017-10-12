@@ -8,12 +8,17 @@ import { graphql, QueryRenderer } from 'react-relay';
 import ProductsRelayContainer from './ProductsRelayContainer';
 import { LoadingInProgress } from '../../../sharedComponents/loadingInProgress';
 import { ErrorMessageWithRetry } from '../../../sharedComponents/errorMessageWithRetry';
+import { Color } from '../../../framework/style/DefaultStyles';
 
 class Products extends Component {
   static navigationOptions = ({ navigation }) => ({
     title: navigation.state.params
       ? navigation.state.params.defaultSearchKeyword ? 'Products for ' + navigation.state.params.defaultSearchKeyword : ''
       : '',
+    headerTintColor: Color.headerIconDefaultColor,
+    headerStyle: {
+      backgroundColor: Color.secondaryColorAction,
+    },
   });
 
   componentDidMount = () => {

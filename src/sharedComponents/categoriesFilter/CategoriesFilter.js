@@ -15,6 +15,7 @@ class CategoriesFilter extends Component {
     // headerTitleStyle: {
     //   marginLeft: Platform.OS === 'ios' ? null : 80,
     // },
+    headerTintColor: Color.headerIconDefaultColor,
     headerStyle: {
       backgroundColor: Color.secondaryColorAction,
     },

@@ -15,6 +15,7 @@ class StapleItems extends Component {
   static navigationOptions = {
     headerTitle: <HeaderContainer environment={environment} />,
     headerStyle: { backgroundColor: Color.secondaryColorAction },
+    headerTintColor: Color.headerIconDefaultColor,
   };
 
   render() {
