@@ -40,14 +40,17 @@ class ShoppingListRow extends React.PureComponent {
         <ListItem
           key={this.props.shoppingList.id}
           title={this.props.shoppingList.name}
+          titleStyle={Styles.shoppingListRowName}
           onPress={() => this.props.onShoppingListPressed(this.props.shoppingList)}
           badge={{
             value: this.props.shoppingList.totalItemsCount,
             textStyle: { color: 'white' },
             containerStyle: { backgroundColor: Color.secondaryColorAction },
           }}
+          wrapperStyle={Styles.shoppingListRowContainer}
           leftIcon={{ name: 'list', type: 'font-awesome' }}
           rightIcon={this.renderMenu()}
+          containerStyle={Styles.shoppingListRow}
         />
       </View>
     );

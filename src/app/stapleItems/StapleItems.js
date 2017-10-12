@@ -9,10 +9,12 @@ import StapleItemsRelayContainer from './StapleItemsRelayContainer';
 import HeaderContainer from './HeaderContainer';
 import { LoadingInProgress } from '../../sharedComponents/loadingInProgress';
 import { ErrorMessageWithRetry } from '../../sharedComponents/errorMessageWithRetry';
+import { Color } from '../../framework/style/DefaultStyles';
 
 class StapleItems extends Component {
   static navigationOptions = {
     headerTitle: <HeaderContainer environment={environment} />,
+    headerStyle: { backgroundColor: Color.secondaryColorAction },
   };
 
   render() {

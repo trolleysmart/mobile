@@ -1,6 +1,6 @@
 // @flow
 
-import React from 'react';
+import React, { Component } from 'react';
 import { View } from 'react-native';
 import { Text, Avatar } from 'react-native-elements';
 import PropTypes from 'prop-types';
@@ -10,7 +10,23 @@ import { Color } from '../../framework/style/DefaultStyles';
 import { ImageUltility } from '../../components/image';
 import { StapleItemProp } from './PropTypes';
 
-class StapleItem extends React.PureComponent {
+class StapleItem extends Component {
+  constructor(props, context) {
+    super(props, context);
+
+    this.state = { isSelected: props.isSelected };
+  }
+
+  shouldComponentUpdate = nextProps => {
+    return this.state.isSelected !== nextProps.isSelected;
+  };
+
+  componentWillReceiveProps = nextProps => {
+    if (this.state.isSelected !== nextProps.isSelected) {
+      this.setState({ isSelected: nextProps.isSelected });
+    }
+  };
+
   onItemPressed = () => {
     this.props.onStapleItemSelectionChanged(this.props.stapleItem, this.props.isSelected);
   };

@@ -6,7 +6,7 @@ import { Color } from '../../../framework/style/DefaultStyles';
 export default StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: Color.primaryBackgroundColor,
   },
   menuOption: {
     flexDirection: 'row',
@@ -14,6 +14,22 @@ export default StyleSheet.create({
   },
   optionText: {
     paddingLeft: 5,
+  },
+  shoppingListRowSeparator: {
+    height: 10,
+    backgroundColor: 'transparent',
+  },
+  shoppingListRow: {
+    backgroundColor: 'white',
+    padding: 5,
+  },
+  shoppingListRowContainer: {
+    height: 40,
+  },
+  shoppingListRowName: {
+    fontSize: 16,
+    fontWeight: '500',
+    color: Color.primaryFontColor,
   },
 });
 
