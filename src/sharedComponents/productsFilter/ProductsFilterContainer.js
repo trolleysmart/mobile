@@ -9,11 +9,15 @@ import { bindActionCreators } from 'redux';
 import * as productsFilterActions from './Actions';
 import ProductsFilter from './ProductsFilter';
 import HeaderContainer from './HeaderContainer';
+import { Color } from '../../framework/style/DefaultStyles';
 
 class ProductsFilterContainer extends Component {
   static navigationOptions = {
     title: 'Filter',
     headerRight: <HeaderContainer onClearFilterPress={this.clearFilters} />,
+    headerStyle: {
+      backgroundColor: Color.secondaryColorAction,
+    },
     // headerTitleStyle: {
     //   marginLeft: Platform.OS === 'ios' ? null : 100,
     // },

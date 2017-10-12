@@ -11,7 +11,7 @@ const ProductsFilterMenu = ({ showProductsFilter, isFilterSet }) => (
     <TouchableIcon
       onPress={showProductsFilter}
       iconContainerStyle={Styles.iconContainerStyle}
-      iconColor={isFilterSet ? 'white' : null}
+      iconColor={isFilterSet ? 'orange' : null}
       iconName="sliders"
       iconType="font-awesome"
     />

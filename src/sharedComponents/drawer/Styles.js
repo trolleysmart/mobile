@@ -1,11 +1,11 @@
 // @flow
 
 import { StyleSheet } from 'react-native';
+import { Color } from '../../framework/style/DefaultStyles';
 
 export default StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: 'green',
   },
   menu: {
     flex: 10,
@@ -13,7 +13,7 @@ export default StyleSheet.create({
   profile: {
     flex: 2,
     flexDirection: 'row',
-    backgroundColor: '#3DC62A',
+    backgroundColor: Color.primaryColorNormal,
     justifyContent: 'center',
     alignItems: 'center',
     paddingLeft: 20,

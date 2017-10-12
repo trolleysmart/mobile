@@ -8,10 +8,14 @@ import { graphql, QueryRenderer } from 'react-relay';
 import ProductDetailRelayContainer from './ProductDetailRelayContainer';
 import { LoadingInProgress } from '../../../sharedComponents/loadingInProgress';
 import { ErrorMessageWithRetry } from '../../../sharedComponents/errorMessageWithRetry';
+import { Color } from '../../../framework/style/DefaultStyles';
 
 class ProductDetail extends Component {
   static navigationOptions = ({ navigation }) => ({
     title: navigation.state.params ? (navigation.state.params.title ? navigation.state.params.title : '') : '',
+    headerStyle: {
+      backgroundColor: Color.secondaryColorAction,
+    },
   });
 
   render = () => {

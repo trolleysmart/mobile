@@ -7,6 +7,7 @@ import { ProductProp } from './PropTypes';
 import Styles from './Styles';
 import ProductListRowItem from './ProductListRowItem';
 import { TouchableIcon } from '../../../components/touchableIcon';
+import { Color } from '../../../framework/style/DefaultStyles';
 
 class ProductListRow extends React.PureComponent {
   render() {
@@ -22,6 +23,7 @@ class ProductListRow extends React.PureComponent {
             iconName="chevron-right"
             iconType="material-community"
             iconContainerStyle={Styles.viewProductIconContainerStyle}
+            iconColor={Color.primaryFontColor}
             onPress={() => this.props.onViewProductDetailPressed(this.props.product.id, this.props.product.name)}
           />
         </View>

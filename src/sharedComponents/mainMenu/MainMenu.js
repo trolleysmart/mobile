@@ -8,7 +8,7 @@ import Styles from './Styles';
 
 const MainMenu = ({ openDrawer }) => (
   <View style={Styles.container}>
-    <TouchableIcon onPress={openDrawer} iconName="ios-menu" iconType="ionicon" />
+    <TouchableIcon onPress={openDrawer} iconName="ios-menu" iconType="ionicon" iconColor="white" />
   </View>
 );
 
