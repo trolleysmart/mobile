@@ -1,6 +1,6 @@
 // @flow
 
-import React from 'react';
+import React, { Component } from 'react';
 import { SectionList, Text, View, Image } from 'react-native';
 import Immutable from 'immutable';
 import PropTypes from 'prop-types';
@@ -9,7 +9,7 @@ import Styles from './Styles';
 import { StapleItemsProp } from './PropTypes';
 import StapleItemsSection from './StapleItemsSection';
 
-class StapleItemsList extends React.PureComponent {
+class StapleItemsList extends Component {
   onStapleItemSelectionChanged = (id, name, isCustomItem, isSelected) => {
     this.props.onStapleItemSelectionChanged(id, name, isCustomItem, isSelected);
   };

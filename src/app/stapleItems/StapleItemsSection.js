@@ -1,12 +1,29 @@
 // @flow
 
-import React from 'react';
+import React, { Component } from 'react';
+import Immutable from 'immutable';
 import { FlatList } from 'react-native';
 import PropTypes from 'prop-types';
 import StapleItem from './StapleItem';
 import { StapleItemsProp } from './PropTypes';
 
-class StapleItemsSection extends React.PureComponent {
+class StapleItemsSection extends Component {
+  constructor(props, context) {
+    super(props, context);
+
+    this.state = { selectedStapleItems: Immutable.fromJS(props.selectedStapleItems) };
+  }
+
+  shouldComponentUpdate = nextProps => {
+    return !this.state.selectedStapleItems.equals(Immutable.fromJS(nextProps.isSelected));
+  };
+
+  componentWillReceiveProps = nextProps => {
+    if (!this.state.selectedStapleItems.equals(Immutable.fromJS(nextProps.isSelected))) {
+      this.setState({ selectedStapleItems: Immutable.fromJS(nextProps.selectedStapleItems) });
+    }
+  };
+
   renderItem = item => {
     return (
       <StapleItem
