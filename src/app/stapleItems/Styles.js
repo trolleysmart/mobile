@@ -15,6 +15,8 @@ export default StyleSheet.create({
   },
   searchHeader: {
     flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
     height: Sizes.searchBarHeaderHeight,
     width: Platform.OS === 'ios' ? Sizes.searchBarHeaderWidth - 90 : null,
     marginRight: Platform.OS === 'ios' ? null : 10,
