@@ -14,7 +14,7 @@ import { Color } from '../../framework/style/DefaultStyles';
 class StapleItems extends Component {
   static navigationOptions = {
     headerTitle: <HeaderContainer environment={environment} />,
-    headerStyle: {backgroundColor: Color.secondaryColorAction},
+    headerStyle: { backgroundColor: Color.secondaryColorAction },
   };
 
   render() {
