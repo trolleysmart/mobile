@@ -15,6 +15,7 @@ class ProductsFilterContainer extends Component {
   static navigationOptions = {
     title: 'Filter',
     headerRight: <HeaderContainer onClearFilterPress={this.clearFilters} />,
+    headerTintColor: Color.headerIconDefaultColor,
     headerStyle: {
       backgroundColor: Color.secondaryColorAction,
     },

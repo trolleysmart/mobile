@@ -1,7 +1,7 @@
 // @flow
 
 import { StyleSheet, Platform } from 'react-native';
-import { Sizes } from '../../framework/style/DefaultStyles';
+import { Sizes, Color } from '../../framework/style/DefaultStyles';
 
 export default StyleSheet.create({
   container: {
@@ -32,6 +32,14 @@ export default StyleSheet.create({
     color: '#3a69e0',
     textAlign: 'center',
   },
+  itemIconContainer: {
+    backgroundColor: '#EFF0F1',
+  },
+  itemIconSelectedContainer: {
+    backgroundColor: Color.primaryColorLight,
+    borderColor: Color.secondaryColorAction,
+    borderWidth: 2,
+  },
   sectionHeaderImage: {
     width: 25,
     height: 25,
@@ -58,12 +66,6 @@ export default StyleSheet.create({
   },
   sectionTitle: {
     fontWeight: '700',
-  },
-  sectionListContainer: {
-    // flex: 1,
-    // flexDirection: 'row',
-    // flexWrap: 'wrap',
-    // justifyContent: 'center',
   },
   addItemsHeaderContainer: {
     alignItems: 'center',

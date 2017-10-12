@@ -1,6 +1,7 @@
 // @flow
 
 import { StyleSheet } from 'react-native';
+import { Color } from '../../framework/style/DefaultStyles';
 
 export default StyleSheet.create({
   container: {
@@ -13,6 +14,6 @@ export default StyleSheet.create({
   },
   searchInput: {
     backgroundColor: 'transparent',
-    color: 'black',
+    color: Color.headerIconDefaultColor,
   },
 });
