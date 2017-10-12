@@ -8,10 +8,14 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Settings from './Settings';
 import { MainMenuContainer } from '../../sharedComponents/mainMenu';
+import { Color } from '../../framework/style/DefaultStyles';
 
 class SettingsContainer extends Component {
   static navigationOptions = {
     headerLeft: <MainMenuContainer />,
+    headerStyle: {
+      backgroundColor: Color.secondaryColorAction,
+    },
   };
 
   handleClickHyperLink = url => {

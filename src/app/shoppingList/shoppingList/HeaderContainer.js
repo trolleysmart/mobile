@@ -25,18 +25,18 @@ class ShoppingListHeaderContainer extends Component {
           onPress={this.onViewShoppingListsPressed}
         />
         {/*<Menu>*/}
-          {/*<MenuTrigger>*/}
-            {/*<Icon name="dots-vertical" type="material-community" />*/}
-            {/*/!* <TouchableIcon iconContainerStyle={Styles.headerIconContainerStyle} iconName="dots-vertical" iconType="material-community"/> *!/*/}
-          {/*</MenuTrigger>*/}
-          {/*<MenuOptions>*/}
-            {/*<MenuOption>*/}
-              {/*<View style={Styles.menuOptionContainer}>*/}
-                {/*<Icon name="view-dashboard" type="material-community" />*/}
-                {/*<Text>List layout</Text>*/}
-              {/*</View>*/}
-            {/*</MenuOption>*/}
-          {/*</MenuOptions>*/}
+        {/*<MenuTrigger>*/}
+        {/*<Icon name="dots-vertical" type="material-community" />*/}
+        {/*/!* <TouchableIcon iconContainerStyle={Styles.headerIconContainerStyle} iconName="dots-vertical" iconType="material-community"/> *!/*/}
+        {/*</MenuTrigger>*/}
+        {/*<MenuOptions>*/}
+        {/*<MenuOption>*/}
+        {/*<View style={Styles.menuOptionContainer}>*/}
+        {/*<Icon name="view-dashboard" type="material-community" />*/}
+        {/*<Text>List layout</Text>*/}
+        {/*</View>*/}
+        {/*</MenuOption>*/}
+        {/*</MenuOptions>*/}
         {/*</Menu>*/}
       </View>
     );

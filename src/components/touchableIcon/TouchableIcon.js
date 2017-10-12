@@ -22,7 +22,7 @@ const TouchableIcon = ({ onPress, iconName, iconType, iconColor, disabled, iconS
     >
       <Icon
         size={iconSize || 28}
-        color={disabled ? Color.primaryFontColorDisabled : iconColor || Color.primaryFontColor}
+        color={disabled ? Color.primaryFontColorDisabled : iconColor || Color.headerIconDefaultColor}
         name={iconName}
         type={iconType}
         containerStyle={iconContainerStyle || Styles.iconContainerStyle}

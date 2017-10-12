@@ -4,16 +4,19 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { environment } from '../../framework/relay';
 import { graphql, QueryRenderer } from 'react-relay';
-import { Platform } from 'react-native';
 import CategoriesFilterRelayContainer from './CategoriesFilterRelayContainer';
 import { LoadingInProgress } from '../loadingInProgress';
 import { ErrorMessageWithRetry } from '../errorMessageWithRetry';
+import { Color } from '../../framework/style/DefaultStyles';
 
 class CategoriesFilter extends Component {
   static navigationOptions = {
     title: 'Categories',
-    headerTitleStyle: {
-      marginLeft: Platform.OS === 'ios' ? null : 80,
+    // headerTitleStyle: {
+    //   marginLeft: Platform.OS === 'ios' ? null : 80,
+    // },
+    headerStyle: {
+      backgroundColor: Color.secondaryColorAction,
     },
   };
 

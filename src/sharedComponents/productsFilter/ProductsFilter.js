@@ -26,7 +26,7 @@ const ProductsFilter = ({ sortOption, onSortOptionChanged, gotoCategoryFilter, c
           badge={{
             value: categories.length,
             textStyle: { color: 'white' },
-            containerStyle: { backgroundColor: Color.primaryColorLight },
+            containerStyle: { backgroundColor: Color.secondaryColorAction },
           }}
         />
         <ListItem
@@ -38,7 +38,7 @@ const ProductsFilter = ({ sortOption, onSortOptionChanged, gotoCategoryFilter, c
           badge={{
             value: stores.length,
             textStyle: { color: 'white' },
-            containerStyle: { backgroundColor: Color.primaryColorLight },
+            containerStyle: { backgroundColor: Color.secondaryColorAction },
           }}
         />
       </List>

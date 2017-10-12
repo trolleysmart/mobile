@@ -4,16 +4,20 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { environment } from '../../framework/relay';
 import { graphql, QueryRenderer } from 'react-relay';
-import { Platform } from 'react-native';
 import StoresFilterRelayContainer from './StoresFilterRelayContainer';
 import { LoadingInProgress } from '../loadingInProgress';
 import { ErrorMessageWithRetry } from '../errorMessageWithRetry';
+import { Color } from '../../framework/style/DefaultStyles';
 
 class StoresFilter extends Component {
   static navigationOptions = {
     title: 'Stores',
-    headerTitleStyle: {
-      marginLeft: Platform.OS === 'ios' ? null : 100,
+    // headerTitleStyle: {
+    //   marginLeft: Platform.OS === 'ios' ? null : 100,
+    // },
+    headerTintColor: Color.headerIconDefaultColor,
+    headerStyle: {
+      backgroundColor: Color.secondaryColorAction,
     },
   };
 

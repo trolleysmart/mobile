@@ -75,16 +75,17 @@ export default StyleSheet.create({
   headerTitleText: {
     fontSize: 17,
     fontWeight: '600',
+    color: Color.headerIconDefaultColor,
   },
   headerTitleNumberText: {
     fontSize: 12,
+    color: Color.headerIconDefaultColor,
   },
   summaryContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: 10,
-    // backgroundColor: Color.primaryColorLight,
   },
   summaryBlockContainer: {
     flexDirection: 'row',

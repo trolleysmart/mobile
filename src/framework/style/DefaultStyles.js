@@ -27,6 +27,7 @@ export const Color = {
   secondaryColorAction: SECONDARY_COLOR_ACTION,
   touchableIconPressColor: ICON_PRESS_COLOR,
   actionButtonColor: ACTION_BUTTON_COLOR,
+  headerIconDefaultColor: 'white',
 };
 
 export const Sizes = {
