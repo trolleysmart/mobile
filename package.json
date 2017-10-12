@@ -1,7 +1,7 @@
 {
   "name": "TrolleySmart",
   "description": "Trolley Smart",
-  "version": "1.0.53-SNAPSHOT",
+  "version": "1.0.54-SNAPSHOT",
   "author": {
     "name": "Micro Business Ltd",
     "email": "micro.business.ltd@gmail.com",
@@ -40,13 +40,13 @@
     "react-native-action-button": "^2.8.0",
     "react-native-code-push": "^5.1.3-beta",
     "react-native-easy-grid": "0.1.15",
-    "react-native-easy-toast": "^1.0.6",
+    "react-native-easy-toast": "^1.0.8",
     "react-native-elements": "0.17.0",
     "react-native-exception-handler": "^2.3.0",
     "react-native-fast-image": "^1.0.0",
-    "react-native-fbsdk": "^0.6.1",
+    "react-native-fbsdk": "^0.6.3",
     "react-native-image-pan-zoom": "^2.0.7",
-    "react-native-maps": "^0.16.4",
+    "react-native-maps": "^0.17.0",
     "react-native-popup-dialog": "^0.9.36",
     "react-native-popup-menu": "^0.8.3",
     "react-native-restart": "0.0.3",
@@ -84,7 +84,7 @@
     "react-test-renderer": "16.0.0",
     "redux-devtools": "3.4.0",
     "relay-compiler": "1.4.1",
-    "xcode": "^0.9.3"
+    "xcode": "^1.0.0"
   },
   "jest": {
     "preset": "react-native"
