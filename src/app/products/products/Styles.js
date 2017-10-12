@@ -77,4 +77,18 @@ export default StyleSheet.create({
     height: Sizes.searchBarHeaderHeight,
     width: 40,
   },
+  noMatchingProductContainer:{
+    padding: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  noMatchingProductText: {
+    fontSize: 18,
+    fontWeight: '700',
+    color: Color.primaryFontColor,
+  },
+  itemAddedText:{
+    color: Color.secondaryColorAction,
+    fontWeight: '600',
+  },
 });
