@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react';
-import { View, TouchableHighlight, Animated, Easing, Text } from 'react-native';
+import { View, Animated, Easing, Text } from 'react-native';
 import PropTypes from 'prop-types';
 import { ProductProp } from './PropTypes';
 import Styles from './Styles';
@@ -10,24 +10,21 @@ import { TouchableIcon, TouchableItem } from '../../../components/touchableIcon'
 import { Color } from '../../../framework/style/DefaultStyles';
 
 class ProductListRow extends React.PureComponent {
-  constructor (props, context) {
+  constructor(props, context) {
     super(props, context);
     this.animatedValue = new Animated.Value(0);
   }
 
-  animate = (easing) => {
+  animate = easing => {
     this.animatedValue.setValue(0);
-    Animated.timing(
-      this.animatedValue,
-      {
-        toValue: 1,
-        duration: 1000,
-        easing,
-      }
-    ).start()
+    Animated.timing(this.animatedValue, {
+      toValue: 1,
+      duration: 1000,
+      easing,
+    }).start();
   };
 
-  onProductItemSelected = (product) => {
+  onProductItemSelected = product => {
     this.props.onItemSelectionChanged(product);
     this.animate(Easing.ease);
   };
@@ -53,13 +50,10 @@ class ProductListRow extends React.PureComponent {
             iconColor={Color.primaryFontColor}
             onPress={() => this.props.onViewProductDetailPressed(this.props.product.id, this.props.product.name)}
           />
-            <Animated.View style={{marginLeft, opacity, position: 'absolute', paddingTop: 55}}>
-              <Text style={Styles.itemAddedText}>Added to list</Text>
-            </Animated.View>
-
-
+          <Animated.View style={{ marginLeft, opacity, position: 'absolute', paddingTop: 55 }}>
+            <Text style={Styles.itemAddedText}>Added to list</Text>
+          </Animated.View>
         </View>
-
       </TouchableItem>
     );
   }
