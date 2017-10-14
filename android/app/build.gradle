@@ -93,7 +93,6 @@ def enableProguardInReleaseBuilds = false
 ext.versionMajor = 1
 ext.versionMinor = 0
 ext.versionPatch = 56
-ext.versionPatch = 56
 ext.versionClassifier = "alpha"
 ext.isSnapshot = false
 ext.minimumSdkVersion = 16
