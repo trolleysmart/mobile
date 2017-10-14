@@ -1,3 +1,3 @@
 // @flow
 
-export UserFeedbackHeader from './UserFeedbackHeader';
+export UserFeedbackContainer from './UserFeedbackContainer';
