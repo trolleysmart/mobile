@@ -1,11 +1,27 @@
 // @flow
 
 import { StyleSheet } from 'react-native';
-import { Sizes } from '../../../framework/style/DefaultStyles';
+import { Sizes, Color } from '../../../framework/style/DefaultStyles';
 
 export default StyleSheet.create({
   container: {
     flex: 1,
+  },
+  headerContainer: {
+    flexDirection: 'row',
+    // flex: 1,
+    // width: 100,
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
+  menuOptionContainer: {
+    flexDirection: 'row',
+    // justifyContent: 'center',
+    alignItems: 'center',
+  },
+  headerIconContainerStyle: {
+    height: 32,
+    width: 32,
   },
   checkbox: {
     justifyContent: 'center',
@@ -25,7 +41,7 @@ export default StyleSheet.create({
   },
   specialItemRow: {
     backgroundColor: 'white',
-    padding: 10,
+    // padding: 10,
   },
   stapleItemRow: {
     alignItems: 'center',
@@ -39,7 +55,7 @@ export default StyleSheet.create({
   },
   sectionHeader: {
     width: Sizes.screenWidth,
-    backgroundColor: '#E9E9EF',
+    backgroundColor: 'transparent',
     padding: 5,
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -51,5 +67,54 @@ export default StyleSheet.create({
   sectionHeaderImage: {
     width: 25,
     height: 25,
+  },
+  headerTitleContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  headerTitleText: {
+    fontSize: 17,
+    fontWeight: '600',
+    color: Color.headerIconDefaultColor,
+  },
+  headerTitleNumberText: {
+    fontSize: 12,
+    color: Color.headerIconDefaultColor,
+  },
+  summaryContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 10,
+  },
+  summaryBlockContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  totalCostText: {
+    color: Color.primaryColorNormal,
+    fontWeight: '600',
+  },
+  totalSavingText: {
+    color: 'red',
+    fontWeight: '600',
+  },
+  summaryLabel: {
+    color: Color.primaryFontColor,
+    fontSize: 14,
+  },
+  addItemsBackgroundContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex: 1,
+  },
+  addItemsText: {
+    fontSize: 20,
+    fontWeight: '600',
+    color: 'grey',
+  },
+  addItemsBackgroundImage: {
+    width: 150,
+    height: 150,
   },
 });

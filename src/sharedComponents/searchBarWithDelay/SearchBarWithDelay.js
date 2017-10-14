@@ -6,6 +6,7 @@ import { View } from 'react-native';
 import { SearchBar } from 'react-native-elements';
 import debounce from 'lodash.debounce';
 import Styles from './Styles';
+import { Color } from '../../framework/style/DefaultStyles';
 
 class SearchBarWithDelay extends Component {
   constructor(props, context) {
@@ -44,14 +45,15 @@ class SearchBarWithDelay extends Component {
     return (
       <View style={Styles.container}>
         <SearchBar
-          clearIcon
+          clearIcon={{ color: Color.headerIconDefaultColor }}
           lightTheme
           noIcon={true}
+          autoFocus={this.props.autoFocus}
           containerStyle={Styles.search}
           inputStyle={Styles.searchInput}
           placeholder="Search..."
           textInputRef="textInputRef"
-          placeholderTextColor="white"
+          placeholderTextColor={Color.headerIconDefaultColor}
           value={this.state.searchKeyword}
           onChangeText={this.searchKeywordChanged}
         />
@@ -63,6 +65,7 @@ class SearchBarWithDelay extends Component {
 SearchBarWithDelay.propTypes = {
   searchKeyword: PropTypes.string,
   onSearchKeywordChanged: PropTypes.func.isRequired,
+  autoFocus: PropTypes.bool.isRequired,
 };
 
 SearchBarWithDelay.defaultProps = {

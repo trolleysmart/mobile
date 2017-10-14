@@ -1,5 +1,5 @@
 // @flow
-import * as userAccessActions from 'micro-business-parse-server-common-react-native/src/userAccess/redux/Actions';
+import * as userAccessActions from 'micro-business-parse-server-common-react-native/src/userAccess/Actions';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Linking } from 'react-native';
@@ -8,10 +8,14 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Settings from './Settings';
 import { MainMenuContainer } from '../../sharedComponents/mainMenu';
+import { Color } from '../../framework/style/DefaultStyles';
 
 class SettingsContainer extends Component {
   static navigationOptions = {
     headerLeft: <MainMenuContainer />,
+    headerStyle: {
+      backgroundColor: Color.secondaryColorAction,
+    },
   };
 
   handleClickHyperLink = url => {

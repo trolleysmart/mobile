@@ -17,6 +17,7 @@ class ShoppingListDetail extends Component {
             inputStyle={Styles.listNameInput}
             autoFocus={true}
             placeholder="Please enter list name..."
+            placeholderTextColor="white"
             onChangeText={name => this.props.shoppingListNameChanged(name)}
             value={this.props.shoppingListName}
           />

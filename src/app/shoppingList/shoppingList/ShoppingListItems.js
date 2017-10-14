@@ -10,6 +10,7 @@ import ShoppingListItem from './ShoppingListItem';
 import { ListItemSeparator } from '../../../components/list';
 import { ImageUltility } from '../../../components/image';
 import Styles from './Styles';
+import { Color } from '../../../framework/style/DefaultStyles';
 
 class ShoppingListItems extends Component {
   renderItem = ({ item }) => {
@@ -18,6 +19,7 @@ class ShoppingListItems extends Component {
         shoppingListItem={item}
         onShoppingListItemSelectionChanged={this.props.onShoppingListItemSelectionChanged}
         onViewProductsPressed={this.props.onViewProductsPressed}
+        onViewProductDetailPressed={this.props.onViewProductDetailPressed}
       />
     );
   };
@@ -35,7 +37,7 @@ class ShoppingListItems extends Component {
     let sectionData = Immutable.fromJS(this.props.shoppingListItems)
       .groupBy(
         item =>
-          item.has('tags') && item.get('tags')
+          item.has('tags') && item.get('tags') && !item.get('tags').isEmpty()
             ? item
                 .get('tags')
                 .first()
@@ -62,23 +64,61 @@ class ShoppingListItems extends Component {
               : key,
         },
       ])
-      .sortBy(_ => _.categoryKey)
+      .sortBy(_ => _.categoryTitle)
       .valueSeq()
       .toJS();
 
+    const totalCost = this.props.shoppingListItems.reduce((sum, value) => {
+      if (value.priceToDisplay) {
+        return sum + value.priceToDisplay;
+      } else {
+        return sum;
+      }
+    }, 0);
+
+    const totalSaving = this.props.shoppingListItems.reduce((sum, value) => {
+      if (value.saving) {
+        return sum + value.saving;
+      } else {
+        return sum;
+      }
+    }, 0);
+
+    const hasItem = sectionData.length;
+
     return (
       <View style={Styles.container}>
-        <SectionList
-          renderItem={this.renderItem}
-          renderSectionHeader={this.renderSectionHeader}
-          sections={sectionData}
-          keyExtractor={item => item.id}
-          onEndReached={this.props.onEndReached}
-          onRefresh={this.props.onRefresh}
-          refreshing={this.props.isFetchingTop}
-          ItemSeparatorComponent={() => <ListItemSeparator />}
-        />
-        <ActionButton buttonColor="rgba(242,135,79,1)" onPress={() => this.props.onShoppingListAddItemClicked()} />
+        {hasItem ? (
+          <View style={Styles.container}>
+            <SectionList
+              renderItem={this.renderItem}
+              renderSectionHeader={this.renderSectionHeader}
+              sections={sectionData}
+              keyExtractor={item => item.id}
+              onEndReached={this.props.onEndReached}
+              onRefresh={this.props.onRefresh}
+              refreshing={this.props.isFetchingTop}
+              ItemSeparatorComponent={() => <ListItemSeparator />}
+            />
+            <View style={Styles.summaryContainer}>
+              <View style={Styles.summaryBlockContainer}>
+                <Text style={Styles.summaryLabel}>Total Cost: </Text>
+                <Text style={Styles.totalCostText}>${totalCost.toFixed(2)}</Text>
+              </View>
+              <View style={Styles.summaryBlockContainer}>
+                <Text style={Styles.summaryLabel}>Est Total Saved: </Text>
+                <Text style={Styles.totalSavingText}>${totalSaving.toFixed(2)}</Text>
+              </View>
+            </View>
+          </View>
+        ) : (
+          <View style={Styles.addItemsBackgroundContainer}>
+            <Image source={ImageUltility.getImageSource('groceries')} style={Styles.addItemsBackgroundImage} />
+            <Text style={Styles.addItemsText}>Start adding products</Text>
+            <Text style={Styles.addItemsText}>just tap the blue button</Text>
+          </View>
+        )}
+        <ActionButton buttonColor={Color.actionButtonColor} offsetX={50} onPress={() => this.props.onShoppingListAddItemClicked()} />
       </View>
     );
   };
@@ -88,6 +128,7 @@ ShoppingListItems.propTypes = {
   shoppingListItems: ShoppingListItemsProp,
   onShoppingListItemSelectionChanged: PropTypes.func.isRequired,
   onViewProductsPressed: PropTypes.func.isRequired,
+  onViewProductDetailPressed: PropTypes.func.isRequired,
   onShoppingListAddItemClicked: PropTypes.func.isRequired,
   isFetchingTop: PropTypes.bool.isRequired,
   onRefresh: PropTypes.func.isRequired,

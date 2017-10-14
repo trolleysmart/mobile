@@ -2,20 +2,21 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Text } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { environment } from '../../../framework/relay';
 import { graphql, QueryRenderer } from 'react-relay';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import { MainMenuContainer } from '../../../sharedComponents/mainMenu';
 import ShoppingListItemsRelayContainer from './ShoppingListItemsRelayContainer';
+import HeaderContainer from './HeaderContainer';
+import HeaderTitleContainer from './HeaderTitleContainer';
+import { LoadingInProgress } from '../../../sharedComponents/loadingInProgress';
+import { ErrorMessageWithRetry } from '../../../sharedComponents/errorMessageWithRetry';
 
 class ShoppingList extends Component {
-  static navigationOptions = ({ navigation }) => ({
-    tabBarLabel: 'Shopping List',
-    tabBarIcon: ({ tintColor, focused }) => (
-      <Ionicons name={focused ? 'ios-list-box' : 'ios-list-box-outline'} size={26} style={{ color: tintColor }} />
-    ),
-    title: navigation.state.params ? navigation.state.params.title : '',
+  static navigationOptions = () => ({
+    headerTitle: <HeaderTitleContainer />,
+    headerLeft: <MainMenuContainer />,
+    headerRight: <HeaderContainer />,
   });
 
   render() {
@@ -31,19 +32,19 @@ class ShoppingList extends Component {
         `}
         variables={{
           cursor: null,
-          count: 30,
+          count: 1000,
           shoppingListId: this.props.shoppingListId,
         }}
-        render={({ error, props }) => {
+        render={({ error, props, retry }) => {
           if (error) {
-            return <Text>{error.message}</Text>;
+            return <ErrorMessageWithRetry errorMessage={error.message} onRetryPressed={retry} />;
           }
 
           if (props) {
             return <ShoppingListItemsRelayContainer user={props.user} shoppingListId={this.props.shoppingListId} />;
-          } else {
-            return <Text>Loading</Text>;
           }
+
+          return <LoadingInProgress />;
         }}
       />
     );
@@ -54,9 +55,9 @@ ShoppingList.propTypes = {
   shoppingListId: PropTypes.string.isRequired,
 };
 
-function mapStateToProps(state, props) {
+function mapStateToProps(state) {
   return {
-    shoppingListId: props.navigation.state.params.shoppingListId,
+    shoppingListId: state.localState.getIn(['defaultShoppingList', 'id']),
   };
 }
 

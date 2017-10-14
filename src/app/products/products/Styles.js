@@ -69,4 +69,26 @@ export default StyleSheet.create({
     color: Color.primaryColorNormal,
     textAlign: 'right',
   },
+  viewProductIconContainerStyle: {
+    height: 60,
+    width: 30,
+  },
+  iconContainerStyle: {
+    height: Sizes.searchBarHeaderHeight,
+    width: 40,
+  },
+  noMatchingProductContainer:{
+    padding: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  noMatchingProductText: {
+    fontSize: 18,
+    fontWeight: '700',
+    color: Color.primaryFontColor,
+  },
+  itemAddedText:{
+    color: Color.secondaryColorAction,
+    fontWeight: '600',
+  },
 });

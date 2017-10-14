@@ -3,6 +3,7 @@
 import React from 'react';
 import { TabNavigator } from 'react-navigation';
 import { Products } from '../products';
+import { Color } from '../../framework/style/DefaultStyles';
 
 const BrowseProductsNavigationTab = TabNavigator(
   {
@@ -52,7 +53,7 @@ const BrowseProductsNavigationTab = TabNavigator(
         marginBottom: 0,
       },
       style: {
-        backgroundColor: '#3DC62A',
+        backgroundColor: Color.primaryColorNormal,
       },
       activeTintColor: '#FAFBFA',
     },

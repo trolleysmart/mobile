@@ -6,11 +6,13 @@ import { bindActionCreators } from 'redux';
 import { NavigationActions } from 'react-navigation';
 import { Map } from 'immutable';
 import PropTypes from 'prop-types';
+import { Alert } from 'react-native';
 import * as shoppingListsActions from './Actions';
 import * as shoppingListDetailActions from '../shoppingListDetail/Actions';
 import ShoppingListsList from './ShoppingListsList';
 import { RemoveShoppingList } from '../../../framework/relay/mutations';
 import { environment } from '../../../framework/relay';
+import * as localStateActions from '../../../framework/localState/Actions';
 import { type ShoppingListsRelayContainer_user } from './__generated__/ShoppingListsRelayContainer_user.graphql';
 
 type Props = {
@@ -25,7 +27,13 @@ class ShoppingListsContainer extends Component<any, Props, State> {
   };
 
   onShoppingListPressed = shoppingList => {
-    this.props.gotoShoppingList(shoppingList);
+    this.props.localStateActions.setDefaultShoppingList(
+      Map({
+        id: shoppingList.id,
+        name: shoppingList.name,
+      }),
+    );
+    this.props.goBack();
   };
 
   onCreateShoppingListPressed = () => {
@@ -49,12 +57,14 @@ class ShoppingListsContainer extends Component<any, Props, State> {
   };
 
   onDeleteShoppingListPressed = shoppingListId => {
-    RemoveShoppingList.commit(environment, this.props.userId, shoppingListId);
+    if (this.props.user.shoppingLists.edges.length <= 1) {
+      Alert.alert('Error', 'Sorry, you must have at least one shopping list.');
+    } else {
+      RemoveShoppingList.commit(environment, this.props.userId, shoppingListId);
+    }
   };
 
   onRefresh = () => {
-    const { shoppingLists } = this.props.user;
-
     if (this.props.relay.isLoading()) {
       return;
     }
@@ -63,8 +73,7 @@ class ShoppingListsContainer extends Component<any, Props, State> {
       isFetchingTop: true,
     });
 
-    this.props.relay.refetchConnection(shoppingLists.edges.length, error => {
-      //TODO: 20170610 - Morteza - Should handle the error here
+    this.props.relay.refetchConnection(this.props.shoppingLists.edges.length, () => {
       this.setState({
         isFetchingTop: false,
       });
@@ -76,9 +85,7 @@ class ShoppingListsContainer extends Component<any, Props, State> {
       return;
     }
 
-    this.props.relay.loadMore(30, error => {
-      //TODO: 20170610 - Morteza - Should handle the error here
-    });
+    this.props.relay.loadMore(30, () => {});
   };
 
   render = () => {
@@ -103,7 +110,7 @@ ShoppingListsContainer.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    userId: state.userAccess.get('userInfo').get('id'),
+    userId: state.userAccess.getIn(['userInfo', 'id']),
   };
 }
 
@@ -111,16 +118,8 @@ function mapDispatchToProps(dispatch) {
   return {
     shoppingListsActions: bindActionCreators(shoppingListsActions, dispatch),
     shoppingListDetailActions: bindActionCreators(shoppingListDetailActions, dispatch),
-    gotoShoppingList: shoppingList =>
-      dispatch(
-        NavigationActions.navigate({
-          routeName: 'ShoppingList',
-          params: {
-            shoppingListId: shoppingList.id,
-            title: shoppingList.name,
-          },
-        }),
-      ),
+    localStateActions: bindActionCreators(localStateActions, dispatch),
+    goBack: () => dispatch(NavigationActions.back()),
     gotoCreateShoppingList: () =>
       dispatch(
         NavigationActions.navigate({

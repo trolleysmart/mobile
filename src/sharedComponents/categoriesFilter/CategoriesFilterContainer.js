@@ -7,8 +7,8 @@ import { bindActionCreators } from 'redux';
 import Immutable, { Map } from 'immutable';
 import * as productsFilterActions from '../productsFilter/Actions';
 import CategoryItems from './CategoryItems';
-import { type CategoriesFilterRelayContainer_viewer } from './__generated__/CategoriesFilterRelayContainer_viewer.graphql';
 import { CategoryItemsProp } from './PropTypes';
+import { type CategoriesFilterRelayContainer_viewer } from './__generated__/CategoriesFilterRelayContainer_viewer.graphql';
 
 type Props = {
   viewer: CategoriesFilterRelayContainer_viewer,
@@ -49,8 +49,6 @@ class CategoriesFilterContainer extends Component<any, Props, State> {
   };
 
   onRefresh = () => {
-    const { tags } = this.props.viewer.tags;
-
     if (this.props.relay.isLoading()) {
       return;
     }
@@ -59,8 +57,7 @@ class CategoriesFilterContainer extends Component<any, Props, State> {
       isFetchingTop: true,
     });
 
-    this.props.relay.refetchConnection(tags.edges.length, error => {
-      //TODO: 20170701 - Should handle the error here
+    this.props.relay.refetchConnection(this.props.viewer.tags.edges.length, () => {
       this.setState({
         isFetchingTop: false,
       });
@@ -72,9 +69,7 @@ class CategoriesFilterContainer extends Component<any, Props, State> {
       return;
     }
 
-    this.props.relay.loadMore(30, error => {
-      //TODO: 20170701 - Fred - Should handle the error here
-    });
+    this.props.relay.loadMore(30, () => {});
   };
 
   render = () => {

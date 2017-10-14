@@ -1,20 +1,24 @@
 // @flow
 
+import { Map } from 'immutable';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { List, Map } from 'immutable';
-import { Platform } from 'react-native';
 import * as productsFilterActions from './Actions';
 import ProductsFilter from './ProductsFilter';
 import HeaderContainer from './HeaderContainer';
+import { Color } from '../../framework/style/DefaultStyles';
 
 class ProductsFilterContainer extends Component {
   static navigationOptions = {
     title: 'Filter',
     headerRight: <HeaderContainer onClearFilterPress={this.clearFilters} />,
+    headerTintColor: Color.headerIconDefaultColor,
+    headerStyle: {
+      backgroundColor: Color.secondaryColorAction,
+    },
     // headerTitleStyle: {
     //   marginLeft: Platform.OS === 'ios' ? null : 100,
     // },

@@ -27,20 +27,16 @@ class ProductsContainer extends Component<any, Props, State> {
   onProductItemSelectionChanged = product => {
     const productId = product.id;
 
-    AddItemsToShoppingList.commit(this.props.relay.environment, this.props.user.id, this.props.user.shoppingLists.edges[0].node.id, {
+    AddItemsToShoppingList.commit(this.props.relay.environment, this.props.user.id, this.props.defaultShoppingListId, {
       productPrices: [Immutable.fromJS(this.props.user.products.edges.map(_ => _.node).find(_ => _.id === productId))],
     });
-
-    this.props.productsActions.productSelected(productId);
   };
 
-  onViewProductDetailPressed = product => {
-    this.props.gotoProductDetail(product);
+  onViewProductDetailPressed = (productId, productName) => {
+    this.props.gotoProductDetail(productId, productName);
   };
 
   onRefresh = () => {
-    const { products } = this.props.user;
-
     if (this.props.relay.isLoading()) {
       return;
     }
@@ -49,8 +45,7 @@ class ProductsContainer extends Component<any, Props, State> {
       isFetchingTop: true,
     });
 
-    this.props.relay.refetchConnection(products.edges.length, error => {
-      //TODO: 20170610 - Morteza - Should handle the error here
+    this.props.relay.refetchConnection(this.props.user.products.edges.length, () => {
       this.setState({
         isFetchingTop: false,
       });
@@ -62,9 +57,7 @@ class ProductsContainer extends Component<any, Props, State> {
       return;
     }
 
-    this.props.relay.loadMore(30, error => {
-      //TODO: 20170610 - Morteza - Should handle the error here
-    });
+    this.props.relay.loadMore(30, () => {});
   };
 
   render = () => {
@@ -83,22 +76,25 @@ class ProductsContainer extends Component<any, Props, State> {
 
 ProductsContainer.propTypes = {
   gotoProductDetail: PropTypes.func.isRequired,
+  defaultShoppingListId: PropTypes.string.isRequired,
 };
 
-function mapStateToProps() {
-  return {};
+function mapStateToProps(state) {
+  return {
+    defaultShoppingListId: state.localState.getIn(['defaultShoppingList', 'id']),
+  };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     productsActions: bindActionCreators(productsActions, dispatch),
-    gotoProductDetail: product =>
+    gotoProductDetail: (productId, productName) =>
       dispatch(
         NavigationActions.navigate({
           routeName: 'ProductDetail',
           params: {
-            title: 'Product detail',
-            product,
+            title: productName,
+            productId,
           },
         }),
       ),

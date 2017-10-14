@@ -1,117 +1,64 @@
 // @flow
 
 import React, { Component } from 'react';
-import { Text, View, Image, ScrollView } from 'react-native';
-import { Card, Button, Icon, Avatar } from 'react-native-elements';
-// import FastImage from 'react-native-fast-image';
 import PropTypes from 'prop-types';
-
-import Styles from './Styles';
+import { connect } from 'react-redux';
+import { environment } from '../../../framework/relay';
+import { graphql, QueryRenderer } from 'react-relay';
+import ProductDetailRelayContainer from './ProductDetailRelayContainer';
+import { LoadingInProgress } from '../../../sharedComponents/loadingInProgress';
+import { ErrorMessageWithRetry } from '../../../sharedComponents/errorMessageWithRetry';
 import { Color } from '../../../framework/style/DefaultStyles';
-import { ProductProp } from './PropTypes';
 
 class ProductDetail extends Component {
+  static navigationOptions = ({ navigation }) => ({
+    title: navigation.state.params ? (navigation.state.params.title ? navigation.state.params.title : '') : '',
+    headerStyle: {
+      backgroundColor: Color.secondaryColorAction,
+    },
+    headerTintColor: Color.headerIconDefaultColor,
+  });
+
   render = () => {
     return (
-      <View style={Styles.container}>
-        <ScrollView>
-          <Image source={{ uri: this.props.product.imageUrl }} resizeMode="cover" style={Styles.productImage} />
-          <View style={Styles.productTitleContainer}>
-            <Text style={Styles.productTitle}>{this.props.product.name}</Text>
-            <Text style={Styles.priceToDisplay}>${this.props.product.priceToDisplay}</Text>
-            <Text style={Styles.savingPercentage}>
-              {
-                this.props.product.saving ?
-                  'Save $' + this.props.product.saving.toFixed(2) + '(' + this.props.product.savingPercentage.toFixed(0) + '%)' : ''
-              }</Text>
-          </View>
-          <Card title="Detail">
-            <Text style={Styles.productDescription}>The product description</Text>
-            {
-              this.props.product.size ?
-              <View><Text style={Styles.productSize}>{this.props.product.size}</Text></View>
-              :
-              <View></View>
+      <QueryRenderer
+        environment={environment}
+        query={graphql`
+          query ProductDetailQuery($productId: ID!) {
+            user {
+              ...ProductDetailRelayContainer_user
             }
-            {this.props.product.unitPrice ?
-              <View><Text style={Styles.unitPrice}>{this.props.product.unitPrice}</Text></View>
-              :
-              <View></View>
-            }
-            <Button
-              icon={{ name: 'web', type:'material-community' }}
-              title="View product on web"
-              backgroundColor={Color.secondaryColorAction}
-              onPress={() => this.props.handleVisitStorePressed(this.props.product.imageUrl)}/>
-          </Card>
-          <Card title="Store Info">
-            <View style={Styles.storeInfoContainer}>
-              <View>
-                {this.props.product.store && this.props.product.store.imageUrl ? (
-                  <Avatar
-                    medium
-                    rounded
-                    source={{ uri: this.props.product.store.imageUrl }}
-                    activeOpacity={0.7}
-                  />
-                ) : (
-                  <Avatar
-                    medium
-                    rounded
-                    icon={{ name: 'user' }}
-                    activeOpacity={0.7}
-                  />
-                )}
-              </View>
-              <View style={Styles.storeDetail}>
-                <Text>{this.props.product.store ? this.props.product.store.name : ''}</Text>
-                <Icon name='google-maps' type='material-community'/>
-              </View>
-            </View>
-          </Card>
-        </ScrollView>
-        <View style={Styles.addProductContainer}>
-          <View style={Styles.productPriceContainer}>
-            <Text style={Styles.priceToDisplay}>${this.props.product.priceToDisplay}</Text>
-            <Text style={Styles.savingPercentage}>
-              {
-                this.props.product.saving ?
-                  'Save $' + this.props.product.saving.toFixed(2) + '(' + this.props.product.savingPercentage.toFixed(0) + '%)' : ''
-              }</Text>
-          </View>
-          <View>
-            <Button title="Add" raised borderRadius={10} backgroundColor={Color.secondaryColorAction} buttonStyle={{}} />
-          </View>
+          }
+        `}
+        variables={{
+          productId: this.props.productId,
+        }}
+        render={({ error, props, retry }) => {
+          if (error) {
+            return <ErrorMessageWithRetry errorMessage={error.message} onRetryPressed={retry} />;
+          }
 
-          {/*<View>*/}
-            {/*<Menu>*/}
-              {/*<MenuTrigger>*/}
-                {/*<Icon name="dots-vertical" type="material-community" color="white" />*/}
-                {/*/!* <Text style={{ color: 'white' }}>Select List</Text> *!/*/}
-              {/*</MenuTrigger>*/}
-              {/*<MenuOptions>*/}
-                {/*<MenuOption onSelect={() => this.props.onEditShoppingListPressed(this.props.shoppingList.id, this.props.shoppingList.name)}>*/}
-                  {/*<View style={Styles.menuOption}>*/}
-                    {/*<Text>Shopping List 1</Text>*/}
-                  {/*</View>*/}
-                {/*</MenuOption>*/}
-                {/*<MenuOption onSelect={() => this.props.onDeleteShoppingListPressed(this.props.shoppingList.id, this.props.shoppingList.name)}>*/}
-                  {/*<View style={Styles.menuOption}>*/}
-                    {/*<Text>Shopping List 2</Text>*/}
-                  {/*</View>*/}
-                {/*</MenuOption>*/}
-              {/*</MenuOptions>*/}
-            {/*</Menu>*/}
-          {/*</View>*/}
-        </View>
-      </View>
+          if (props) {
+            return <ProductDetailRelayContainer user={props.user} productId={this.props.productId} isInShoppingList={this.props.isInShoppingList} />;
+          }
+
+          return <LoadingInProgress />;
+        }}
+      />
     );
   };
 }
 
 ProductDetail.propTypes = {
-  product: ProductProp,
-  handleVisitStorePressed: PropTypes.func.isRequired,
+  productId: PropTypes.string.isRequired,
+  isInShoppingList: PropTypes.bool.isRequired,
+};
+
+function mapStateToProps(state, props) {
+  return {
+    productId: props.navigation.state.params.productId,
+    isInShoppingList: !!props.navigation.state.params.isInShoppingList,
+  };
 }
 
-export default ProductDetail;
+export default connect(mapStateToProps)(ProductDetail);

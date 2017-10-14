@@ -2,17 +2,23 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Text } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { environment } from '../../../framework/relay';
 import { graphql, QueryRenderer } from 'react-relay';
 import ProductsRelayContainer from './ProductsRelayContainer';
+import { LoadingInProgress } from '../../../sharedComponents/loadingInProgress';
+import { ErrorMessageWithRetry } from '../../../sharedComponents/errorMessageWithRetry';
+import { Color } from '../../../framework/style/DefaultStyles';
 
 class Products extends Component {
   static navigationOptions = ({ navigation }) => ({
     title: navigation.state.params
       ? navigation.state.params.defaultSearchKeyword ? 'Products for ' + navigation.state.params.defaultSearchKeyword : ''
       : '',
+    headerTintColor: Color.headerIconDefaultColor,
+    headerStyle: {
+      backgroundColor: Color.secondaryColorAction,
+    },
   });
 
   componentDidMount = () => {
@@ -40,16 +46,16 @@ class Products extends Component {
           categories: this.props.defaultCategories ? this.props.defaultCategories : this.props.categories, // Use default categories if supplied
           stores: this.props.stores,
         }}
-        render={({ error, props }) => {
+        render={({ error, props, retry }) => {
           if (error) {
-            return <Text>{error.message}</Text>;
+            return <ErrorMessageWithRetry errorMessage={error.message} onRetryPressed={retry} />;
           }
 
           if (props) {
             return <ProductsRelayContainer user={props.user} />;
-          } else {
-            return <Text>Loading...</Text>;
           }
+
+          return <LoadingInProgress />;
         }}
       />
     );
@@ -68,9 +74,15 @@ Products.propTypes = {
 
 function mapStateToProps(state, props) {
   return {
-    defaultCategories: props.navigation.state.params ? props.navigation.state.params.defaultCategories : props.defaultCategories,
+    defaultCategories:
+      props.navigation.state.params && props.navigation.state.params.defaultCategories
+        ? props.navigation.state.params.defaultCategories
+        : props.defaultCategories,
     defaultSortOption: props.defaultSortOption,
-    defaultSearchKeyword: props.navigation.state.params ? props.navigation.state.params.defaultSearchKeyword : props.defaultSearchKeyword,
+    defaultSearchKeyword:
+      props.navigation.state.params && props.navigation.state.params.defaultSearchKeyword
+        ? props.navigation.state.params.defaultSearchKeyword
+        : props.defaultSearchKeyword,
     searchKeyword: state.products.get('searchKeyword'),
     sortOption: state.productsFilter.get('sortOption'),
     categories: state.productsFilter.get('categories').isEmpty()

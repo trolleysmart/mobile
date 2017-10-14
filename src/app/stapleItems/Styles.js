@@ -1,7 +1,7 @@
 // @flow
 
 import { StyleSheet, Platform } from 'react-native';
-import { Sizes } from '../../framework/style/DefaultStyles';
+import { Sizes, Color } from '../../framework/style/DefaultStyles';
 
 export default StyleSheet.create({
   container: {
@@ -15,6 +15,8 @@ export default StyleSheet.create({
   },
   searchHeader: {
     flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
     height: Sizes.searchBarHeaderHeight,
     width: Platform.OS === 'ios' ? Sizes.searchBarHeaderWidth - 90 : null,
     marginRight: Platform.OS === 'ios' ? null : 10,
@@ -25,6 +27,20 @@ export default StyleSheet.create({
   itemName: {
     fontSize: 10,
     textAlign: 'center',
+  },
+  itemNameSelected: {
+    fontSize: 10,
+    fontWeight: '500',
+    color: '#3a69e0',
+    textAlign: 'center',
+  },
+  itemIconContainer: {
+    backgroundColor: '#EFF0F1',
+  },
+  itemIconSelectedContainer: {
+    backgroundColor: Color.primaryColorLight,
+    borderColor: Color.secondaryColorAction,
+    borderWidth: 2,
   },
   sectionHeaderImage: {
     width: 25,
@@ -43,19 +59,15 @@ export default StyleSheet.create({
     justifyContent: 'center',
   },
   itemsCount: {
-    color: 'blue',
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#3a69e0',
   },
   select: {
     color: 'blue',
   },
   sectionTitle: {
     fontWeight: '700',
-  },
-  sectionListContainer: {
-    // flex: 1,
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    // justifyContent: 'center',
   },
   addItemsHeaderContainer: {
     alignItems: 'center',

@@ -1,6 +1,6 @@
 // @flow
 
-import Immutable, { Map } from 'immutable';
+import Immutable, { Map, List } from 'immutable';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import uuid from 'uuid/v4';
 import StapleItemsList from './StapleItemsList';
 import * as StapleItemsActions from './Actions';
+import { AddItemsToShoppingList } from '../../framework/relay/mutations';
 import { type StapleItemsRelayContainer_user } from './__generated__/StapleItemsRelayContainer_user.graphql';
 
 type Props = {
@@ -23,25 +24,36 @@ class StapleItemsContrainer extends Component<any, Props, State> {
     isFetchingTop: false,
   };
 
-  componentDidMount = () => {
-    this.props.stapleItemsActions.userIdChanged(Map({ userId: this.props.user.id }));
-    this.props.stapleItemsActions.shoppingListChanged(Immutable.fromJS(this.props.shoppingList));
+  tryAddStapleItems = () => {
+    if (this.props.selectedStapleItems.length !== 0) {
+      AddItemsToShoppingList.commit(this.props.relay.environment, this.props.user.id, this.props.shoppingListId, {
+        newStapleItemNames: this.props.selectedStapleItems.filter(_ => _.isCustomItem).map(_ => _.name),
+        stapleItems: Immutable.fromJS(this.props.selectedStapleItems.filter(_ => !_.isCustomItem)),
+      });
+
+      // Clear the selected staple list
+      this.props.stapleItemsActions.stapleItemSelectionChanged(Map({ selectedStapleItems: List() }));
+    }
+  };
+
+  componentWillUnmount = () => {
+    this.tryAddStapleItems();
   };
 
   clearSearchKeyword = () => {
     this.props.stapleItemsActions.searchKeywordChanged(Map({ searchKeyword: '' }));
   };
 
-  onStapleItemSelectionChanged = (stapleItemId, name, isCustomItem, isSelected) => {
+  onStapleItemSelectionChanged = (stapleItem, isSelected) => {
     const selectedItems = Immutable.fromJS(this.props.selectedStapleItems);
 
     // original state is selected, so remove from selected list
     if (isSelected) {
       this.props.stapleItemsActions.stapleItemSelectionChanged(
-        Map({ selectedStapleItems: selectedItems.filterNot(_ => _.get('id') === stapleItemId) }),
+        Map({ selectedStapleItems: selectedItems.filterNot(_ => _.get('id') === stapleItem.id) }),
       );
     } else {
-      if (!stapleItemId) {
+      if (!stapleItem.id) {
         this.clearSearchKeyword();
       }
 
@@ -49,9 +61,10 @@ class StapleItemsContrainer extends Component<any, Props, State> {
         Map({
           selectedStapleItems: selectedItems.push(
             Map({
-              id: stapleItemId || uuid(),
-              name: name,
-              isCustomItem: isCustomItem,
+              id: stapleItem.id || uuid(),
+              name: stapleItem.name,
+              isCustomItem: stapleItem.isCustomItem,
+              tags: Immutable.fromJS(stapleItem.tags),
             }),
           ),
         }),
@@ -60,8 +73,6 @@ class StapleItemsContrainer extends Component<any, Props, State> {
   };
 
   onRefresh = () => {
-    const { stapleItems } = this.props.user;
-
     if (this.props.relay.isLoading()) {
       return;
     }
@@ -70,8 +81,7 @@ class StapleItemsContrainer extends Component<any, Props, State> {
       isFetchingTop: true,
     });
 
-    this.props.relay.refetchConnection(stapleItems.edges.length, error => {
-      //TODO: 20170610 - Morteza - Should handle the error here
+    this.props.relay.refetchConnection(this.props.user.stapleItems.edges.length, () => {
       this.setState({
         isFetchingTop: false,
       });
@@ -83,9 +93,7 @@ class StapleItemsContrainer extends Component<any, Props, State> {
       return;
     }
 
-    this.props.relay.loadMore(30, error => {
-      //TODO: 20170610 - Morteza - Should handle the error here
-    });
+    this.props.relay.loadMore(30, () => {});
   };
 
   getStapleItemsWithCustomItem = () => {
@@ -123,7 +131,7 @@ class StapleItemsContrainer extends Component<any, Props, State> {
 StapleItemsContrainer.propTypes = {
   customStapleItem: PropTypes.string,
   stapleItemsActions: PropTypes.object.isRequired,
-  shoppingList: PropTypes.shape({ id: PropTypes.string.isRequired }).isRequired,
+  shoppingListId: PropTypes.string.isRequired,
 };
 
 function mapStateToProps(state) {

@@ -29,12 +29,13 @@ type MultiBuy {
 }
 
 type Mutation {
-  addShoppingList(input: AddShoppingListInput!): AddShoppingListPayload
-  removeShoppingList(input: RemoveShoppingListInput!): RemoveShoppingListPayload
-  updateShoppingList(input: UpdateShoppingListInput!): UpdateShoppingListPayload
   addItemsToShoppingList(input: AddItemsToShoppingListInput!): AddItemsToShoppingListPayload
+  addShoppingList(input: AddShoppingListInput!): AddShoppingListPayload
   removeItemsFromShoppingList(input: RemoveItemsFromShoppingListInput!): RemoveItemsFromShoppingListPayload
+  removeShoppingList(input: RemoveShoppingListInput!): RemoveShoppingListPayload
+  setUserDefaultShoppingList(input: SetUserDefaultShoppingListInput!): SetUserDefaultShoppingListPayload
   submitUserFeedback(input: SubmitUserFeedbackInput!): SubmitUserFeedbackPayload
+  updateShoppingList(input: UpdateShoppingListInput!): UpdateShoppingListPayload
 }
 
 # An object with an ID
@@ -144,6 +145,16 @@ input RemoveShoppingListInput {
 }
 
 type RemoveShoppingListPayload {
+  errorMessage: String
+  clientMutationId: String
+}
+
+input SetUserDefaultShoppingListInput {
+  shoppingListId: ID!
+  clientMutationId: String
+}
+
+type SetUserDefaultShoppingListPayload {
   errorMessage: String
   clientMutationId: String
 }
@@ -329,10 +340,14 @@ type UpdateShoppingListPayload {
 
 type User implements Node {
   id: ID!
-  shoppingLists(after: String, first: Int, before: String, last: Int, name: String, shoppingListIds: [ID]): ShoppingListConnection
+  shoppingLists(after: String, first: Int, before: String, last: Int, name: String, shoppingListIds: [ID!]): ShoppingListConnection
+  defaultShoppingList: ShoppingList
+  shoppingList(shoppingListId: ID!): ShoppingList
+  defaultShoppingListItems(after: String, first: Int, before: String, last: Int, name: String, addedByUserId: ID, tagKeys: [String], storeKeys: [String]): ShoppingListItemConnection
   shoppingListItems(after: String, first: Int, before: String, last: Int, shoppingListId: ID!, name: String, addedByUserId: ID, tagKeys: [String], storeKeys: [String]): ShoppingListItemConnection
   stapleItems(after: String, first: Int, before: String, last: Int, name: String, tagKeys: [String]): StapleItemConnection
   products(after: String, first: Int, before: String, last: Int, name: String, description: String, sortOption: String, tagKeys: [String], storeKeys: [String], special: Boolean): ProductConnection
+  product(productId: ID!): Product
 }
 
 type Viewer implements Node {

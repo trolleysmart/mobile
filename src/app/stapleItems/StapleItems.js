@@ -2,16 +2,20 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Text } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { environment } from '../../framework/relay';
 import { graphql, QueryRenderer } from 'react-relay';
 import StapleItemsRelayContainer from './StapleItemsRelayContainer';
 import HeaderContainer from './HeaderContainer';
+import { LoadingInProgress } from '../../sharedComponents/loadingInProgress';
+import { ErrorMessageWithRetry } from '../../sharedComponents/errorMessageWithRetry';
+import { Color } from '../../framework/style/DefaultStyles';
 
 class StapleItems extends Component {
   static navigationOptions = {
     headerTitle: <HeaderContainer environment={environment} />,
+    headerStyle: { backgroundColor: Color.secondaryColorAction },
+    headerTintColor: Color.headerIconDefaultColor,
   };
 
   render() {
@@ -30,16 +34,16 @@ class StapleItems extends Component {
           count: 1000,
           searchKeyword: this.props.searchKeyword,
         }}
-        render={({ error, props }) => {
+        render={({ error, props, retry }) => {
           if (error) {
-            return <Text>{error.message}</Text>;
+            return <ErrorMessageWithRetry errorMessage={error.message} onRetryPressed={retry} />;
           }
 
           if (props) {
-            return <StapleItemsRelayContainer user={props.user} shoppingList={this.props.shoppingList} />;
-          } else {
-            return <Text>Loading</Text>;
+            return <StapleItemsRelayContainer user={props.user} shoppingListId={this.props.shoppingListId} />;
           }
+
+          return <LoadingInProgress />;
         }}
       />
     );
@@ -53,7 +57,7 @@ StapleItems.propTypes = {
 function mapStateToProps(state, props) {
   return {
     searchKeyword: state.stapleItems.get('searchKeyword'),
-    shoppingList: { id: props.navigation.state.params.shoppingListId },
+    shoppingListId: props.navigation.state.params.shoppingListId,
   };
 }
 

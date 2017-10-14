@@ -5,7 +5,7 @@ import { View, Text } from 'react-native';
 import PropTypes from 'prop-types';
 import { ListItem, Icon } from 'react-native-elements';
 import { Menu, MenuTrigger, MenuOptions, MenuOption } from 'react-native-popup-menu';
-import Styles from './Styles';
+import Styles, { optionsStyles } from './Styles';
 import { Color } from '../../../framework/style/DefaultStyles';
 import { ShoppingListProp } from './PropTypes';
 
@@ -16,15 +16,17 @@ class ShoppingListRow extends React.PureComponent {
         <MenuTrigger>
           <Icon name="dots-vertical" type="material-community" />
         </MenuTrigger>
-        <MenuOptions>
+        <MenuOptions customStyles={optionsStyles}>
           <MenuOption onSelect={() => this.props.onEditShoppingListPressed(this.props.shoppingList.id, this.props.shoppingList.name)}>
             <View style={Styles.menuOption}>
-              <Text>Edit</Text>
+              <Icon name="pencil" type="material-community" />
+              <Text style={Styles.optionText}>Edit</Text>
             </View>
           </MenuOption>
           <MenuOption onSelect={() => this.props.onDeleteShoppingListPressed(this.props.shoppingList.id, this.props.shoppingList.name)}>
             <View style={Styles.menuOption}>
-              <Text>Delete</Text>
+              <Icon name="delete" type="material-community" />
+              <Text style={Styles.optionText}>Delete</Text>
             </View>
           </MenuOption>
         </MenuOptions>
@@ -38,14 +40,17 @@ class ShoppingListRow extends React.PureComponent {
         <ListItem
           key={this.props.shoppingList.id}
           title={this.props.shoppingList.name}
+          titleStyle={Styles.shoppingListRowName}
           onPress={() => this.props.onShoppingListPressed(this.props.shoppingList)}
           badge={{
             value: this.props.shoppingList.totalItemsCount,
             textStyle: { color: 'white' },
             containerStyle: { backgroundColor: Color.secondaryColorAction },
           }}
+          wrapperStyle={Styles.shoppingListRowContainer}
           leftIcon={{ name: 'list', type: 'font-awesome' }}
           rightIcon={this.renderMenu()}
+          containerStyle={Styles.shoppingListRow}
         />
       </View>
     );

@@ -1444,8 +1444,6 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.trolleysmart;
 				PRODUCT_NAME = TrolleySmart;
-				PROVISIONING_PROFILE = "9e68d3e7-7dc2-4131-bb94-2552e291d3af";
-				PROVISIONING_PROFILE_SPECIFIER = "XC iOS: com.trolleysmart";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;

@@ -1,6 +1,6 @@
 // @flow
 
-import React from 'react';
+import React, { Component } from 'react';
 import { View } from 'react-native';
 import { Text, Avatar } from 'react-native-elements';
 import PropTypes from 'prop-types';
@@ -8,10 +8,27 @@ import Styles from './Styles';
 import { TouchableItem } from '../../components/touchableIcon';
 import { Color } from '../../framework/style/DefaultStyles';
 import { ImageUltility } from '../../components/image';
+import { StapleItemProp } from './PropTypes';
 
-class StapleItem extends React.PureComponent {
+class StapleItem extends Component {
+  constructor(props, context) {
+    super(props, context);
+
+    this.state = { isSelected: props.isSelected };
+  }
+
+  shouldComponentUpdate = nextProps => {
+    return this.state.isSelected !== nextProps.isSelected;
+  };
+
+  componentWillReceiveProps = nextProps => {
+    if (this.state.isSelected !== nextProps.isSelected) {
+      this.setState({ isSelected: nextProps.isSelected });
+    }
+  };
+
   onItemPressed = () => {
-    this.props.onStapleItemSelectionChanged(this.props.id, this.props.name, this.props.isCustomItem, this.props.isSelected);
+    this.props.onStapleItemSelectionChanged(this.props.stapleItem, this.props.isSelected);
   };
 
   render() {
@@ -22,17 +39,16 @@ class StapleItem extends React.PureComponent {
         delayPressIn={0}
         pressColor={Color.touchableIconPressColor}
         onPress={this.onItemPressed}
-        style={Styles.touchableContainer}
         borderless
       >
         <View style={Styles.touchableContainer}>
           <Avatar
             rounded
-            overlayContainerStyle={{ backgroundColor: this.props.isSelected ? '#F4CC62' : '#EFF0F1' }}
-            source={ImageUltility.getImageSource(this.props.name.toLowerCase().replace(/\s+/g, ''))}
+            overlayContainerStyle={this.props.isSelected ? Styles.itemIconSelectedContainer : Styles.itemIconContainer}
+            source={ImageUltility.getImageSource(this.props.stapleItem.name.toLowerCase().replace(/\s+/g, ''))}
             activeOpacity={0.7}
           />
-          <Text style={Styles.itemName}>{this.props.name}</Text>
+          <Text style={this.props.isSelected ? Styles.itemNameSelected : Styles.itemName}>{this.props.stapleItem.name}</Text>
         </View>
       </TouchableItem>
     );
@@ -40,9 +56,8 @@ class StapleItem extends React.PureComponent {
 }
 
 StapleItem.propTypes = {
-  id: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  isCustomItem: PropTypes.bool,
+  stapleItem: StapleItemProp,
+  isSelected: PropTypes.bool,
 };
 
 StapleItem.defaultProps = {

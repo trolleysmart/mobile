@@ -1,18 +1,23 @@
 // @flow
 
 import React, { Component } from 'react';
-import { Text } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { environment } from '../../framework/relay';
 import { graphql, QueryRenderer } from 'react-relay';
-import { Platform } from 'react-native';
 import StoresFilterRelayContainer from './StoresFilterRelayContainer';
+import { LoadingInProgress } from '../loadingInProgress';
+import { ErrorMessageWithRetry } from '../errorMessageWithRetry';
+import { Color } from '../../framework/style/DefaultStyles';
 
 class StoresFilter extends Component {
   static navigationOptions = {
     title: 'Stores',
-    headerTitleStyle: {
-      marginLeft: Platform.OS === 'ios' ? null : 100,
+    // headerTitleStyle: {
+    //   marginLeft: Platform.OS === 'ios' ? null : 100,
+    // },
+    headerTintColor: Color.headerIconDefaultColor,
+    headerStyle: {
+      backgroundColor: Color.secondaryColorAction,
     },
   };
 
@@ -31,16 +36,16 @@ class StoresFilter extends Component {
           cursor: null,
           count: 100,
         }}
-        render={({ error, props }) => {
+        render={({ error, props, retry }) => {
           if (error) {
-            return <Text>{error.message}</Text>;
+            return <ErrorMessageWithRetry errorMessage={error.message} onRetryPressed={retry} />;
           }
 
           if (props) {
             return <StoresFilterRelayContainer viewer={props.viewer} />;
-          } else {
-            return <Text>Loading</Text>;
           }
+
+          return <LoadingInProgress />;
         }}
       />
     );

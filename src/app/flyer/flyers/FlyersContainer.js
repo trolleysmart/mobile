@@ -19,6 +19,7 @@ class FlyersContainer extends Component {
     headerStyle: {
       backgroundColor: Color.primaryColorNormal,
     },
+    headerTintColor: Color.headerIconDefaultColor,
     // headerTitleStyle: {
     //   marginLeft: Platform.OS === 'ios' ? null : 70,
     // },

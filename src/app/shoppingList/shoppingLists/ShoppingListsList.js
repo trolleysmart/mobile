@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { FlatList, View } from 'react-native';
 import ActionButton from 'react-native-action-button';
 import PropTypes from 'prop-types';
-import { ListItemSeparator } from '../../../components/list';
+import { Color } from '../../../framework/style/DefaultStyles';
 import ShoppingListRow from './ShoppingListRow';
 import Styles from './Styles';
 import { ShoppingListsProp } from './PropTypes';
@@ -27,9 +27,9 @@ class ShoppingListsList extends Component {
           onEndReached={this.props.onEndReached}
           onRefresh={this.props.onRefresh}
           refreshing={this.props.isFetchingTop}
-          ItemSeparatorComponent={() => <ListItemSeparator />}
+          ItemSeparatorComponent={() => <View style={Styles.shoppingListRowSeparator} />}
         />
-        <ActionButton buttonColor="rgba(242,135,79,1)" onPress={() => this.props.onCreateShoppingListPressed()} />
+        <ActionButton buttonColor={Color.actionButtonColor} onPress={() => this.props.onCreateShoppingListPressed()} />
       </View>
     );
   };

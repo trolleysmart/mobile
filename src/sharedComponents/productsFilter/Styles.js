@@ -1,6 +1,7 @@
 // @flow
 
 import { StyleSheet } from 'react-native';
+import { Color } from '../../framework/style/DefaultStyles';
 
 export default StyleSheet.create({
   container: {
@@ -33,5 +34,9 @@ export default StyleSheet.create({
     justifyContent: 'center',
     marginLeft: 15,
     padding: 5,
+  },
+  clearFilterText: {
+    color: Color.headerIconDefaultColor,
+    fontWeight: '600',
   },
 });

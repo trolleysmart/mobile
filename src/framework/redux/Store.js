@@ -7,6 +7,8 @@ import {
   watchSignInWithFacebook,
   watchSignOut,
 } from 'micro-business-parse-server-common-react-native';
+import { watchGetDefaultShoppingList, watchSetDefaultShoppingList } from '../localState';
+import { watchRefreshState } from 'micro-business-common-react-native';
 import { createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import getReducers from './Reducers';
@@ -18,6 +20,9 @@ const rootSagas = function* sagas() {
     watchSignInWithUsernameAndPassword(),
     watchSignInWithFacebook(),
     watchSignOut(),
+    watchGetDefaultShoppingList(),
+    watchSetDefaultShoppingList(),
+    watchRefreshState(),
   ];
 };
 

@@ -33,7 +33,7 @@ class HeaderContainer extends Component {
     return (
       <View style={Styles.clearFilterHeaderContainer}>
         <TouchableItem onPress={this.clearFilters}>
-          <Text>Clear filters</Text>
+          <Text style={Styles.clearFilterText}>Clear filters</Text>
         </TouchableItem>
       </View>
     );

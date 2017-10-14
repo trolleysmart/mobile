@@ -2,16 +2,9 @@
 
 import ActionTypes from './ActionTypes';
 
-export function currentViewingStapleItemChanged(payload) {
+export function shoppingListItemsCountChanged(payload) {
   return {
-    type: ActionTypes.SHOPPING_LIST_CURRENT_VIEWING_STAPLE_ITEM_CHANGED,
-    payload,
-  };
-}
-
-export function removeCurrentViewingStapleItemFlagChanged(payload) {
-  return {
-    type: ActionTypes.SHOPPING_LIST_REMOVE_CURRENT_VIEWING_STAPLE_ITEM_FLAG_CHANGED,
+    type: ActionTypes.SHOPPING_LIST_ITEMS_COUNT_CHANGED,
     payload,
   };
 }

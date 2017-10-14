@@ -21,12 +21,6 @@ export default (state = initialState, action) => {
         ),
       );
 
-    case ActionTypes.STAPLE_ITEMS_USER_ID_CHANGED:
-      return state.set('userId', action.payload.get('userId'));
-
-    case ActionTypes.STAPLE_ITEMS_SHOPPING_LIST_CHANGED:
-      return state.setIn(['shoppingList', 'id'], action.payload.get('id'));
-
     default:
       return state;
   }

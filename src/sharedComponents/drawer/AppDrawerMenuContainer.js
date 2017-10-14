@@ -1,6 +1,6 @@
 // @flow
 
-import * as userAccessActions from 'micro-business-parse-server-common-react-native/src/userAccess/redux/Actions';
+import * as userAccessActions from 'micro-business-parse-server-common-react-native/src/userAccess/Actions';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { DrawerItems, NavigationActions } from 'react-navigation';
@@ -41,9 +41,9 @@ AppDrawerMenuContainer.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    name: state.userAccess.get('userInfo').get('name')
-      ? state.userAccess.get('userInfo').get('name')
-      : state.userAccess.get('userInfo').get('emailAddress'),
+    name: state.userAccess.getIn(['userInfo', 'name'])
+      ? state.userAccess.getIn(['userInfo', 'name'])
+      : state.userAccess.getIn(['userInfo', 'emailAddress']),
     avatarUrl: state.userAccess.getIn(['userInfo', 'avatar']) ? state.userAccess.getIn(['userInfo', 'avatar']).data.url : null,
   };
 }
