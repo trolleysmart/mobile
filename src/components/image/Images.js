@@ -68,6 +68,7 @@ const Images = {
   orange: require('../../../assets/img/orange.png'),
   papertowl: require('../../../assets/img/papertowl.png'),
   peanutbutter: require('../../../assets/img/peanut-butter.png'),
+  pencil: require('../../../assets/img/pencil.png'),
   pepper: require('../../../assets/img/pepper.png'),
   personalcare: require('../../../assets/img/pesonal-care.png'),
   petcare: require('../../../assets/img/pet-care.png'),

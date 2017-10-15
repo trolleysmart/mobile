@@ -5,8 +5,16 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { NavigationActions } from 'react-navigation';
 import UserFeedback from './UserFeedback';
+import MainMenuContainer from '../../sharedComponents/mainMenu/MainMenuContainer';
+import { Color } from '../../framework/style/DefaultStyles';
 
 class UserFeedbackContainer extends Component {
+  static navigationOptions = {
+    headerLeft: <MainMenuContainer />,
+    headerStyle: {
+      backgroundColor: Color.secondaryColorAction,
+    },
+  };
   render = () => {
     return <UserFeedback/>;
   };

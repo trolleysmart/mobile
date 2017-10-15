@@ -7,7 +7,7 @@ import { Icon } from 'react-native-elements';
 import AppDrawerMenuContainer from '../../sharedComponents/drawer/AppDrawerMenuContainer';
 import { DisclaimerNavigator } from '../../sharedComponents/disclaimer';
 import { Color } from '../../framework/style/DefaultStyles';
-import {UserFeedbackContainer} from '../userFeedback';
+import {UserFeedbackNavigationStack} from '../userFeedback';
 
 export default DrawerNavigator(
   {
@@ -32,13 +32,13 @@ export default DrawerNavigator(
         drawerIcon: () => <Icon name="ios-settings" type="ionicon" color={Color.secondaryColorAction} />,
       },
     },
-    // UserFeedback: {
-    //   screen: UserFeedbackContainer,
-    //   navigationOptions: {
-    //     drawerLabel: 'Give Feedback',
-    //     drawerIcon: () => <Icon name="ios-settings" type="ionicon" color={Color.secondaryColorAction} />,
-    //   },
-    // },
+    UserFeedback: {
+      screen: UserFeedbackNavigationStack,
+      navigationOptions: {
+        drawerLabel: 'Give Feedback',
+        drawerIcon: () => <Icon name="ios-settings" type="ionicon" color={Color.secondaryColorAction} />,
+      },
+    },
   },
   {
     contentComponent: AppDrawerMenuContainer,
