@@ -18,7 +18,7 @@ function commit(environment, feedback) {
     mutation,
     variables: {
       input: {
-        feedback: feedback.toJS(),
+        feedback: JSON.stringify(feedback.toJS()),
       },
     },
     updater: store => {

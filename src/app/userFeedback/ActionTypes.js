@@ -1,0 +1,5 @@
+// @flow
+
+export default {
+  USER_FEEDBACK_MESSAGE_CHANGED: 'USER_FEEDBACK_MESSAGE_CHANGED',
+};

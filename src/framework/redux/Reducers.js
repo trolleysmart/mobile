@@ -8,6 +8,7 @@ import { StapleItemsReducer } from '../../app/stapleItems';
 import { ProductsFilterReducer } from '../../sharedComponents/productsFilter';
 import { ProductReducer } from '../../app/products';
 import { LocalStateReducer } from '../localState';
+import { UserFeedbackReducer } from '../../app/userFeedback';
 
 export default function getReducers(navigationReducer) {
   return combineReducers({
@@ -22,5 +23,6 @@ export default function getReducers(navigationReducer) {
     products: ProductReducer,
     shoppingListDetail: ShoppingListDetailReducer,
     localState: LocalStateReducer,
+    userFeedback: UserFeedbackReducer,
   });
 }
