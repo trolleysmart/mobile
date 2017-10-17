@@ -8,3 +8,10 @@ export function userFeedbackMessageChanged(payload) {
     payload,
   };
 }
+
+export function userFeedbackOptionsChanged(payload) {
+  return {
+    type: ActionTypes.USER_FEEDBACK_OPTIONS_CHANGED,
+    payload,
+  };
+}

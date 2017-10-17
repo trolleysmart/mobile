@@ -7,7 +7,7 @@ import { Icon } from 'react-native-elements';
 import AppDrawerMenuContainer from '../../sharedComponents/drawer/AppDrawerMenuContainer';
 import { DisclaimerNavigator } from '../../sharedComponents/disclaimer';
 import { Color } from '../../framework/style/DefaultStyles';
-import {UserFeedbackNavigationStack} from '../userFeedback';
+import { UserFeedbackNavigationStack } from '../userFeedback';
 
 export default DrawerNavigator(
   {

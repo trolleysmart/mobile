@@ -15,13 +15,30 @@ import * as userFeedbackActions from './Actions';
 class UserFeedbackContainer extends Component {
   static navigationOptions = {
     headerLeft: <MainMenuContainer />,
+    headerTitle: 'Give Feedback',
     headerStyle: {
       backgroundColor: Color.secondaryColorAction,
     },
   };
 
+  componentWillMount = () => {
+    this.props.userFeedbackActions.userFeedbackOptionsChanged(Map({ options: Map(), message: '' }));
+  };
+
   onMessageChanged = message => {
     this.props.userFeedbackActions.userFeedbackMessageChanged(Map({ message }));
+  };
+
+  onOptionsChanged = (optionKey, optionText, isSelected) => {
+    let selectedOptions = this.props.options;
+
+    if (isSelected) {
+      selectedOptions = selectedOptions.delete(optionKey);
+    } else {
+      selectedOptions = selectedOptions.set(optionKey, optionText);
+    }
+
+    this.props.userFeedbackActions.userFeedbackOptionsChanged(Map({ options: selectedOptions }));
   };
 
   onSendPress = () => {
@@ -29,12 +46,21 @@ class UserFeedbackContainer extends Component {
       environment,
       Map({
         message: this.props.message,
+        options: this.props.options,
       }),
     );
+    this.props.goBack();
   };
 
   render = () => {
-    return <UserFeedback onSendPress={this.onSendPress} onMessageChanged={this.onMessageChanged} />;
+    return (
+      <UserFeedback
+        onSendPress={this.onSendPress}
+        onMessageChanged={this.onMessageChanged}
+        onOptionsChanged={this.onOptionsChanged}
+        selectedOptions={this.props.options}
+      />
+    );
   };
 }
 
@@ -44,6 +70,7 @@ function mapStateToProps(state) {
   return {
     userId: state.userAccess.getIn(['userInfo', 'id']),
     message: state.userFeedback.get('message'),
+    options: state.userFeedback.get('options'),
   };
 }
 

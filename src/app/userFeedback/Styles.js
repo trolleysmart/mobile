@@ -1,30 +1,32 @@
 // @flow
 
 import { StyleSheet } from 'react-native';
-import {Color, Sizes} from '../../framework/style/DefaultStyles';
+import { Color, Sizes } from '../../framework/style/DefaultStyles';
 
 export default StyleSheet.create({
   container: {
     // alignItems: 'center',
     // justifyContent: 'center',
   },
-  topContainer:{
+  topContainer: {
     flexDirection: 'row',
-    padding: 20,
+    paddingLeft: 20,
+    paddingRight: 20,
+    paddingTop: 20,
+    paddingBottom: 10,
   },
-  image:{
+  image: {
     width: 150,
     height: 150,
     // marginLeft: 50,
   },
-  feedbackIntroTextContainer:{
+  feedbackIntroTextContainer: {
     width: 200,
   },
-  feedbackIntroText:{
+  feedbackIntroText: {
     fontSize: 16,
     fontWeight: '500',
     color: Color.primaryFontColor,
-
   },
   touchableContainer: {
     alignItems: 'center',
@@ -34,5 +36,11 @@ export default StyleSheet.create({
   iconContainerStyle: {
     height: Sizes.searchBarHeaderHeight,
     width: Sizes.searchBarHeaderHeight,
+  },
+  feedbackOptionText: {
+    fontSize: 14,
+    fontWeight: '500',
+    color: Color.primaryFontColor,
+    padding: 10,
   },
 });
