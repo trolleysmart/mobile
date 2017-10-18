@@ -16,12 +16,12 @@ export default StyleSheet.create({
     paddingBottom: 10,
   },
   image: {
-    width: 150,
-    height: 150,
-    // marginLeft: 50,
+    width: 100,
+    height: 100,
   },
   feedbackIntroTextContainer: {
     width: 200,
+    padding: 10,
   },
   feedbackIntroText: {
     fontSize: 16,
