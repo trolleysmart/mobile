@@ -12,7 +12,6 @@ export default createPaginationContainer(
         defaultShoppingList {
           id
           name
-          totalItemsCount
         }
         defaultShoppingListItems(first: $count, after: $cursor) @connection(key: "User_defaultShoppingListItems") {
           pageInfo {

@@ -29,7 +29,7 @@ class ShoppingListItemsContainer extends Component<any, Props, State> {
     this.props.localStateActions.defaultShoppingListIdChanged(Map({ id: this.props.user.defaultShoppingList.id }));
     this.props.localStateActions.defaultShoppingListNameChanged(Map({ name: this.props.user.defaultShoppingList.name }));
     this.props.localStateActions.defaultShoppingListTotalItemsCountChanged(
-      Map({ totalItemsCount: Maybe.Some(this.props.user.defaultShoppingList.totalItemsCount) }),
+      Map({ totalItemsCount: Maybe.Some(this.props.user.defaultShoppingListItems.edges.length) }),
     );
     this.props.localStateActions.defaultShoppingListItemIdsChanged(
       Map({ itemIds: Immutable.fromJS(this.props.user.defaultShoppingListItems.edges.map(_ => _.node.id)) }),
@@ -37,13 +37,18 @@ class ShoppingListItemsContainer extends Component<any, Props, State> {
   };
 
   componentWillReceiveProps = nextProps => {
+    this.props.localStateActions.defaultShoppingListTotalItemsCountChanged(
+      Map({ totalItemsCount: Maybe.Some(nextProps.user.defaultShoppingListItems.edges.length) }),
+    );
     this.props.localStateActions.defaultShoppingListItemIdsChanged(
       Map({ itemIds: Immutable.fromJS(nextProps.user.defaultShoppingListItems.edges.map(_ => _.node.id)) }),
     );
   };
 
   onShoppingListItemSelectionChanged = shoppingListItem => {
-    RemoveItemsFromShoppingList.commit(this.props.relay.environment, this.props.user.id, this.props.shoppingListId, [shoppingListItem.id]);
+    RemoveItemsFromShoppingList.commit(this.props.relay.environment, this.props.user.id, this.props.user.defaultShoppingList.id, [
+      shoppingListItem.id,
+    ]);
   };
 
   onShoppingListAddItemClicked = () => {

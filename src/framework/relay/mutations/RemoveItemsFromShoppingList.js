@@ -14,9 +14,9 @@ const mutation = graphql`
   }
 `;
 
-const sharedUpdater = (store, userId, shoppingListId, shoppingListItemId) => {
+const sharedUpdater = (store, userId, shoppingListItemId) => {
   const userProxy = store.get(userId);
-  const connection = ConnectionHandler.getConnection(userProxy, 'User_defaultShoppingListItems', { shoppingListId });
+  const connection = ConnectionHandler.getConnection(userProxy, 'User_defaultShoppingListItems');
 
   if (!connection) {
     return;
@@ -42,13 +42,13 @@ const commit = (environment, userId, shoppingListId, shoppingListItemIds) => {
         reduxStore.dispatch(messageBarActions.add(errorMessage, MessageType.ERROR));
       } else {
         shoppingListItemIds.forEach(shoppingListItemId => {
-          sharedUpdater(store, userId, shoppingListId, shoppingListItemId);
+          sharedUpdater(store, userId, shoppingListItemId);
         });
       }
     },
     optimisticUpdater: store => {
       shoppingListItemIds.forEach(shoppingListItemId => {
-        sharedUpdater(store, userId, shoppingListId, shoppingListItemId);
+        sharedUpdater(store, userId, shoppingListItemId);
       });
     },
   });
