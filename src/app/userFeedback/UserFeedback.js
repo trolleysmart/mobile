@@ -23,8 +23,8 @@ class UserFeedback extends Component {
           <View style={Styles.feedbackIntroTextContainer}>
             <Text style={Styles.feedbackIntroText}>
               <Text>Love to hear from </Text>
-              <Text>you.</Text>
-              <Text>Please let use know how we can improve the app.</Text>
+              <Text>you. </Text>
+              <Text>Please let us know how we can improve the app.</Text>
             </Text>
           </View>
         </View>
@@ -60,7 +60,7 @@ class UserFeedback extends Component {
             </View>
           </View>
           <FormLabel>Other Feedback</FormLabel>
-          <FormInput multiline={true} placeholder="Message" numberOfLines={8} onChangeText={message => this.props.onMessageChanged(message)} />
+          <FormInput multiline={true} placeholder="Message" numberOfLines={2} onChangeText={message => this.props.onMessageChanged(message)} />
           <Button
             title="Send"
             icon={{ name: 'send', type: 'material-community' }}

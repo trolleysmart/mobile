@@ -44,7 +44,7 @@ class Products extends Component {
           searchKeyword: this.props.defaultSearchKeyword ? this.props.defaultSearchKeyword : this.props.searchKeyword,
           sortOption: this.props.defaultSortOption ? this.props.defaultSortOption : this.props.sortOption,
           categories: this.props.defaultCategories ? this.props.defaultCategories : this.props.categories, // Use default categories if supplied
-          stores: this.props.stores,
+          stores: this.props.defaultStores ? this.props.defaultStores : this.props.stores,
         }}
         render={({ error, props, retry }) => {
           if (error) {
@@ -67,6 +67,7 @@ Products.propTypes = {
   sortOption: PropTypes.string,
   categories: PropTypes.arrayOf(PropTypes.string),
   defaultCategories: PropTypes.arrayOf(PropTypes.string),
+  defaultStores: PropTypes.arrayOf(PropTypes.string),
   defaultSortOption: PropTypes.string,
   defaultSearchKeyword: PropTypes.string,
   stores: PropTypes.arrayOf(PropTypes.string),
@@ -83,6 +84,9 @@ function mapStateToProps(state, props) {
       props.navigation.state.params && props.navigation.state.params.defaultSearchKeyword
         ? props.navigation.state.params.defaultSearchKeyword
         : props.defaultSearchKeyword,
+    defaultStores: props.navigation.state.params && props.navigation.state.params.defaultStores
+      ? props.navigation.state.params.defaultStores
+      : props.defaultStores,
     searchKeyword: state.products.get('searchKeyword'),
     sortOption: state.productsFilter.get('sortOption'),
     categories: state.productsFilter.get('categories').isEmpty()

@@ -143,6 +143,7 @@ function mapDispatchToProps(dispatch) {
           params: {
             defaultSearchKeyword,
             defaultCategories,
+            defaultStores: [],
           },
         }),
       ),
