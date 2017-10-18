@@ -1,5 +1,0 @@
-// @flow
-
-export default {
-  SHOPPING_LIST_ITEMS_COUNT_CHANGED: 'SHOPPING_LIST_ITEMS_COUNT_CHANGED',
-};

@@ -2,23 +2,30 @@
 
 import ActionTypes from './ActionTypes';
 
-export function getDefaultShoppingList(payload) {
+export function defaultShoppingListIdChanged(payload) {
   return {
-    type: ActionTypes.LOCAL_STATE_GET_DEFAULT_SHOPPING_LIST,
+    type: ActionTypes.LOCAL_STATE_DEFAULT_SHOPPING_LIST_ID_CHANGED,
     payload,
   };
 }
 
-export function setDefaultShoppingList(payload) {
+export function defaultShoppingListNameChanged(payload) {
   return {
-    type: ActionTypes.LOCAL_STATE_SET_DEFAULT_SHOPPING_LIST,
+    type: ActionTypes.LOCAL_STATE_DEFAULT_SHOPPING_LIST_NAME_CHANGED,
     payload,
   };
 }
 
-export function defaultShoppingListChanged(payload) {
+export function defaultShoppingListTotalItemsCountChanged(payload) {
   return {
-    type: ActionTypes.LOCAL_STATE_DEFAULT_SHOPPING_LIST_CHANGED,
+    type: ActionTypes.LOCAL_STATE_DEFAULT_SHOPPING_LIST_TOTAL_ITEMS_COUNT_CHANGED,
+    payload,
+  };
+}
+
+export function defaultShoppingListItemIdsChanged(payload) {
+  return {
+    type: ActionTypes.LOCAL_STATE_DEFAULT_SHOPPING_LIST_ITEM_IDS_CHANGED,
     payload,
   };
 }

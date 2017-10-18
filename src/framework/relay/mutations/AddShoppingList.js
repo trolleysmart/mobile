@@ -24,7 +24,7 @@ const mutation = graphql`
   }
 `;
 
-function sharedUpdater(store, userId, shoppingListItemsEdge) {
+const sharedUpdater = (store, userId, shoppingListItemsEdge) => {
   const userProxy = store.get(userId);
   const connection = ConnectionHandler.getConnection(userProxy, 'User_shoppingLists');
 
@@ -33,9 +33,9 @@ function sharedUpdater(store, userId, shoppingListItemsEdge) {
   }
 
   ConnectionHandler.insertEdgeAfter(connection, shoppingListItemsEdge);
-}
+};
 
-function commit(environment, userId, name) {
+const commit = (environment, userId, name) => {
   return commitMutation(environment, {
     mutation,
     variables: {
@@ -68,7 +68,7 @@ function commit(environment, userId, name) {
       sharedUpdater(store, userId, shoppingListEdge);
     },
   });
-}
+};
 
 export default {
   commit,

@@ -1,14 +1,14 @@
 // @flow
 
-import { List, Map } from 'immutable';
+import Immutable, { List, Map } from 'immutable';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Maybe } from 'monet';
 import { NavigationActions } from 'react-navigation';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import ShoppingListItems from './ShoppingListItems';
 import { RemoveItemsFromShoppingList } from '../../../framework/relay/mutations';
-import * as ShoppingListActions from './Actions';
 import * as StapleItemsActions from '../../stapleItems/Actions';
 import * as ProductsActions from '../../products/products/Actions';
 import * as localStateActions from '../../../framework/localState/Actions';
@@ -26,39 +26,39 @@ class ShoppingListItemsContainer extends Component<any, Props, State> {
   };
 
   componentWillMount = () => {
-    if (this.props.errorMessage) {
-      return;
-    }
-
-    if (!this.props.defaultShoppingListId) {
-      this.props.localStateActions.setDefaultShoppingList(
-        Map({ id: this.props.user.shoppingLists.edges[0].node.id, name: this.props.user.shoppingLists.edges[0].node.name }),
-      );
-    }
-
-    this.props.shoppingListActions.shoppingListItemsCountChanged(Map({ numberOfItems: this.props.user.shoppingListItems.edges.length }));
+    this.props.localStateActions.defaultShoppingListIdChanged(Map({ id: this.props.user.defaultShoppingList.id }));
+    this.props.localStateActions.defaultShoppingListNameChanged(Map({ name: this.props.user.defaultShoppingList.name }));
+    this.props.localStateActions.defaultShoppingListTotalItemsCountChanged(
+      Map({ totalItemsCount: Maybe.Some(this.props.user.defaultShoppingListItems.edges.length) }),
+    );
+    this.props.localStateActions.defaultShoppingListItemIdsChanged(
+      Map({ itemIds: Immutable.fromJS(this.props.user.defaultShoppingListItems.edges.map(_ => _.node.id)) }),
+    );
   };
 
   componentWillReceiveProps = nextProps => {
-    if (this.props.errorMessage) {
-      return;
-    }
-
-    nextProps.shoppingListActions.shoppingListItemsCountChanged(Map({ numberOfItems: nextProps.user.shoppingListItems.edges.length }));
+    this.props.localStateActions.defaultShoppingListTotalItemsCountChanged(
+      Map({ totalItemsCount: Maybe.Some(nextProps.user.defaultShoppingListItems.edges.length) }),
+    );
+    this.props.localStateActions.defaultShoppingListItemIdsChanged(
+      Map({ itemIds: Immutable.fromJS(nextProps.user.defaultShoppingListItems.edges.map(_ => _.node.id)) }),
+    );
   };
 
   onShoppingListItemSelectionChanged = shoppingListItem => {
-    RemoveItemsFromShoppingList.commit(this.props.relay.environment, this.props.user.id, this.props.shoppingListId, [shoppingListItem.id]);
+    RemoveItemsFromShoppingList.commit(this.props.relay.environment, this.props.user.id, this.props.user.defaultShoppingList.id, [
+      shoppingListItem.id,
+    ]);
   };
 
   onShoppingListAddItemClicked = () => {
     // Clear the selected staple list
     this.props.stapleItemsActions.stapleItemSelectionChanged(Map({ selectedStapleItems: List() }));
-    this.props.gotoAddStapleItemsItems(this.props.defaultShoppingListId);
+    this.props.gotoAddStapleItems(this.props.user.defaultShoppingList.id);
   };
 
   onViewProductsPressed = id => {
-    const foundItem = this.props.user.shoppingListItems.edges.map(_ => _.node).find(item => item.id.localeCompare(id) === 0);
+    const foundItem = this.props.user.defaultShoppingListItems.edges.map(_ => _.node).find(item => item.id.localeCompare(id) === 0);
 
     this.props.gotoProducts(foundItem.name, foundItem.tags ? foundItem.tags.map(_ => _.key) : '');
   };
@@ -67,7 +67,7 @@ class ShoppingListItemsContainer extends Component<any, Props, State> {
     this.props.gotoProductDetail(productId, productName);
   };
 
-  onRefresh = () => {
+  onRefresh = lengthToRefresh => {
     if (this.props.relay.isLoading()) {
       return;
     }
@@ -76,7 +76,7 @@ class ShoppingListItemsContainer extends Component<any, Props, State> {
       isFetchingTop: true,
     });
 
-    this.props.relay.refetchConnection(this.props.user.shoppingListItems.edges.length, () => {
+    this.props.relay.refetchConnection(lengthToRefresh || this.props.user.defaultShoppingListItems.edges.length, () => {
       this.setState({
         isFetchingTop: false,
       });
@@ -94,7 +94,7 @@ class ShoppingListItemsContainer extends Component<any, Props, State> {
   render = () => {
     return (
       <ShoppingListItems
-        shoppingListItems={this.props.user.shoppingListItems.edges.map(_ => _.node)}
+        shoppingListItems={this.props.user.defaultShoppingListItems.edges.map(_ => _.node)}
         onShoppingListItemSelectionChanged={this.onShoppingListItemSelectionChanged}
         onViewProductsPressed={this.onViewProductsPressed}
         onShoppingListAddItemClicked={this.onShoppingListAddItemClicked}
@@ -107,12 +107,10 @@ class ShoppingListItemsContainer extends Component<any, Props, State> {
   };
 }
 ShoppingListItemsContainer.propTypes = {
-  gotoAddStapleItemsItems: PropTypes.func.isRequired,
-  shoppingListActions: PropTypes.object.isRequired,
+  gotoAddStapleItems: PropTypes.func.isRequired,
   stapleItemsActions: PropTypes.object.isRequired,
   productsActions: PropTypes.object.isRequired,
   localStateActions: PropTypes.object.isRequired,
-  defaultShoppingListId: PropTypes.string.isRequired,
 };
 
 function mapStateToProps(state) {
@@ -123,11 +121,10 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    shoppingListActions: bindActionCreators(ShoppingListActions, dispatch),
     stapleItemsActions: bindActionCreators(StapleItemsActions, dispatch),
     productsActions: bindActionCreators(ProductsActions, dispatch),
     localStateActions: bindActionCreators(localStateActions, dispatch),
-    gotoAddStapleItemsItems: shoppingListId =>
+    gotoAddStapleItems: shoppingListId =>
       dispatch(
         NavigationActions.navigate({
           routeName: 'StapleItems',
@@ -143,6 +140,7 @@ function mapDispatchToProps(dispatch) {
           params: {
             defaultSearchKeyword,
             defaultCategories,
+            defaultStores: [],
           },
         }),
       ),

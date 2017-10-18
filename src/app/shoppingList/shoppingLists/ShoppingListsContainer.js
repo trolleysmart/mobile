@@ -7,10 +7,11 @@ import { NavigationActions } from 'react-navigation';
 import { Map } from 'immutable';
 import PropTypes from 'prop-types';
 import { Alert } from 'react-native';
+import { Maybe } from 'monet';
 import * as shoppingListsActions from './Actions';
 import * as shoppingListDetailActions from '../shoppingListDetail/Actions';
 import ShoppingListsList from './ShoppingListsList';
-import { RemoveShoppingList } from '../../../framework/relay/mutations';
+import { RemoveShoppingList, SetUserDefaultShoppingList } from '../../../framework/relay/mutations';
 import { environment } from '../../../framework/relay';
 import * as localStateActions from '../../../framework/localState/Actions';
 import { type ShoppingListsRelayContainer_user } from './__generated__/ShoppingListsRelayContainer_user.graphql';
@@ -27,12 +28,10 @@ class ShoppingListsContainer extends Component<any, Props, State> {
   };
 
   onShoppingListPressed = shoppingList => {
-    this.props.localStateActions.setDefaultShoppingList(
-      Map({
-        id: shoppingList.id,
-        name: shoppingList.name,
-      }),
-    );
+    this.props.localStateActions.defaultShoppingListIdChanged(Map({ id: shoppingList.id }));
+    this.props.localStateActions.defaultShoppingListNameChanged(Map({ name: shoppingList.name }));
+    this.props.localStateActions.defaultShoppingListTotalItemsCountChanged(Map({ totalItemsCount: Maybe.Some(shoppingList.totalItemsCount) }));
+    SetUserDefaultShoppingList.commit(environment, this.props.userId, this.props.defaultShoppingListItemIds, shoppingList.id);
     this.props.goBack();
   };
 
@@ -106,11 +105,13 @@ class ShoppingListsContainer extends Component<any, Props, State> {
 
 ShoppingListsContainer.propTypes = {
   userId: PropTypes.string.isRequired,
+  defaultShoppingListItemIds: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
 };
 
 function mapStateToProps(state) {
   return {
     userId: state.userAccess.getIn(['userInfo', 'id']),
+    defaultShoppingListItemIds: state.localState.getIn(['defaultShoppingList', 'itemIds']).toJS(),
   };
 }
 

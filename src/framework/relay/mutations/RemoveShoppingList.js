@@ -14,7 +14,7 @@ const mutation = graphql`
   }
 `;
 
-function sharedUpdater(store, userId, shoppingListId) {
+const sharedUpdater = (store, userId, shoppingListId) => {
   const userProxy = store.get(userId);
   const connection = ConnectionHandler.getConnection(userProxy, 'User_shoppingLists');
 
@@ -23,9 +23,9 @@ function sharedUpdater(store, userId, shoppingListId) {
   }
 
   ConnectionHandler.deleteNode(connection, shoppingListId);
-}
+};
 
-function commit(environment, userId, shoppingListId) {
+const commit = (environment, userId, shoppingListId) => {
   return commitMutation(environment, {
     mutation,
     variables: {
@@ -47,7 +47,7 @@ function commit(environment, userId, shoppingListId) {
       sharedUpdater(store, userId, shoppingListId);
     },
   });
-}
+};
 
 export default {
   commit,
