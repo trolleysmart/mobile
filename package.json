@@ -1,7 +1,7 @@
 {
   "name": "TrolleySmart",
   "description": "Trolley Smart",
-  "version": "1.0.57-SNAPSHOT",
+  "version": "1.0.58-SNAPSHOT",
   "author": {
     "name": "Micro Business Ltd",
     "email": "micro.business.ltd@gmail.com",
@@ -49,14 +49,14 @@
     "react-native-maps": "^0.17.0",
     "react-native-popup-dialog": "^0.9.36",
     "react-native-popup-menu": "^0.8.3",
-    "react-native-restart": "0.0.3",
+    "react-native-restart": "0.0.4",
     "react-native-swiper": "^1.5.13",
     "react-native-vector-icons": "4.4.2",
-    "react-navigation": "^1.0.0-beta.13",
+    "react-navigation": "^1.0.0-beta.14",
     "react-redux": "5.0.6",
     "react-relay": "1.4.1",
     "redux": "3.7.2",
-    "redux-saga": "0.15.6",
+    "redux-saga": "0.16.0",
     "uuid": "3.1.0"
   },
   "devDependencies": {
@@ -75,7 +75,7 @@
     "eslint-plugin-import": "2.7.0",
     "eslint-plugin-react": "7.4.0",
     "eslint-plugin-react-native": "3.1.0",
-    "flow-bin": "0.57.2",
+    "flow-bin": "0.57.3",
     "jest": "21.2.1",
     "lint-staged": "4.2.3",
     "plist": "^2.1.0",

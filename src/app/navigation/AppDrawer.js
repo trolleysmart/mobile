@@ -36,7 +36,7 @@ export default DrawerNavigator(
       screen: UserFeedbackNavigationStack,
       navigationOptions: {
         drawerLabel: 'Give Feedback',
-        drawerIcon: () => <Icon name="ios-settings" type="ionicon" color={Color.secondaryColorAction} />,
+        drawerIcon: () => <Icon name="ios-megaphone" type="ionicon" color={Color.secondaryColorAction} />,
       },
     },
   },
