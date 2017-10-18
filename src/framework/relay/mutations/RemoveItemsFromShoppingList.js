@@ -14,18 +14,18 @@ const mutation = graphql`
   }
 `;
 
-function sharedUpdater(store, userId, shoppingListId, shoppingListItemId) {
+const sharedUpdater = (store, userId, shoppingListId, shoppingListItemId) => {
   const userProxy = store.get(userId);
-  const connection = ConnectionHandler.getConnection(userProxy, 'User_shoppingListItems', { shoppingListId });
+  const connection = ConnectionHandler.getConnection(userProxy, 'User_defaultShoppingListItems', { shoppingListId });
 
   if (!connection) {
     return;
   }
 
   ConnectionHandler.deleteNode(connection, shoppingListItemId);
-}
+};
 
-function commit(environment, userId, shoppingListId, shoppingListItemIds) {
+const commit = (environment, userId, shoppingListId, shoppingListItemIds) => {
   return commitMutation(environment, {
     mutation,
     variables: {
@@ -52,7 +52,7 @@ function commit(environment, userId, shoppingListId, shoppingListItemIds) {
       });
     },
   });
-}
+};
 
 export default {
   commit,

@@ -20,7 +20,6 @@ import { SignUpSignInContainer } from '../signUpSignIn';
 import { configureStore } from '../../framework/redux';
 import AppDrawer from './AppDrawer';
 import { SignInDisclaimerContainer } from '../../sharedComponents/disclaimer';
-import * as localStateActions from '../../framework/localState/Actions';
 
 const AppNavigator = StackNavigator(
   {
@@ -139,7 +138,6 @@ class AppWithNavigationState extends Component {
 
   componentWillMount() {
     this.props.netInfoActions.refreshState(Map());
-    this.props.localStateActions.getDefaultShoppingList(Map());
 
     CodePush.sync(
       {
@@ -254,7 +252,6 @@ AppWithNavigationState.propTypes = {
   navigation: PropTypes.object.isRequired,
   messageBarActions: PropTypes.object.isRequired,
   userAccessActions: PropTypes.object.isRequired,
-  localStateActions: PropTypes.object.isRequired,
   goBack: PropTypes.func.isRequired,
   netInfo: PropTypes.shape({
     netInfoExists: PropTypes.bool.isRequired,
@@ -283,7 +280,6 @@ function mapDispatchToProps(dispatch) {
     dispatch,
     messageBarActions: bindActionCreators(messageBarActions, dispatch),
     userAccessActions: bindActionCreators(userAccessActions, dispatch),
-    localStateActions: bindActionCreators(localStateActions, dispatch),
     goBack: () => dispatch(NavigationActions.back()),
   };
 }

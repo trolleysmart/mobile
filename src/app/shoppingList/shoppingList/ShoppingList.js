@@ -1,8 +1,6 @@
 // @flow
 
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { environment } from '../../../framework/relay';
 import { graphql, QueryRenderer } from 'react-relay';
 import { MainMenuContainer } from '../../../sharedComponents/mainMenu';
@@ -12,7 +10,7 @@ import HeaderTitleContainer from './HeaderTitleContainer';
 import { LoadingInProgress } from '../../../sharedComponents/loadingInProgress';
 import { ErrorMessageWithRetry } from '../../../sharedComponents/errorMessageWithRetry';
 
-class ShoppingList extends Component {
+export default class ShoppingList extends Component {
   static navigationOptions = () => ({
     headerTitle: <HeaderTitleContainer />,
     headerLeft: <MainMenuContainer />,
@@ -24,7 +22,7 @@ class ShoppingList extends Component {
       <QueryRenderer
         environment={environment}
         query={graphql`
-          query ShoppingListQuery($count: Int!, $cursor: String, $shoppingListId: ID!) {
+          query ShoppingListQuery($count: Int!, $cursor: String) {
             user {
               ...ShoppingListItemsRelayContainer_user
             }
@@ -33,7 +31,6 @@ class ShoppingList extends Component {
         variables={{
           cursor: null,
           count: 1000,
-          shoppingListId: this.props.shoppingListId,
         }}
         render={({ error, props, retry }) => {
           if (error) {
@@ -41,7 +38,7 @@ class ShoppingList extends Component {
           }
 
           if (props) {
-            return <ShoppingListItemsRelayContainer user={props.user} shoppingListId={this.props.shoppingListId} />;
+            return <ShoppingListItemsRelayContainer user={props.user} />;
           }
 
           return <LoadingInProgress />;
@@ -50,15 +47,3 @@ class ShoppingList extends Component {
     );
   }
 }
-
-ShoppingList.propTypes = {
-  shoppingListId: PropTypes.string.isRequired,
-};
-
-function mapStateToProps(state) {
-  return {
-    shoppingListId: state.localState.getIn(['defaultShoppingList', 'id']),
-  };
-}
-
-export default connect(mapStateToProps)(ShoppingList);

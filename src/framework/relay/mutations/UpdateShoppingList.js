@@ -22,7 +22,7 @@ const mutation = graphql`
   }
 `;
 
-function commit(environment, userId, shoppingListId, name) {
+const commit = (environment, userId, shoppingListId, name) => {
   return commitMutation(environment, {
     mutation,
     variables: {
@@ -40,7 +40,7 @@ function commit(environment, userId, shoppingListId, name) {
       }
     },
   });
-}
+};
 
 export default {
   commit,
