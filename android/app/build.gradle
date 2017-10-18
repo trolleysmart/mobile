@@ -93,8 +93,8 @@ def enableProguardInReleaseBuilds = false
 ext.versionMajor = 1
 ext.versionMinor = 0
 ext.versionPatch = 58
-ext.versionClassifier = null
-ext.isSnapshot = true
+ext.versionClassifier = "alpha"
+ext.isSnapshot = false
 ext.minimumSdkVersion = 16
 
 android {
@@ -106,7 +106,7 @@ android {
         targetSdkVersion 26
         minSdkVersion project.ext.minimumSdkVersion
         versionCode 160010058
-        versionName "1.0.58-SNAPSHOT"
+        versionName "1.0.0-alpha.58"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
