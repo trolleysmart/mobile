@@ -2,7 +2,8 @@
 
 import { configParseServerSdk } from 'micro-business-parse-server-common-react-native';
 import React, { Component } from 'react';
-import { Alert, Provider } from 'react-redux';
+import { Alert } from 'react-native';
+import { Provider } from 'react-redux';
 import Config from 'react-native-config';
 import { MenuContext } from 'react-native-popup-menu';
 import RNRestart from 'react-native-restart';
