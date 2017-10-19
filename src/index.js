@@ -3,11 +3,11 @@
 import { configParseServerSdk } from 'micro-business-parse-server-common-react-native';
 import React, { Component } from 'react';
 import { Alert, Provider } from 'react-redux';
+import Config from 'react-native-config';
 import { MenuContext } from 'react-native-popup-menu';
 import RNRestart from 'react-native-restart';
 import { setJSExceptionHandler } from 'react-native-exception-handler';
 import Navigation, { reduxStore } from './app/navigation';
-import Config from './framework/config';
 
 const errorHandler = (e, isFatal) => {
   Alert.alert(
@@ -34,7 +34,7 @@ export default class TrolleySmart extends Component {
   constructor(props, context) {
     super(props, context);
 
-    configParseServerSdk(Config.parseServerServerUrl, Config.parseServerApplicationId, Config.parseServerJavascriptKey);
+    configParseServerSdk(Config.PARSE_SERVER_URL, Config.PARSE_SERVER_APPLICATION_ID, Config.PARSE_SERVER_JAVASCRIPT_KEY);
 
     this.state = {
       store: reduxStore,

@@ -2,11 +2,11 @@
 
 import { UserService } from 'micro-business-parse-server-common-react-native';
 import { Environment, Network, RecordSource, Store } from 'relay-runtime';
-import config from '../config';
+import Config from 'react-native-config';
 
 const fetchQuery = async (operation, variables) => {
   const sessionToken = await UserService.getCurrentUserSession();
-  const response = await fetch(config.graphqlEndpoint, {
+  const response = await fetch(Config.GRAPHQL_ENDPOINT, {
     method: 'POST',
     headers: {
       Accept: 'application/json',
