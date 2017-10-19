@@ -24,8 +24,8 @@
     "clear": "node node_modules/react-native/local-cli/cli.js start --reset-cache",
     "devtools": "react-devtools",
     "lint:staged": "lint-staged",
-    "codepush:ios": "code-push release-react trolleysmart-v1-alpha-ios ios && code-push promote trolleysmart-v1-alpha-ios Staging Production",
-    "codepush:android": "code-push release-react trolleysmart-v1-alpha-android android && code-push promote trolleysmart-v1-alpha-android Staging Production"
+    "codepush:ios": "code-push release-react trolleysmart-alpha-ios ios && code-push promote trolleysmart-alpha-ios Staging Production",
+    "codepush:android": "code-push release-react trolleysmart-alpha-android android && code-push promote trolleysmart-alpha-android Staging Production"
   },
   "dependencies": {
     "email-validator": "1.1.1",
