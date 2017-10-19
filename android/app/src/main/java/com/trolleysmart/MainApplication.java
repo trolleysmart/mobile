@@ -3,6 +3,7 @@ package com.trolleysmart;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.lugg.ReactNativeConfig.ReactNativeConfigPackage;
 import com.masteratul.exceptionhandler.ReactNativeExceptionHandlerPackage;
 import com.airbnb.android.react.maps.MapsPackage;
 import com.avishayil.rnrestart.ReactNativeRestartPackage;
@@ -49,7 +50,8 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new ReactNativeExceptionHandlerPackage(),
+          new ReactNativeConfigPackage(),
+          new ReactNativeExceptionHandlerPackage(),
           new MapsPackage(),
           new ReactNativeRestartPackage(),
           new FastImageViewPackage(),
