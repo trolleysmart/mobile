@@ -1,5 +1,5 @@
 <resources>
-    <string moduleConfig="true" name="reactNativeCodePush_androidDeploymentKey">QsUacyPNulFUoSfOfB2uZAFbNP52678fa9f4-af75-4806-89b9-bad9002337a3</string>
+    <string moduleConfig="true" name="reactNativeCodePush_androidDeploymentKey">Y5MoEnQMCaNQQC5rzXlML6NrGlY7678fa9f4-af75-4806-89b9-bad9002337a3</string>
     <string name="app_name">TrolleySmart</string>
     <string name="facebook_app_id">817077331792920</string>
 </resources>
