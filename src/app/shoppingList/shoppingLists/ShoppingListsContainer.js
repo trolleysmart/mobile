@@ -27,11 +27,15 @@ class ShoppingListsContainer extends Component<any, Props, State> {
     isFetchingTop: false,
   };
 
-  onShoppingListPressed = shoppingList => {
+  setDefaultShoppingList = shoppingList => {
     this.props.localStateActions.defaultShoppingListIdChanged(Map({ id: shoppingList.id }));
     this.props.localStateActions.defaultShoppingListNameChanged(Map({ name: shoppingList.name }));
     this.props.localStateActions.defaultShoppingListTotalItemsCountChanged(Map({ totalItemsCount: Maybe.Some(shoppingList.totalItemsCount) }));
     SetUserDefaultShoppingList.commit(environment, this.props.userId, this.props.defaultShoppingListItemIds, shoppingList.id);
+  };
+
+  onShoppingListPressed = shoppingList => {
+    this.setDefaultShoppingList(shoppingList);
     this.props.goBack();
   };
 
@@ -60,6 +64,14 @@ class ShoppingListsContainer extends Component<any, Props, State> {
       Alert.alert('Error', 'Sorry, you must have at least one shopping list.');
     } else {
       RemoveShoppingList.commit(environment, this.props.userId, shoppingListId);
+
+      if (shoppingListId.localeCompare(this.props.user.defaultShoppingList.id) === 0) {
+        const defaultShoppingList = this.props.user.shoppingLists.edges
+          .map(_ => _.node)
+          .filter(_ => _.id.localeCompare(shoppingListId) !== 0)[0];
+
+        this.setDefaultShoppingList(defaultShoppingList);
+      }
     }
   };
 
@@ -72,7 +84,7 @@ class ShoppingListsContainer extends Component<any, Props, State> {
       isFetchingTop: true,
     });
 
-    this.props.relay.refetchConnection(this.props.shoppingLists.edges.length, () => {
+    this.props.relay.refetchConnection(this.props.user.shoppingLists.edges.length, () => {
       this.setState({
         isFetchingTop: false,
       });
