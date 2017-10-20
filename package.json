@@ -1,7 +1,7 @@
 {
   "name": "TrolleySmart",
   "description": "Trolley Smart",
-  "version": "1.0.0-alpha.62",
+  "version": "1.0.0-alpha.63",
   "author": {
     "name": "Micro Business Ltd",
     "email": "micro.business.ltd@gmail.com",
@@ -38,7 +38,7 @@
     "react": "16.0.0",
     "react-immutable-proptypes": "2.1.0",
     "react-native": "0.49.3",
-    "react-native-action-button": "^2.8.0",
+    "react-native-action-button": "^2.8.1",
     "react-native-code-push": "^5.1.3-beta",
     "react-native-config": "^0.9.0",
     "react-native-easy-grid": "0.1.15",
@@ -49,7 +49,7 @@
     "react-native-fbsdk": "^0.6.3",
     "react-native-image-pan-zoom": "^2.0.7",
     "react-native-maps": "^0.17.1",
-    "react-native-popup-dialog": "^0.9.36",
+    "react-native-popup-dialog": "^0.9.37",
     "react-native-popup-menu": "^0.8.3",
     "react-native-restart": "0.0.4",
     "react-native-swiper": "^1.5.13",
