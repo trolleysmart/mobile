@@ -48,10 +48,16 @@ class ProductDetailView extends Component {
               <View />
             )}
             <View style={Styles.rowContainer}>
-              <Icon style={Styles.icon} color="#bfc4c9" name="web" type="material-community" />
-              <Text style={Styles.link} onPress={() => this.props.handleVisitStorePressed(this.props.product.productPageUrl)}>
-                View on web
-              </Text>
+              {this.props.product.productPageUrl ? (
+                <View>
+                  <Icon style={Styles.icon} color="#bfc4c9" name="web" type="material-community" />
+                  <Text style={Styles.link} onPress={() => this.props.handleVisitStorePressed(this.props.product.productPageUrl)}>
+                    View on web
+                  </Text>
+                </View>
+              ) : (
+                <View />
+              )}
             </View>
           </Card>
           <Card title="Store Info">
@@ -60,12 +66,11 @@ class ProductDetailView extends Component {
                 {this.props.product.store && this.props.product.store.imageUrl ? (
                   <Avatar medium rounded source={{ uri: this.props.product.store.imageUrl }} activeOpacity={0.7} />
                 ) : (
-                  <Avatar medium rounded icon={{ name: 'user' }} activeOpacity={0.7} />
+                  <View />
                 )}
               </View>
               <View style={Styles.storeDetail}>
                 <Text>{this.props.product.store ? this.props.product.store.name : ''}</Text>
-                {/*<Icon name="google-maps" type="material-community" />*/}
               </View>
             </View>
           </Card>
