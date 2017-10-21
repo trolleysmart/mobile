@@ -1,7 +1,7 @@
 {
   "name": "TrolleySmart",
   "description": "Trolley Smart",
-  "version": "1.0.0-alpha.64",
+  "version": "1.0.0-alpha.65",
   "author": {
     "name": "Micro Business Ltd",
     "email": "micro.business.ltd@gmail.com",
@@ -29,10 +29,10 @@
   },
   "dependencies": {
     "email-validator": "1.1.1",
-    "immutable": "^4.0.0-rc.4",
+    "immutable": "^4.0.0-rc.9",
     "lodash.debounce": "^4.0.8",
-    "micro-business-common-react-native": "^1.0.0-alpha.4",
-    "micro-business-parse-server-common-react-native": "1.0.0-alpha.7",
+    "micro-business-common-react-native": "^1.0.0-alpha.5",
+    "micro-business-parse-server-common-react-native": "1.0.0-alpha.8",
     "monet": "^0.8.10",
     "prop-types": "15.6.0",
     "react": "16.0.0",
