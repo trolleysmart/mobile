@@ -1,15 +1,29 @@
 // @flow
 
 import React from 'react';
-import { TouchableHighlight } from 'react-native';
+import { TouchableHighlight, View } from 'react-native';
 import { Col, Grid } from 'react-native-easy-grid';
-import { CheckBox, ListItem } from 'react-native-elements';
+import { CheckBox, ListItem, Avatar, Text } from 'react-native-elements';
 import PropTypes from 'prop-types';
 import { ShoppingListItemProp } from './PropTypes';
 import Styles from './Styles';
+import { ImageUltility } from '../../../components/image';
 import { ProductListRow } from '../../products';
 
 class ShoppingListItem extends React.PureComponent {
+  renderStapleListItem = (stapleItemName) => {
+    return <View style={Styles.stapleItemNameContainer}>
+      <Avatar
+        width={24}
+        height={24}
+        overlayContainerStyle={Styles.stapleItemIconContainer}
+        source={ImageUltility.getImageSource(stapleItemName.toLowerCase().replace(/\s+/g, ''))}
+        activeOpacity={0.1}
+      />
+      <Text style={Styles.stapleItemName}>{stapleItemName}</Text>
+    </View>;
+  };
+
   render() {
     if (this.props.shoppingListItem.stapleItemId) {
       // Staple item
@@ -25,7 +39,7 @@ class ShoppingListItem extends React.PureComponent {
             />
           }
           key={this.props.shoppingListItem.name}
-          title={this.props.shoppingListItem.name}
+          title={this.renderStapleListItem(this.props.shoppingListItem.name)}
           onPressRightIcon={() => this.props.onViewProductsPressed(this.props.shoppingListItem.id)}
         />
       );

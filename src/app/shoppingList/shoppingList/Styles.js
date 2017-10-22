@@ -37,7 +37,8 @@ export default StyleSheet.create({
     marginRight: -15,
   },
   stapleItemName: {
-    justifyContent: 'center',
+    // justifyContent: 'center',
+    paddingLeft: 10,
   },
   specialItemRow: {
     backgroundColor: 'white',
@@ -116,5 +117,12 @@ export default StyleSheet.create({
   addItemsBackgroundImage: {
     width: 150,
     height: 150,
+  },
+  stapleItemNameContainer:{
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  stapleItemIconContainer: {
+    backgroundColor: 'transparent',
   },
 });
