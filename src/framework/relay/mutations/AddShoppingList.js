@@ -59,8 +59,10 @@ const commit = (environment, userId, name) => {
       const id = uuid();
       const node = store.create(id, 'item');
 
+      node.setValue(true, 'savingInProgress');
       node.setValue(id, 'id');
       node.setValue(name, 'name');
+      node.setValue(0, 'totalItemsCount');
 
       const shoppingListEdge = store.create(uuid(), 'ShoppingListEdge');
 

@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, ActivityIndicator } from 'react-native';
 import PropTypes from 'prop-types';
 import { ListItem, Icon } from 'react-native-elements';
 import { Menu, MenuTrigger, MenuOptions, MenuOption } from 'react-native-popup-menu';
@@ -39,7 +39,7 @@ class ShoppingListRow extends React.PureComponent {
       <View>
         <ListItem
           key={this.props.shoppingList.id}
-          title={this.props.shoppingList.name}
+          title={this.props.shoppingList.name + (this.props.shoppingList.savingInProgress ? ' - saving...' : '')}
           titleStyle={Styles.shoppingListRowName}
           onPress={() => this.props.onShoppingListPressed(this.props.shoppingList)}
           badge={{
