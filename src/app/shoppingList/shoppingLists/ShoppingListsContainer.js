@@ -61,14 +61,12 @@ class ShoppingListsContainer extends Component<any, Props, State> {
 
   onDeleteShoppingListPressed = shoppingListId => {
     if (this.props.user.shoppingLists.edges.length <= 1) {
-      Alert.alert('Error', 'Sorry, you must have at least one shopping list.');
+      Alert.alert('Info', 'Sorry, you must have at least one shopping list.');
     } else {
       RemoveShoppingList.commit(environment, this.props.userId, shoppingListId);
 
       if (shoppingListId.localeCompare(this.props.user.defaultShoppingList.id) === 0) {
-        const defaultShoppingList = this.props.user.shoppingLists.edges
-          .map(_ => _.node)
-          .filter(_ => _.id.localeCompare(shoppingListId) !== 0)[0];
+        const defaultShoppingList = this.props.user.shoppingLists.edges.map(_ => _.node).filter(_ => _.id.localeCompare(shoppingListId) !== 0)[0];
 
         this.setDefaultShoppingList(defaultShoppingList);
       }

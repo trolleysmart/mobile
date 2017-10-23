@@ -22,7 +22,6 @@ class AppDrawerMenuContainer extends Component {
           )}
           <View style={Styles.profileDetail}>
             <Text>{this.props.name}</Text>
-            <Text>View Profile</Text>
           </View>
         </View>
         <View style={Styles.menu}>

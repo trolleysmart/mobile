@@ -30,6 +30,10 @@ class ProductDetailContainer extends Component<any, Props, State> {
     this.props.goBack();
   };
 
+  onViewStorePressed = storeId => {
+    this.props.gotoStore(storeId);
+  };
+
   handleVisitStorePressed = url => {
     this.handleClickHyperLink(url);
   };
@@ -40,6 +44,7 @@ class ProductDetailContainer extends Component<any, Props, State> {
         product={this.props.user.product}
         handleVisitStorePressed={this.handleVisitStorePressed}
         onAddProductPressed={this.onAddProductPressed}
+        onViewStorePressed={this.onViewStorePressed}
         isInShoppingList={this.props.isInShoppingList}
       />
     );
@@ -62,6 +67,15 @@ function mapDispatchToProps(dispatch) {
   return {
     productsActions: bindActionCreators(productsActions, dispatch),
     goBack: () => dispatch(NavigationActions.back()),
+    gotoStore: storeId =>
+      dispatch(
+        NavigationActions.navigate({
+          routeName: 'Store',
+          params: {
+            storeId,
+          },
+        }),
+      ),
   };
 }
 

@@ -12,6 +12,7 @@ import ShoppingListDetailContainer from '../shoppingList/shoppingListDetail/Shop
 import ProductDetail from '../products/productDetail/ProductDetail';
 import ShoppingLists from '../shoppingList/shoppingLists/ShoppingLists';
 import { Color } from '../../framework/style/DefaultStyles';
+import { Store } from '../store';
 
 export default StackNavigator(
   {
@@ -44,6 +45,9 @@ export default StackNavigator(
     },
     ProductDetail: {
       screen: ProductDetail,
+    },
+    Store: {
+      screen: Store,
     },
   },
   {

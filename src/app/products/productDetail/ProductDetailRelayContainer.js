@@ -19,6 +19,7 @@ export default createFragmentContainer(
           store {
             name
             imageUrl
+            id
           }
           comments
           unitPrice {

@@ -13,7 +13,7 @@ class ProductDetailView extends Component {
   render = () => {
     return (
       <View style={Styles.container}>
-        <ScrollView>
+        <ScrollView style={Styles.scrollViewContainer}>
           <Image source={{ uri: this.props.product.imageUrl }} resizeMode="cover" style={Styles.productImage} />
           <View style={Styles.productTitleContainer}>
             <Text style={Styles.productTitle}>{this.props.product.name}</Text>
@@ -64,7 +64,13 @@ class ProductDetailView extends Component {
             <View style={Styles.storeInfoContainer}>
               <View>
                 {this.props.product.store && this.props.product.store.imageUrl ? (
-                  <Avatar medium rounded source={{ uri: this.props.product.store.imageUrl }} activeOpacity={0.7} />
+                  <Avatar
+                    medium
+                    rounded
+                    source={{ uri: this.props.product.store.imageUrl }}
+                    activeOpacity={0.7}
+                    onPress={() => this.props.onViewStorePressed(this.props.product.store.id)}
+                  />
                 ) : (
                   <View />
                 )}
@@ -104,6 +110,7 @@ ProductDetailView.propTypes = {
   product: ProductProp,
   handleVisitStorePressed: PropTypes.func.isRequired,
   onAddProductPressed: PropTypes.func.isRequired,
+  onViewStorePressed: PropTypes.func.isRequired,
   isInShoppingList: PropTypes.bool.isRequired,
 };
 

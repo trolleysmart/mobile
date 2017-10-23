@@ -1,7 +1,7 @@
 // @flow
 
 import { StyleSheet } from 'react-native';
-import { Color } from '../../../framework/style/DefaultStyles';
+import { Color } from '../../framework/style/DefaultStyles';
 
 export default StyleSheet.create({
   container: {
@@ -15,11 +15,10 @@ export default StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  scrollViewContainer: {
-    marginBottom: 20,
-  },
   addProductContainer: {
+    // marginBottom: 10,
     justifyContent: 'space-between',
+    // padding: 10,
     height: 50,
     flexDirection: 'row',
     backgroundColor: '#262626',
