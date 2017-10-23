@@ -46,7 +46,7 @@ class ShoppingListItemsContainer extends Component<any, Props, State> {
   };
 
   onShoppingListItemSelectionChanged = shoppingListItem => {
-    RemoveItemsFromShoppingList.commit(this.props.relay.environment, this.props.user.id, this.props.user.defaultShoppingList.id, [
+    RemoveItemsFromShoppingList.commit(this.props.relay.environment, this.props.user.id, this.props.defaultShoppingListId, [
       shoppingListItem.id,
     ]);
   };
@@ -54,7 +54,7 @@ class ShoppingListItemsContainer extends Component<any, Props, State> {
   onShoppingListAddItemClicked = () => {
     // Clear the selected staple list
     this.props.stapleItemsActions.stapleItemSelectionChanged(Map({ selectedStapleItems: List() }));
-    this.props.gotoAddStapleItems(this.props.user.defaultShoppingList.id);
+    this.props.gotoAddStapleItems(this.props.defaultShoppingListId);
   };
 
   onViewProductsPressed = id => {
