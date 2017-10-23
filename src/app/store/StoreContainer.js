@@ -26,7 +26,7 @@ class StoreContainer extends Component<any, Props, State> {
 
 StoreContainer.propTypes = {};
 
-function mapStateToProps(state, props) {
+function mapStateToProps() {
   return {};
 }
 
