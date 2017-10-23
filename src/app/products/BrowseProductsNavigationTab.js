@@ -14,19 +14,60 @@ const BrowseProductsNavigationTab = TabNavigator(
       },
       path: '/all',
     },
-    BigSave: {
-      screen: props => <Products {...props} defaultSortOption="SavingDescending" />,
+    Groceries: {
+      screen: props => (
+        <Products
+          {...props}
+          defaultCategories={[
+            'baby-care-toys',
+            'bakery',
+            'baking-cooking',
+            'beauty-personal-care',
+            'biscuits-crackers',
+            'books-music-movies',
+            'breakfast-foods',
+            'canned-prepared-foods',
+            'chocolate-sweets-snacks',
+            'cleaning-homecare',
+            'clothing-shoes-bags',
+            'deli-chilled-foods',
+            'drinks-hot-cold',
+            'electronics-gaming-giftcards',
+            'frozen-foods',
+            'fruit-vegetables',
+            'garden',
+            'health-wellness',
+            'home-kitchenware-manchester',
+            'jewellery',
+            'liquor-beer-cider',
+            'liquor-wine',
+            'meal-ingredients',
+            'meat-seafood',
+            'office-craft',
+            'pet-care',
+            'sports-outdoors',
+            'toys-party',
+          ]}
+        />
+      ),
       navigationOptions: {
-        tabBarLabel: 'Big Save',
+        tabBarLabel: 'Groceries',
       },
-      path: '/specialsbig',
+      path: '/groceries',
     },
-    FruitsAndVeg: {
+    Health: {
+      screen: props => <Products {...props} defaultCategories={['health-wellness']} />,
+      navigationOptions: {
+        tabBarLabel: 'Health',
+      },
+      path: '/health',
+    },
+    FruitAndVege: {
       screen: props => <Products {...props} defaultCategories={['fruit-vegetables']} />,
       navigationOptions: {
-        tabBarLabel: 'Fruits & Vegs',
+        tabBarLabel: 'Fruit & Vege',
       },
-      path: '/fruits',
+      path: '/fruitAndVege',
     },
     Meat: {
       screen: props => <Products {...props} defaultCategories={['meat-seafood']} />,
