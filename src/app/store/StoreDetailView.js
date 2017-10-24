@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from 'react';
-import { Text, View, Image, ScrollView } from 'react-native';
+import { Text, View, ScrollView } from 'react-native';
 import { Card, Avatar, Icon } from 'react-native-elements';
 import PropTypes from 'prop-types';
 import Styles from './Styles';
