@@ -13,6 +13,11 @@ class Settings extends Component {
       <View>
         <List>
           <ListItem title="Disclaimer" leftIcon={{ name: 'ios-information-outline', type: 'ionicon' }} onPress={this.props.gotoDisclaimer} />
+          <ListItem
+            title="Pricing Disclaimer"
+            leftIcon={{ name: 'ios-information-outline', type: 'ionicon' }}
+            onPress={this.props.gotoPricingDisclaimer}
+          />
           <ListItem title="Sign out" leftIcon={{ name: 'ios-log-out-outline', type: 'ionicon' }} onPress={this.props.signOut} />
         </List>
         <View style={Styles.aboutContainer}>
@@ -36,6 +41,7 @@ class Settings extends Component {
 Settings.propTypes = {
   signOut: PropTypes.func.isRequired,
   gotoDisclaimer: PropTypes.func.isRequired,
+  gotoPricingDisclaimer: PropTypes.func.isRequired,
   handleClickOpenSourceLicensesLink: PropTypes.func.isRequired,
   handleClickPrivacyPolicyLink: PropTypes.func.isRequired,
   handleClickTermsAndConditionLink: PropTypes.func.isRequired,

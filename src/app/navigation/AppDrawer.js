@@ -6,6 +6,7 @@ import { SettingsNavigator } from '../settings';
 import { Icon } from 'react-native-elements';
 import AppDrawerMenuContainer from '../../sharedComponents/drawer/AppDrawerMenuContainer';
 import { DisclaimerNavigator } from '../disclaimer';
+import { PricingDisclaimerNavigator } from '../pricingDisclaimer';
 import { Color } from '../../framework/style/DefaultStyles';
 import { UserFeedbackNavigationStack } from '../userFeedback';
 
@@ -22,6 +23,13 @@ export default DrawerNavigator(
       screen: DisclaimerNavigator,
       navigationOptions: {
         drawerLabel: 'Alpha Programme',
+        drawerIcon: () => <Icon name="new-releases" color="#517fa4" type="material-icons" />,
+      },
+    },
+    PricingDisclaimer: {
+      screen: PricingDisclaimerNavigator,
+      navigationOptions: {
+        drawerLabel: 'Pricing Disclaimer',
         drawerIcon: () => <Icon name="new-releases" color="#517fa4" type="material-icons" />,
       },
     },

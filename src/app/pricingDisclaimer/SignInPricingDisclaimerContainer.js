@@ -4,19 +4,19 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { NavigationActions } from 'react-navigation';
-import SignInDisclaimer from './SignInDisclaimer';
+import SignInPricingDisclaimer from './SignInPricingDisclaimer';
 
-class SignInDisclaimerContainer extends Component {
+class SignInPricingDisclaimerContainer extends Component {
   gotoSignIn = () => {
-    this.props.gotoScreen('SignInPricingDisclaimer');
+    this.props.gotoScreen('SignUpSignIn');
   };
 
   render = () => {
-    return <SignInDisclaimer disclaimerButtonClicked={this.gotoSignIn} />;
+    return <SignInPricingDisclaimer disclaimerButtonClicked={this.gotoSignIn} />;
   };
 }
 
-SignInDisclaimerContainer.propTypes = {
+SignInPricingDisclaimerContainer.propTypes = {
   gotoScreen: PropTypes.func.isRequired,
 };
 
@@ -41,4 +41,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignInDisclaimerContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(SignInPricingDisclaimerContainer);

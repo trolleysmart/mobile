@@ -20,6 +20,7 @@ import { SignUpSignInContainer } from '../signUpSignIn';
 import { configureStore } from '../../framework/redux';
 import AppDrawer from './AppDrawer';
 import { SignInDisclaimerContainer } from '../disclaimer';
+import { SignInPricingDisclaimerContainer } from '../pricingDisclaimer';
 
 const AppNavigator = StackNavigator(
   {
@@ -30,6 +31,10 @@ const AppNavigator = StackNavigator(
     SignInDisclaimer: {
       screen: SignInDisclaimerContainer,
       path: '/SignInDisclaimer',
+    },
+    SignInPricingDisclaimer: {
+      screen: SignInPricingDisclaimerContainer,
+      path: '/SignInPricingDisclaimer',
     },
     SignUpSignIn: {
       screen: SignUpSignInContainer,

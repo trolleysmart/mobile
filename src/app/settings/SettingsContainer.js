@@ -42,6 +42,10 @@ class SettingsContainer extends Component {
     this.props.gotoScreen('Disclaimer');
   };
 
+  gotoPricingDisclaimer = () => {
+    this.props.gotoScreen('PricingDisclaimer');
+  };
+
   signOut = () => {
     this.props.userAccessActions.signOut();
   };
@@ -51,6 +55,7 @@ class SettingsContainer extends Component {
       <Settings
         signOut={this.signOut}
         gotoDisclaimer={this.gotoDisclaimer}
+        gotoPricingDisclaimer={this.gotoPricingDisclaimer}
         handleClickTermsAndConditionLink={this.handleClickTermsAndConditionLink}
         handleClickOpenSourceLicensesLink={this.handleClickOpenSourceLicensesLink}
         handleClickPrivacyPolicyLink={this.handleClickPrivacyPolicyLink}
