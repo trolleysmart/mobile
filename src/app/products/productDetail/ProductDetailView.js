@@ -76,7 +76,7 @@ class ProductDetailView extends Component {
                 )}
               </View>
               <View style={Styles.storeDetail}>
-                <Text>{this.props.product.store ? this.props.product.store.name : ''}</Text>
+                <Text onPress={() => this.props.onViewStorePressed(this.props.product.store.id)}>{this.props.product.store ? this.props.product.store.name : ''}</Text>
               </View>
             </View>
           </Card>

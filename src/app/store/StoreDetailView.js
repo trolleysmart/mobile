@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import { Text, View, Image, ScrollView } from 'react-native';
-import { Card, Avatar } from 'react-native-elements';
+import { Card, Avatar, Icon } from 'react-native-elements';
 import PropTypes from 'prop-types';
 import Styles from './Styles';
 import { StoreProp } from './PropTypes';
@@ -12,42 +12,33 @@ class StoreDetailView extends Component {
     return (
       <View style={Styles.container}>
         <ScrollView>
-          <Image source={{ uri: this.props.store.imageUrl }} resizeMode="cover" style={Styles.storeImage} />
-          <View style={Styles.productTitleContainer}>
-            <Text style={Styles.productTitle}>{this.props.store.name}</Text>
-          </View>
-          {/*<Card title="Detail">*/}
-          {/*<Text style={Styles.productDescription}>{this.props.product.description}</Text>*/}
-
-          {/*{this.props.store.unitPrice ? (*/}
-          {/*<View style={Styles.rowContainer}>*/}
-          {/*<Icon style={Styles.icon} color="#bfc4c9" name="md-pricetag" type="ionicon" />*/}
-          {/*<Text> Price per unit: </Text>*/}
-          {/*<Text style={Styles.unitPrice}>{'$' + this.props.product.unitPrice.price.toFixed(2) + '/' + this.props.product.unitPrice.size}</Text>*/}
-          {/*</View>*/}
-          {/*) : (*/}
-          {/*<View />*/}
-          {/*)}*/}
-          {/*<View style={Styles.rowContainer}>*/}
-          {/*{this.props.product.productPageUrl ? (*/}
-          {/*<View>*/}
-          {/*<Icon style={Styles.icon} color="#bfc4c9" name="web" type="material-community" />*/}
-          {/*<Text style={Styles.link} onPress={() => this.props.handleVisitStorePressed(this.props.product.productPageUrl)}>*/}
-          {/*View on web*/}
-          {/*</Text>*/}
-          {/*</View>*/}
-          {/*) : (*/}
-          {/*<View />*/}
-          {/*)}*/}
-          {/*</View>*/}
-          {/*</Card>*/}
-          <Card title="Store Info">
-            <View style={Styles.storeInfoContainer}>
+          <View style={Styles.storeInfoHeaderContainer}>
+            {/*<View style={Styles.storeDetail}>*/}
               <View>
-                {this.props.store.imageUrl ? <Avatar medium rounded source={{ uri: this.props.store.imageUrl }} activeOpacity={0.7} /> : <View />}
+                {this.props.store.imageUrl ?
+                  <Avatar large rounded source={{ uri: this.props.store.imageUrl }} activeOpacity={0.7} />
+                  : <Avatar large rounded title={this.props.store.name} activeOpacity={0.7} />}
               </View>
-              <View style={Styles.storeDetail}>
-                <Text>{this.props.store.name}</Text>
+              <Text style={Styles.storeName}>{this.props.store.name}</Text>
+            {/*</View>*/}
+          </View>
+          <Card title="Store Contact">
+            <View style={Styles.storeInfoContainer}>
+              <View style={Styles.storeInfoRow}>
+                <Icon size={32} name='location-city' type='material'/>
+                <Text style={Styles.storeInfoRowText}>{this.props.store.address ? this.props.store.address : '4 Not Real Street, Christchurch'}</Text>
+              </View>
+              <View style={Styles.storeInfoRow}>
+                <Icon size={32} name='phone' type='material-community'/>
+                <Text style={Styles.storeInfoRowText}>03-345-8745</Text>
+              </View>
+            </View>
+          </Card>
+          <Card title="Opening Hours">
+            <View style={Styles.storeInfoContainer}>
+              <View style={Styles.storeInfoRow}>
+                <Icon size={32} name='ios-clock-outline' type='ionicon'/>
+                <Text style={Styles.storeInfoRowText}>Mon - Sat, 9am - 5pm</Text>
               </View>
             </View>
           </Card>
