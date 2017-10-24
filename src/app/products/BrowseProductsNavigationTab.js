@@ -29,7 +29,6 @@ const BrowseProductsNavigationTab = TabNavigator(
             'canned-prepared-foods',
             'chocolate-sweets-snacks',
             'cleaning-homecare',
-            'clothing-shoes-bags',
             'deli-chilled-foods',
             'drinks-hot-cold',
             'electronics-gaming-giftcards',
