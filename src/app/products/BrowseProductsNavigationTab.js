@@ -38,7 +38,6 @@ const BrowseProductsNavigationTab = TabNavigator(
             'garden',
             'health-wellness',
             'home-kitchenware-manchester',
-            'jewellery',
             'liquor-beer-cider',
             'liquor-wine',
             'meal-ingredients',
