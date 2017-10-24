@@ -12,7 +12,7 @@ class SignInDisclaimerContainer extends Component {
   };
 
   render = () => {
-    return <SignInDisclaimer gotoSignIn={this.gotoSignIn} />;
+    return <SignInDisclaimer disclaimerButtonClicked={this.gotoSignIn} />;
   };
 }
 

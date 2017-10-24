@@ -19,7 +19,7 @@ import { SplashContainer } from '../splash';
 import { SignUpSignInContainer } from '../signUpSignIn';
 import { configureStore } from '../../framework/redux';
 import AppDrawer from './AppDrawer';
-import { SignInDisclaimerContainer } from '../../sharedComponents/disclaimer';
+import { SignInDisclaimerContainer } from '../disclaimer';
 
 const AppNavigator = StackNavigator(
   {

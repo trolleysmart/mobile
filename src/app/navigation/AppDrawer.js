@@ -5,7 +5,7 @@ import AppNavigationStack from './AppNavigationStack';
 import { SettingsNavigator } from '../settings';
 import { Icon } from 'react-native-elements';
 import AppDrawerMenuContainer from '../../sharedComponents/drawer/AppDrawerMenuContainer';
-import { DisclaimerNavigator } from '../../sharedComponents/disclaimer';
+import { DisclaimerNavigator } from '../disclaimer';
 import { Color } from '../../framework/style/DefaultStyles';
 import { UserFeedbackNavigationStack } from '../userFeedback';
 
