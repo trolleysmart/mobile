@@ -77,14 +77,14 @@ public class MainApplication extends Application implements ReactApplication {
     AppEventsLogger.activateApp(this);
 
     Parse.initialize(new Parse.Configuration.Builder(this)
-                     .applicationId("TrolleySmart-v1-alpha")
-                     .clientKey("c06ce52d-7d16-4b6a-a0fd-25ab671842b1")
-                     .server("https://trolleysmart-backend-v1-alpha.herokuapp.com/parse/").build()
+                     .applicationId(BuildConfig.PARSE_SERVER_APPLICATION_ID)
+                     .clientKey(BuildConfig.PARSE_SERVER_CLIENT_KEY)
+                     .server(BuildConfig.PARSE_SERVER_URL).build()
                      );
 
     ParseInstallation installation = ParseInstallation.getCurrentInstallation();
 
-    installation.put("GCMSenderId", "479040979190");
+    installation.put("GCMSenderId", BuildConfig.GCM_SENDER_ID);
     installation.saveInBackground();
   }
 }
