@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import { SectionList, Text, View, Image } from 'react-native';
 import Immutable from 'immutable';
 import PropTypes from 'prop-types';
+import debounce from 'lodash.debounce';
 import { ShoppingListItemsProp } from './PropTypes';
 import ActionButton from 'react-native-action-button';
 import ShoppingListItem from './ShoppingListItem';
@@ -11,8 +12,15 @@ import { ListItemSeparator } from '../../../components/list';
 import { ImageUltility } from '../../../components/image';
 import Styles from './Styles';
 import { Color } from '../../../framework/style/DefaultStyles';
+import config from '../../../framework/config';
 
 class ShoppingListItems extends Component {
+  constructor(props, context) {
+    super(props, context);
+
+    this.onShoppingListAddItemClicked = debounce(this.props.onShoppingListAddItemClicked, config.navigationDelay);
+  }
+
   renderItem = ({ item }) => {
     return (
       <ShoppingListItem
@@ -118,7 +126,7 @@ class ShoppingListItems extends Component {
             <Text style={Styles.addItemsText}>just tap the blue button</Text>
           </View>
         )}
-        <ActionButton buttonColor={Color.actionButtonColor} offsetX={50} onPress={() => this.props.onShoppingListAddItemClicked()} />
+        <ActionButton buttonColor={Color.actionButtonColor} offsetX={50} onPress={() => this.onShoppingListAddItemClicked()} />
       </View>
     );
   };

@@ -4,12 +4,20 @@ import React, { Component } from 'react';
 import { FlatList, View } from 'react-native';
 import ActionButton from 'react-native-action-button';
 import PropTypes from 'prop-types';
+import debounce from 'lodash.debounce';
 import { Color } from '../../../framework/style/DefaultStyles';
 import ShoppingListRow from './ShoppingListRow';
 import Styles from './Styles';
 import { ShoppingListsProp } from './PropTypes';
+import config from '../../../framework/config';
 
 class ShoppingListsList extends Component {
+  constructor(props, context) {
+    super(props, context);
+
+    this.onCreateShoppingListPressed = debounce(this.props.onCreateShoppingListPressed, config.navigationDelay);
+  }
+
   render = () => {
     return (
       <View style={Styles.container}>
@@ -29,7 +37,7 @@ class ShoppingListsList extends Component {
           refreshing={this.props.isFetchingTop}
           ItemSeparatorComponent={() => <View style={Styles.shoppingListRowSeparator} />}
         />
-        <ActionButton buttonColor={Color.actionButtonColor} onPress={() => this.props.onCreateShoppingListPressed()} />
+        <ActionButton buttonColor={Color.actionButtonColor} onPress={() => this.onCreateShoppingListPressed()} />
       </View>
     );
   };
