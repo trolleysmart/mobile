@@ -28,7 +28,7 @@ const StoreDetailView = ({ store }) => (
           </View>
           <View style={Styles.storeInfoRow}>
             <Icon size={32} name="phone" type="material-community" />
-            <Text style={Styles.storeInfoRowText}>{store.phones && store.phones.length > 0 ? store.phones[0] : ''}</Text>
+            <Text style={Styles.storeInfoRowText}>{store.phones && store.phones.length > 0 ? store.phones[0].number : ''}</Text>
           </View>
         </View>
       </Card>
