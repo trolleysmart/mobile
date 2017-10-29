@@ -6,6 +6,7 @@ import { Sizes, Color } from '../../framework/style/DefaultStyles';
 export default StyleSheet.create({
   container: {
     backgroundColor: 'white',
+    marginBottom: 35,
   },
   touchableContainer: {
     padding: 10,
