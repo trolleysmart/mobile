@@ -14,6 +14,14 @@ export default createFragmentContainer(
           key
           imageUrl
           address
+          openingHours {
+            from
+            until
+          }
+          phones {
+            label
+            number
+          }
           geoLocation {
             latitude
             longitude
