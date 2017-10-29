@@ -3,16 +3,20 @@
 import React from 'react';
 import { View, Animated, Easing, Text } from 'react-native';
 import PropTypes from 'prop-types';
+import debounce from 'lodash.debounce';
 import { ProductProp } from './PropTypes';
 import Styles from './Styles';
 import ProductListRowItem from './ProductListRowItem';
 import { TouchableIcon, TouchableItem } from '../../../components/touchableIcon';
 import { Color } from '../../../framework/style/DefaultStyles';
+import config from '../../../framework/config';
 
 class ProductListRow extends React.PureComponent {
   constructor(props, context) {
     super(props, context);
+
     this.animatedValue = new Animated.Value(0);
+    this.onViewProductDetailPressed = debounce(this.props.onViewProductDetailPressed, config.navigationDelay);
   }
 
   animate = easing => {
@@ -48,7 +52,7 @@ class ProductListRow extends React.PureComponent {
             iconType="material-community"
             iconContainerStyle={Styles.viewProductIconContainerStyle}
             iconColor={Color.primaryFontColor}
-            onPress={() => this.props.onViewProductDetailPressed(this.props.product.id, this.props.product.name)}
+            onPress={() => this.onViewProductDetailPressed(this.props.product.id, this.props.product.name)}
           />
           <Animated.View style={{ marginLeft, opacity, position: 'absolute', paddingTop: 55 }}>
             <Text style={Styles.itemAddedText}>Added to list</Text>

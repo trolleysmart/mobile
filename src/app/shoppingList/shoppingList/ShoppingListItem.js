@@ -5,23 +5,34 @@ import { TouchableHighlight, View } from 'react-native';
 import { Col, Grid } from 'react-native-easy-grid';
 import { CheckBox, ListItem, Avatar, Text } from 'react-native-elements';
 import PropTypes from 'prop-types';
+import debounce from 'lodash.debounce';
 import { ShoppingListItemProp } from './PropTypes';
 import Styles from './Styles';
 import { ImageUltility } from '../../../components/image';
 import { ProductListRow } from '../../products';
+import config from '../../../framework/config';
 
 class ShoppingListItem extends React.PureComponent {
-  renderStapleListItem = (stapleItemName) => {
-    return <View style={Styles.stapleItemNameContainer}>
-      <Avatar
-        width={24}
-        height={24}
-        overlayContainerStyle={Styles.stapleItemIconContainer}
-        source={ImageUltility.getImageSource(stapleItemName.toLowerCase().replace(/\s+/g, ''))}
-        activeOpacity={0.1}
-      />
-      <Text style={Styles.stapleItemName}>{stapleItemName}</Text>
-    </View>;
+  constructor(props, context) {
+    super(props, context);
+
+    this.onViewProductsPressed = debounce(this.props.onViewProductsPressed, config.navigationDelay);
+    this.onViewProductDetailPressed = debounce(this.props.onViewProductDetailPressed, config.navigationDelay);
+  }
+
+  renderStapleListItem = stapleItemName => {
+    return (
+      <View style={Styles.stapleItemNameContainer}>
+        <Avatar
+          width={24}
+          height={24}
+          overlayContainerStyle={Styles.stapleItemIconContainer}
+          source={ImageUltility.getImageSource(stapleItemName.toLowerCase().replace(/\s+/g, ''))}
+          activeOpacity={0.1}
+        />
+        <Text style={Styles.stapleItemName}>{stapleItemName}</Text>
+      </View>
+    );
   };
 
   render() {
@@ -40,7 +51,7 @@ class ShoppingListItem extends React.PureComponent {
           }
           key={this.props.shoppingListItem.name}
           title={this.renderStapleListItem(this.props.shoppingListItem.name)}
-          onPressRightIcon={() => this.props.onViewProductsPressed(this.props.shoppingListItem.id)}
+          onPressRightIcon={() => this.onViewProductsPressed(this.props.shoppingListItem.id)}
         />
       );
     } else {
@@ -57,9 +68,9 @@ class ShoppingListItem extends React.PureComponent {
               <ProductListRow
                 product={this.props.shoppingListItem}
                 onViewProductDetailPressed={() =>
-                  this.props.onViewProductDetailPressed(this.props.shoppingListItem.productPriceId, this.props.shoppingListItem.name)}
+                  this.onViewProductDetailPressed(this.props.shoppingListItem.productPriceId, this.props.shoppingListItem.name)}
                 onItemSelectionChanged={() =>
-                  this.props.onViewProductDetailPressed(this.props.shoppingListItem.productPriceId, this.props.shoppingListItem.name)}
+                  this.onViewProductDetailPressed(this.props.shoppingListItem.productPriceId, this.props.shoppingListItem.name)}
                 isInShoppingList={true}
               />
             </Col>

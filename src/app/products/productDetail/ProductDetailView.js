@@ -4,12 +4,20 @@ import React, { Component } from 'react';
 import { Text, View, Image, ScrollView } from 'react-native';
 import { Card, Icon, Avatar } from 'react-native-elements';
 import PropTypes from 'prop-types';
+import debounce from 'lodash.debounce';
 import Styles from './Styles';
 import { Color } from '../../../framework/style/DefaultStyles';
 import { ProductProp } from './PropTypes';
 import { TouchableIcon } from '../../../components/touchableIcon';
+import config from '../../../framework/config';
 
 class ProductDetailView extends Component {
+  constructor(props, context) {
+    super(props, context);
+
+    this.onViewStorePressed = debounce(this.props.onViewStorePressed, config.navigationDelay);
+  }
+
   render = () => {
     return (
       <View style={Styles.container}>
@@ -69,14 +77,16 @@ class ProductDetailView extends Component {
                     rounded
                     source={{ uri: this.props.product.store.imageUrl }}
                     activeOpacity={0.7}
-                    onPress={() => this.props.onViewStorePressed(this.props.product.store.id)}
+                    onPress={() => this.onViewStorePressed(this.props.product.store.id)}
                   />
                 ) : (
                   <View />
                 )}
               </View>
               <View style={Styles.storeDetail}>
-                <Text onPress={() => this.props.onViewStorePressed(this.props.product.store.id)}>{this.props.product.store ? this.props.product.store.name : ''}</Text>
+                <Text onPress={() => this.onViewStorePressed(this.props.product.store.id)}>
+                  {this.props.product.store ? this.props.product.store.name : ''}
+                </Text>
               </View>
             </View>
           </Card>
