@@ -14,7 +14,7 @@ class UserSignInSignUpContainer extends Component {
   };
 
   onSignInWithFacebookClicked = () => {
-    this.props.userAccessActions.signInWithFacebook('public_profile,email');
+    this.props.userAccessActions.signInWithFacebook('public_profile,email', 'individual');
   };
 
   onSignInClicked = (emailAddress, password) => {
@@ -22,7 +22,7 @@ class UserSignInSignUpContainer extends Component {
   };
 
   onSignUpClicked = (emailAddress, password) => {
-    this.props.userAccessActions.signUpWithUsernameAndPassword(emailAddress, password, emailAddress);
+    this.props.userAccessActions.signUpWithUsernameAndPassword(emailAddress, password, emailAddress, 'individual');
   };
 
   render = () => {
