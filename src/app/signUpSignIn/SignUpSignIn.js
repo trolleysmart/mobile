@@ -8,6 +8,7 @@ import { ActivityIndicator, ScrollView, View } from 'react-native';
 import { Col, Grid, Row } from 'react-native-easy-grid';
 import { Button, FormLabel, FormInput, FormValidationMessage, SocialIcon, Text } from 'react-native-elements';
 import Styles from './Styles';
+import { Color } from '../../framework/style/DefaultStyles';
 
 class UserSignInSignUpPresentational extends Component {
   constructor(props, context) {
@@ -178,11 +179,11 @@ class UserSignInSignUpPresentational extends Component {
 
   renderFacebookButton = () => {
     return (
-      <SocialIcon
+      <Button
         title="Sign in with Facebook"
-        type="facebook"
-        button
-        style={Styles.facebookButton}
+        icon={{name:'facebook', type:'material-community'}}
+        backgroundColor='#3b5998'
+        buttonStyle={Styles.button}
         onPress={this.props.onSignInWithFacebookClicked}
       />
     );
@@ -191,14 +192,12 @@ class UserSignInSignUpPresentational extends Component {
   renderSignInButton = () => {
     return (
       <Button
-        raised
-        large
         title="Sign in via Email"
         onPress={this.onSignInClicked}
-        buttonStyle={Styles.signInButton}
+        buttonStyle={Styles.button}
         containerViewStyle={Styles.signInButtonContainerViewStyle}
-        icon={{ name: 'md-log-in', type: 'ionicon' }}
-        backgroundColor="#3b5998"
+        icon={{ name: 'email', type: 'material-community' }}
+        backgroundColor={Color.secondaryColorAction}
       />
     );
   };
@@ -233,13 +232,12 @@ class UserSignInSignUpPresentational extends Component {
     return (
       <Button
         raised
-        large
-        title="Sign up via Email"
+        title="Create Account"
         onPress={this.onSignUpClicked}
-        buttonStyle={Styles.signUpButton}
+        buttonStyle={Styles.button}
         containerViewStyle={Styles.signUpButtonContainerViewStyle}
         icon={{ name: 'md-log-in', type: 'ionicon' }}
-        backgroundColor="#3b5998"
+        backgroundColor={Color.primaryColorNormal}
       />
     );
   };
@@ -295,24 +293,40 @@ class UserSignInSignUpPresentational extends Component {
   render = () => {
     return (
       <ScrollView style={Styles.scrollView} keyboardShouldPersistTaps="always">
-        <Grid style={Styles.grid}>
-          <Row>
+        {/*<View style={Styles.container}>*/}
+          <View style={Styles.topContainer}>
             <Text h2 style={Styles.title}>
               {' '}
               TrolleySmart
             </Text>
-          </Row>
-          {this.renderSignUpOrSignInIsInProgressIndicator()}
-          <Row>
-            <Col>{this.renderFacebookButton()}</Col>
-          </Row>
-          <Row>
-            <Col>{this.renderSignInInputArea()}</Col>
-          </Row>
-          <Row>
-            <Col>{this.renderSignUpInputArea()}</Col>
-          </Row>
-        </Grid>
+          </View>
+
+          <View>
+            {this.renderSignUpOrSignInIsInProgressIndicator()}
+          </View>
+          <View>{this.renderFacebookButton()}</View>
+          <View>{this.renderSignInInputArea()}</View>
+          <View>{this.renderSignUpInputArea()}</View>
+          <View></View>
+        {/*</View>*/}
+        {/*<Grid style={Styles.grid}>*/}
+          {/*<Row>*/}
+            {/*<Text h2 style={Styles.title}>*/}
+              {/*{' '}*/}
+              {/*TrolleySmart*/}
+            {/*</Text>*/}
+          {/*</Row>*/}
+          {/*{this.renderSignUpOrSignInIsInProgressIndicator()}*/}
+          {/*<Row>*/}
+            {/*<Col>{this.renderFacebookButton()}</Col>*/}
+          {/*</Row>*/}
+          {/*<Row>*/}
+            {/*<Col>{this.renderSignInInputArea()}</Col>*/}
+          {/*</Row>*/}
+          {/*<Row>*/}
+            {/*<Col>{this.renderSignUpInputArea()}</Col>*/}
+          {/*</Row>*/}
+        {/*</Grid>*/}
       </ScrollView>
     );
   };

@@ -26,7 +26,7 @@ export default StyleSheet.create({
   checkbox: {
     justifyContent: 'center',
     alignItems: 'center',
-    marginLeft: 9,
+    marginLeft: 18.5,
     marginRight: -13,
   },
   stapleItemCheckbox: {
@@ -121,6 +121,8 @@ export default StyleSheet.create({
   stapleItemNameContainer:{
     flexDirection: 'row',
     alignItems: 'center',
+    paddingLeft: 10,
+    paddingRight: 10,
   },
   stapleItemIconContainer: {
     backgroundColor: 'transparent',

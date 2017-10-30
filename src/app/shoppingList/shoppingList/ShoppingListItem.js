@@ -64,7 +64,7 @@ class ShoppingListItem extends React.PureComponent {
               center
               onPress={() => this.props.onShoppingListItemSelectionChanged(this.props.shoppingListItem)}
             />
-            <Col size={80}>
+            <Col>
               <ProductListRow
                 product={this.props.shoppingListItem}
                 onViewProductDetailPressed={() =>

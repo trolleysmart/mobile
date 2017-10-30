@@ -9,7 +9,13 @@ export default StyleSheet.create({
     padding: 8,
   },
   scrollView: {
+    // flex:1,
     backgroundColor: 'white',
+  },
+  topContainer:{
+    paddingTop: 80,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   grid: {
     alignItems: 'center',
@@ -17,22 +23,12 @@ export default StyleSheet.create({
   title: {
     color: '#3b5998',
   },
-  facebookButton: {
+  button: {
     marginTop: 15,
-    height: 50,
-  },
-  signInButton: {
-    marginTop: 15,
-    borderRadius: 35,
     height: 50,
   },
   signInButtonContainerViewStyle: {
     borderRadius: 35,
-  },
-  signUpButton: {
-    marginTop: 15,
-    borderRadius: 35,
-    height: 50,
   },
   signUpButtonContainerViewStyle: {
     borderRadius: 35,
