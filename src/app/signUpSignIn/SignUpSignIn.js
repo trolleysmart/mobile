@@ -5,8 +5,8 @@ import { Map } from 'immutable';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { ActivityIndicator, ScrollView, View } from 'react-native';
-import { Col, Grid, Row } from 'react-native-easy-grid';
-import { Button, FormLabel, FormInput, FormValidationMessage, SocialIcon, Text } from 'react-native-elements';
+import { Col, Row } from 'react-native-easy-grid';
+import { Button, FormLabel, FormInput, FormValidationMessage, Text } from 'react-native-elements';
 import Styles from './Styles';
 import { Color } from '../../framework/style/DefaultStyles';
 
@@ -181,8 +181,8 @@ class UserSignInSignUpPresentational extends Component {
     return (
       <Button
         title="Sign in with Facebook"
-        icon={{name:'facebook', type:'material-community'}}
-        backgroundColor='#3b5998'
+        icon={{ name: 'facebook', type: 'material-community' }}
+        backgroundColor="#3b5998"
         buttonStyle={Styles.button}
         onPress={this.props.onSignInWithFacebookClicked}
       />
@@ -294,38 +294,36 @@ class UserSignInSignUpPresentational extends Component {
     return (
       <ScrollView style={Styles.scrollView} keyboardShouldPersistTaps="always">
         {/*<View style={Styles.container}>*/}
-          <View style={Styles.topContainer}>
-            <Text h2 style={Styles.title}>
-              {' '}
-              TrolleySmart
-            </Text>
-          </View>
+        <View style={Styles.topContainer}>
+          <Text h2 style={Styles.title}>
+            {' '}
+            TrolleySmart
+          </Text>
+        </View>
 
-          <View>
-            {this.renderSignUpOrSignInIsInProgressIndicator()}
-          </View>
-          <View>{this.renderFacebookButton()}</View>
-          <View>{this.renderSignInInputArea()}</View>
-          <View>{this.renderSignUpInputArea()}</View>
-          <View></View>
+        <View>{this.renderSignUpOrSignInIsInProgressIndicator()}</View>
+        <View>{this.renderFacebookButton()}</View>
+        <View>{this.renderSignInInputArea()}</View>
+        <View>{this.renderSignUpInputArea()}</View>
+        <View />
         {/*</View>*/}
         {/*<Grid style={Styles.grid}>*/}
-          {/*<Row>*/}
-            {/*<Text h2 style={Styles.title}>*/}
-              {/*{' '}*/}
-              {/*TrolleySmart*/}
-            {/*</Text>*/}
-          {/*</Row>*/}
-          {/*{this.renderSignUpOrSignInIsInProgressIndicator()}*/}
-          {/*<Row>*/}
-            {/*<Col>{this.renderFacebookButton()}</Col>*/}
-          {/*</Row>*/}
-          {/*<Row>*/}
-            {/*<Col>{this.renderSignInInputArea()}</Col>*/}
-          {/*</Row>*/}
-          {/*<Row>*/}
-            {/*<Col>{this.renderSignUpInputArea()}</Col>*/}
-          {/*</Row>*/}
+        {/*<Row>*/}
+        {/*<Text h2 style={Styles.title}>*/}
+        {/*{' '}*/}
+        {/*TrolleySmart*/}
+        {/*</Text>*/}
+        {/*</Row>*/}
+        {/*{this.renderSignUpOrSignInIsInProgressIndicator()}*/}
+        {/*<Row>*/}
+        {/*<Col>{this.renderFacebookButton()}</Col>*/}
+        {/*</Row>*/}
+        {/*<Row>*/}
+        {/*<Col>{this.renderSignInInputArea()}</Col>*/}
+        {/*</Row>*/}
+        {/*<Row>*/}
+        {/*<Col>{this.renderSignUpInputArea()}</Col>*/}
+        {/*</Row>*/}
         {/*</Grid>*/}
       </ScrollView>
     );
