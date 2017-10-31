@@ -93,7 +93,7 @@
   },
   "pre-commit": "lint:staged",
   "repository": {
-    "url": "git@bitbucket.org:microbusiness/smart-grocery-mobile-modern.git",
+    "url": "git@bitbucket.org:microbusiness/trolley-smart-mobile.git",
     "type": "git"
   },
   "lint-staged": {
