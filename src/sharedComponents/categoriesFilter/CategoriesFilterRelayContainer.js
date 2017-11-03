@@ -9,7 +9,7 @@ export default createPaginationContainer(
     viewer: graphql`
       fragment CategoriesFilterRelayContainer_viewer on Viewer {
         id
-        tags(first: $count, after: $cursor) @connection(key: "Viewer_tags") {
+        tags(first: $count, after: $cursor, forDisplay: true) @connection(key: "Viewer_tags") {
           pageInfo {
             hasNextPage
             endCursor

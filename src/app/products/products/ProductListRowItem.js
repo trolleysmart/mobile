@@ -61,11 +61,11 @@ class ProductListRowItem extends Component {
   }
 
   shouldComponentUpdate = nextProps => {
-    return this.state.product.equals(Immutable.fromJS(nextProps));
+    return this.state.product.equals(Immutable.fromJS(nextProps.product));
   };
 
   componentWillReceiveProps = nextProps => {
-    const product = Immutable.fromJS(nextProps);
+    const product = Immutable.fromJS(nextProps.product);
 
     if (!this.state.product.equals(product)) {
       this.setState({ product });

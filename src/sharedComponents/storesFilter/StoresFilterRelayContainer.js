@@ -9,7 +9,7 @@ export default createPaginationContainer(
     viewer: graphql`
       fragment StoresFilterRelayContainer_viewer on Viewer {
         id
-        stores(first: $count, after: $cursor) @connection(key: "Viewer_stores") {
+        stores(first: $count, after: $cursor, forDisplay: true) @connection(key: "Viewer_stores") {
           pageInfo {
             hasNextPage
             endCursor
