@@ -1,6 +1,7 @@
 // @flow
 
-import React from 'react';
+import Immutable from 'immutable';
+import React, { Component } from 'react';
 import { View, Animated, Easing, Text } from 'react-native';
 import PropTypes from 'prop-types';
 import debounce from 'lodash.debounce';
@@ -11,16 +12,31 @@ import { TouchableIcon, TouchableItem } from '../../../components/touchableIcon'
 import { Color } from '../../../framework/style/DefaultStyles';
 import config from '../../../framework/config';
 
-class ProductListRow extends React.PureComponent {
+class ProductListRow extends Component {
   constructor(props, context) {
     super(props, context);
 
     this.animatedValue = new Animated.Value(0);
     this.onViewProductDetailPressed = debounce(this.props.onViewProductDetailPressed, config.navigationDelay);
+
+    this.state = { product: Immutable.fromJS(props.product) };
   }
+
+  shouldComponentUpdate = nextProps => {
+    return this.state.product.equals(Immutable.fromJS(nextProps));
+  };
+
+  componentWillReceiveProps = nextProps => {
+    const product = Immutable.fromJS(nextProps);
+
+    if (!this.state.product.equals(product)) {
+      this.setState({ product });
+    }
+  };
 
   animate = easing => {
     this.animatedValue.setValue(0);
+
     Animated.timing(this.animatedValue, {
       toValue: 1,
       duration: 1000,

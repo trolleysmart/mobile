@@ -1,6 +1,7 @@
 // @flow
 
-import React from 'react';
+import Immutable from 'immutable';
+import React, { Component } from 'react';
 import { View } from 'react-native';
 import { Col, Grid, Row } from 'react-native-easy-grid';
 import FastImage from 'react-native-fast-image';
@@ -52,7 +53,25 @@ function getItemSubTitle(offerEndDate, multiBuy, unitPrice) {
   return subTitleItems.join('|');
 }
 
-class ProductListRowItem extends React.PureComponent {
+class ProductListRowItem extends Component {
+  constructor(props, context) {
+    super(props, context);
+
+    this.state = { product: Immutable.fromJS(props.product) };
+  }
+
+  shouldComponentUpdate = nextProps => {
+    return this.state.product.equals(Immutable.fromJS(nextProps));
+  };
+
+  componentWillReceiveProps = nextProps => {
+    const product = Immutable.fromJS(nextProps);
+
+    if (!this.state.product.equals(product)) {
+      this.setState({ product });
+    }
+  };
+
   render() {
     return (
       <Grid>
