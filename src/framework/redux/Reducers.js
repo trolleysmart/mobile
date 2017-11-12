@@ -2,7 +2,8 @@
 
 import { combineReducers } from 'redux';
 import { UserAccessReducer } from 'micro-business-parse-server-common-react-native';
-import { AppUpdaterReducer, MessageBarReducer, NetInfoReducer } from 'micro-business-common-react-native';
+import { AppUpdaterReducer, MessageBarReducer } from 'micro-business-common-react';
+import { NetInfoReducer } from 'micro-business-common-react-native';
 import { ShoppingListDetailReducer } from '../../app/shoppingList';
 import { StapleItemsReducer } from '../../app/stapleItems';
 import { ProductsFilterReducer } from '../../sharedComponents/productsFilter';
