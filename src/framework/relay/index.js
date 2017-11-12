@@ -1,3 +1,3 @@
 // @flow
 
-export environment from './environment';
+export environment from './Environment';
