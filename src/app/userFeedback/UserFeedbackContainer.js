@@ -9,7 +9,7 @@ import UserFeedback from './UserFeedback';
 import MainMenuContainer from '../../sharedComponents/mainMenu/MainMenuContainer';
 import { Color } from '../../framework/style/DefaultStyles';
 import { SubmitUserFeedback } from '../../framework/relay/mutations';
-import environment from '../../framework/relay/environment';
+import { environment } from '../../framework/relay';
 import * as userFeedbackActions from './Actions';
 
 class UserFeedbackContainer extends Component {
