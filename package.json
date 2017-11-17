@@ -21,7 +21,7 @@
     "android:install": "adb install android/app/build/outputs/apk/app-release.apk",
     "clear": "node node_modules/react-native/local-cli/cli.js start --reset-cache",
     "devtools": "react-devtools",
-    "precommit": "lint-staged && npm run fixlint",
+    "precommit": "lint-staged",
     "codepush:ios": "code-push release-react trolleysmart-alpha-ios ios && code-push promote trolleysmart-alpha-ios Staging Production",
     "codepush:android": "code-push release-react trolleysmart-alpha-android android && code-push promote trolleysmart-alpha-android Staging Production"
   },
@@ -99,6 +99,7 @@
   "lint-staged": {
     "src/**/*.{js,jsx,json,css}": [
       "prettier --write --single-quote true --trailing-comma all --print-width 150",
+      "npm run fixlint",
       "git add"
     ]
   }
