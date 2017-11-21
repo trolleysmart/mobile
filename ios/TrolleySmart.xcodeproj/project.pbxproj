@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -59,6 +58,7 @@
 		D21D587868014B06954D9771 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 63DFD20E93644F3E9B0AECDD /* SimpleLineIcons.ttf */; };
 		EFD302E3A34345B89AA9F947 /* libReactNativeConfig.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C32D968451544B15B5038E94 /* libReactNativeConfig.a */; };
 		F292000CB3AA49BCA443CCD9 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 64049709745446E18BD0A9FA /* MaterialCommunityIcons.ttf */; };
+		0077BA23C2004E569115C299 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 01CB0C05E47649AEAE15998F /* Feather.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -356,6 +356,20 @@
 			remoteGlobalIDString = EB2648DF1C7BE17A00B8F155;
 			remoteInfo = ReactNativeConfig;
 		};
+		B6B0E6C71FC426F200B0CE32 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9936F3131F5F2E4B0010BF04;
+			remoteInfo = privatedata;
+		};
+		B6B0E6C91FC426F200B0CE32 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9936F32F1F5F2E5B0010BF04;
+			remoteInfo = "privatedata-tvOS";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -414,6 +428,7 @@
 		E6E5CCE3A6564526B065641A /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		FC5783B2F58744EFB0082C8C /* libRCTFBSDK.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTFBSDK.a; sourceTree = "<group>"; };
 		FF34E7D5CF3942EE82BA0428 /* ReactNativeConfig.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeConfig.xcodeproj; path = "../node_modules/react-native-config/ios/ReactNativeConfig.xcodeproj"; sourceTree = "<group>"; };
+		01CB0C05E47649AEAE15998F /* Feather.ttf */ = {isa = PBXFileReference; name = "Feather.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -589,6 +604,8 @@
 				B63F6B8B1F2C83690065609B /* libthird-party.a */,
 				B63F6B8D1F2C83690065609B /* libdouble-conversion.a */,
 				B63F6B8F1F2C83690065609B /* libdouble-conversion.a */,
+				B6B0E6C81FC426F200B0CE32 /* libprivatedata.a */,
+				B6B0E6CA1FC426F200B0CE32 /* libprivatedata-tvOS.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -713,6 +730,7 @@
 				4CB0EFAC58CF4D1BA2C27A55 /* Octicons.ttf */,
 				63DFD20E93644F3E9B0AECDD /* SimpleLineIcons.ttf */,
 				669FBE9A06BB4B05B276BA53 /* Zocial.ttf */,
+				01CB0C05E47649AEAE15998F /* Feather.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1265,6 +1283,20 @@
 			remoteRef = B690D71E1F99EACA0042F201 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		B6B0E6C81FC426F200B0CE32 /* libprivatedata.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libprivatedata.a;
+			remoteRef = B6B0E6C71FC426F200B0CE32 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B6B0E6CA1FC426F200B0CE32 /* libprivatedata-tvOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libprivatedata-tvOS.a";
+			remoteRef = B6B0E6C91FC426F200B0CE32 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -1291,6 +1323,7 @@
 				ADA2067113724FB287AEDDD5 /* Octicons.ttf in Resources */,
 				D21D587868014B06954D9771 /* SimpleLineIcons.ttf in Resources */,
 				CB149ECCD3CA40CA901D843E /* Zocial.ttf in Resources */,
+				0077BA23C2004E569115C299 /* Feather.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1511,6 +1544,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.trolleysmart;
 				PRODUCT_NAME = TrolleySmart;
+				PROVISIONING_PROFILE = "5b566478-18df-4bd1-9534-3237248a1e30";
+				PROVISIONING_PROFILE_SPECIFIER = "Fred MBP";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
