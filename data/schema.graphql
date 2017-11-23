@@ -12,6 +12,35 @@ type AddItemsToShoppingListPayload {
   clientMutationId: String
 }
 
+input AddMasterProductInput {
+  name: String!
+  description: String
+  barcode: String
+  size: String
+  clientMutationId: String
+}
+
+type AddMasterProductPayload {
+  errorMessage: String
+  masterProduct: MasterProductEdge
+  clientMutationId: String
+}
+
+input AddMyProductInput {
+  name: String!
+  description: String
+  barcode: String
+  productPageUrl: String
+  size: String
+  clientMutationId: String
+}
+
+type AddMyProductPayload {
+  errorMessage: String
+  myProduct: MyProductEdge
+  clientMutationId: String
+}
+
 input AddShoppingListInput {
   name: String!
   clientMutationId: String
@@ -20,6 +49,18 @@ input AddShoppingListInput {
 type AddShoppingListPayload {
   errorMessage: String
   shoppingList: ShoppingListEdge
+  clientMutationId: String
+}
+
+input AddStoreInput {
+  name: String!
+  address: String
+  clientMutationId: String
+}
+
+type AddStorePayload {
+  errorMessage: String
+  store: OwnedStoreTypeEdge
   clientMutationId: String
 }
 
@@ -64,6 +105,9 @@ type MultiBuy {
 type Mutation {
   addItemsToShoppingList(input: AddItemsToShoppingListInput!): AddItemsToShoppingListPayload
   addShoppingList(input: AddShoppingListInput!): AddShoppingListPayload
+  addMasterProduct(input: AddMasterProductInput!): AddMasterProductPayload
+  addMyProduct(input: AddMyProductInput!): AddMyProductPayload
+  addStore(input: AddStoreInput!): AddStorePayload
   removeItemsFromShoppingList(input: RemoveItemsFromShoppingListInput!): RemoveItemsFromShoppingListPayload
   removeShoppingList(input: RemoveShoppingListInput!): RemoveShoppingListPayload
   setUserDefaultShoppingList(input: SetUserDefaultShoppingListInput!): SetUserDefaultShoppingListPayload
@@ -465,19 +509,19 @@ type User implements Node {
   shoppingList(shoppingListId: ID!): ShoppingList
   defaultShoppingListItems(after: String, first: Int, before: String, last: Int, name: String, addedByUserId: ID, tagKeys: [String], storeKeys: [String]): ShoppingListItemConnection
   shoppingListItems(after: String, first: Int, before: String, last: Int, shoppingListId: ID!, name: String, addedByUserId: ID, tagKeys: [String], storeKeys: [String]): ShoppingListItemConnection
-  stapleItems(after: String, first: Int, before: String, last: Int, name: String, tagKeys: [String], sortOption: String): StapleItemConnection
-  products(after: String, first: Int, before: String, last: Int, name: String, description: String, sortOption: String, tagKeys: [String], storeKeys: [String], special: Boolean): ProductConnection
+  stapleItems(after: String, first: Int, before: String, last: Int, stapleItemIds: [ID!], name: String, tagKeys: [String], sortOption: String): StapleItemConnection
+  products(after: String, first: Int, before: String, last: Int, productIds: [ID!], name: String, description: String, sortOption: String, tagKeys: [String], storeKeys: [String], special: Boolean): ProductConnection
   product(productId: ID!): Product
-  myProducts(after: String, first: Int, before: String, last: Int, name: String, description: String, sortOption: String, tagKeys: [String]): MyProductConnection
+  myProducts(after: String, first: Int, before: String, last: Int, myProductIds: [ID!], name: String, description: String, sortOption: String, tagKeys: [String]): MyProductConnection
   myProduct(myProductId: ID!, sortOption: String): MyProduct
-  ownedStores(after: String, first: Int, before: String, last: Int, name: String, forDisplay: Boolean, sortOption: String): OwnedStoreTypeConnection
+  ownedStores(after: String, first: Int, before: String, last: Int, ownedStoreIds: [ID!], name: String, forDisplay: Boolean, sortOption: String): OwnedStoreTypeConnection
 }
 
 type Viewer implements Node {
   id: ID!
-  tags(after: String, first: Int, before: String, last: Int, name: String, level: Int, forDisplay: Boolean, sortOption: String): TagTypeConnection
+  tags(after: String, first: Int, before: String, last: Int, tagIds: [ID!], name: String, level: Int, forDisplay: Boolean, sortOption: String): TagTypeConnection
   store(storeId: ID!): Store
-  stores(after: String, first: Int, before: String, last: Int, name: String, forDisplay: Boolean, sortOption: String): StoreTypeConnection
-  masterProducts(after: String, first: Int, before: String, last: Int, name: String, description: String, sortOption: String, tagKeys: [String]): MasterProductConnection
+  stores(after: String, first: Int, before: String, last: Int, storeIds: [ID!], name: String, forDisplay: Boolean, sortOption: String): StoreTypeConnection
+  masterProducts(after: String, first: Int, before: String, last: Int, masterProductIds: [ID!], name: String, description: String, sortOption: String, tagKeys: [String]): MasterProductConnection
   masterProduct(masterProductId: ID!): MasterProduct
 }
