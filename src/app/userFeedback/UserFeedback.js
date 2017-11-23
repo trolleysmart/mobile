@@ -15,6 +15,7 @@ class UserFeedback extends Component {
     const option3Selected = this.props.selectedOptions.has('option3');
     const option4Selected = this.props.selectedOptions.has('option4');
     const option5Selected = this.props.selectedOptions.has('option5');
+    const option6Selected = this.props.selectedOptions.has('option6');
 
     return (
       <ScrollView style={Styles.container}>
@@ -57,17 +58,24 @@ class UserFeedback extends Component {
                 onPress={() => this.props.onOptionsChanged('option5', 'list sharing', option5Selected)}
                 checked={option5Selected}
               />
+              <CheckBox
+                title="support more retailers"
+                onPress={() => this.props.onOptionsChanged('option6', 'more retailers', option6Selected)}
+                checked={option6Selected}
+              />
             </View>
           </View>
-          <FormLabel>Other Feedback</FormLabel>
+          <FormLabel>Any other features or comments</FormLabel>
           <FormInput multiline={true} placeholder="Message" numberOfLines={2} onChangeText={message => this.props.onMessageChanged(message)} />
-          <Button
-            title="Send"
-            icon={{ name: 'send', type: 'material-community' }}
-            raised
-            onPress={() => this.props.onSendPress()}
-            backgroundColor={Color.secondaryColorAction}
-          />
+          <View style={{ padding: 10 }}>
+            <Button
+              title="Send"
+              icon={{ name: 'send', type: 'material-community' }}
+              raised
+              onPress={() => this.props.onSendPress()}
+              backgroundColor={Color.secondaryColorAction}
+            />
+          </View>
         </View>
       </ScrollView>
     );

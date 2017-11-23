@@ -82,6 +82,7 @@ class ProductListRowItem extends Component {
             <View />
           )}
         </Col>
+        <Col size={5} />
         <Col size={80}>
           <Row>
             <Col size={70}>

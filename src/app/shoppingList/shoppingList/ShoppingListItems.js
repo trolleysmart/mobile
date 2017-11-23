@@ -76,22 +76,6 @@ class ShoppingListItems extends Component {
       .valueSeq()
       .toJS();
 
-    const totalCost = this.props.shoppingListItems.reduce((sum, value) => {
-      if (value.priceToDisplay) {
-        return sum + value.priceToDisplay;
-      } else {
-        return sum;
-      }
-    }, 0);
-
-    const totalSaving = this.props.shoppingListItems.reduce((sum, value) => {
-      if (value.saving) {
-        return sum + value.saving;
-      } else {
-        return sum;
-      }
-    }, 0);
-
     const hasItem = sectionData.length;
 
     return (
@@ -108,16 +92,6 @@ class ShoppingListItems extends Component {
               refreshing={this.props.isFetchingTop}
               ItemSeparatorComponent={() => <ListItemSeparator />}
             />
-            <View style={Styles.summaryContainer}>
-              <View style={Styles.summaryBlockContainer}>
-                <Text style={Styles.summaryLabel}>Total Cost: </Text>
-                <Text style={Styles.totalCostText}>${totalCost.toFixed(2)}</Text>
-              </View>
-              <View style={Styles.summaryBlockContainer}>
-                <Text style={Styles.summaryLabel}>Est Total Saved: </Text>
-                <Text style={Styles.totalSavingText}>${totalSaving.toFixed(2)}</Text>
-              </View>
-            </View>
           </View>
         ) : (
           <View style={Styles.addItemsBackgroundContainer}>

@@ -22,7 +22,7 @@ class ProductDetailView extends Component {
     return (
       <View style={Styles.container}>
         <ScrollView style={Styles.scrollViewContainer}>
-          <Image source={{ uri: this.props.product.imageUrl }} resizeMode="cover" style={Styles.productImage} />
+          <Image source={{ uri: this.props.product.imageUrl }} resizeMode="contain" style={Styles.productImage} />
           <View style={Styles.productTitleContainer}>
             <Text style={Styles.productTitle}>{this.props.product.name}</Text>
             <View style={Styles.rowContainer}>

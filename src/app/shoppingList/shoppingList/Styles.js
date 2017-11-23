@@ -23,22 +23,26 @@ export default StyleSheet.create({
     height: 32,
     width: 32,
   },
-  checkbox: {
+  productItemCheckBox: {
+    backgroundColor: 'transparent',
+    borderWidth: 0,
     justifyContent: 'center',
     alignItems: 'center',
     marginLeft: 18.5,
     marginRight: -13,
   },
   stapleItemCheckbox: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 5,
-    marginLeft: 7,
+    backgroundColor: 'transparent',
+    borderWidth: 0,
+    // justifyContent: 'center',
+    // alignItems: 'center',
+    // marginTop: 5,
+    // marginLeft: 7,
     marginRight: -15,
   },
   stapleItemName: {
     // justifyContent: 'center',
-    paddingLeft: 10,
+    paddingLeft: 25,
   },
   specialItemRow: {
     backgroundColor: 'white',
@@ -118,7 +122,7 @@ export default StyleSheet.create({
     width: 150,
     height: 150,
   },
-  stapleItemNameContainer:{
+  stapleItemNameContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     paddingLeft: 10,

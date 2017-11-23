@@ -43,7 +43,7 @@ class ShoppingListItem extends React.PureComponent {
           containerStyle={Styles.stapleItemRow}
           avatar={
             <CheckBox
-              style={Styles.stapleItemCheckbox}
+              containerStyle={Styles.stapleItemCheckbox}
               checked={false}
               center
               onPress={() => this.props.onShoppingListItemSelectionChanged(this.props.shoppingListItem)}
@@ -59,7 +59,7 @@ class ShoppingListItem extends React.PureComponent {
         <TouchableHighlight underlayColor="whitesmoke" style={Styles.specialItemRow}>
           <Grid>
             <CheckBox
-              style={Styles.checkbox}
+              containerStyle={Styles.productItemCheckBox}
               checked={false}
               center
               onPress={() => this.props.onShoppingListItemSelectionChanged(this.props.shoppingListItem)}
@@ -68,9 +68,11 @@ class ShoppingListItem extends React.PureComponent {
               <ProductListRow
                 product={this.props.shoppingListItem}
                 onViewProductDetailPressed={() =>
-                  this.onViewProductDetailPressed(this.props.shoppingListItem.productPriceId, this.props.shoppingListItem.name)}
+                  this.onViewProductDetailPressed(this.props.shoppingListItem.productPriceId, this.props.shoppingListItem.name)
+                }
                 onItemSelectionChanged={() =>
-                  this.onViewProductDetailPressed(this.props.shoppingListItem.productPriceId, this.props.shoppingListItem.name)}
+                  this.onViewProductDetailPressed(this.props.shoppingListItem.productPriceId, this.props.shoppingListItem.name)
+                }
                 isInShoppingList={true}
               />
             </Col>

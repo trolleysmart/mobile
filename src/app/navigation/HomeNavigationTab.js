@@ -3,7 +3,6 @@ import React from 'react';
 import { TabNavigator } from 'react-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { BrowseProductsNavigationTab } from '../products';
-import { FlyersContainer } from '../flyer';
 import { Color } from '../../framework/style/DefaultStyles';
 import { ProductsHeaderContainer } from '../products';
 import { ShoppingList } from '../shoppingList';
@@ -35,10 +34,6 @@ const HomeNavigationTab = TabNavigator(
           backgroundColor: Color.primaryColorNormal,
         },
       },
-    },
-    Flyers: {
-      screen: FlyersContainer,
-      path: '/flyers',
     },
   },
   {

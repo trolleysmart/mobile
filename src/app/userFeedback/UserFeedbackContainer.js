@@ -16,6 +16,7 @@ class UserFeedbackContainer extends Component {
   static navigationOptions = {
     headerLeft: <MainMenuContainer />,
     headerTitle: 'Give Feedback',
+    headerTintColor: Color.headerIconDefaultColor,
     headerStyle: {
       backgroundColor: Color.secondaryColorAction,
     },

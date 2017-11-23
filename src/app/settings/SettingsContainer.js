@@ -3,7 +3,6 @@ import * as userAccessActions from 'micro-business-parse-server-common-react-nat
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Linking } from 'react-native';
-import { NavigationActions } from 'react-navigation';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Settings from './Settings';
@@ -38,14 +37,6 @@ class SettingsContainer extends Component {
     this.handleClickHyperLink('http://www.trolleysmart.co.nz/index.php/term-and-conditions');
   };
 
-  gotoDisclaimer = () => {
-    this.props.gotoScreen('Disclaimer');
-  };
-
-  gotoPricingDisclaimer = () => {
-    this.props.gotoScreen('PricingDisclaimer');
-  };
-
   signOut = () => {
     this.props.userAccessActions.signOut();
   };
@@ -66,7 +57,6 @@ class SettingsContainer extends Component {
 
 SettingsContainer.propTypes = {
   userAccessActions: PropTypes.object.isRequired,
-  gotoScreen: PropTypes.func.isRequired,
 };
 
 function mapStateToProps() {
@@ -76,12 +66,6 @@ function mapStateToProps() {
 function mapDispatchToProps(dispatch) {
   return {
     userAccessActions: bindActionCreators(userAccessActions, dispatch),
-    gotoScreen: routeName =>
-      dispatch(
-        NavigationActions.navigate({
-          routeName,
-        }),
-      ),
   };
 }
 
