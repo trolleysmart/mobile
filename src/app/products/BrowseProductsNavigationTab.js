@@ -76,9 +76,9 @@ const BrowseProductsNavigationTab = TabNavigator(
     },
   },
   {
-    lazy: true,
     tabBarPosition: 'top',
     ...TabNavigator.Presets.AndroidTopTabs,
+    lazy: true,
     tabBarOptions: {
       scrollEnabled: true,
       showIcon: false,
