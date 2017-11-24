@@ -12,6 +12,8 @@ import { Color } from '../../framework/style/DefaultStyles';
 class SettingsContainer extends Component {
   static navigationOptions = {
     headerLeft: <MainMenuContainer />,
+    headerTitle: 'Settings',
+    headerTintColor: Color.headerIconDefaultColor,
     headerStyle: {
       backgroundColor: Color.secondaryColorAction,
     },
