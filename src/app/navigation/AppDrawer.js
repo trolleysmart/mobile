@@ -5,7 +5,7 @@ import AppNavigationStack from './AppNavigationStack';
 import { SettingsNavigator } from '../settings';
 import { Icon } from 'react-native-elements';
 import AppDrawerMenuContainer from '../../sharedComponents/drawer/AppDrawerMenuContainer';
-import { DisclaimerNavigator } from '../disclaimer';
+/* import { DisclaimerNavigator } from '../disclaimer';*/
 import { PricingDisclaimerNavigator } from '../pricingDisclaimer';
 import { Color } from '../../framework/style/DefaultStyles';
 import { UserFeedbackNavigationStack } from '../userFeedback';
@@ -19,13 +19,13 @@ export default DrawerNavigator(
         drawerIcon: () => <Icon name="home" type="material-community" color={Color.primaryColorNormal} />,
       },
     },
-    Disclaimer: {
-      screen: DisclaimerNavigator,
-      navigationOptions: {
-        drawerLabel: 'Alpha Programme',
-        drawerIcon: () => <Icon name="new-releases" color="#517fa4" type="material-icons" />,
-      },
-    },
+    /* Disclaimer: {
+       *   screen: DisclaimerNavigator,
+       *   navigationOptions: {
+       *     drawerLabel: 'Alpha Programme',
+       *     drawerIcon: () => <Icon name="new-releases" color="#517fa4" type="material-icons" />,
+       *   },
+       * },*/
     PricingDisclaimer: {
       screen: PricingDisclaimerNavigator,
       navigationOptions: {
