@@ -25,6 +25,7 @@ const ProductList = ({
         renderItem={info => (
           <ProductListRow
             product={info.item}
+            animateOnProductSelected
             onItemSelectionChanged={onItemSelectionChanged}
             onViewProductDetailPressed={onViewProductDetailPressed}
           />

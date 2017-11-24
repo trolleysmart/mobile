@@ -46,7 +46,10 @@ class ProductListRow extends Component {
 
   onProductItemSelected = product => {
     this.props.onItemSelectionChanged(product);
-    this.animate(Easing.ease);
+
+    if (this.props.animateOnProductSelected) {
+      this.animate(Easing.ease);
+    }
   };
 
   render() {
@@ -83,6 +86,11 @@ ProductListRow.propTypes = {
   product: ProductProp,
   onItemSelectionChanged: PropTypes.func.isRequired,
   onViewProductDetailPressed: PropTypes.func.isRequired,
+  animateOnProductSelected: PropTypes.bool,
+};
+
+ProductListRow.defaultProps = {
+  animateOnProductSelected: false,
 };
 
 export default ProductListRow;
