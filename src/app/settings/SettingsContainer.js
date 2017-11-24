@@ -47,8 +47,6 @@ class SettingsContainer extends Component {
     return (
       <Settings
         signOut={this.signOut}
-        gotoDisclaimer={this.gotoDisclaimer}
-        gotoPricingDisclaimer={this.gotoPricingDisclaimer}
         handleClickTermsAndConditionLink={this.handleClickTermsAndConditionLink}
         handleClickOpenSourceLicensesLink={this.handleClickOpenSourceLicensesLink}
         handleClickPrivacyPolicyLink={this.handleClickPrivacyPolicyLink}
