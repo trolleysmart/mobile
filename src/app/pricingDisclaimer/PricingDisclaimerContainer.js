@@ -8,6 +8,8 @@ import { Color } from '../../framework/style/DefaultStyles';
 class PricingDisclaimerContainer extends Component {
   static navigationOptions = {
     headerLeft: <MainMenuContainer />,
+    headerTitle: 'Pricing Disclaimer',
+    headerTintColor: Color.headerIconDefaultColor,
     headerStyle: {
       backgroundColor: Color.secondaryColorAction,
     },
