@@ -19,7 +19,7 @@ import { SplashContainer } from '../splash';
 import { SignUpSignInContainer } from '../signUpSignIn';
 import { configureStore } from '../../framework/redux';
 import AppDrawer from './AppDrawer';
-import { SignInDisclaimerContainer } from '../disclaimer';
+/* import { SignInDisclaimerContainer } from '../disclaimer';*/
 import { SignInPricingDisclaimerContainer } from '../pricingDisclaimer';
 
 const AppNavigator = StackNavigator(
@@ -28,10 +28,10 @@ const AppNavigator = StackNavigator(
       screen: SplashContainer,
       path: '/',
     },
-    SignInDisclaimer: {
-      screen: SignInDisclaimerContainer,
-      path: '/SignInDisclaimer',
-    },
+    /* SignInDisclaimer: {
+       *   screen: SignInDisclaimerContainer,
+       *   path: '/SignInDisclaimer',
+       * },*/
     SignInPricingDisclaimer: {
       screen: SignInPricingDisclaimerContainer,
       path: '/SignInPricingDisclaimer',
@@ -88,7 +88,7 @@ const navigationReducer = (state, action) => {
             index: 0,
             actions: [
               NavigationActions.navigate({
-                routeName: 'SignInDisclaimer',
+                routeName: 'SignInPricingDisclaimer',
               }),
             ],
             key: null,
