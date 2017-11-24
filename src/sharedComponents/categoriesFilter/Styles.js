@@ -4,7 +4,6 @@ import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
   row: {
-    // padding: 10,
     flexDirection: 'row',
   },
   description: {

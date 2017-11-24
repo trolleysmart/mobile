@@ -4,10 +4,7 @@ import { StyleSheet } from 'react-native';
 import { Color, Sizes } from '../../framework/style/DefaultStyles';
 
 export default StyleSheet.create({
-  container: {
-    // alignItems: 'center',
-    // justifyContent: 'center',
-  },
+  container: {},
   topContainer: {
     flexDirection: 'row',
     paddingLeft: 20,
@@ -41,6 +38,9 @@ export default StyleSheet.create({
     fontSize: 14,
     fontWeight: '500',
     color: Color.primaryFontColor,
+    padding: 10,
+  },
+  submitButtonContainer: {
     padding: 10,
   },
 });

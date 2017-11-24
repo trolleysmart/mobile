@@ -12,7 +12,7 @@ class Store extends React.PureComponent {
     return (
       <View style={Styles.row}>
         <CheckBox
-          style={Styles.checkbox}
+          containerStyle={Styles.checkbox}
           checked={this.props.isSelected}
           right
           onPress={() => this.props.onStoreSelectionChanged(this.props.store.id, this.props.store.key, this.props.store.name, this.props.isSelected)}
