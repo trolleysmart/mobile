@@ -59,7 +59,7 @@ class UserFeedback extends Component {
                 checked={option5Selected}
               />
               <CheckBox
-                title="support more retailers"
+                title="Support more retailers"
                 onPress={() => this.props.onOptionsChanged('option6', 'more retailers', option6Selected)}
                 checked={option6Selected}
               />
