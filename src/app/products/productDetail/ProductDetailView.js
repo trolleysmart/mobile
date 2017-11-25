@@ -19,95 +19,84 @@ class ProductDetailView extends Component {
   }
 
   render = () => {
+    const { product, handleVisitStorePressed, isInShoppingList, onAddProductPressed } = this.props;
+
     return (
       <View style={Styles.container}>
         <ScrollView style={Styles.scrollViewContainer}>
-          <Image source={{ uri: this.props.product.imageUrl }} resizeMode="contain" style={Styles.productImage} />
+          <Image source={{ uri: product.imageUrl }} resizeMode="contain" style={Styles.productImage} />
           <View style={Styles.productTitleContainer}>
-            <Text style={Styles.productTitle}>{this.props.product.name}</Text>
+            <Text style={Styles.productTitle}>{product.name}</Text>
             <View style={Styles.rowContainer}>
-              <Text style={Styles.priceToDisplay}>${this.props.product.priceToDisplay.toFixed(2)}</Text>
+              <Text style={Styles.priceToDisplay}>${product.priceToDisplay.toFixed(2)}</Text>
               <Text style={Styles.savingPercentageSmall}>
-                {this.props.product.saving
-                  ? 'Save $' + this.props.product.saving.toFixed(2) + '(' + this.props.product.savingPercentage.toFixed(0) + '%)'
-                  : ''}
+                {product.saving ? 'Save $' + product.saving.toFixed(2) + '(' + product.savingPercentage.toFixed(0) + '%)' : ''}
               </Text>
-              <Text>{this.props.product.offerEndDate ? this.props.product.offerEndDate + 'day(s) left' : ''}</Text>
+              <Text>{product.offerEndDate ? product.offerEndDate + 'day(s) left' : ''}</Text>
             </View>
           </View>
           <Card title="Detail">
-            <Text style={Styles.productDescription}>{this.props.product.description}</Text>
-            {this.props.product.size ? (
+            <Text style={Styles.productDescription}>{product.description}</Text>
+            {product.size && (
               <View style={Styles.rowContainer}>
                 <Icon style={Styles.icon} color="#bfc4c9" name="weight" type="material-community" />
                 <Text>Size: </Text>
-                <Text style={Styles.productSize}>{this.props.product.size}</Text>
+                <Text style={Styles.productSize}>{product.size}</Text>
               </View>
-            ) : (
-              <View />
             )}
-            {this.props.product.unitPrice ? (
+            {product.unitPrice && (
               <View style={Styles.rowContainer}>
                 <Icon style={Styles.icon} color="#bfc4c9" name="md-pricetag" type="ionicon" />
                 <Text> Price per unit: </Text>
-                <Text style={Styles.unitPrice}>{'$' + this.props.product.unitPrice.price.toFixed(2) + '/' + this.props.product.unitPrice.size}</Text>
+                <Text style={Styles.unitPrice}>{'$' + product.unitPrice.price.toFixed(2) + '/' + product.unitPrice.size}</Text>
               </View>
-            ) : (
-              <View />
             )}
             <View style={Styles.rowContainer}>
-              {this.props.product.productPageUrl ? (
+              {product.productPageUrl && (
                 <View>
                   <Icon style={Styles.icon} color="#bfc4c9" name="web" type="material-community" />
-                  <Text style={Styles.link} onPress={() => this.props.handleVisitStorePressed(this.props.product.productPageUrl)}>
+                  <Text style={Styles.link} onPress={() => handleVisitStorePressed(product.productPageUrl)}>
                     View on web
                   </Text>
                 </View>
-              ) : (
-                <View />
               )}
             </View>
           </Card>
           <Card title="Store Info">
             <View style={Styles.storeInfoContainer}>
               <View>
-                {this.props.product.store && this.props.product.store.imageUrl ? (
-                  <Avatar
-                    medium
-                    rounded
-                    source={{ uri: this.props.product.store.imageUrl }}
-                    activeOpacity={0.7}
-                    onPress={() => this.onViewStorePressed(this.props.product.store.id)}
-                  />
-                ) : (
-                  <View />
-                )}
+                {product.store &&
+                  product.store.imageUrl && (
+                    <Avatar
+                      medium
+                      rounded
+                      source={{ uri: product.store.imageUrl }}
+                      activeOpacity={0.7}
+                      onPress={() => this.onViewStorePressed(product.store.id)}
+                    />
+                  )}
               </View>
               <View style={Styles.storeDetail}>
-                <Text onPress={() => this.onViewStorePressed(this.props.product.store.id)}>
-                  {this.props.product.store ? this.props.product.store.name : ''}
-                </Text>
+                <Text onPress={() => this.onViewStorePressed(product.store.id)}>{product.store ? product.store.name : ''}</Text>
               </View>
             </View>
           </Card>
         </ScrollView>
         <View style={Styles.addProductContainer}>
           <View style={Styles.productPriceContainer}>
-            <Text style={Styles.priceToDisplay}>${this.props.product.priceToDisplay.toFixed(2)}</Text>
+            <Text style={Styles.priceToDisplay}>${product.priceToDisplay.toFixed(2)}</Text>
             <Text style={Styles.savingPercentage}>
-              {this.props.product.saving
-                ? 'Save $' + this.props.product.saving.toFixed(2) + '(' + this.props.product.savingPercentage.toFixed(0) + '%)'
-                : ''}
+              {product.saving ? 'Save $' + product.saving.toFixed(2) + '(' + product.savingPercentage.toFixed(0) + '%)' : ''}
             </Text>
           </View>
           <View>
             <TouchableIcon
-              iconName={this.props.isInShoppingList ? 'check-circle-outline' : 'plus-circle'}
+              iconName={isInShoppingList ? 'check-circle-outline' : 'plus-circle'}
               iconType="material-community"
               iconColor={Color.secondaryColorAction}
               iconSize={40}
-              disabled={this.props.isInShoppingList}
-              onPress={() => this.props.onAddProductPressed(this.props.product.id)}
+              disabled={isInShoppingList}
+              onPress={() => onAddProductPressed(product.id)}
             />
           </View>
         </View>
