@@ -1,7 +1,7 @@
 {
   "name": "TrolleySmart",
   "description": "Trolley Smart",
-  "version": "1.0.0-alpha.107",
+  "version": "1.1.0",
   "author": {
     "name": "Micro Business Ltd",
     "email": "micro.business.ltd@gmail.com",
@@ -43,7 +43,7 @@
     "react-native-easy-grid": "0.1.15",
     "react-native-easy-toast": "^1.0.9",
     "react-native-elements": "0.18.4",
-    "react-native-exception-handler": "^2.4.0",
+    "react-native-exception-handler": "^2.4.1",
     "react-native-fast-image": "^1.0.0",
     "react-native-fbsdk": "^0.6.3",
     "react-native-image-pan-zoom": "^2.0.8",
