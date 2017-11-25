@@ -22,7 +22,12 @@ export const ProductProp = PropTypes.shape({
     awardValue: PropTypes.number.isRequired,
   }),
   store: PropTypes.shape({
+    id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     imageUrl: PropTypes.string.isRequired,
+    geoLocation: PropTypes.shape({
+      latitude: PropTypes.number.isRequired,
+      longitude: PropTypes.number.isRequired,
+    }),
   }),
 }).isRequired;

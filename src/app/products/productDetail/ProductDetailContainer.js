@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { Linking } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { NavigationActions } from 'react-navigation';
+import openMap from 'react-native-open-maps';
 import PropTypes from 'prop-types';
 import ProductDetailView from './ProductDetailView';
 import * as productsActions from '../products/Actions';
@@ -30,8 +31,12 @@ class ProductDetailContainer extends Component<any, Props, State> {
     this.props.goBack();
   };
 
-  onViewStorePressed = storeId => {
-    this.props.gotoStore(storeId);
+  onViewStorePressed = () => {
+    this.props.gotoStore(this.props.user.product.store.id);
+  };
+
+  onViewStoreOnMapPressed = () => {
+    openMap({ latitude: this.props.user.product.store.geoLocation.latitude, longitude: this.props.user.product.store.geoLocation.longitude });
   };
 
   handleVisitStorePressed = url => {
@@ -45,6 +50,7 @@ class ProductDetailContainer extends Component<any, Props, State> {
         handleVisitStorePressed={this.handleVisitStorePressed}
         onAddProductPressed={this.onAddProductPressed}
         onViewStorePressed={this.onViewStorePressed}
+        onViewStoreOnMapPressed={this.onViewStoreOnMapPressed}
         isInShoppingList={this.props.isInShoppingList}
       />
     );

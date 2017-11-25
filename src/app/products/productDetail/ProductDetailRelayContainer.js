@@ -17,9 +17,13 @@ export default createFragmentContainer(
           priceToDisplay
           productPageUrl
           store {
+            id
             name
             imageUrl
-            id
+            geoLocation {
+              latitude
+              longitude
+            }
           }
           comments
           unitPrice {

@@ -16,6 +16,7 @@ class ProductDetailView extends Component {
     super(props, context);
 
     this.onViewStorePressed = debounce(this.props.onViewStorePressed, config.navigationDelay);
+    this.onViewStoreOnMapPressed = debounce(this.props.onViewStoreOnMapPressed, config.navigationDelay);
   }
 
   render = () => {
@@ -77,8 +78,12 @@ class ProductDetailView extends Component {
                   )}
               </View>
               <View style={Styles.storeDetail}>
-                <Text onPress={() => this.onViewStorePressed(product.store.id)}>{product.store ? product.store.name : ''}</Text>
+                <Text onPress={this.onViewStorePressed}>{product.store ? product.store.name : ''}</Text>
               </View>
+              {product.store &&
+                product.store.geoLocation && (
+                  <Icon style={Styles.icon} color="#bfc4c9" name="map" type="material-community" onPress={this.onViewStoreOnMapPressed} />
+                )}
             </View>
           </Card>
         </ScrollView>
@@ -110,6 +115,7 @@ ProductDetailView.propTypes = {
   handleVisitStorePressed: PropTypes.func.isRequired,
   onAddProductPressed: PropTypes.func.isRequired,
   onViewStorePressed: PropTypes.func.isRequired,
+  onViewStoreOnMapPressed: PropTypes.func.isRequired,
   isInShoppingList: PropTypes.bool.isRequired,
 };
 
