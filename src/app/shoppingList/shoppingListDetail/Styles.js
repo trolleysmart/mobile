@@ -4,9 +4,7 @@ import { StyleSheet } from 'react-native';
 import { Color } from '../../../framework/style/DefaultStyles';
 
 export default StyleSheet.create({
-  container: {
-    // padding: 20,
-  },
+  container: {},
   membersContainer: {
     padding: 20,
   },

@@ -1,33 +1,14 @@
 // @flow
 
-import React, {
-  Component,
-} from 'react';
-import {
-  View,
-} from 'react-native';
-import {
-  NavigationActions,
-} from 'react-navigation';
-import {
-  connect,
-} from 'react-redux';
-import {
-  bindActionCreators,
-} from 'redux';
-import {
-  Map,
-} from 'immutable';
-import {
-  TouchableIcon,
-} from '../../../components/touchableIcon';
-import {
-  AddShoppingList,
-  UpdateShoppingList,
-} from '../../../framework/relay/mutations';
-import {
-  environment,
-} from '../../../framework/relay';
+import React, { Component } from 'react';
+import { View } from 'react-native';
+import { NavigationActions } from 'react-navigation';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { Map } from 'immutable';
+import { TouchableIcon } from '../../../components/touchableIcon';
+import { AddShoppingList, UpdateShoppingList } from '../../../framework/relay/mutations';
+import { environment } from '../../../framework/relay';
 import * as ShoppingListDetailActions from './Actions';
 
 class HeaderContainer extends Component {
@@ -61,17 +42,13 @@ function mapStateToProps(state) {
   return {
     shoppingListName: state.shoppingListDetail.get('shoppingListName'),
     shoppingListId: state.shoppingListDetail.get('shoppingListId'),
-    userId: state.userAccess.get('userInfo')
-      .get('id'),
+    userId: state.userAccess.get('userInfo').get('id'),
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    goBack: () =>
-      dispatch(
-        NavigationActions.back(),
-      ),
+    goBack: () => dispatch(NavigationActions.back()),
     ShoppingListDetailActions: bindActionCreators(ShoppingListDetailActions, dispatch),
   };
 }
