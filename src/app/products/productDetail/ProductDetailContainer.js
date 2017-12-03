@@ -12,7 +12,7 @@ import * as productsActions from '../products/Actions';
 import { AddItemsToShoppingList } from '../../../framework/relay/mutations';
 
 class ProductDetailContainer extends Component<any, Props, State> {
-  handleClickHyperLink = url => {
+  static handleClickHyperLink = url => {
     Linking.canOpenURL(url).then(supported => {
       if (supported) {
         Linking.openURL(url);
@@ -35,11 +35,11 @@ class ProductDetailContainer extends Component<any, Props, State> {
   };
 
   onViewStoreOnMapPressed = () => {
-    this.handleClickHyperLink(this.props.user.product.store.googleMapUrl);
+    ProductDetailContainer.handleClickHyperLink(this.props.user.product.store.googleMapUrl);
   };
 
   handleVisitStorePressed = () => {
-    this.handleClickHyperLink(this.props.user.product.url);
+    ProductDetailContainer.handleClickHyperLink(this.props.user.product.url);
   };
 
   render = () => {
