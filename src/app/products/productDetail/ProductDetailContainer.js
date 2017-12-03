@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import { Linking } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { NavigationActions } from 'react-navigation';
-import openMap from 'react-native-open-maps';
 import PropTypes from 'prop-types';
 import ProductDetailView from './ProductDetailView';
 import * as productsActions from '../products/Actions';
@@ -36,11 +35,11 @@ class ProductDetailContainer extends Component<any, Props, State> {
   };
 
   onViewStoreOnMapPressed = () => {
-    openMap({ latitude: this.props.user.product.store.geoLocation.latitude, longitude: this.props.user.product.store.geoLocation.longitude });
+    this.handleClickHyperLink(this.props.user.product.store.googleMapUrl);
   };
 
-  handleVisitStorePressed = url => {
-    this.handleClickHyperLink(url);
+  handleVisitStorePressed = () => {
+    this.handleClickHyperLink(this.props.user.product.url);
   };
 
   render = () => {

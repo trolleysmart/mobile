@@ -56,7 +56,7 @@ class ProductDetailView extends Component {
               {product.productPageUrl && (
                 <View>
                   <Icon style={Styles.icon} color="#bfc4c9" name="web" type="material-community" />
-                  <Text style={Styles.link} onPress={() => handleVisitStorePressed(product.productPageUrl)}>
+                  <Text style={Styles.link} onPress={handleVisitStorePressed}>
                     View on web
                   </Text>
                 </View>
@@ -81,7 +81,7 @@ class ProductDetailView extends Component {
                 <Text onPress={this.onViewStorePressed}>{product.store ? product.store.name : ''}</Text>
               </View>
               {product.store &&
-                product.store.geoLocation && (
+                product.store.googleMapUrl && (
                   <Icon style={Styles.icon} color="#bfc4c9" name="map-marker" type="material-community" onPress={this.onViewStoreOnMapPressed} />
                 )}
             </View>

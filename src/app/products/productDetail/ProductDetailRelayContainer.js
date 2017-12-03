@@ -20,10 +20,7 @@ export default createFragmentContainer(
             id
             name
             imageUrl
-            geoLocation {
-              latitude
-              longitude
-            }
+            googleMapUrl
           }
           comments
           unitPrice {

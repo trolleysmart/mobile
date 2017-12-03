@@ -25,9 +25,6 @@ export const ProductProp = PropTypes.shape({
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     imageUrl: PropTypes.string.isRequired,
-    geoLocation: PropTypes.shape({
-      latitude: PropTypes.number.isRequired,
-      longitude: PropTypes.number.isRequired,
-    }),
+    googleMapUrl: PropTypes.string,
   }),
 }).isRequired;
