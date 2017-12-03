@@ -82,7 +82,7 @@ class ProductDetailView extends Component {
               </View>
               {product.store &&
                 product.store.geoLocation && (
-                  <Icon style={Styles.icon} color="#bfc4c9" name="map" type="material-community" onPress={this.onViewStoreOnMapPressed} />
+                  <Icon style={Styles.icon} color="#bfc4c9" name="map-marker" type="material-community" onPress={this.onViewStoreOnMapPressed} />
                 )}
             </View>
           </Card>
