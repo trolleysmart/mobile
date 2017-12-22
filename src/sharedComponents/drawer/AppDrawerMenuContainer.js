@@ -1,6 +1,6 @@
 // @flow
 
-import * as userAccessActions from 'micro-business-parse-server-common-react-native/src/userAccess/Actions';
+import * as userAccessActions from '@microbusiness/parse-server-common-react-native/src/userAccess/Actions';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { DrawerItems, NavigationActions } from 'react-navigation';

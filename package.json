@@ -26,12 +26,12 @@
     "codepush:android": "code-push release-react trolleysmart-alpha-android android && code-push promote trolleysmart-alpha-android Staging Production"
   },
   "dependencies": {
+    "@microbusiness/common-react": "^1.1.2",
+    "@microbusiness/common-react-native": "^1.1.16",
+    "@microbusiness/parse-server-common-react-native": "^1.1.12",
     "email-validator": "1.1.1",
     "immutable": "^4.0.0-rc.9",
     "lodash.debounce": "^4.0.8",
-    "micro-business-common-react": "^1.1.0",
-    "micro-business-common-react-native": "^1.1.0",
-    "micro-business-parse-server-common-react-native": "1.1.1",
     "monet": "^0.8.10",
     "prop-types": "15.6.0",
     "react": "16.2.0",

@@ -1,12 +1,12 @@
 // @flow
 
 import { Map } from 'immutable';
-import { UserAccessActionTypes } from 'micro-business-parse-server-common-react-native';
-import { MessageType } from 'micro-business-common-react';
-import * as appUpdaterActions from 'micro-business-common-react/src/appUpdater/Actions';
-import * as messageBarActions from 'micro-business-common-react/src/messageBar/Actions';
-import * as netInfoActions from 'micro-business-common-react-native/src/netInfo/Actions';
-import * as userAccessActions from 'micro-business-parse-server-common-react-native/src/userAccess/Actions';
+import { UserAccessActionTypes } from '@microbusiness/parse-server-common-react-native';
+import { MessageType } from '@microbusiness/common-react';
+import * as appUpdaterActions from '@microbusiness/common-react/src/appUpdater/Actions';
+import * as messageBarActions from '@microbusiness/common-react/src/messageBar/Actions';
+import * as netInfoActions from '@microbusiness/common-react-native/src/netInfo/Actions';
+import * as userAccessActions from '@microbusiness/parse-server-common-react-native/src/userAccess/Actions';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { addNavigationHelpers, NavigationActions, StackNavigator } from 'react-navigation';

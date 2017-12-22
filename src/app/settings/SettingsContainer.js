@@ -1,5 +1,5 @@
 // @flow
-import * as userAccessActions from 'micro-business-parse-server-common-react-native/src/userAccess/Actions';
+import * as userAccessActions from '@microbusiness/parse-server-common-react-native/src/userAccess/Actions';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Linking } from 'react-native';
